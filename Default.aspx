@@ -236,7 +236,6 @@
         </div><!-- end .menu-content-holder-->
         
         <div id="menu-hider">
-            <div id="menu-hider-background"></div>
             <div id="menu-hider-icon"></div>
         </div>
     </div><!-- end #menu-container -->

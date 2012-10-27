@@ -176,17 +176,17 @@ body
 .menu-option-text,
 .sub-menu-option-text
 {	
-	width: 210px;
+	width: 230px;
 }
 .sub-menu-holder,
 .menu-option-background
 {
-	margin-left:210px;
+	margin-left:230px;
 }
 .sub-menu-holder
 {
 	width: 84%;
-	margin-left:220px; /*  + menu-hider width so the submenu appears after the vertical hider strip*/ 
+	margin-left:240px; /*  + menu-hider width so the submenu appears after the vertical hider strip*/ 
 }
 
 /* START fix IE 8: we add 2 more px so it fills the gap. 
@@ -195,7 +195,7 @@ submenu holder has overflow hidden */
 .sub-menu-option-holder,
 .sub-menu-option-background-selected
 {
-	width: 212px;	 
+	width: 212px;
 }
 
 .sub-menu-option-background
@@ -509,7 +509,7 @@ footer
 {
 	position:absolute;
 	top: 0px;
-	left: 240px;
+	left: 280px;
 	width:100%;
 	height:100%;
 	z-index:3;
@@ -1245,13 +1245,13 @@ footer
 {
 	position:relative;
 	float:left;
-	width:210px;
+	width:230px;
 }
 #home-advertise1
 {
 	position:relative;
 	float:left;
-	width:210px;
+	width:230px;
 	height: 185px;
 	margin-bottom: 21px;
 	background-color:#669933;
@@ -1261,7 +1261,7 @@ footer
 {
 	position:relative;
 	float:left;
-	width:210px;
+	width:230px;
 	height: 148px;
 	overflow:hidden;
 }
@@ -1270,7 +1270,7 @@ footer
 	position:abosolute;
 	top:0px;
 	left:0px;
-	width: 210px;
+	width: 230px;
 	height:148px;	
 }
 .advertise-details
@@ -1313,7 +1313,7 @@ footer
 {
 	position:relative;
 	float:left;
-	width:210px;
+	width:230px;
 	height: 185px;
 	background-color:#669933;
 }
@@ -3578,7 +3578,7 @@ h1, h2, h3, h4, h5, h6
 {
 	.template-logo{ margin-left: -80px; }
 	.template-menu{ margin: 0px; }
-	footer{ width: 210px; }
+	footer{ width: 230px; }
 	
 	#thumb-image-hover{ display: none; }
 	
@@ -3592,8 +3592,8 @@ h1, h2, h3, h4, h5, h6
 	
 	.module-home-layout3{ width: 556px; } #home-video-block{ width: 510px; height: 296px; margin-right: 0px; }	
 	#module-home-layout3-holder{margin:25px 20px; width: 510px;}
-	#home-advertise{ margin-top: 20px;  height: 210px; width: 510px; } #home-advertise1{ margin-bottom: 0px;} #home-advertise2{ margin-left: 20px; }
-	#home-advertise1, #home-advertise2{ height: 210px; width: 245px; } .advertise-image, #home-advertise img{ height: 173px; width: 245px; }
+	#home-advertise{ margin-top: 20px;  height: 230px; width: 510px; } #home-advertise1{ margin-bottom: 0px;} #home-advertise2{ margin-left: 20px; }
+	#home-advertise1, #home-advertise2{ height: 230px; width: 245px; } .advertise-image, #home-advertise img{ height: 173px; width: 245px; }
 	
 	
 	
