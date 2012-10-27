@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>DFAD USA</title>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<style type="text/css">
+    
+    body, html{ margin:0px; padding:0px; height:100%; font-family:Tahoma, Arial; min-width:900px; min-height:600px }
+    body{ background:#33385b; color:#fff}
+    a{ color:#fff; text-decoration:underline}
+    
+    #pageHolder{ height:100%; overflow:hidden; width:100%; position:relative }
+    #buttonsHolder{ position:absolute; left:50%; top:50%; }
+    
+    #buttonsBlock{ width:900px; height:410px; position:relative; top:-210px; left:-450px;
+                    margin:auto; }
+    
+    #buttonsBlock .bfirst{ margin-left:35px; }
+    
+    #popHolder{ position:absolute; width:900px; height:250px; top:0px; left:0px; }
+    #popHolder .popItem{ width:250px; height:280px; background:#000; float:left; visibility:hidden;
+                         text-align:center; cursor:default; position:relative;
+                         margin-left:75px; -moz-border-radius: 20px; border-radius: 20px;
+                         filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80); -moz-opacity: 0.8;-khtml-opacity: 0.8;opacity: 0.8; }
+    #popHolder .popItem p{ padding-right:20px; padding-left:20px; padding-top:0px}
+    #popHolder .pfirst{ margin-left:0px}
+    #popHolder .popItem h3{ font-weight:normal; margin-bottom:0px }
+    #popHolder .popItem ul{ text-align:left; padding-top:0px; margin-top:13px; margin-left:30px}
+    #popHolder .popItem ul li{ font-size:15px }
+    #popHolder .popItem .contact{ color:#21BCFF }
+    #popHolder .footer{ position:absolute; bottom:10px; heigth:50px }
+    
+    
+    .buttonItem{ width:171px; height:171px; background:url(img/butback.jpg); cursor:pointer; 
+                 float:left; margin:35px; margin-left:123px; position:relative; z-index:2; }
+    .buttonItem h2{ text-align:center; font-weight:normal;
+                    margin-top:56px; font-size:40px; }
+    
+    #logosHolder{ margin-top:50px; height:95px;}
+    #logosHolder #mainLogos{ margin:auto; width:173px; height:81px;
+                              background:url(img/logos.jpg) }
+                              
+    #copyText{ font-size:11px; cursor:default; text-align:center; height:12px; margin-top:10px; color:#b7c0fe}
+    #copyText a{ color:#b7c0fe }    
+
+</style>
+
+<script type="text/javascript">
+    
+    function showBubl(i){
+        $("#popHolder").show();
+        $("#popHolder .popItem").show().css("visibility", "hidden").css("z-index", "3");
+        $("#popHolder .popItem").eq(i).css("visibility", "visible").hide().fadeIn("fast");
+    }
+
+    $(function () {
+
+        $("#popHolder").hide();
+
+	//$("#popHolder").mouseleave(function(){ $(this).hide()});
+
+	$("#popHolder .popItem").each(function(){ 
+	    $(this).mouseleave(function(){ $(this).hide(); });
+	});
+
+        $("#buttonsBlock .buttonItem").each(function (a, b) {
+            $(this).click(function () { showBubl(a); });
+        });
+
+    })
+
+</script>
+
+</head>
+
+<body>
+    
+    <div id="pageHolder" >
+            
+            <div id="buttonsHolder">
+                <div id="buttonsBlock">
+                    
+                    <div class="buttonItem bfirst"><h2>music</h2></div>
+                    <div class="buttonItem"><h2>voice</h2></div>
+                    <div class="buttonItem"><h2>sound</h2></div>
+                    <div style="clear:both"></div>
+                    
+                    <div id="popHolder">
+                        <div class="popItem pfirst">
+                            <h3>Music services</h3>
+                            <ul> 
+                                <li>Music Supervision</li> 
+                                <li>Music Licensing</li>
+                                <li>Custom Music</li>
+                                <li>Audio Localization</li>
+                                <li>Audio Branding</li> 
+                                <li>All genres</li>
+                            </ul>
+                            
+                            
+
+			<div class="footer">
+				
+			    <p>
+                                <a href="http://soundcloud.com/dfad-sound/sets/so">Listen on SoundCloud</a>
+                            </p>
+
+                            <p class="contact">
+                                + 1.310.734.84.55
+                                MUSIC@DFAD.US
+                            </p>
+
+			</div>
+
+                        </div>
+                        <div class="popItem">
+                            <h3>Voice services</h3>
+                            <ul style="margin-top:50px"> 
+                                <li>Voiceovers</li> 
+                                <li>Voice Localization</li>
+                            </ul>
+                            
+
+
+			<div class="footer">
+
+                            <p>
+                                <a href="http://soundcloud.com/dfad-sound/sets/vo/">Listen on SoundCloud</a>
+                            </p>
+
+                            <p class="contact">
+                                + 1.310.734.84.55
+                                VOICE@DFAD.US
+                            </p>
+
+			</div>
+
+                        </div>
+                        <div class="popItem">
+                            <h3>Sound Design</h3>
+                            
+                            <p style="margin-top:60px"><strong>ALL TYPES</strong></p>
+                            
+
+
+			<div class="footer">
+
+                            <p>
+                                <a href="http://soundcloud.com/dfad-sound/sets/fx/">Listen on SoundCloud</a>
+                            </p>
+
+                            <p class="contact">
+                                + 1.310.734.84.55
+                                SOUND@DFAD.US
+                            </p>
+
+			</div>
+
+                        </div>
+                    </div>
+                    
+                    <div id="logosHolder">
+                        <div id="mainLogos"></div>
+                    </div>
+
+                    <div id="copyText">
+                        © DF Music Organization Group.
+                        All labels and logotypes are official trademarks of DF Music Organization Group.
+                        All rights reserved.  <a href="http://dfempire.com">www.dfempire.com</a>
+                    </div>
+
+                </div>
+            </div>
+        
+    </div>
+
+</body>
+</html>
