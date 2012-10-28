@@ -251,13 +251,13 @@ submenu holder has overflow hidden */
 	clear:both;
 	position:relative;
 	float:left;
-	background-image:url(../assets/media/synergy_html5_logo.png);
+	background-image:url(../assets/media/dfad_logo.gif);
 	background-repeat:no-repeat;
 	width: 140px;
 	height: 90px;
-	margin: 28px 0 28px -70px;	
+	margin: 28px 0 28px 0px;	
 	z-index: 8;
-	left:50%;
+	left:132px;
 	cursor:pointer;
 }
 .template-menu
