@@ -169,7 +169,7 @@ body
 /* -------- MENU AND  SUBMENU SIZE ------- */
 .template-menu
 {
-	margin: 0 0 0 20px;
+	margin: 0 0 0 0px;
 }
 .template-menu,
 .menu-option-holder, 
@@ -257,7 +257,7 @@ submenu holder has overflow hidden */
 	height: 90px;
 	margin: 28px 0 28px 0px;	
 	z-index: 8;
-	left:132px;
+	left:60px;
 	cursor:pointer;
 }
 .template-menu
@@ -3557,127 +3557,3 @@ h1, h2, h3, h4, h5, h6
 	padding:5px;
 	border: 1px solid #777777;	
 }
-/*------------------------------------------------------------------*/
-/*						TOUCH DEVICES								*/
-/*------------------------------------------------------------------*/
-@media only screen and (min-width: 1025px) and (max-width: 1200px)
-{
-	#standard-banner{ height: 363px; }
-	.home-layout2-content ul{ margin: 0px 21px; }
-	.banner-desc-tr{ top: 50px; right: 50px; }
-	.banner-desc-cr{ top: 100px; right: 50px; }
-	.banner-desc-br{ bottom: 50px; right: 50px; }
-	.banner-desc-tl{ top: 50px; left: 50px; }
-	.banner-desc-cl{ top: 100px; left: 50px; }
-	.banner-desc-bl{ bottom: 50px; left: 50px; }
-	
-	.module-home-layout3{ width: 824px; } #home-video-block{ width: 572px; height: 337px; }	
-	#home-advertise, #home-advertise1, #home-advertise2{ height: 158px; width: 170px; } .advertise-image, #home-advertise img{ height: 120px; width: 170px; }
-
-	.module-galleries{ width: 722px; }
-	
-}
-@media only screen and (min-width: 768px) and (max-width: 1024px)
-{
-	.template-logo{ margin-left: -80px; }
-	.template-menu{ margin: 0px; }
-	footer{ width: 230px; }
-	
-	#thumb-image-hover{ display: none; }
-	
-	
-	#standard-banner{ height: 251px; }
-	.home-layout2-content ul{ margin: 0px 30px; } .home-layout2-content ul li{ margin: 20px 30px 20px 0px; width: 215px; }
-	.banner-desc{ width: 100%; clear: both; float: left; position: absolute;} .banner-desc span{ padding: 10px; font-size:13px; } .banner-desc span h1{ margin-bottom: 5px; font-size:18px;}
-	.banner-desc-tr, .banner-desc-cr,.banner-desc-br, .banner-desc-tl, .banner-desc-cl, .banner-desc-bl {bottom:3px; left:0px; top:auto; }	
-	
-	.home-layout-clients a{margin: 10px 0 10px 3px; }
-	
-	.module-home-layout3{ width: 556px; } #home-video-block{ width: 510px; height: 296px; margin-right: 0px; }	
-	#module-home-layout3-holder{margin:25px 20px; width: 510px;}
-	#home-advertise{ margin-top: 20px;  height: 230px; width: 510px; } #home-advertise1{ margin-bottom: 0px;} #home-advertise2{ margin-left: 20px; }
-	#home-advertise1, #home-advertise2{ height: 230px; width: 245px; } .advertise-image, #home-advertise img{ height: 173px; width: 245px; }
-	
-	
-	
-	.module-about-us, .module-ethics, .module-careers{ width: 460px; } .module-philosophy{ width: 510px; }
-	
-	.module-pricing{ width: 510px; } #pricing-column-header h2{ font-size: 15px; } #pricing-column-header h1{ font-size: 12px; }
-	#module-pricing-container{ margin: 5px 0px; }
-	
-	.module-news-vertical, #module-news-preview-holder{ width: 490px; } .news-preview-horizontal-fix, #module-news-preview-container ul li { width:400px; } 
-	
-	#module-contact-holder { width: 510px; }
-
-	.module-galleries{ width: 486px; }
-	
-	.full-width-info-container{ width: 240px; }
-
-}
-@media only screen and (min-width: 480px) and (max-width: 767px)
-{
-	#menu-container{ position:absolute; width: 336px; height:auto; left:0px; z-index:10; }
-	#template-menu{ display: none; }
-	.menu-content-holder{ width: 100%; }
-	.template-logo{ margin: 5px 0 5px -47px; background-image: url("../assets/media/synergy_html5_logo_smartphone.png"); width:94px; height:60px;}
-	#template-smpartphone-menu{ display: inline; }
-	
-	#menu-hider{ width: 100%; height: 10px; }
-	#menu-hider-background{ width: 100%; height: 10px; }
-	#menu-hider-icon{ background-position: -302px -205px; height: 20px; width: 31px; left:50%; top: 3px; margin-left: -15px; }
-	
-	footer{ display:none; }	
-	
-	#thumb-image-hover{ display: none; }
-	
-	.home-layout2-content ul{ margin: 0px 25px; } .home-layout2-content ul li{ margin: 20px 20px 20px 0px; width: 195px; }
-	#standard-banner{ height: 222px; }
-	.banner-desc{ width: 460px; clear: both; float: left; position: absolute;} .banner-desc span{ padding: 10px; font-size:13px; } .banner-desc span h1{ margin-bottom: 5px; font-size:18px;}
-	.banner-desc-tr, .banner-desc-cr,.banner-desc-br, .banner-desc-tl, .banner-desc-cl, .banner-desc-bl {bottom:3px; left:0px; top:auto; }
-
-	.home-layout-clients a{ margin: 10px 0px 10px 40px; } 
-
-
-	.module-home-layout3{ width: 516px; } #home-video-block{ width: 470px; height: 274px; margin-right: 0px; }	
-	#home-advertise{ margin-top: 20px;  height: 196px; width: 470px; } #home-advertise1{ margin-bottom: 0px;} #home-advertise2{ margin-left: 20px; }
-	#home-advertise1, #home-advertise2{ height: 196px; width: 225px; } .advertise-image, #home-advertise img{ height: 159px; width: 225px; }
-
-	.module-about-us, .module-ethics, .module-careers{ width: 466px; } .module-philosophy{ width: 466px; }
-	
-	.module-pricing{ width: 550px; } #pricing-column-header h2{ font-size: 15px; } #pricing-column-header h1{ font-size: 12px }
-	
-	.module-news-vertical, #module-news-preview-holder{ width: 480px; } .news-preview-horizontal-fix, #module-news-preview-container ul li { width:390px; } 
-	
-	#module-contact-holder { width: 480px; }
-	
-	.module-galleries{ width: 486px; }
-	
-	#module-columns-container{ margin: 40px 0px; }
-	.filter-button{ font-size: 12px; margin: 0 0 0 2px; padding: 4px; }
-	
-}
-@media only screen and (max-width: 479px)
-{
-	#menu-container{ position:absolute; width: 100%; height:auto; left:0px; z-index:10; }
-	#template-menu{ display: none; }
-	.menu-content-holder{ width: 100%; }
-	.template-logo{ margin: 5px 0 5px -47px; background-image: url("../assets/media/synergy_html5_logo_smartphone.png"); width:94px; height:60px;}
-	#template-smpartphone-menu{ display: inline; }
-	
-	#menu-hider{ width: 100%; height: 10px; }
-	#menu-hider-background{ width: 100%; height: 10px; }
-	#menu-hider-icon{ background-position: -302px -205px; height: 20px; width: 31px; left:50%; top: 3px; margin-left: -15px; }
-	
-	footer{ display:none; }
-	
-	
-	#module-text-page-holder-about-us, #module-text-page-holder-philosophy, 
-	#module-text-page-holder-ethics, #module-text-page-holder-careers{ margin: 35px 30px; }
-	.module-about-us, .module-ethics, .module-careers{ width: 320px; } .module-philosophy{ width: 320px; }
-	
-	#module-news-vertical-container{ margin: 35px 30px; } #module-news-preview-container{margin: 29px 25px;}
-	.module-news-vertical, #module-news-preview-holder{ width: 320px; } .news-preview-horizontal-fix, #module-news-preview-container ul li { width:250px; }
-	.news-item-vertical-read-more{ width: 30%; } 
-	
-	.module-galleries{ width: 100%; }
-} 

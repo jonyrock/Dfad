@@ -187,38 +187,6 @@
                     </div>            
                 </div><!-- end #template-menu --> 
             
-            
-
-                <div id="template-smpartphone-menu">
-                    <select>
-                        <option value="#">Navigate to...</option>
-                        <option value="#"> HOME +</option>
-                        <option value="#home_layout_1.html">  - Home Layout 1</option>
-                        <option value="#home_layout_2.html">  - Home Layout 2</option>
-                        <option value="#home_layout_3.html">  - Home Layout 3</option>
-                        <option value="#"> ABOUT US +</option>
-                        <option value="#about_us.html">  - About us</option>
-                        <option value="#philosophy.html">  - Philosophy</option>
-                        <option value="#ethics.html">  - Ethics</option>
-                        <option value="#careers.html">  - Careers</option>
-                        <option value="#news.html"> NEWS</option>
-                        <option value="#portfolio.html"> PORTFOLIO</option>
-                        <option value="#"> OUR PROJECTS +</option>
-                        <option value="#4_columns_projects.html">  - 4 Columns Projects</option>
-                        <option value="#3_columns_projects.html">  - 3 Columns Projects</option>
-                        <option value="#2_columns_projects.html">  - 2 Columns Projects</option>
-                        <option value="#showreel.html"> SHOWREEL</option>    
-                        <option value="#"> GALLERIES +</option>
-                        <option value="#image_gallery.html">  - Image Gallery</option>
-                        <option value="#mixed_gallery.html">  - Mixed Gallery</option>
-                        <option value="#"> FEATURES +</option>
-                        <option value="#full_width_text_and_image.html">  - Full Width Text + Image</option>
-                        <option value="#full_width_text_and_video.html">  - Full Width Text + Video</option>
-                        <option value="#fullscreen_video.html">  - Fullscreen Video</option>
-                        <option value="#pricing_tables.html">  - Pricing Table</option>  
-                        <option value="#contact.html"> CONTACT</option>
-                    </select>
-                </div>
                 <footer>    
                     <div id="footer-social">            
                         <div id="footer-social-holder">
