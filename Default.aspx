@@ -68,32 +68,16 @@
                      data-side="none" 
                      data-href="#portfolio.html"><!-- start #template-menu -->
                 
+                    <div class="menu-option-holder" data-module-type="home" data-side="height">
+                        <div id="menu-option-background" class="menu-option-background"> </div>
+                        <div id="menu-option-text" class="menu-option-text">
+                            <a href="/">HOME</a>
+                        </div>
+                    </div> 
                     <div class="menu-option-holder">
                         <div id="menu-option-background" class="menu-option-background"> </div>
                         <div id="menu-option-text" class="menu-option-text">
-                            <a href="#">HOME</a>
-                            <div class="menu-option-sign">+</div>
-                        </div>                
-                        <div class="sub-menu-holder">
-                            <div class="sub-menu-option-holder" data-module-type="slideshow" data-side="none">
-                                <div class="sub-menu-option-background"></div>
-                                <div class="sub-menu-option-text"><a href="#home_layout_1.html" data-path-href="html/home/">Home Layout 1</a></div>
-                            </div>
-                            <div class="sub-menu-option-holder" data-module-type="home2" data-side="none">
-                                <div class="sub-menu-option-background"></div>
-                                <div class="sub-menu-option-text"><a href="#home_layout_2.html" data-path-href="html/home/">Home Layout 2</a></div>
-                            </div>
-                            <div class="sub-menu-option-holder" data-module-type="home3" data-side="none">
-                                <div class="sub-menu-option-background"> </div>
-                                <div class="sub-menu-option-text"><a href="#home_layout_3.html" data-path-href="html/home/">Home Layout 3</a></div>
-                            </div>
-                        
-                        </div>         
-                    </div>
-                    <div class="menu-option-holder">
-                        <div id="menu-option-background" class="menu-option-background"> </div>
-                        <div id="menu-option-text" class="menu-option-text">
-                            <a href="#">ABOUT US</a>
+                            <a href="#">MUSIC</a>
                             <div class="menu-option-sign">+</div>
                         </div>
                         <div class="sub-menu-holder">
