@@ -6,8 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,IE=8,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta itemprop="image" content="assets/favicon.png" />
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/png" href="http://www.dfempire.com/favicon.png" />
     
     
 	<title>Synergy - Responsive and Interactive HTML Portfolio</title>
@@ -48,7 +47,7 @@
         Careful when using the online version because the destroy method throws an error.    
         Our version has the fix on destroy method. Until it updates we recommend using the JS file from the template.    
         -->
-        <script>
+        <script type="text/javascript">
             _V_.options.flash.swf = "js/video-js/video-js.swf";
             _V_.options.techOrder = ["html5", "flash", "links"];
             var params = {};
@@ -68,7 +67,12 @@
         <div class="menu-content-holder"><!-- start .menu-content-holder -->
             <div class="menu-background"></div>
             <div id="template-logo" class="template-logo" data-href="#portfolio.html"></div> 
-            <div id="template-menu" class="template-menu" data-current-module-type="full_width_gallery" data-side="none" data-href="#portfolio.html"><!-- start #template-menu -->
+            
+            <div id="template-menu" class="template-menu" 
+                data-current-module-type="full_width_gallery" 
+                data-side="none" 
+                data-href="#portfolio.html"><!-- start #template-menu -->
+                
                 <div class="menu-option-holder">
                     <div id="menu-option-background" class="menu-option-background"> </div>
                     <div id="menu-option-text" class="menu-option-text">
@@ -186,7 +190,10 @@
                     <div id="menu-option-background" class="menu-option-background"> </div>
                     <div id="menu-option-text" class="menu-option-text"><a href="#contact.html" data-path-href="html/contact/">CONTACT US</a></div>
                 </div>            
-            </div><!-- end #template-menu -->  
+            </div><!-- end #template-menu --> 
+            
+            
+
             <div id="template-smpartphone-menu">
                 <select>
                     <option value="#">Navigate to...</option>
