@@ -8,11 +8,12 @@
  /* start GENERAL CUSTOMIZATION PROPERTIES */
 var templateBaseURL = "http://" + window.location.host + "/";
 var themeColor = "#d00355";
+var moduleContainerMarginLeft = 335;
 var menuActive = true;
 var menuHoverActive = true;
 /* it will change to false if menuActive == true. If 'menuActive' 
                                         is false and this true than on hover it will show the menu */
-var menuTextOutColor = "#777777";
+var menuTextOutColor = "#FFF";
 
 var customPageStart = true;
 var customPageStartURL = "#portfolio.html";
@@ -307,7 +308,7 @@ function settingsForScreens() {
 
         /*start-up animation*/
         $("#module-container").css("opacity", 1);
-        $("#module-container").css("left", menuWidth + menuHider + "px");
+        $("#module-container").css("left", moduleContainerMarginLeft + "px");
 
         $("footer").css('display', 'inline');
         TweenMax.to($("#menu-container"), .4, { css: { left: "0px" }, ease: Sine.easeInOut, delay: 0.5, onComplete: endStartupAnimation });
@@ -4637,6 +4638,7 @@ $(window).resize(
 
         $("#module-container").css("width", (winW - get_OffsetWidth()) + "px");
         if (winW >= 768) {
+            //$("#module-container").css("top", "0px").css("left", moduleContainerMarginLeft + "px");
             $("#module-container").css("top", "0px").css("left", menW + "px");
             $("#module-container").css("height", "100%");
             if (firstRun == false) $("footer").css('display', 'inline').css('visibility', 'visible');
