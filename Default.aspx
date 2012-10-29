@@ -60,7 +60,9 @@
     <div id="template-wrapper">
         <div id="menu-container"><!-- start #menu-container -->        
             <div class="menu-content-holder"><!-- start .menu-content-holder -->
-                <div class="menu-background"></div>
+                <div class="menu-background">
+                    <div class="menu-background-gradient"></div>
+                </div>
                 <div id="template-logo" class="template-logo" data-href="#portfolio.html"></div> 
             
                 <div id="template-menu" class="template-menu" 

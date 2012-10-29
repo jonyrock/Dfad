@@ -143,11 +143,17 @@ body
 {
 	width:336px;
     height: 100%;
-    background:url(../assets/patterns/menu/menu_pattern_5.png);
+    background:url(../assets/patterns/menu/menu_pattern_5.jpg);
 	position:absolute; 
 	top:0px;
 	left:0px;
 	z-index:7;
+}
+.menu-background-gradient
+{
+    width:231px;
+    background:url(../assets/menu-background-gradient.jpg) no-repeat;
+    height: 100%;
 }
 .menu-background, .sub-menu-holder
 {
@@ -233,7 +239,7 @@ submenu holder has overflow hidden */
 {
 	position:absolute;
 	left:0px;
-	top: 68px;
+	top: 64px;
 	height: 89px;
     width: 47px;
 	/*background-color:#d00355;*/
