@@ -104,10 +104,14 @@ body
 	height: 100%;
 }
 /* -------- THEME COLOR SETUP ---------------------- */
+.menu-option-background, 
+.menu-option-background-selected
+{
+    background-color:#373839;
+}
+
 #menu-hider-background,
 #menu-hider-icon,
-.menu-option-background, 
-.menu-option-background-selected,
 .sub-menu-option-background,
 .sub-menu-option-background-selected,
 #module-scrollbar-dragger,
@@ -177,18 +181,21 @@ body
 {
 	margin: 0 0 0 0px;
 }
-.template-menu,
+.template-menu
+{
+    width:230px    
+}
 .menu-option-holder, 
 .menu-option-background-selected,
 .menu-option-text,
 .sub-menu-option-text
 {	
-	width: 230px;
+	width: 200px;
 }
 .sub-menu-holder,
 .menu-option-background
 {
-	margin-left:230px;
+	margin-left:200px;
 }
 .sub-menu-holder
 {
@@ -284,6 +291,7 @@ submenu holder has overflow hidden */
 	cursor: pointer;
 	cursor: hand;		
 }
+
 .menu-option-holder,
 .menu-option-background,
 .menu-option-background-selected,
@@ -293,7 +301,7 @@ submenu holder has overflow hidden */
 .sub-menu-option-background-selected,
 .sub-menu-option-text
 {
-	height:32px;
+	height:34px;
 }
 .menu-option-background, 
 .menu-option-background-selected,
