@@ -73,7 +73,7 @@
                     <div class="menu-option-holder" data-module-type="home" data-side="height">
                         <div id="menu-option-background" class="menu-option-background"> </div>
                         <div id="menu-option-text" class="menu-option-text">
-                            <a href="/">HOME</a>
+                            <a href="#portfolio.html">HOME</a>
                         </div>
                     </div> 
                     <div class="menu-option-holder">
@@ -186,7 +186,9 @@
                         </div>                   
                     </div>    
                     <div id="footer-text"><!-- start #footer-text -->
-                        <div id="footer-copyright"><a href="#">&copy;2012 DFAD.COM</a></div>           
+                        <div id="footer-copyright">
+                            © DF Music Organization Group. <br />                             All labels and logotypes <br />                            are official trademarks <br />                            of DF Music Organization Group. <br />                            All rights reserved <br />
+                        </div>           
                     </div><!-- end #footer -->    
                 </footer> 
             </div><!-- end .menu-content-holder-->
