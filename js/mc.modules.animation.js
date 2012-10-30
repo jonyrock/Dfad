@@ -4007,7 +4007,7 @@ function menuOptionHover(event) {
         if (subMenuHol != "null") {
             subMenuHol.css('overflow', '');
             TweenMax.killTweensOf(subMenuHol);
-            TweenMax.to(subMenuHol, menuAnimDuration, { css: { height: "0px", width: "0px" }, ease: menuAnimEase, onComplete: hideSubmenu, onCompleteParams: [subMenuHol] });
+            TweenMax.to(subMenuHol, 0.7, { css: { height: "0px", width: "0px" }, ease: menuAnimEase, onComplete: hideSubmenu, onCompleteParams: [subMenuHol] });
         }
     }
 }
