@@ -107,7 +107,7 @@ body
 .menu-option-background, 
 .menu-option-background-selected
 {
-    background-color:#373839;
+    background-color:#333333;
 }
 
 #menu-hider-background,
@@ -314,6 +314,7 @@ submenu holder has overflow hidden */
 {
 	height:34px;
 }
+
 .menu-option-background, 
 .menu-option-background-selected,
 .sub-menu-option-background,

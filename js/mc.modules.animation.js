@@ -3975,7 +3975,11 @@ function menuOptionHover(event) {
         subMenuHol = menuOptionsArr[idx][5];
     if (event.type == "mouseenter") {
         menuOptionsArr[idx][3][0].css("width", menuOptionsArr[idx][4]);
-        TweenMax.to(menuOptionsArr[idx][2], 0.1, { css: { marginLeft: menuOptionHoverMarginLeft + "px", width: menuOptionHoverWidth+"px" }, ease: menuAnimEase });
+        if (subMenuHol == "null") {
+            TweenMax.to(menuOptionsArr[idx][2], 0.1, { css: { marginLeft: menuOptionHoverMarginLeft + "px", width: menuOptionHoverWidth + "px" }, ease: menuAnimEase });
+        } else {
+            TweenMax.to(menuOptionsArr[idx][2], 0.1, { css: { marginLeft: menuOptionHoverMarginLeft + "px", width: 224 + "px" }, ease: menuAnimEase });
+        }
         TweenMax.to(menuOptionsArr[idx][3], 0.1, { css: { color: "#FFF" }, ease: menuAnimEase });
 
         if (subMenuHol != "null") {
@@ -3985,14 +3989,15 @@ function menuOptionHover(event) {
             subMenuHol.css('width', '0px').css('height', '0px');
             TweenMax.to(subMenuHol, menuAnimDuration, {
                 css: { height: initialHeight, width: initialWidth },
-                delay: 0.2,
+                delay: 0.01,
                 ease: menuAnimEase,
                 onStart:
-                    function() {
+                    function () {
                         subMenuHol.css('opacity', '1').css('display', 'block');
                     }
             });
         }
+
     } else {
         menuOptionsArr[idx][3][0].css("width", "");
         if (menuOptionsArr[idx][2].hasClass('menu-option-background-selected') == false) {
@@ -4033,7 +4038,7 @@ function menuListeners() {
             function() {
                 var submOptBack = $(".sub-menu-option-background", this);
                 var elem = submOptBack.length == 1 ? submOptBack : $("." + submOptBackSel, this);
-                TweenMax.to(elem, menuAnimDuration, { css: { marginLeft: "5px", width: submenuWidth }, ease: menuAnimEase });
+                TweenMax.to(elem, 0.1, { css: { marginLeft: "0px", width: submenuWidth }, ease: menuAnimEase });
                 TweenMax.to($(".sub-menu-option-text a", this), menuAnimDuration, { css: { color: "#FFF" }, ease: menuAnimEase });
             },
             function() {
