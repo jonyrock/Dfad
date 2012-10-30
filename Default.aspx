@@ -27,8 +27,7 @@
     <!-- START TEMPLATE JavaScript load -->
     <script type="text/javascript" src="js/libs/jquery-1.7.2.min.js"> </script>
     <script type="text/javascript" src="js/libs/modernizr.custom.min.js"> </script>
-    <script type="text/javascript" src="js/libs/jquery.wipetouch.js"> </script>       
-    <script type="text/javascript" src="js/libs/jquery.gmap.min.js"> </script>
+    <script type="text/javascript" src="js/libs/jquery.wipetouch.js"> </script>
     <script type="text/javascript" src="js/greensock/minified/TweenMax.min.js"> </script>
     <script type="text/javascript" src="js/libs/jquery.timer.js"> </script>
     <script type="text/javascript" src="js/libs/jqueryui/1.8/jquery-ui.min.js"> </script>
@@ -70,11 +69,9 @@
                      data-side="none" 
                      data-href="#portfolio.html"><!-- start #template-menu -->
                 
-                    <div class="menu-option-holder" data-module-type="home" data-side="height">
+                    <div class="menu-option-holder" data-module-type="full_width_gallery" data-side="none">
                         <div id="menu-option-background" class="menu-option-background"> </div>
-                        <div id="menu-option-text" class="menu-option-text">
-                            <a href="#portfolio.html">HOME</a>
-                        </div>
+                        <div id="menu-option-text" class="menu-option-text"><a href="#portfolio.html" data-path-href="html/portfolio/">HOME</a></div>
                     </div> 
                     <div class="menu-option-holder">
                         <div id="menu-option-background" class="menu-option-background"> </div>
@@ -105,10 +102,7 @@
                         <div id="menu-option-background" class="menu-option-background"> </div>
                         <div id="menu-option-text" class="menu-option-text"><a href="#news.html" data-path-href="html/news/">NEWS</a></div>
                     </div>  
-                    <div class="menu-option-holder" data-module-type="full_width_gallery" data-side="none">
-                        <div id="menu-option-background" class="menu-option-background"> </div>
-                        <div id="menu-option-text" class="menu-option-text"><a href="#portfolio.html" data-path-href="html/portfolio/">PORTFOLIO</a></div>
-                    </div> 
+                    
                     <div class="menu-option-holder">
                         <div id="menu-option-background" class="menu-option-background"> </div>
                         <div id="menu-option-text" class="menu-option-text"><a href="#">OUR PROJECTS</a><div class="menu-option-sign">+</div></div>
