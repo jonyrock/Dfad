@@ -110,7 +110,6 @@ body
     background-color:#333333;
 }
 
-#menu-hider-background,
 #menu-hider-icon,
 .sub-menu-option-background,
 .sub-menu-option-background-selected,
@@ -143,7 +142,7 @@ body
 
 .menu-background
 {
-	width:242px;
+	width:230px;
     height: 100%;
     background:url(../assets/patterns/menu/menu_pattern_5.jpg);
 	position:absolute; 
@@ -242,16 +241,17 @@ submenu holder has overflow hidden */
 	float:left;
 	width:10px;
 	height:100%;
-	z-index:2;
+	z-index:-1;
 	display:none;
 }
 #menu-hider-background
 {
 	position:absolute;
-	width:10px;
+	width:14px;
 	height: 100%;
 	left:0px;
-	z-index:2;	
+	z-index:1;
+	background: url(../assets/patterns/menu/menu_pattern_5.jpg) 106px;
 }
 #menu-hider-icon
 {

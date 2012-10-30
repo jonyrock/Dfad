@@ -8,7 +8,7 @@
  /* start GENERAL CUSTOMIZATION PROPERTIES */
 var templateBaseURL = "http://" + window.location.host + "/";
 var themeColor = "#d00355";
-var moduleContainerMarginLeft = 335;
+var moduleContainerMarginLeft = 240;
 var menuActive = true;
 var menuHoverActive = true;
 var menuOptionHoverMarginLeft = 18;
@@ -4007,7 +4007,7 @@ function menuOptionHover(event) {
         if (subMenuHol != "null") {
             subMenuHol.css('overflow', '');
             TweenMax.killTweensOf(subMenuHol);
-            TweenMax.to(subMenuHol, 0.7, { css: { height: "0px", width: "0px" }, ease: menuAnimEase, onComplete: hideSubmenu, onCompleteParams: [subMenuHol] });
+            TweenMax.to(subMenuHol, 0.1, { css: { height: "0px", width: "0px" }, ease: menuAnimEase, onComplete: hideSubmenu, onCompleteParams: [subMenuHol] });
         }
     }
 }
@@ -4307,6 +4307,7 @@ function loadModule(url) {
         prevURL = url;
         loadContainer.empty().load(url + ' #module-container > *', moduleLoaded);
     }
+    
 }
 
 var showModuleInterval = "";
@@ -4322,7 +4323,7 @@ function moduleLoaded(response, status, xhr) {
             clearCustomInterval(showModuleInterval);
         } else {
             clearCustomInterval(showModuleInterval);
-            showModuleInterval = setInterval(function() {
+            showModuleInterval = setInterval(function () {
                 if (menuData[2] == oldMenuData[2]) {
                     clearCustomInterval(showModuleInterval);
                     loadedContent = true;
@@ -4343,6 +4344,7 @@ function moduleLoaded(response, status, xhr) {
                 clearCustomInterval(showModuleInterval);
             }, 50);
         }
+        
         break;
     }
 }
@@ -4644,40 +4646,21 @@ $(window).resize(
         var menW = getMenuWidth();
         var menH = getMenuHeight();
 
-        $("#module-container").css("width", menW - get_OffsetWidth() - 96 + "px");
-        if (winW >= 768) {
-            //$("#module-container").css("top", "0px").css("left", moduleContainerMarginLeft + "px");
-            $("#module-container").css("top", "0px").css("left", (menW + 96) + "px");
-            $("#module-container").css("height", "100%");
-            if (firstRun == false) $("footer").css('display', 'inline').css('visibility', 'visible');
-            if (availScrollbar.length > 0) {
-                availScrollbar.css("height", winH).css("top", "0px");
-            }
-            if (menuActive == false) {
-                var menuHider = ($("#menu-hider").length > 0) ? parseInt($("#menu-hider").width(), 10) : 0;
-                var menuWidth = parseInt($("#menu-container").css("width"), 10) - menuHider;
-                var menuVal = 0;
-                $("#template-wrapper").css("left", -(menuWidth) + "px").css("top", "0px");
-                $("#menu-container").css("left", menuVal + "px").css("top", "0px");
-            }
-        } else {
-
-            if (menuActive == true) {
-                var menuVal = 0;
-                $("#template-wrapper").css("left", "0px").css("top", "0px");
-                $("#menu-container").css("left", "0px").css("top", "0px");
-            } else {
-                var menuHeight = parseInt($("#menu-container").height(), 10) - menuHiderH;
-                $("#template-wrapper").css("left", "0px").css("top", -menuHeight + "px");
-                $("#menu-container").css("left", "0px").css("top", "0px");
-            }
-            $("#module-container").css("left", "0px").css("top", $("#menu-container").height() + "px");
-            $("#module-container").css("height", (winH - menuHiderH) + "px");
-            if (firstRun == false) $("footer").css('display', 'none').css('visibility', 'hidden');
-            if (availScrollbar.length > 0 && touchDevice == 0) {
-                availScrollbar.css("height", (winH - menuHiderH) + "px");
-            }
+        $("#module-container").css("width", (winW - menW) + "px");
+        $("#module-container").css("top", "0px").css("left", menW + "px");
+        $("#module-container").css("height", "100%");
+        if (firstRun == false) $("footer").css('display', 'inline').css('visibility', 'visible');
+        if (availScrollbar.length > 0) {
+            availScrollbar.css("height", winH).css("top", "0px");
         }
+        if (menuActive == false) {
+            var menuHider = ($("#menu-hider").length > 0) ? parseInt($("#menu-hider").width(), 10) : 0;
+            var menuWidth = parseInt($("#menu-container").css("width"), 10) - menuHider;
+            var menuVal = 0;
+            $("#template-wrapper").css("left", -(menuWidth) + "px").css("top", "0px");
+            $("#menu-container").css("left", menuVal + "px").css("top", "0px");
+        }
+        
         /*window["moduleUpdate_" + currModuleType]();*/
         switch (currModuleType) {
         case "slideshow":
