@@ -27,9 +27,9 @@ var contactFormDemo = false;
 
 
 /* start ready function */
-$(document).ready(function() {
+$(document).ready(function () {
     readyAndLoad++;
-    $(window).error(function(msg, url, line) {
+    $(window).error(function (msg, url, line) {
         console.log("error: ", msg, " url: ", url, " line: ", line);
     });
     if (readyAndLoad == 2) {
@@ -39,7 +39,7 @@ $(document).ready(function() {
 /* end ready function */
 
 /* start load function */
-$(window).load(function() {
+$(window).load(function () {
     readyAndLoad++;
     if (templateBaseURL == "http://www.your_domain.com/" || templateBaseURL == "null") {
         $("body").empty().css("visibility", "visible").append("<br/><span>Please check the documentation on page 4 on how to change the 'templateBaseURL' path!!!</span>");
@@ -48,6 +48,7 @@ $(window).load(function() {
     if (readyAndLoad == 2) {
         checkIfTouchDevice();
     }
+    
 });
 /* end load function */
 
@@ -4636,10 +4637,10 @@ $(window).resize(
         var menW = getMenuWidth();
         var menH = getMenuHeight();
 
-        $("#module-container").css("width", (winW - get_OffsetWidth()) + "px");
+        $("#module-container").css("width", menW - get_OffsetWidth() - 96 + "px");
         if (winW >= 768) {
             //$("#module-container").css("top", "0px").css("left", moduleContainerMarginLeft + "px");
-            $("#module-container").css("top", "0px").css("left", menW + "px");
+            $("#module-container").css("top", "0px").css("left", (menW + 96) + "px");
             $("#module-container").css("height", "100%");
             if (firstRun == false) $("footer").css('display', 'inline').css('visibility', 'visible');
             if (availScrollbar.length > 0) {

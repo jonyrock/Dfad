@@ -5,7 +5,7 @@
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {  display: block; }
-body { line-height: 1; }
+body { line-height: 1; font-family: Arial; }
 ol, ul { list-style: none; }
 blockquote, q { quotes: none; }
 blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
@@ -118,9 +118,7 @@ body
 .draggerH-preview,
 .filter-button.selected,
 .draggerH,
-.tooltip-background,
-.smartphone-option-background, 
-.smartphone-option-background-selected
+.tooltip-background
 {
 	background-color:#00AAFF;
 }
@@ -282,11 +280,11 @@ submenu holder has overflow hidden */
 	z-index:9;
 }
 
-.menu-option-holder, .sub-menu-option-holder, .smartphone-option-holder
+.menu-option-holder, .sub-menu-option-holder
 {
 	margin-bottom: 1px;
 }
-.menu-option-holder:hover, .sub-menu-option-holder:hover, .smartphone-option-holder:hover
+.menu-option-holder:hover, .sub-menu-option-holder:hover
 {
 	cursor: pointer;
 	cursor: hand;		
@@ -312,19 +310,18 @@ submenu holder has overflow hidden */
     z-index:1;
 }
 .sub-menu-option-text,
-.menu-option-text,
-.smartphone-option-text
+.menu-option-text
 {
 	position:absolute;
     z-index:2;
 }
-.menu-option-text a, .menu-option-sign, .sub-menu-option-text a, .smartphone-option-text a
+.menu-option-text a, .menu-option-sign, .sub-menu-option-text a
 {
 	display:block;
 	padding-top:10px;
 	padding-bottom:10px;
 	padding-left:14px;
-	font-family: PT Sans Caption; /*'Open Sans',sans-serif;*/
+	font-family: PT Sans Caption, Arial; /*'Open Sans',sans-serif;*/
 	font-size: 12px;	
 	/*letter-spacing:1px;*/
 	color: #FFF;
@@ -340,7 +337,7 @@ submenu holder has overflow hidden */
 	padding-left:10px;
 	text-align:right;	
 }
-.menu-option-text .selected, .menu-option-sign .selected, .sub-menu-option-text .selected, .smartphone-option-text .selected
+.menu-option-text .selected, .menu-option-sign .selected, .sub-menu-option-text .selected
 {
  	color: #ffffff;	
 }
@@ -361,7 +358,7 @@ submenu holder has overflow hidden */
 }
 .sub-menu-option-text a
 {	
-	font-family: PT Sans;
+	font-family: PT Sans, Arial;
 	font-size: 13px;
 }
 
@@ -423,7 +420,7 @@ footer
     display:block;
     margin:  auto;
     padding-top: 3px;
-    font-family:PT Sans;
+    font-family:PT Sans, Arial;
 	font-weight: bold;
 	font-size:13px;
 	color:#444444; 
@@ -491,7 +488,7 @@ footer
     position:relative;
     float:left;
 	width: 100%;    
-    font-family:PT Sans;
+    font-family:PT Sans, Arial;
 	font-weight: normal;
 	font-size:12px;
 	line-height: 170%;
@@ -779,7 +776,7 @@ footer
 #slideshow-captions-text p
 {
 	padding: 10px !important;
-	font-family: PT Sans;
+	font-family: PT Sans, Arial;
 	font-size:20px;
 	color:#3f3f3f;
 }	
@@ -1025,7 +1022,7 @@ footer
 	position:relative;
 	padding: 30px;
 	display:block;
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: normal;
 	font-size:14px;
 	line-height: 140%;
@@ -1078,7 +1075,7 @@ footer
 	float:left;
 	margin-top: 20px;
 	margin-left: 20px;
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: bold;
 	font-size:20px;
 	color:#444444; 
@@ -1098,7 +1095,7 @@ footer
 	float:left;
 	margin-top: 20px;	
 	margin-left: 20px;
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: bold;
 	font-size:20px;
 	color:#444444; 
@@ -1191,7 +1188,7 @@ footer
 {
 	width: 100%;
 	margin-top: 15px;
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: bold;
 	font-size:16px;
 	color:#3f3f3f; 
@@ -1201,7 +1198,7 @@ footer
 .layout2-description span
 {
 	margin-top: 15px;
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: normal;
 	font-size:14px;
 	color:#434343; 
@@ -1317,7 +1314,7 @@ footer
 	margin: 7px 0px;
     color: #0C0C0C;
     
-    font-family: PT Sans;
+    font-family: PT Sans, Arial;
     font-size: 18px;
     font-weight: bold;
     text-align: center;	
@@ -1414,7 +1411,7 @@ footer
 }
 .main-text-holder p
 {
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	line-height:170%;
 	font-size:13px;
 	color:#444444; 
@@ -1502,7 +1499,7 @@ footer
 .sub-title-text-ethics
 {
 	margin-left:152px;
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: normal;
 	font-size:16px;
 	color:#0c0c0c; 
@@ -1535,7 +1532,7 @@ footer
 }
 .main-text-holder-careers p
 {
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	line-height:170%;
 	font-size:13px;
 	color:#444444; 
@@ -1642,7 +1639,7 @@ footer
 	position:relative;
 	float:left;
 	margin: 0 0 20px;
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: bold;
 	font-size:18px;
 	color:#3f3f3f; 
@@ -1676,7 +1673,7 @@ footer
 	float:left;
 	width: 94%;
 	padding: 3%;
-	font-family: PT Sans; /*'Open Sans',sans-serif;*/
+	font-family: PT Sans, Arial; /*'Open Sans',sans-serif;*/
 	font-size: 13px;
     line-height: 200%;	
 	color: #ffffff;
@@ -1838,7 +1835,7 @@ footer
 }
 .contact-information-title p
 {
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: bold;
 	font-size:20px;
 	color:#333333; 
@@ -1865,7 +1862,7 @@ footer
 	width: 160px;
 	margin-left: 15px;
 	margin-top: 8px;
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: normal;
 	font-size:14px;
 	color:#444444; 
@@ -1875,7 +1872,7 @@ footer
 {
 	position:relative;
 	float: left;	
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: normal;
 	text-decoration: none;
 	font-size:14px;
@@ -1884,7 +1881,7 @@ footer
 }
 .contact-information-details p a:hover
 {
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: normal;
 	text-decoration: underline;
 	font-size:14px;
@@ -1928,7 +1925,7 @@ footer
 	padding: 0;
 	background-color:transparent;
 	border: none;
-    font-family:PT Sans;
+    font-family:PT Sans, Arial;
 	font-weight: normal;
 	text-decoration: none;
 	font-size:14px;
@@ -1969,7 +1966,7 @@ footer
 	padding: 0;
 	background-color:transparent;
 	border: none;
-    font-family:PT Sans;
+    font-family:PT Sans, Arial;
 	font-weight: normal;
 	text-decoration: none;
 	font-size:14px;
@@ -1999,7 +1996,7 @@ footer
 	padding: 0;
 	background-color: transparent;
 	border: none;
-    font-family:PT Sans;
+    font-family:PT Sans, Arial;
 	font-weight: normal;
 	text-decoration: none;
 	font-size:14px;
@@ -2035,7 +2032,7 @@ footer
 #response-form p, #response-form span
 {
 	display:none;
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: bold;
 	text-decoration: none;
 	font-size:13px;
@@ -2065,7 +2062,7 @@ footer
 }
 #form-reset p, #form-send p
 {
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: normal;
 	text-decoration: none;
 	font-size:13px;
@@ -2253,7 +2250,7 @@ footer
 	float:left;
 	width: 100%;
 	padding: 5px 0px 5px 0px;
-	font-family: PT Sans; /*'Open Sans',sans-serif;*/
+	font-family: PT Sans, Arial; /*'Open Sans',sans-serif;*/
 	font-size: 16px;
     line-height: 200%;
 	color: #ffffff;
@@ -2362,7 +2359,7 @@ h1, h2, h3, h4, h5, h6
 	float:left;
 	width: 100%;
 	padding: 5px 0px 5px 0px;
-	font-family: PT Sans; /*'Open Sans',sans-serif;*/
+	font-family: PT Sans, Arial; /*'Open Sans',sans-serif;*/
 	font-size: 13px;
     line-height: 200%;	
 	color: #3f3f3f;
@@ -2414,7 +2411,7 @@ h1, h2, h3, h4, h5, h6
 {
 	float:left;
 	width: 100%;
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: normal;
 	font-size:18px;
 	color:#3f3f3f;
@@ -2423,7 +2420,7 @@ h1, h2, h3, h4, h5, h6
 }
 .full-width-text-content-dropcaps p
 {
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: normal;
 	color:#3f3f3f;
     text-align:justify;
@@ -2437,7 +2434,7 @@ h1, h2, h3, h4, h5, h6
 	padding-right: 8px; 
 	padding-left: 3px; 
 	padding-top: 20px;
-	font-family: PT Sans; 
+	font-family: PT Sans, Arial; 
 }
 .full-width-text-content span, .full-width-text-content-dropcaps p
 {
@@ -2519,7 +2516,7 @@ h1, h2, h3, h4, h5, h6
 	position:relative;
 	float:left;
 	width: 90%;
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: bold;
 	font-size:18px;
 	color:#e3e3e3; 
@@ -2592,7 +2589,7 @@ h1, h2, h3, h4, h5, h6
 	position:relative;
 	float:left;
 	width:100%;
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: normal;
 	font-size:18px;
 	color:#3f3f3f;
@@ -2772,7 +2769,7 @@ h1, h2, h3, h4, h5, h6
 	display:block;	
 	margin: 0px 0px 0px 4px;
 	padding: 4px 13px;
-	font-family: PT Sans; /*'Open Sans',sans-serif;*/
+	font-family: PT Sans, Arial; /*'Open Sans',sans-serif;*/
 	font-size: 13px;	
 	color: #3f3f3f;
 	overflow:hidden;	
@@ -2955,7 +2952,7 @@ h1, h2, h3, h4, h5, h6
 .columns-preview-description p, .columns-preview-description span
 {
 	float:left;
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: normal;
 	font-size:18px;
 	color:#3f3f3f;
@@ -3194,7 +3191,7 @@ h1, h2, h3, h4, h5, h6
 	position:relative;
 	float:left;
 	width: 100%;
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: normal;
 	font-size:14px;
 	color:#3f3f3f; 
@@ -3208,7 +3205,7 @@ h1, h2, h3, h4, h5, h6
 	float:left;
 	overflow:hidden;
 	width: 100%;
-	font-family:PT Sans;
+	font-family:PT Sans, Arial;
 	font-weight: normal;
 	font-size:14px;
 	color:#3f3f3f; 
@@ -3342,7 +3339,7 @@ h1, h2, h3, h4, h5, h6
 {
     position: absolute;
     top: 9px;    
-    font-family:PT Sans;
+    font-family:PT Sans, Arial;
 	font-weight: normal;
 	font-size:16px;
 	color:#3f3f3f; 
