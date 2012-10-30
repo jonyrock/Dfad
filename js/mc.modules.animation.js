@@ -3933,12 +3933,12 @@ function storeMenuArr() {
 
 function menuOptionIn(idx1, idx2) {
     menuOptionsArr[idx1][2].attr("class", "menu-option-background-selected");
-    TweenMax.to(menuOptionsArr[idx1][2], menuAnimDuration, { css: { marginLeft: "0px", width: menuWidth }, ease: menuAnimEase });
+    TweenMax.to(menuOptionsArr[idx1][2], menuAnimDuration, { css: { marginLeft: "15px", width: menuWidth }, ease: menuAnimEase });
     TweenMax.to(menuOptionsArr[idx1][3], menuAnimDuration, { css: { color: "#FFF" }, ease: menuAnimEase });
     if (idx2 != -1) {
         var subMenu = menuOptionsArr[idx1][6];
         subMenu[idx2][2].attr("class", "sub-menu-option-background-selected");
-        TweenMax.to(subMenu[idx2][2], menuAnimDuration, { css: { marginLeft: "0px", width: menuWidth }, ease: menuAnimEase });
+        TweenMax.to(subMenu[idx2][2], menuAnimDuration, { css: { marginLeft: "15px", width: menuWidth }, ease: menuAnimEase });
         TweenMax.to(subMenu[idx2][3], menuAnimDuration, { css: { color: "#FFF" }, ease: menuAnimEase });
     }
 }
@@ -4009,7 +4009,7 @@ function hideSubmenu(obj) { obj.css('opacity', '0').css('display', 'none'); }
 
 var menuAnimEase = Quad.easeOut;
 /* Circ.easeOut  Quad.easeOut*/
-var menuAnimDuration = 0.4;
+var menuAnimDuration = 0.15;
 /* 0.6  or  0.3*/
 var menuWidth = 0;
 var submenuWidth = 0;
@@ -4017,10 +4017,10 @@ var oldMenuData = "";
 var menuData = "";
 
 function menuListeners() {
-    menuWidth = $(".template-menu").width() + "px";
+    menuWidth = "200px";
     /* We add 2 px in order to fix the 2px margin on the right. Since sub menu holder */
     /* has overflow hidden the 2px will fill the gap in IE 8 and in the other browser it won't be shown. */
-    submenuWidth = $(".template-menu").width() + 2 + "px";
+    submenuWidth = "200px";
     /* MENU & SUBMENU -- OVER & OUT LISTENER */
 
     function hideSubmenu(obj) { obj.css('opacity', '0').css('display', 'none'); }
@@ -4031,7 +4031,7 @@ function menuListeners() {
             function() {
                 var submOptBack = $(".sub-menu-option-background", this);
                 var elem = submOptBack.length == 1 ? submOptBack : $("." + submOptBackSel, this);
-                TweenMax.to(elem, menuAnimDuration, { css: { marginLeft: "0px", width: submenuWidth }, ease: menuAnimEase });
+                TweenMax.to(elem, menuAnimDuration, { css: { marginLeft: "5px", width: submenuWidth }, ease: menuAnimEase });
                 TweenMax.to($(".sub-menu-option-text a", this), menuAnimDuration, { css: { color: "#FFF" }, ease: menuAnimEase });
             },
             function() {

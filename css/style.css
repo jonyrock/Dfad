@@ -188,7 +188,11 @@ body
 .menu-option-text,
 .sub-menu-option-text
 {	
-	width: 200px;
+	width: 175px;
+}
+.menu-option-text
+{
+    margin-left: 20px;
 }
 .sub-menu-holder,
 .menu-option-background
@@ -1396,7 +1400,7 @@ footer
 }
 .title-text_normal
 {
-	font-family:PT Sans Caption;
+	font-family:PT Sans Caption, Arial;
 	font-weight: normal;
 	font-size:23px;
 	line-height:120%;
