@@ -188,17 +188,26 @@ body
 .menu-option-text,
 .sub-menu-option-text
 {	
-	width: 175px;
+	width: 200px;
 }
 .menu-option-text
 {
     margin-left: 20px;
+    margin-top:2px;
 }
 .sub-menu-holder,
 .menu-option-background
 {
 	margin-left:200px;
 }
+
+.menu-option-background-selected,
+.menu-option-background
+{
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
 .sub-menu-holder
 {
 	width: 84%;

@@ -25,16 +25,16 @@
       
       
     <!-- START TEMPLATE JavaScript load -->
-    <script type="text/javascript" src="js/libs/jquery-1.7.2.min.js"> </script>    
-    <script type="text/javascript" src="js/libs/modernizr.custom.min.js"> </script> 
+    <script type="text/javascript" src="js/libs/jquery-1.7.2.min.js"> </script>
+    <script type="text/javascript" src="js/libs/modernizr.custom.min.js"> </script>
     <script type="text/javascript" src="js/libs/jquery.wipetouch.js"> </script>       
     <script type="text/javascript" src="js/libs/jquery.gmap.min.js"> </script>
-    <script type="text/javascript" src="js/greensock/minified/TweenMax.min.js"> </script>    
+    <script type="text/javascript" src="js/greensock/minified/TweenMax.min.js"> </script>
     <script type="text/javascript" src="js/libs/jquery.timer.js"> </script>
     <script type="text/javascript" src="js/libs/jqueryui/1.8/jquery-ui.min.js"> </script>
     <script type="text/javascript" src="js/libs/jquery.mousewheel.min.js"> </script>
     <script type="text/javascript" src="js/mediacreed/scrollbar/mc.custom.list.js"> </script>
-    <script type="text/javascript" src="js/mc.modules.animation.js"> </script> 
+    <script type="text/javascript" src="js/mc.modules.animation.js"> </script>
     <link rel="stylesheet" href="js/video-js/video-js.min.css" media="screen" />
     <script type="text/javascript" src="js/video-js/video.min.js"> </script>
     <!-- END TEMPLATE JavaScript load ---->

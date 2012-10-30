@@ -11,6 +11,8 @@ var themeColor = "#d00355";
 var moduleContainerMarginLeft = 335;
 var menuActive = true;
 var menuHoverActive = true;
+var menuOptionHoverMarginLeft = 18;
+var menuOptionHoverWidth = 200;
 /* it will change to false if menuActive == true. If 'menuActive' 
                                         is false and this true than on hover it will show the menu */
 var menuTextOutColor = "#FFF";
@@ -3933,12 +3935,12 @@ function storeMenuArr() {
 
 function menuOptionIn(idx1, idx2) {
     menuOptionsArr[idx1][2].attr("class", "menu-option-background-selected");
-    TweenMax.to(menuOptionsArr[idx1][2], menuAnimDuration, { css: { marginLeft: "15px", width: menuWidth }, ease: menuAnimEase });
+    TweenMax.to(menuOptionsArr[idx1][2], menuAnimDuration, { css: { marginLeft: menuOptionHoverMarginLeft + "px", width: menuOptionHoverWidth + "px" }, ease: menuAnimEase });
     TweenMax.to(menuOptionsArr[idx1][3], menuAnimDuration, { css: { color: "#FFF" }, ease: menuAnimEase });
     if (idx2 != -1) {
         var subMenu = menuOptionsArr[idx1][6];
         subMenu[idx2][2].attr("class", "sub-menu-option-background-selected");
-        TweenMax.to(subMenu[idx2][2], menuAnimDuration, { css: { marginLeft: "15px", width: menuWidth }, ease: menuAnimEase });
+        TweenMax.to(subMenu[idx2][2], menuAnimDuration, { css: { marginLeft: "0px", width: menuWidth }, ease: menuAnimEase });
         TweenMax.to(subMenu[idx2][3], menuAnimDuration, { css: { color: "#FFF" }, ease: menuAnimEase });
     }
 }
@@ -3973,8 +3975,8 @@ function menuOptionHover(event) {
         subMenuHol = menuOptionsArr[idx][5];
     if (event.type == "mouseenter") {
         menuOptionsArr[idx][3][0].css("width", menuOptionsArr[idx][4]);
-        TweenMax.to(menuOptionsArr[idx][2], menuAnimDuration, { css: { marginLeft: "0px", width: menuWidth }, ease: menuAnimEase });
-        TweenMax.to(menuOptionsArr[idx][3], menuAnimDuration, { css: { color: "#FFF" }, ease: menuAnimEase });
+        TweenMax.to(menuOptionsArr[idx][2], 0.1, { css: { marginLeft: menuOptionHoverMarginLeft + "px", width: menuOptionHoverWidth+"px" }, ease: menuAnimEase });
+        TweenMax.to(menuOptionsArr[idx][3], 0.1, { css: { color: "#FFF" }, ease: menuAnimEase });
 
         if (subMenuHol != "null") {
             subMenuHol.css('height', '').css('width', '');
