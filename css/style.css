@@ -247,7 +247,7 @@ submenu holder has overflow hidden */
 #menu-hider-background
 {
 	position:absolute;
-	width:14px;
+	width:105px;
 	height: 100%;
 	left:0px;
 	z-index:1;
@@ -259,7 +259,7 @@ submenu holder has overflow hidden */
 	left:0px;
 	top: 64px;
 	height: 89px;
-    width: 12px;
+    width: 45px;
 	/*background-color:#d00355;*/
 	background-image:url(../assets/menu-hider-icon.jpg);
 	background-repeat:no-repeat;

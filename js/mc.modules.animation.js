@@ -7,7 +7,7 @@
  
  /* start GENERAL CUSTOMIZATION PROPERTIES */
 var templateBaseURL = "http://" + window.location.host + "/";
-var themeColor = "#d00355";
+var themeColor = "#00aaff";
 var moduleContainerMarginLeft = 240;
 var menuActive = true;
 var menuHoverActive = true;
