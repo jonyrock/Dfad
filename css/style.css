@@ -187,7 +187,11 @@ body
 .menu-option-text,
 .sub-menu-option-text
 {	
-	width: 200px;
+	width: 190px;
+}
+.menu-option-background-selected
+{
+    margin-left: 20px;
 }
 .menu-option-text
 {

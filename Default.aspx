@@ -33,6 +33,8 @@
     <script type="text/javascript" src="js/libs/jqueryui/1.8/jquery-ui.min.js"> </script>
     <script type="text/javascript" src="js/libs/jquery.mousewheel.min.js"> </script>
     <script type="text/javascript" src="js/mediacreed/scrollbar/mc.custom.list.js"> </script>
+    
+    <script type="text/javascript" src="js/mainMenu.js"> </script>
     <script type="text/javascript" src="js/mc.modules.animation.js"> </script>
     <link rel="stylesheet" href="js/video-js/video-js.min.css" media="screen" />
     <script type="text/javascript" src="js/video-js/video.min.js"> </script>
