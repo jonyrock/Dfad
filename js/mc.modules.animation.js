@@ -219,48 +219,7 @@ function onTemplateHashChange(event, runLoad) {
 
 /* update menu */
 
-function updateMenu(currentURL, prevURL, sameURLParent, animate) {
-    currentURL = currentURL.replace("#", "");
-    prevURL = prevURL.replace("#", "");
 
-    var returnURL = "",
-        i = 0,
-        j = 0,
-        tempMenuID = 0,
-        tempSubmID = 0,
-        idx = menuOptionsArr.length;
-
-    while (idx--) {
-        if (menuOptionsArr[idx][1] != "null") {
-            if (currentURL == menuOptionsArr[idx][1][2]) {
-                returnURL = "#" + menuOptionsArr[idx][1][2];
-                setMenuData(menuOptionsArr[idx][1]);
-                menuOptionID = idx;
-                submenuOptionID = -1;
-                if (animate == true) {
-                    menuOptionIn(menuOptionID, submenuOptionID);
-                }
-                idx = 0;
-            }
-        } else {
-            var subMenu = menuOptionsArr[idx][6];
-            var subLength = subMenu.length;
-            while (subLength--) {
-                if (currentURL == subMenu[subLength][1][2]) {
-                    returnURL = subMenu[subLength][0];
-                    setMenuData(subMenu[subLength][1]);
-                    menuOptionID = idx;
-                    submenuOptionID = subLength;
-                    if (animate == true) {
-                        menuOptionIn(menuOptionID, submenuOptionID);
-                    }
-                    idx = 0;
-                }
-            }
-        }
-    }
-    return returnURL;
-}
 
 /* on first run loaded html page */
 

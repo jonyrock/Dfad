@@ -189,26 +189,28 @@ body
 {	
 	width: 190px;
 }
-.menu-option-background-selected
-{
+.menu-option-background,
+.menu-option-background-selected{
     margin-left: 20px;
+    width:190px;
 }
 .menu-option-text
 {
     margin-left: 20px;
     margin-top:2px;
 }
-.sub-menu-holder,
-.menu-option-background
-{
-	margin-left:200px;
-}
+
 
 .menu-option-background-selected,
 .menu-option-background
 {
     border-radius: 3px;
     -moz-border-radius: 3px;
+}
+
+.menu-option-background
+{
+    display: none;    
 }
 
 .sub-menu-holder

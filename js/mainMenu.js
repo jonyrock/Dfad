@@ -1,4 +1,21 @@
-﻿function menuListeners() {
+﻿$(function () {
+
+    $(".menu-option-text a").mouseenter(function () {
+        $(this).parent().parent().find(".menu-option-background").fadeIn("fast");
+    });
+
+    $(".menu-option-text a").click(function () {
+        $(this).parent().parent().parent()
+        .find(".menu-option-background-selected").fadeOut("fast").attr("class", "menu-option-background");
+    });
+
+    $(".menu-option-text a").mouseleave(function () {
+        $(this).parent().parent().find(".menu-option-background").hide();
+    });
+
+});
+
+function menuListeners() {
     menuWidth = "200px";
     /* We add 2 px in order to fix the 2px margin on the right. Since sub menu holder */
     /* has overflow hidden the 2px will fill the gap in IE 8 and in the other browser it won't be shown. */
@@ -183,29 +200,11 @@ function storeMenuArr() {
 
 function menuOptionIn(idx1, idx2) {
     var backgroundBlock = menuOptionsArr[idx1][2].attr("class", "menu-option-background-selected");
-
-    //TweenMax.to(menuOptionsArr[idx1][2], menuAnimDuration, { css: { marginLeft: menuOptionHoverMarginLeft + "px", width: menuOptionHoverWidth + "px" }, ease: menuAnimEase });
-    //TweenMax.to(menuOptionsArr[idx1][3], menuAnimDuration, { css: { color: "#FFF" }, ease: menuAnimEase });
-    if (idx2 != -1) {
-        var subMenu = menuOptionsArr[idx1][6];
-        subMenu[idx2][2].attr("class", "sub-menu-option-background-selected");
-        TweenMax.to(subMenu[idx2][2], menuAnimDuration, { css: { marginLeft: "0px", width: menuWidth }, ease: menuAnimEase });
-        TweenMax.to(subMenu[idx2][3], menuAnimDuration, { css: { color: "#FFF" }, ease: menuAnimEase });
-    }
+    
 }
 
 function menuOptionOut(idx1, idx2, disableIdx1) {
-    if (disableIdx1 == undefined) {
-        menuOptionsArr[idx1][2].attr("class", "menu-option-background");
-        //TweenMax.to(menuOptionsArr[idx1][2], menuAnimDuration, { css: { marginLeft: menuWidth, width: "0px" }, ease: menuAnimEase });
-        //TweenMax.to(menuOptionsArr[idx1][3], menuAnimDuration, { css: { color: menuTextOutColor }, ease: menuAnimEase });
-    }
-    if (idx2 != -1) {
-        var subMenu = menuOptionsArr[idx1][6];
-        subMenu[idx2][2].attr("class", "sub-menu-option-background");
-        TweenMax.to(subMenu[idx2][2], menuAnimDuration, { css: { marginLeft: menuWidth, width: "0px" }, ease: menuAnimEase });
-        TweenMax.to(subMenu[idx2][3], menuAnimDuration, { css: { color: menuTextOutColor }, ease: menuAnimEase });
-    }
+
 }
 
 function setMenuData(val) {
@@ -236,6 +235,7 @@ var menuData = "";
 
 
 function menuOptionClicked(val, mType, sType, hrefPath) {
+
     if (val != "#") {
         var url = '';
         if ($("#template-menu").attr("data-current-module-type") == "slideshow") {
