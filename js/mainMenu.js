@@ -7,7 +7,6 @@ $(function () {
         var myLastHover = $(this).find("a").text();
         var parentBlock = this;
         menuLastHoverText = myLastHover;
-        $(".menu-option-background").trigger("mouseleave");
         if ($(this).attr("data-activeEffect") == "true") return;
         $(this).attr("data-activeEffect", "true");
         $(this).find(".menu-option-background").fadeIn("medium", function () {
@@ -20,17 +19,19 @@ $(function () {
     });
 
     $(".menu-option-holder").mouseleave(function () {
-        if ($(this).attr("data-activeEffect") == "true") return;
+        if ($(this).attr("data-activeEffect") == "true") {
+            if ($(this).find("a").text() == menuLastHoverText) {
+                menuLastHoverText = "x";
+            }
+            return;
+        }
         $(this).find(".menu-option-background").hide();
+        return;
     });
 
     $(".menu-option-text a").click(function () {
         $(this).parent().parent().parent()
         .find(".menu-option-background-selected").attr("class", "menu-option-background");
-    });
-
-    $("#template-menu").mouseleave(function () {
-        menuLastHoverText = "";
     });
 
 });
