@@ -1,16 +1,36 @@
-﻿$(function () {
+﻿
+var menuLastHoverText;
 
-    $(".menu-option-text a").mouseenter(function () {
-        $(this).parent().parent().find(".menu-option-background").fadeIn("fast");
+$(function () {
+
+    $(".menu-option-holder").mouseenter(function () {
+        var myLastHover = $(this).find("a").text();
+        var parentBlock = this;
+        menuLastHoverText = myLastHover;
+        $(".menu-option-background").trigger("mouseleave");
+        if ($(this).attr("data-activeEffect") == "true") return;
+        $(this).attr("data-activeEffect", "true");
+        $(this).find(".menu-option-background").fadeIn("medium", function () {
+            $(parentBlock).attr("data-activeEffect", "false");
+            if (menuLastHoverText != myLastHover) {
+                $(this).trigger("mouseleave");
+                return;
+            }
+        });
+    });
+
+    $(".menu-option-holder").mouseleave(function () {
+        if ($(this).attr("data-activeEffect") == "true") return;
+        $(this).find(".menu-option-background").hide();
     });
 
     $(".menu-option-text a").click(function () {
         $(this).parent().parent().parent()
-        .find(".menu-option-background-selected").fadeOut("fast").attr("class", "menu-option-background");
+        .find(".menu-option-background-selected").attr("class", "menu-option-background");
     });
 
-    $(".menu-option-text a").mouseleave(function () {
-        $(this).parent().parent().find(".menu-option-background").hide();
+    $("#template-menu").mouseleave(function () {
+        menuLastHoverText = "";
     });
 
 });
@@ -200,11 +220,11 @@ function storeMenuArr() {
 
 function menuOptionIn(idx1, idx2) {
     var backgroundBlock = menuOptionsArr[idx1][2].attr("class", "menu-option-background-selected");
-    
 }
 
 function menuOptionOut(idx1, idx2, disableIdx1) {
-
+    
+    
 }
 
 function setMenuData(val) {
