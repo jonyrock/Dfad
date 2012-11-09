@@ -20,9 +20,8 @@ $(function () {
 
     $(".menu-option-holder").mouseleave(function () {
         if ($(this).attr("data-activeEffect") == "true") {
-            if ($(this).find("a").text() == menuLastHoverText) {
+            if ($(this).find("a").text() == menuLastHoverText)
                 menuLastHoverText = "x";
-            }
             return;
         }
         $(this).find(".menu-option-background").hide();
@@ -30,8 +29,9 @@ $(function () {
     });
 
     $(".menu-option-text a").click(function () {
-        $(this).parent().parent().parent()
-        .find(".menu-option-background-selected").attr("class", "menu-option-background");
+        $(".menu-option-background-selected").hide()
+        .attr("class", "menu-option-background").parent()
+        .attr("data-activeEffect", "false");
     });
 
 });
