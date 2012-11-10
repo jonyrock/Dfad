@@ -73,36 +73,50 @@
                 
                     <div class="menu-option-holder" data-module-type="full_width_gallery" data-side="none">
                         <div id="menu-option-background" class="menu-option-background"> </div>
-                        <div id="menu-option-text" class="menu-option-text"><a href="#portfolio.html" data-path-href="html/portfolio/">HOME</a></div>
+                        <div id="menu-option-text" class="menu-option-text">
+                            <a href="#portfolio.html" data-path-href="html/portfolio/">HOME</a>
+                        </div>
                     </div>
 
                      <div class="menu-option-holder" data-module-type="page_columns" data-side="none">
                         <div id="menu-option-background" class="menu-option-background"> </div>
-                        <div id="menu-option-text" class="menu-option-text"><a href="#list1.html" data-path-href="html/music/">MUSIC</a></div>
+                        <div id="menu-option-text" class="menu-option-text">
+                            <a href="#music.html" data-path-href="html/music/">MUSIC</a>
+                        </div>
                     </div>   
 
                    <div class="menu-option-holder" data-module-type="page_columns" data-side="none">
                         <div id="menu-option-background" class="menu-option-background"> </div>
-                        <div id="menu-option-text" class="menu-option-text"><a href="#list2.html" data-path-href="html/sound/">SOUND</a></div>
+                        <div id="menu-option-text" class="menu-option-text">
+                            <a href="#sound.html" data-path-href="html/sound/">SOUND</a>
+                        </div>
                     </div>  
                     <div class="menu-option-holder" data-module-type="page_columns" data-side="none">
                         <div id="menu-option-background" class="menu-option-background"> </div>
-                        <div id="menu-option-text" class="menu-option-text"><a href="#list3.html" data-path-href="html/voice/">VOICE</a></div>
+                        <div id="menu-option-text" class="menu-option-text">
+                            <a href="#voice.html" data-path-href="html/voice/">VOICE</a>
+                        </div>
                     </div>  
                     
                     <div class="menu-option-holder" data-module-type="page_columns" data-side="none">
                         <div id="menu-option-background" class="menu-option-background"> </div>
-                        <div id="menu-option-text" class="menu-option-text"><a href="" data-path-href="html/dfadtv/">DFADTV</a></div>
+                        <div id="menu-option-text" class="menu-option-text">
+                            <a href="dfadtv.html" data-path-href="html/dfadtv/">DFADTV</a>
+                        </div>
                     </div>  
 
                     <div class="menu-option-holder" data-module-type="page_columns" data-side="none">
                         <div id="menu-option-background" class="menu-option-background"> </div>
-                        <div id="menu-option-text" class="menu-option-text"><a href="" data-path-href="html/services/">SERVICES</a></div>
+                        <div id="menu-option-text" class="menu-option-text">
+                            <a href="#services.html" data-path-href="html/services/">SERVICES</a>
+                        </div>
                     </div>  
 
                     <div class="menu-option-holder" data-module-type="contact" data-side="custom">
                         <div id="menu-option-background" class="menu-option-background"> </div>
-                        <div id="menu-option-text" class="menu-option-text"><a href="#contact.html" data-path-href="html/contact/">CONTACT US</a></div>
+                        <div id="menu-option-text" class="menu-option-text">
+                            <a href="#contact.html" data-path-href="html/contact/">CONTACT US</a>
+                        </div>
                     </div>            
                 </div><!-- end #template-menu --> 
             
