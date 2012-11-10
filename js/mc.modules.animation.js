@@ -9,6 +9,7 @@
  /* start GENERAL CUSTOMIZATION PROPERTIES */
 var templateBaseURL = "http://" + window.location.host + "/";
 var themeColor = "#00aaff";
+//var moduleContainerMarginLeft = 308;
 var moduleContainerMarginLeft = 308;
 var menuActive = true;
 var menuHoverActive = true;
@@ -238,7 +239,7 @@ function firstRunLoaded(response, status, xhr) {
 /* menu width */
 
 function getMenuWidth() {
-    // I don't know why 10
+    //TODO: I don't know why 10
     return $("#menu-container").width() + $("#menu-hider-background").width() - 10;
 }
 
@@ -252,19 +253,16 @@ function getMenuHeight() {
 
 function settingsForScreens() {
     $("body").css("visibility", "visible");
-    var menuWidth = parseInt($("#menu-container .menu-content-holder").css("width"), 10);
     var menuHider = parseInt($("#menu-container #menu-hider").width(), 10);
     var menuHiderIcon = parseInt($("#menu-container #menu-hider #menu-hider-icon").width(), 10);
     var menuHeight = parseInt($("#menu-container").css("height"), 10);
 
     var menuHiderH = parseInt($("#menu-container #menu-hider").height(), 10);
     var menuHiderIconH = parseInt($("#menu-container #menu-hider #menu-hider-icon").height(), 10);
-    templateMenuW = menuWidth + menuHider;
     $("#menu-hider-icon").click(menuHideClick);
-    $("#module-container").css("width", ($(window).width() - templateMenuW) + "px");
+    $("#module-container").css("width", ($(window).width() - moduleContainerMarginLeft) + "px");
 
-    
-    $("#menu-container").css('left', -(menuWidth + menuHider + menuHiderIcon) + 'px');
+    $("#menu-container").css('left', -moduleContainerMarginLeft + 'px');
     $("#menu-container").css('visibility', 'visible');
 
     $("#menu-hider").css('display', 'inline');
@@ -275,7 +273,10 @@ function settingsForScreens() {
     $("#module-container").css("left", moduleContainerMarginLeft + "px");
 
     $("footer").css('display', 'inline');
-    TweenMax.to($("#menu-container"), .4, { css: { left: "0px" }, ease: Sine.easeInOut, delay: 0.5, onComplete: endStartupAnimation });
+    TweenMax.to($("#menu-container"), .4, {
+        css: { left: "0px" },
+        ease: Sine.easeInOut, delay: 0.5, onComplete: endStartupAnimation
+    });
     /*end start-up animation*/
     
     $("#template-smpartphone-menu select").change(
@@ -295,6 +296,7 @@ function endStartupAnimation() {
         showModule();
         clearInterval(delayInterval);
     }, 200);
+    $(window).trigger("resize")
 }
 
 /*end module start*/
@@ -3794,10 +3796,6 @@ function footerListeners() {
 
 /*----------------- end footerListeners -------------------*/
 
-
-
-
-
 function urlChanged() {
     loadedContent = true;
     menuOptionClicked(menuData[2], menuData[0], menuData[1], menuData[3]);
@@ -4205,7 +4203,8 @@ $(window).resize(
         var winW = $(window).width();
         var winH = $(window).height();
         var menuHiderH = parseInt($("#menu-container #menu-hider").height(), 10);
-        var menW = getMenuWidth();
+        //TODO: i don't know why 66
+        var menW = getMenuWidth() - 66;
         var menH = getMenuHeight();
 
         $("#module-container").css("width", (winW - menW) + "px");
