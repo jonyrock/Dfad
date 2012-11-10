@@ -240,7 +240,7 @@ function firstRunLoaded(response, status, xhr) {
 
 function getMenuWidth() {
     //TODO: I don't know why 10
-    return $("#menu-container").width() + $("#menu-hider-background").width() - 10;
+    return $("#menu-container").width();// + $("#menu-hider-background").width() - 10;
 }
 
 /* menu height */
@@ -260,8 +260,7 @@ function settingsForScreens() {
     var menuHiderH = parseInt($("#menu-container #menu-hider").height(), 10);
     var menuHiderIconH = parseInt($("#menu-container #menu-hider #menu-hider-icon").height(), 10);
     $("#menu-hider-icon").click(menuHideClick);
-    $("#module-container").css("width", ($(window).width() - moduleContainerMarginLeft) + "px");
-
+    
     $("#menu-container").css('left', -moduleContainerMarginLeft + 'px');
     $("#menu-container").css('visibility', 'visible');
 
@@ -317,7 +316,8 @@ function menuHideClick() {
         var menuHider = ($("#menu-hider").length > 0) ? parseInt($("#menu-hider").width(), 10) : 0,
             menuWidth = parseInt($("#menu-container").css("width"), 10) - menuHider,
             menuVal = 0;
-        TweenMax.to($("#template-wrapper"), .4, { css: { left: -(menuWidth) + "px" }, ease: Sine.easeInOut });
+        var targetOffset = $("#menu-hider-background").width() - menuWidth;
+        TweenMax.to($("#template-wrapper"), .4, { css: { left: targetOffset + "px" }, ease: Sine.easeInOut });
         TweenMax.to($("#menu-container"), .4, {
             css: { left: menuVal + "px" },
             ease: Sine.easeInOut,
@@ -381,7 +381,8 @@ function outMenu() {
 
     var menuWidth = parseInt($("#menu-container").css("width"), 10) - parseInt($("#menu-hider").width(), 10),
         menuVal = 0;
-    TweenMax.to($("#template-wrapper"), .4, { css: { left: -(menuWidth) + "px", top: "0px" }, ease: Sine.easeInOut });
+    var targetOffset = $("#menu-hider-background").width() - menuWidth;
+    TweenMax.to($("#template-wrapper"), .4, { css: { left: targetOffset + "px", top: "0px" }, ease: Sine.easeInOut });
     TweenMax.to($("#menu-container"), .4, { css: { left: menuVal + "px", top: "0px" }, ease: Sine.easeInOut });
 
     alwaysUpdate()
@@ -4204,13 +4205,13 @@ $(window).resize(
         var winH = $(window).height();
         var menuHiderH = parseInt($("#menu-container #menu-hider").height(), 10);
         //TODO: i don't know why 66
-        var menW = getMenuWidth() - 120;
+        var menW = getMenuWidth();
         var menH = getMenuHeight();
 
         $("#module-container")
-        .css("width", (winW - menW - 100) + "px")
+        .css("width", (winW - menW) + "px")
         .css("top", "0px")
-        .css("left", menW + 100 + "px")
+        .css("left", menW + "px")
         .css("height", "100%");
 
         if (firstRun == false) $("footer").css('display', 'inline').css('visibility', 'visible');
