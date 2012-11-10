@@ -9,7 +9,7 @@
  /* start GENERAL CUSTOMIZATION PROPERTIES */
 var templateBaseURL = "http://" + window.location.host + "/";
 var themeColor = "#00aaff";
-var moduleContainerMarginLeft = 240;
+var moduleContainerMarginLeft = 308;
 var menuActive = true;
 var menuHoverActive = true;
 var menuOptionHoverMarginLeft = 18;
@@ -238,7 +238,8 @@ function firstRunLoaded(response, status, xhr) {
 /* menu width */
 
 function getMenuWidth() {
-    return $("#menu-container").width();
+    // I don't know why 10
+    return $("#menu-container").width() + $("#menu-hider-background").width() - 10;
 }
 
 /* menu height */
@@ -262,40 +263,21 @@ function settingsForScreens() {
     $("#menu-hider-icon").click(menuHideClick);
     $("#module-container").css("width", ($(window).width() - templateMenuW) + "px");
 
-    if ($(window).width() > 767) {
-        $("#menu-container").css('left', -(menuWidth + menuHider + menuHiderIcon) + 'px');
-        $("#menu-container").css('visibility', 'visible');
+    
+    $("#menu-container").css('left', -(menuWidth + menuHider + menuHiderIcon) + 'px');
+    $("#menu-container").css('visibility', 'visible');
 
-        $("#menu-hider").css('display', 'inline');
-        $("#menu-hider").css('visibility', 'visible');
+    $("#menu-hider").css('display', 'inline');
+    $("#menu-hider").css('visibility', 'visible');
 
-        /*start-up animation*/
-        $("#module-container").css("opacity", 1);
-        $("#module-container").css("left", moduleContainerMarginLeft + "px");
+    /*start-up animation*/
+    $("#module-container").css("opacity", 1);
+    $("#module-container").css("left", moduleContainerMarginLeft + "px");
 
-        $("footer").css('display', 'inline');
-        TweenMax.to($("#menu-container"), .4, { css: { left: "0px" }, ease: Sine.easeInOut, delay: 0.5, onComplete: endStartupAnimation });
-        /*end start-up animation*/
-    }
-    if ($(window).width() <= 767) {
-        templateMenuW = 0;
-        var containerH = $(window).height() - (menuHeight + menuHiderH);
-        $("#menu-container").css("left", "0px");
-        $("#menu-container").css("top", -(menuHeight + menuHiderH + menuHiderIconH) + "px");
-        $("#menu-container").css("visibility", "visible");
-
-        $("#menu-hider").css("display", "inline");
-        $("#menu-hider").css("visibility", "visible");
-
-        /*start-up animation*/
-        $("#module-container").css("opacity", "1");
-        $("#module-container").css("left", "0px");
-        $("#module-container").css("top", (menuHeight + menuHiderH) + "px");
-        $("#module-container").css("height", containerH);
-
-        TweenMax.to($("#menu-container"), .4, { css: { top: "0px" }, ease: Sine.easeInOut, delay: 0.5, onComplete: endStartupAnimation });
-        /*end start-up animation*/
-    }
+    $("footer").css('display', 'inline');
+    TweenMax.to($("#menu-container"), .4, { css: { left: "0px" }, ease: Sine.easeInOut, delay: 0.5, onComplete: endStartupAnimation });
+    /*end start-up animation*/
+    
     $("#template-smpartphone-menu select").change(
         function() {
             if ($(this).val() != "#") {
@@ -303,13 +285,6 @@ function settingsForScreens() {
                 window.location.hash = hashURL;
             }
         });
-    /*
-        if( touchDevice == 1){            
-            $("#theme-panel").css("display", "none");
-            $("#console-log").css("display", "inline");
-            $("#console-log").css("left", "300px");
-            $("#console-log").css("top", "10px") 
-        }*/
 }
 
 var delayInterval = "";
@@ -336,32 +311,19 @@ function menuHideClick() {
     if (menuActive == true) {
         menuActive = false;
         alwaysUpdate();
-        if (winW >= 768) {
-            var menuHider = ($("#menu-hider").length > 0) ? parseInt($("#menu-hider").width(), 10) : 0,
-                menuWidth = parseInt($("#menu-container").css("width"), 10) - menuHider,
-                menuVal = 0;
-            TweenMax.to($("#template-wrapper"), .4, { css: { left: -(menuWidth) + "px" }, ease: Sine.easeInOut });
-            TweenMax.to($("#menu-container"), .4, {
-                css: { left: menuVal + "px" },
-                ease: Sine.easeInOut,
-                onComplete: function() {
-                    if (touchDevice == 0) activateHoverMenu();
-                }
-            });
-        } else {
-            var menuHiderH = parseInt($("#menu-container #menu-hider").height(), 10),
-                menuHeight = parseInt($("#menu-container").css("height"), 10) - menuHiderH,
-                menuVal = 0;
 
-            TweenMax.to($("#template-wrapper"), .4, { css: { top: -(menuHeight) + "px" }, ease: Sine.easeInOut });
-            TweenMax.to($("#menu-container"), .4, {
-                css: { top: menuVal + "px" },
-                ease: Sine.easeInOut,
-                onComplete: function() {
-                    if (touchDevice == 0) activateHoverMenu();
-                }
-            });
-        }
+        var menuHider = ($("#menu-hider").length > 0) ? parseInt($("#menu-hider").width(), 10) : 0,
+            menuWidth = parseInt($("#menu-container").css("width"), 10) - menuHider,
+            menuVal = 0;
+        TweenMax.to($("#template-wrapper"), .4, { css: { left: -(menuWidth) + "px" }, ease: Sine.easeInOut });
+        TweenMax.to($("#menu-container"), .4, {
+            css: { left: menuVal + "px" },
+            ease: Sine.easeInOut,
+            onComplete: function () {
+                if (touchDevice == 0) activateHoverMenu();
+            }
+        });
+
     } else {
         if (touchDevice == 0) disableHoverMenu();
         menuActive = true;
@@ -414,25 +376,12 @@ function outMenu() {
     isOverMenu = false;
     var winW = $(window).width(),
         winH = $(window).height();
-    if (winW >= 768) {
-        var menuWidth = parseInt($("#menu-container").css("width"), 10) - parseInt($("#menu-hider").width(), 10),
-            menuVal = 0;
-        TweenMax.to($("#template-wrapper"), .4, { css: { left: -(menuWidth) + "px", top: "0px" }, ease: Sine.easeInOut });
-        TweenMax.to($("#menu-container"), .4, { css: { left: menuVal + "px", top: "0px" }, ease: Sine.easeInOut });
-    } else {
-        var menuHiderH = parseInt($("#menu-container #menu-hider").height(), 10),
-            menuHeight = parseInt($("#menu-container").css("height"), 10) - menuHiderH,
-            menuVal = 0;
 
-        TweenMax.to($("#template-wrapper"), .4, { css: { top: -(menuHeight) + "px", left: "0px" }, ease: Sine.easeInOut });
-        TweenMax.to($("#menu-container"), .4, {
-            css: { top: menuVal + "px", left: "0px" },
-            ease: Sine.easeInOut,
-            onComplete: function() {
-                if (touchDevice == 0) activateHoverMenu();
-            }
-        });
-    }
+    var menuWidth = parseInt($("#menu-container").css("width"), 10) - parseInt($("#menu-hider").width(), 10),
+        menuVal = 0;
+    TweenMax.to($("#template-wrapper"), .4, { css: { left: -(menuWidth) + "px", top: "0px" }, ease: Sine.easeInOut });
+    TweenMax.to($("#menu-container"), .4, { css: { left: menuVal + "px", top: "0px" }, ease: Sine.easeInOut });
+
     alwaysUpdate()
 }
 
@@ -447,11 +396,11 @@ function alwaysUpdate() {
     var newModContW = winW - get_OffsetWidth();
     var newModContH = winH;
     var cModuleType = $("#template-menu").attr("data-current-module-type")
-    if (winW < 768) {
-        var menuHiderH = parseInt($("#menu-container #menu-hider").height(), 10),
-            menuHeight = winH - menuHiderH;
-        newModContH = menuHeight;
-    }
+    
+    var menuHiderH = parseInt($("#menu-container #menu-hider").height(), 10),
+        menuHeight = winH - menuHiderH;
+    newModContH = menuHeight;
+    
 
     TweenMax.to($("#module-container"), .4, { css: { width: newModContW + "px", height: newModContH + "px" }, ease: Sine.easeInOut });
 
@@ -4244,7 +4193,7 @@ function moduleUpdate_page_columns(customStartPos) {
 }
 
 $(window).resize(
-    function() {
+    function () {
         /*SLIDESHOW CHECK*/
         if (currentSlide != null) resizeImage(currentSlide);
         /*BACKGROUND CHECK*/
@@ -4273,71 +4222,67 @@ $(window).resize(
             $("#template-wrapper").css("left", -(menuWidth) + "px").css("top", "0px");
             $("#menu-container").css("left", menuVal + "px").css("top", "0px");
         }
-        
+
         /*window["moduleUpdate_" + currModuleType]();*/
         switch (currModuleType) {
-        case "slideshow":
-            moduleUpdate_slideshow();
-            break;
-        case "home2":
-            moduleUpdate_home2();
-            break;
-        case "home3":
-            moduleUpdate_home3();
-            break;
-        case "text_page":
-            moduleUpdate_text_page();
-            break;
-        case "showreel":
-            moduleUpdate_showreel();
-            break;
-        case "fullscreen_video":
-            moduleUpdate_fullscreen_video();
-            break;
-        case "pricing_tables":
-            moduleUpdate_pricing_tables();
-            break;
-        case "full_width":
-            moduleUpdate_full_width();
-            break;
-        case "news":
-            moduleUpdate_news();
-            break;
-        case "contact":
-            moduleUpdate_contact();
-            break;
-        case "gallery":
-            moduleUpdate_gallery();
-            break;
-        case "full_width_gallery":
-            moduleUpdate_full_width_gallery();
-            break;
-        case "page_columns":
-            moduleUpdate_page_columns();
-            break;
+            case "slideshow":
+                moduleUpdate_slideshow();
+                break;
+            case "home2":
+                moduleUpdate_home2();
+                break;
+            case "home3":
+                moduleUpdate_home3();
+                break;
+            case "text_page":
+                moduleUpdate_text_page();
+                break;
+            case "showreel":
+                moduleUpdate_showreel();
+                break;
+            case "fullscreen_video":
+                moduleUpdate_fullscreen_video();
+                break;
+            case "pricing_tables":
+                moduleUpdate_pricing_tables();
+                break;
+            case "full_width":
+                moduleUpdate_full_width();
+                break;
+            case "news":
+                moduleUpdate_news();
+                break;
+            case "contact":
+                moduleUpdate_contact();
+                break;
+            case "gallery":
+                moduleUpdate_gallery();
+                break;
+            case "full_width_gallery":
+                moduleUpdate_full_width_gallery();
+                break;
+            case "page_columns":
+                moduleUpdate_page_columns();
+                break;
         }
         moduleType = null;
         /*FOOTER*/
         if (firstRun == true) return;
-        if ($(window).width() >= 768) {
-            $("footer").css('display', 'inline').css('visibility', 'visible');
-        } else {
-            $("footer").css('display', 'none').css('visibility', 'hidden');
-        }
+
+        $("footer").css('display', 'inline').css('visibility', 'visible');
+
     }
 );
 
 function get_OffsetWidth() {
     var value = 0;
-    if ($(window).width() > 767) {
-        if (menuActive == false) {
-            if (isOverMenu == false)
-                value = parseInt($("#menu-hider").css("width"), 10);
-            else
-                value = parseInt($("#menu-container").css("width"), 10);
-        } else {
+    if (menuActive == false) {
+        if (isOverMenu == false)
+            value = parseInt($("#menu-hider").css("width"), 10);
+        else
             value = parseInt($("#menu-container").css("width"), 10);
-        }
+    } else {
+        value = parseInt($("#menu-container").css("width"), 10);
     }
     return value;
 }
