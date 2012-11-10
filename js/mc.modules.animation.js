@@ -4204,12 +4204,15 @@ $(window).resize(
         var winH = $(window).height();
         var menuHiderH = parseInt($("#menu-container #menu-hider").height(), 10);
         //TODO: i don't know why 66
-        var menW = getMenuWidth() - 66;
+        var menW = getMenuWidth() - 120;
         var menH = getMenuHeight();
 
-        $("#module-container").css("width", (winW - menW) + "px");
-        $("#module-container").css("top", "0px").css("left", menW + "px");
-        $("#module-container").css("height", "100%");
+        $("#module-container")
+        .css("width", (winW - menW - 100) + "px")
+        .css("top", "0px")
+        .css("left", menW + 100 + "px")
+        .css("height", "100%");
+
         if (firstRun == false) $("footer").css('display', 'inline').css('visibility', 'visible');
         if (availScrollbar.length > 0) {
             availScrollbar.css("height", winH).css("top", "0px");
