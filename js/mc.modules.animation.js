@@ -2931,16 +2931,10 @@ function modulePageColumns() {
     var list = $("#filter-buttons-holder #filter-buttons-dropdown").find("select");
     var count = 0;
     $("#filter-buttons-holder .filter-button").each(function () {
-        var v = "<li><a href=\"#1\" id='link" + count + "'>" + $(this).text() + "</a></li>";
+        var v = "<option>" + $(this).text() + "</option>";
         list.append(v);
-        var parentLink = this;
-        list.find("#link" + count).click(function () {
-            $(parentLink).trigger("click");
-            return false;
-        });
-        count++;
     });
-
+    list.selectbox();
 }
 
 var containerTotalH = 0;

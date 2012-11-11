@@ -32,6 +32,7 @@
     <script type="text/javascript" src="js/libs/jquery.timer.js"> </script>
     <script type="text/javascript" src="js/libs/jqueryui/1.8/jquery-ui.min.js"> </script>
     <script type="text/javascript" src="js/libs/jquery.mousewheel.min.js"> </script>
+    <script type="text/javascript" src="js/libs/jquery.selectbox-0.6.1.js"> </script>
     <script type="text/javascript" src="js/mediacreed/scrollbar/mc.custom.list.js"> </script>
     
     <script type="text/javascript" src="js/mainMenu.js"> </script>
