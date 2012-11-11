@@ -2910,6 +2910,7 @@ function modulePageColumns() {
                 TweenMax.to($(this), .3, { css: { color: "#3f3f3f", backgroundColor: "transparent" }, ease: Sine.easeOut });
             }
         );
+
     $("#filter-buttons-holder .filter-button", textPageInstance).click(
         function() {
             if ($(this).hasClass("selected") == true) return;
@@ -2918,12 +2919,21 @@ function modulePageColumns() {
                 function() {
                     if ($(this).hasClass("selected") == true) {
                         $(this).removeClass("selected");
-                        TweenMax.to($(this), .3, { css: { color: "#3f3f3f", backgroundColor: "transparent" }, ease: Sine.easeOut });
+                        TweenMax.to($(this), .3, {
+                            css: { color: "#3f3f3f", backgroundColor: "transparent" },
+                            ease: Sine.easeOut
+                        });
                     }
                 });
             $(this).addClass("selected");
+            $(this).attr("style", "");
+            if ($("#filter-buttons-holder").attr("data-folded") == "true")
+                $(this).hide();
             if (touchDevice == 1) {
-                TweenMax.to($(this), .3, { css: { color: "#ffffff", backgroundColor: themeColor }, ease: Sine.easeOut });
+                TweenMax.to($(this), .3, {
+                    css: { color: "#ffffff", backgroundColor: themeColor },
+                    ease: Sine.easeOut
+                });
             }
             filterContent($filterContainer, selector, $originalDataPos, onFilterComplete);
             return false;
@@ -2938,8 +2948,10 @@ function modulePageColumns() {
     list.selectbox().bind("change", function () {
         var val = $(this).val();
         var searchText = 'div[data-filter="' + val + '"]';
+        //alert($("#filter-buttons-holder").find(searchText).length);
         var res = $("#filter-buttons-holder").find(searchText).trigger("click");
     });
+    $("#filter-buttons-holder").attr("data-folded", "true");
 }
 
 var containerTotalH = 0;
