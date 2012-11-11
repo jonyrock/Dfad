@@ -651,6 +651,7 @@ function endShowPage() {
     if ($("#module-container-old").length > 0) {
         $("body").find("#module-container-old").each(function() { $(this).empty().remove(); });
     }
+    $(window).trigger("resize");
 }
 
 /*----------------- end showTemplate ----------------------*/
@@ -2929,7 +2930,6 @@ function modulePageColumns() {
 
     // buttons folding
     var list = $("#filter-buttons-holder #filter-buttons-dropdown").find("select");
-    var count = 0;
     $("#filter-buttons-holder .filter-button").each(function () {
         var v = "<option value='" + $(this).attr("data-filter") + "'>" + $(this).text() + "</option>";
         list.append(v);
@@ -2938,7 +2938,6 @@ function modulePageColumns() {
         var val = $(this).val();
         var searchText = 'div[data-filter="' + val + '"]';
         var res = $("#filter-buttons-holder").find(searchText).trigger("click");
-       
     });
 }
 
