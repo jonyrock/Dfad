@@ -2914,6 +2914,10 @@ function modulePageColumns() {
     $("#filter-buttons-holder .filter-button", textPageInstance).click(
         function() {
             if ($(this).hasClass("selected") == true) return;
+
+            $("#filter-buttons-holder select").val($(this).attr('data-filter'));
+            $("#filter-buttons-holder .jquery-selectbox-currentItem").text($(this).text());
+
             var selector = $(this).attr('data-filter');
             $("#filter-buttons-holder", textPageInstance).find(".filter-button").each(
                 function() {
