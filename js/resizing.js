@@ -268,13 +268,10 @@ function moduleUpdate_page_columns(customStartPos) {
         if (buttonsHolder.width() > 900) {
             buttonsHolder.find(".filter-button").show();
             buttonsHolder.find("#filter-buttons-dropdown").hide();
-            //buttonsHolder.find("select").unselectbox();
         } else {
             buttonsHolder.find(".filter-button").hide();
             buttonsHolder.find("#filter-buttons-dropdown").show();
-            //buttonsHolder.find("select").selectbox();
         }
-
     }
 }
 

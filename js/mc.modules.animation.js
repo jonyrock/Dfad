@@ -1,4 +1,5 @@
 /// <reference path="mainMenu.js" />
+/// <reference path="libs/jquery.selectbox-0.6.1.js" />
 /**
  * VERSION: 1.0
  * DATE: 2012-09-20
@@ -2932,7 +2933,7 @@ function modulePageColumns() {
     var list = $("#filter-buttons-holder #filter-buttons-dropdown").find("select");
     $("#filter-buttons-holder .filter-button").each(function () {
         var v = "<option value='" + $(this).attr("data-filter") + "'>" + $(this).text() + "</option>";
-        list.append(v);
+        list.prepend(v);
     });
     list.selectbox().bind("change", function () {
         var val = $(this).val();
