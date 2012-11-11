@@ -2926,6 +2926,21 @@ function modulePageColumns() {
             filterContent($filterContainer, selector, $originalDataPos, onFilterComplete);
             return false;
         });
+
+    // buttons folding
+    var list = $("#filter-buttons-holder #filter-buttons-dropdown").find("select");
+    var count = 0;
+    $("#filter-buttons-holder .filter-button").each(function () {
+        var v = "<li><a href=\"#1\" id='link" + count + "'>" + $(this).text() + "</a></li>";
+        list.append(v);
+        var parentLink = this;
+        list.find("#link" + count).click(function () {
+            $(parentLink).trigger("click");
+            return false;
+        });
+        count++;
+    });
+
 }
 
 var containerTotalH = 0;

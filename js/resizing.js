@@ -266,16 +266,14 @@ function moduleUpdate_page_columns(customStartPos) {
     if ($("#module-container #filter-buttons-holder").length > 0) {
         var buttonsHolder = $("#module-container #filter-buttons-holder");
         if (buttonsHolder.width() > 900) {
-            if (buttonsHolder.attr("data-folded") == "false") return;
-            $("#module-container #filter-buttons-dropdown").hide();
             buttonsHolder.find(".filter-button").show();
+            buttonsHolder.find("#filter-buttons-dropdown").hide();
         } else {
-            $("#module-container #filter-buttons-dropdown").show();
             buttonsHolder.find(".filter-button").hide();
+            buttonsHolder.find("#filter-buttons-dropdown").show();
         }
 
     }
-
 }
 
 $(window).resize(
