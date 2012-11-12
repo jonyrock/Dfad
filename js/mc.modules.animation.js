@@ -2949,17 +2949,24 @@ function modulePageColumns() {
         var v = "<option value='" + $(this).attr("data-filter") + "'>" + $(this).text() + "</option>";
         list.prepend(v);
     });
+    //TODO: understang what is going on
+    var needToShowDropdown = $("#filter-buttons-dropdown").css("display") == "none";
+    if(needToShowDropdown)
+        $("#filter-buttons-dropdown").show();
     list.selectbox().bind("change", function () {
         var val = $(this).val();
         var searchText = 'div[data-filter="' + val + '"]';
         $("#filter-buttons-holder").find(searchText).trigger("click");
     });
+    //TODO: move it to lib
     $("#filter-buttons-holder .jquery-selectbox-moreButton").text("▼");
     $("#filter-buttons-holder .jquery-selectbox-list").css("height", "");
     $("#filter-buttons-holder .jquery-selectbox").css("width", "");
     $("#filter-buttons-holder .jquery-selectbox-list").css("width", "");
     
     $("#filter-buttons-holder").attr("data-folded", "true");
+    if(needToShowDropdown)
+        $("#filter-buttons-dropdown").hide();
 }
 
 var containerTotalH = 0;
