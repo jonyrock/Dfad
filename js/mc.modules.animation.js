@@ -2956,6 +2956,9 @@ function modulePageColumns() {
     });
     $("#filter-buttons-holder .jquery-selectbox-moreButton").text("▼");
     $("#filter-buttons-holder .jquery-selectbox-list").css("height", "");
+    $("#filter-buttons-holder .jquery-selectbox").css("width", "");
+    $("#filter-buttons-holder .jquery-selectbox-list").css("width", "");
+    
     $("#filter-buttons-holder").attr("data-folded", "true");
 }
 

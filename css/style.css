@@ -3609,7 +3609,7 @@ h1, h2, h3, h4, h5, h6
 	height: 32px;
 	border: 1px solid #949494;
     background: #fff;
-	width: 100px;
+	width: 185px;
 	z-index: 10;
 	float: left;
 	display: inline;
@@ -3635,9 +3635,9 @@ h1, h2, h3, h4, h5, h6
 	display: none;
 	position: absolute;
 	top: 34px;
-	left: 0px;
+	left: -1px;
 	background: #FFF;
-	width: 100px;
+	width: 185px;
 	overflow-x: hidden;
 	overflow-y: auto;
 	z-index: 1000;
