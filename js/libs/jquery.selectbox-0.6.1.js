@@ -15,7 +15,7 @@ jQuery.fn.selectbox = function(options){
 	/* Default settings */
 	var settings = {
 		className: 'jquery-selectbox',
-		animationSpeed: "normal",
+		animationSpeed: "fast",
 		listboxMaxSize: 10,
 		replaceInvisible: false
 	};

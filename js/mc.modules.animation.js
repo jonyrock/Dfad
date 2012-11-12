@@ -1,4 +1,4 @@
-/// <reference path="mainMenu.js" />
+﻿/// <reference path="mainMenu.js" />
 /// <reference path="libs/jquery.selectbox-0.6.1.js" />
 /**
  * VERSION: 1.0
@@ -2952,9 +2952,10 @@ function modulePageColumns() {
     list.selectbox().bind("change", function () {
         var val = $(this).val();
         var searchText = 'div[data-filter="' + val + '"]';
-        //alert($("#filter-buttons-holder").find(searchText).length);
-        var res = $("#filter-buttons-holder").find(searchText).trigger("click");
+        $("#filter-buttons-holder").find(searchText).trigger("click");
     });
+    $("#filter-buttons-holder .jquery-selectbox-moreButton").text("▼");
+    $("#filter-buttons-holder .jquery-selectbox-list").css("height", "");
     $("#filter-buttons-holder").attr("data-folded", "true");
 }
 
