@@ -2930,7 +2930,7 @@ function modulePageColumns() {
                     }
                 });
             $(this).addClass("selected");
-            $(this).attr("style", "");
+            ///$(this).attr("style", "");
             if ($("#filter-buttons-holder").attr("data-folded") == "true")
                 $(this).hide();
             if (touchDevice == 1) {
@@ -2967,6 +2967,8 @@ function modulePageColumns() {
     $("#filter-buttons-holder").attr("data-folded", "true");
     if(needToShowDropdown)
         $("#filter-buttons-dropdown").hide();
+
+    $(window).trigger("resize");
 }
 
 var containerTotalH = 0;
