@@ -2672,6 +2672,7 @@ h1, h2, h3, h4, h5, h6
     user-select: none;	
 }
 .preview-arrow-forward { right: 35px; }
+.preview-counter{ position: absolute; right: 161px; top:18px; z-index:993 }
 .preview-arrow-close{ z-index:993; right: 77px; }
 .preview-arrow-backward{ right: 119px; }
 .preview-arrow-backg
@@ -2995,7 +2996,7 @@ h1, h2, h3, h4, h5, h6
 	float:right;		
 	margin: 3px 0px;
 }
-.columns-preview-counter, .news-preview-counter{
+.columns-preview-counter, .news-preview-counter, .preview-counter{
 	float:left;
 	background-color: #3F3F3F;
 	margin-left: 1px;	
@@ -3006,7 +3007,7 @@ h1, h2, h3, h4, h5, h6
     -o-user-select: none;
     user-select: none;
 }
-.columns-preview-counter span, .news-preview-counter span 
+.columns-preview-counter span, .news-preview-counter span, .preview-counter span
 {
 	display:block;
 	font-family:Century Gothic,Arial;

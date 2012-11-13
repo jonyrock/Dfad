@@ -2512,6 +2512,9 @@ function fullWidthFadeInMedia(mediaType) {
                 TweenMax.to($(".full-width-preview-media-loader"), .3, { css: { opacity: "1" }, easing: Sine.easeOut });
                 changeFullWidthPreviewMedia(1);
             });
+
+        //update counter
+        changeFullWidthPreviewMedia(0);
     }
 }
 
@@ -2539,6 +2542,9 @@ function changeFullWidthPreviewMedia(value) {
         $("#full-width-preview-media-holder").find("#preview-media-holder").empty();
         loadFullWidthMedia();
     }
+
+    //update counter
+    $("#full-width-preview .preview-counter span").text(currIndex + "/" + previewMediaArr.length);
 }
 
 function setFullWidthPreview() {
