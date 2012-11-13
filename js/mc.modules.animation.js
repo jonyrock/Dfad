@@ -2544,7 +2544,7 @@ function changeFullWidthPreviewMedia(value) {
     }
 
     //update counter
-    $("#full-width-preview .preview-counter span").text(currIndex + "/" + previewMediaArr.length);
+    $("#full-width-preview .preview-counter span").text((currIndex + 1) + "/" + previewMediaArr.length);
 }
 
 function setFullWidthPreview() {
