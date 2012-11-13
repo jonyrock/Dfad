@@ -2320,8 +2320,8 @@ function updateFullWidthPreviewPosition() {
     var mediaContW = $(window).width() - infoWidth;
     var mediaContH = $(window).height();
     fwMediaContainer.attr("style", "width:" + mediaContW + "px; height:" + mediaContH + "px;");
-    $(".preview-arrow-close").css("right", infoWidth);
-    $(".preview-arrow-forward").css("right", infoWidth);
+    //$(".preview-arrow-close").css("right", infoWidth);
+    //$(".preview-arrow-forward").css("right", infoWidth);
     var mediaType = fwMediaType;
     if (mediaType == "preview-media-image") {
         var elem = $("#preview-media-load");
@@ -2363,8 +2363,8 @@ function loadFullWidthPreview(index) {
     var mediaContH = $(window).height();
     fwMediaContainer.attr("style", "width:" + mediaContW + "px; height:" + mediaContH + "px;");
 
-    $(".preview-arrow-close").css("right", infoWidth);
-    $(".preview-arrow-forward").css("right", infoWidth);
+    //$(".preview-arrow-close").css("right", infoWidth);
+    //$(".preview-arrow-forward").css("right", infoWidth);
 
     function showHideFullWidthPreviewInfo(show) {
         previewInfoHolder.css("position", "fixed");
@@ -2489,16 +2489,16 @@ function fullWidthFadeInMedia(mediaType) {
         var prevControlClose = $(".preview-arrow-close");
         var prevControlBack = $(".preview-arrow-backward");
         var prevControlForw = $(".preview-arrow-forward");
-        prevControlClose.css("opacity", "0").css("display", "inline");
-        prevControlBack.css("opacity", "0").css("display", "inline");
-        prevControlForw.css("opacity", "0").css("display", "inline");
-        TweenMax.to([prevControlClose, prevControlBack, prevControlForw], .6, { css: { opacity: "1" }, ease: Circ.easeInOut });
-        var initOpacity = $(".preview-arrow-backward .preview-arrow-backg").css("opacity");
+        prevControlClose.css("opacity", "1").css("display", "inline");
+        prevControlBack.css("opacity", "1").css("display", "inline");
+        prevControlForw.css("opacity", "1").css("display", "inline");
+        //TweenMax.to([prevControlClose, prevControlBack, prevControlForw], .6, { css: { opacity: "1" }, ease: Circ.easeInOut });
+        var initOpacity = 1;
         var initBackColor = rgb2hex($(".preview-arrow-backward .preview-arrow-backg").css("background-color"));
         $(".preview-arrow-backward, .preview-arrow-forward, .preview-arrow-close").unbind('mouseenter mouseleave');
         $(".preview-arrow-backward, .preview-arrow-forward, .preview-arrow-close").hover(
-            function() { TweenMax.to($(".preview-arrow-backg", this), 0.3, { css: { opacity: "1", backgroundColor: themeColor }, easing: Sine.easeOut }); },
-            function() { TweenMax.to($(".preview-arrow-backg", this), 0.3, { css: { opacity: initOpacity, backgroundColor: initBackColor }, easing: Sine.easeOut }); }
+            function() { TweenMax.to($(".preview-arrow-backg", this), 0.3, { css: { backgroundColor: themeColor }, easing: Sine.easeOut }); },
+            function() { TweenMax.to($(".preview-arrow-backg", this), 0.3, { css: { backgroundColor: initBackColor }, easing: Sine.easeOut }); }
         );
         $(".preview-arrow-backward").unbind("click");
         $(".preview-arrow-forward").unbind("click");
