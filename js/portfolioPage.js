@@ -1,4 +1,5 @@
 ﻿/// <reference path="libs/jquery.tinyscrollbar.js"/>
+/// <reference path="mc.modules.animation.js"/>
 
 /*================= FULL WIDTH GALLERY =====================*/
 var initialNumberColumns = 4;
@@ -242,22 +243,28 @@ function loadFullWidthMedia() {
         var prevMediaHolder = $("#preview-media-holder");
         prevMediaHolder.attr("style", "width: 100%; height: 100%; margin: 0px;");
         prevMediaHolder.append('<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>');
-        prevMediaHolder.tinyscrollbar();
-
+        prevMediaHolder.append('<div class="viewport"><div class="overview"></div></div>');
+        var tergetBlockHolder = prevMediaHolder.find(".viewport .overview");
+        
         var i = 0;
         currPreviewElem.find("#video-wrapper").each(function () {
-            prevMediaHolder.append('<div id="video-wrapper' + i + '" style="width:100%"></div>');
+            tergetBlockHolder.append('<div id="video-wrapper' + i + '" style="width:100%"></div>');
             templateAddMediaVideo(
                 $(this).attr("data-video-type"),
                 $(this),
                 $("#video-wrapper" + i));
         });
 
+        
+
         // set design
         TweenMax.to($(".full-width-preview-media-loader"), .3, { css: { opacity: "0" }, easing: Sine.easeOut });
         loadingAnimationDone = true;
         animationLoadFWPreviewDone = true;
         fullWidthFadeInMedia(mediaType);
+
+        prevMediaHolder.tinyscrollbar();
+
     }
 
 }
