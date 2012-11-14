@@ -2443,6 +2443,8 @@ function loadFullWidthMedia() {
         animationLoadFWPreviewDone = true;
         fwMediaType = mediaType;
         fullWidthFadeInMedia(mediaType);
+    } else if (mediaType == "video-wrapper-collection") {
+        // TODO: #video-wrapper-collection case imp
     }
 }
 
@@ -2532,7 +2534,7 @@ function changeFullWidthPreviewMedia(value) {
         if ($(elem).attr("id") == "preview-media-image") {
             $("#preview-media-load").css("opacity", 0);
             $("#preview-media-load").attr("style", "visibility: hidden; display: none;");
-        } else if ($(elem).attr("id") == "video-wrapper") {
+        } else if ($(elem).attr("id") == "video-wrapper" || $(elem).attr("id") == "video-wrapper-coolection") {
             $(elem).css("opacity", "0");
             $(elem).attr("style", "visibility: hidden; display: none;");
         }
@@ -3594,7 +3596,21 @@ function showGalleryPreviewMedia() {
         TweenMax.to($(".gallery-preview-media-loader"), .3, { css: { opacity: "0" }, easing: Sine.easeOut });
         loadingAnimationDone = true;
         fadeInMedia("");
+    } else if ($(currPreviewElem).attr("id") == "video-wrapper-collection") {
+        /*PLAY MEDIA VIDEO COLLECTION*/
+        // TODO: imp
+
+        $("#module-galleries-preview").find("#preview-media-holder")
+            .append('<img id="preview-media-load" onload="animatePreviewMedia()" title="" alt="" />');
+        var prevMediaLoad = $("#preview-media-load");
+        prevMediaLoad.attr("style", "visibility: visible; display: inline");
+        prevMediaLoad.css("opacity", "0");
+        prevMediaLoad
+            .attr("src", "http://localhost:50845/assets/media/portfolio/images/Project_page_img1.jpg");
+            
+
     }
+    
 }
 
 function addControlsListeners() {
