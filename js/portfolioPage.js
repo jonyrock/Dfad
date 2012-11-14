@@ -194,6 +194,7 @@ function loadFullWidthPreview(index) {
 function loadFullWidthMedia() {
     var currPreviewElem = previewMediaArr[currIndex];
     var mediaType = $(currPreviewElem).attr("id");
+    fwMediaType = mediaType;
     var fwMediaContainer = $("#full-width-preview-media-holder");
 
     if (mediaType == "preview-media-image") {
@@ -201,7 +202,7 @@ function loadFullWidthMedia() {
         var totalWidth = fwMediaContainer.width() - previewBorderSize * 2;
         var totalHeight = fwMediaContainer.height() - previewBorderSize * 2;
         var prevMediaLoad = $("#preview-media-load");
-        fwMediaType = mediaType;
+        
         fwW = totalWidth;
         fwH = totalHeight;
         prevMediaLoad.css("opacity", "0");
@@ -231,7 +232,6 @@ function loadFullWidthMedia() {
         TweenMax.to($(".full-width-preview-media-loader"), .3, { css: { opacity: "0" }, easing: Sine.easeOut });
         loadingAnimationDone = true;
         animationLoadFWPreviewDone = true;
-        fwMediaType = mediaType;
         fullWidthFadeInMedia(mediaType);
     }
 
