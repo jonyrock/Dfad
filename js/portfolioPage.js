@@ -195,7 +195,8 @@ function loadFullWidthMedia() {
     var currPreviewElem = previewMediaArr[currIndex];
     var mediaType = $(currPreviewElem).attr("id");
     var fwMediaContainer = $("#full-width-preview-media-holder");
-    if (mediaType == "preview-media-image" || mediaType == "video-wrapper-collection") {
+
+    if (mediaType == "preview-media-image") {
         /*PLAY MEDIA IMAGE*/
         var totalWidth = fwMediaContainer.width() - previewBorderSize * 2;
         var totalHeight = fwMediaContainer.height() - previewBorderSize * 2;
@@ -212,7 +213,9 @@ function loadFullWidthMedia() {
         prevMediaLoad.attr("src", $(currPreviewElem).attr("src"));
         prevMediaLoad.attr("title", $(currPreviewElem).attr("title"));
         prevMediaLoad.attr("alt", $(currPreviewElem).attr("alt"));
-    } else if (mediaType == "video-wrapper") {
+    }
+
+    if (mediaType == "video-wrapper") {
         /*PLAY MEDIA VIDEO*/
         fwMediaContainer.find("#preview-media-holder").empty();
         var prevMediaHolder = $("#preview-media-holder");
@@ -222,7 +225,7 @@ function loadFullWidthMedia() {
         var mediaBackMarginLeft = -mediaBackNewW * .5;
 
         prevMediaHolder.attr("style", "width: " + mediaBackNewW + "px; height: " + mediaBackNewH + "px; margin: 0px; top: 50%; left: 50%; margin-top:" + mediaBackMarginTop + "px; margin-left:" + mediaBackMarginLeft + "px;");
-        prevMediaHolder.append('<div id="video-wrapper"></div>')
+        prevMediaHolder.append('<div id="video-wrapper"></div>');
         templateAddMediaVideo($(currPreviewElem).attr("data-video-type"), $(currPreviewElem), $("#video-wrapper"));
 
         TweenMax.to($(".full-width-preview-media-loader"), .3, { css: { opacity: "0" }, easing: Sine.easeOut });
@@ -230,9 +233,29 @@ function loadFullWidthMedia() {
         animationLoadFWPreviewDone = true;
         fwMediaType = mediaType;
         fullWidthFadeInMedia(mediaType);
-    } else if (mediaType == "video-wrapper-collection") {
-        // TODO: #video-wrapper-collection case imp
     }
+
+    if (mediaType == "video-wrapper-collection") {
+
+        var prevMediaHolder = $("#preview-media-holder");
+        prevMediaHolder.attr("style", "width: 100%; height: 100%; margin: 0px;");
+
+        var i = 0;
+        currPreviewElem.find("#video-wrapper").each(function () {
+            prevMediaHolder.append('<div id="video-wrapper' + i + '" style="width:100%"></div>');
+            templateAddMediaVideo(
+                $(this).attr("data-video-type"),
+                $(this),
+                $("#video-wrapper" + i));
+        });
+
+        // set design
+        TweenMax.to($(".full-width-preview-media-loader"), .3, { css: { opacity: "0" }, easing: Sine.easeOut });
+        loadingAnimationDone = true;
+        animationLoadFWPreviewDone = true;
+        fullWidthFadeInMedia(mediaType);
+    }
+
 }
 
 var fwMediaType = "";
