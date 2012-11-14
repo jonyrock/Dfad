@@ -124,6 +124,7 @@ function updateFullWidthPreviewPosition() {
         var mediaBackMarginLeft = -mediaBackNewW * .5;
         $("#preview-media-holder").attr("style", "width: 100%; height: 100%; margin: 0px; top: 50%; left: 50%; margin-top:" + mediaBackMarginTop + "px; margin-left:" + mediaBackMarginLeft + "px;");
     }
+    $("#preview-media-holder #scrollbar1").tinyscrollbar_update();
 }
 
 function loadFullWidthPreview(index) {
