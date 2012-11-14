@@ -1,4 +1,6 @@
-﻿/*================= FULL WIDTH GALLERY =====================*/
+﻿/// <reference path="libs/jquery.tinyscrollbar.js"/>
+
+/*================= FULL WIDTH GALLERY =====================*/
 var initialNumberColumns = 4;
 var maximNumberColumns = 4;
 var initialThumbW = 0;
@@ -239,6 +241,8 @@ function loadFullWidthMedia() {
 
         var prevMediaHolder = $("#preview-media-holder");
         prevMediaHolder.attr("style", "width: 100%; height: 100%; margin: 0px;");
+        prevMediaHolder.append('<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>');
+        prevMediaHolder.tinyscrollbar();
 
         var i = 0;
         currPreviewElem.find("#video-wrapper").each(function () {

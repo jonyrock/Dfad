@@ -14,6 +14,8 @@
     <meta name="description" content="" />
         
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="http://baijs.nl/tinyscrollbar/css/tinyscrollbar.css" type="text/css" media="screen"/>
+
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic|PT+Sans+Caption:400,700' rel='stylesheet' type='text/css' />        
         
     <!-- SCRIPT IE FIXES -->  
@@ -34,6 +36,7 @@
     <script type="text/javascript" src="js/libs/jquery.mousewheel.min.js"> </script>
     <script type="text/javascript" src="js/libs/jquery.selectbox-0.6.1.js"> </script>
     <script type="text/javascript" src="js/mediacreed/scrollbar/mc.custom.list.js"> </script>
+    <script type="text/javascript" src="js/libs/jquery.tinyscrollbar.js"></script>
     
     <script type="text/javascript" src="js/mainMenu.js"> </script>
     <script type="text/javascript" src="js/portfolioPage.js"> </script>
