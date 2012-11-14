@@ -91,7 +91,7 @@ html, body
 }
 body
 {
-	visibility:hidden;
+	
 }
 #template-wrapper
 {
@@ -2639,7 +2639,7 @@ h1, h2, h3, h4, h5, h6
 }
 .full-width-preview-media-loader, .gallery-preview-media-loader
 {
-    position:relative;
+    position:absolute;
     width: 60px;
     height: 40px;
     top: 50%;

@@ -242,6 +242,9 @@ function loadFullWidthMedia() {
 
         var prevMediaHolder = $("#preview-media-holder");
         prevMediaHolder.attr("style", "width: 100%; height: 100%; margin: 0px;");
+
+        prevMediaHolder.append('<div id="scrollbar1"></div>');
+        prevMediaHolder = prevMediaHolder.find("#scrollbar1");
         prevMediaHolder.append('<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>');
         prevMediaHolder.append('<div class="viewport"><div class="overview"></div></div>');
         var tergetBlockHolder = prevMediaHolder.find(".viewport .overview");
@@ -253,6 +256,7 @@ function loadFullWidthMedia() {
                 $(this).attr("data-video-type"),
                 $(this),
                 $("#video-wrapper" + i));
+            i++;
         });
 
         

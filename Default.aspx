@@ -14,7 +14,7 @@
     <meta name="description" content="" />
         
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="http://baijs.nl/tinyscrollbar/css/tinyscrollbar.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="css/tinyscrollbar.css" type="text/css" media="screen"/>
 
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic|PT+Sans+Caption:400,700' rel='stylesheet' type='text/css' />        
         
