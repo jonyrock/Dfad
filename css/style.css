@@ -58,8 +58,6 @@ html, body
     -khtml-user-select: none;
     -moz-user-select: none;
     -o-user-select: none;
-    user-select: none;
-	
 }
 *:not(html)
 {
@@ -654,7 +652,7 @@ footer
     -khtml-user-select: none;
     -moz-user-select: none;
     -o-user-select: none;
-    user-select: none;	
+
 }
 .slideshow-thumbs-arrow-forward{ margin-left: 4px; margin-right: 0px;}
 .slideshow-thumbs-arrow-backg
@@ -1306,7 +1304,7 @@ footer
 }
 .advertise-image img
 {
-	position:abosolute;
+	position:absolute;
 	top:0px;
 	left:0px;
 	width: 230px;
@@ -1705,7 +1703,6 @@ footer
     -khtml-user-select: none;
     -moz-user-select: none;
     -o-user-select: none;
-    user-select: none;
 }
 #news-preview-controls{
 	position:relative;
@@ -1728,7 +1725,6 @@ footer
     -khtml-user-select: none;
     -moz-user-select: none;
     -o-user-select: none;
-    user-select: none;
 	
 }
 .news-preview-backg
@@ -2488,7 +2484,7 @@ h1, h2, h3, h4, h5, h6
 	margin-right: 2%;
 }
 .full-width-text-content-fourth-right, .full-width-text-content-fourth-third{ margin-left: 2%; margin-right: 0; }
-.full-width-text-content-fourth-middle{ margin-left: 2%; }*/
+.full-width-text-content-fourth-middle{ margin-left: 2%; }
 /* ============================ 8. FULL WIDTH GALLERY ======================= */
 #module-full-width-gallery
 {
@@ -2628,7 +2624,7 @@ h1, h2, h3, h4, h5, h6
 	position:absolute;
 	top:0px;
 	left: 0px;
-	width:100%
+	width:100%;
 	height: 100%;
 	z-index:992;
 }
@@ -2669,7 +2665,6 @@ h1, h2, h3, h4, h5, h6
     -khtml-user-select: none;
     -moz-user-select: none;
     -o-user-select: none;
-    user-select: none;	
 }
 .preview-arrow-forward { right: 35px; }
 .preview-counter{ position: absolute; right: 161px; top:18px; z-index:993 }
@@ -3005,7 +3000,7 @@ h1, h2, h3, h4, h5, h6
     -khtml-user-select: none;
     -moz-user-select: none;
     -o-user-select: none;
-    user-select: none;
+    
 }
 .columns-preview-counter span, .news-preview-counter span, .preview-counter span
 {
@@ -3034,7 +3029,7 @@ h1, h2, h3, h4, h5, h6
     -khtml-user-select: none;
     -moz-user-select: none;
     -o-user-select: none;
-    user-select: none;
+    
 }
 .columns-preview-backg
 {
@@ -3085,7 +3080,7 @@ h1, h2, h3, h4, h5, h6
 	left: 0px;
 	width:100%;
 	height:100%;
-	background-image:url(../assets/patterns/body_pattern1.png);
+	
 	background-repeat:repeat;
 		
 }
@@ -3169,7 +3164,7 @@ h1, h2, h3, h4, h5, h6
 }
 .hover-default
 {
-	display:visible;
+	display:block;
 	top: 0px;
     left: -100%;
 }
@@ -3388,7 +3383,7 @@ h1, h2, h3, h4, h5, h6
     -khtml-user-select: none;
     -moz-user-select: none;
     -o-user-select: none;
-    user-select: none;	
+    
 }
 .module-galleries-preview-arrow-close{ right: 30px;  top:20px; margin-top: 0px; z-index:993;}
 .module-galleries-preview-arrow-backward{ left:30px; }
@@ -3671,6 +3666,5 @@ h1, h2, h3, h4, h5, h6
 /** ERROR classes **/
 form .error .jquery-selectbox {
 	color: #d00;
-	border-color: #d00;
-	background-image: url("../img/bg-TextFieldError.gif");
+	border-color: #d00;	
 }
