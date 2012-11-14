@@ -1,4 +1,6 @@
-﻿function moduleUpdate_slideshow() {
+﻿/// <reference path="greensock/uncompressed/TweenMax.js"/>
+
+function moduleUpdate_slideshow() {
     var winW = $(window).width();
     if ($("#slideshow-thumbs-content").length > 0) {
         var thumbHolder = $("#slideshow-thumbs");

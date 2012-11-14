@@ -1,4 +1,5 @@
 ﻿/// <reference path="mainMenu.js" />
+/// <reference path="greensock/uncompressed/TweenMax.js"/>
 /// <reference path="portfolioPage.js" />
 /// <reference path="libs/jquery.selectbox-0.6.1.js" />
 /**

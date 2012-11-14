@@ -1,6 +1,6 @@
-<!doctype html>
+<html>
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,IE=8,chrome=1" />
@@ -54,7 +54,11 @@
         params.bgcolor = "#000000";
         params.allowFullScreen = "true";
         _V_.options.flash.params = params;
-    </script>    
+    </script>
+    <style type="text/css">.no-js { }
+
+                                                                                                         .lt-ie9 { }
+    </style>    
 </head>
 
 <body>
