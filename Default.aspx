@@ -40,6 +40,7 @@
     
     <script type="text/javascript" src="js/mainMenu.js"> </script>
     <script type="text/javascript" src="js/portfolioPage.js"> </script>
+    <script type="text/javascript" src="js/columnsPortfolioModule.js"> </script>
     <script type="text/javascript" src="js/mc.modules.animation.js"> </script>
     <script type="text/javascript" src="js/resizing.js"> </script>
     <link rel="stylesheet" href="js/video-js/video-js.min.css" media="screen" />
