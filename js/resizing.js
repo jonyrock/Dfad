@@ -1,4 +1,7 @@
-﻿/// <reference path="greensock/uncompressed/TweenMax.js"/>
+﻿/// <reference path="mc.modules.animation.js"/>
+/// <reference path="columnsPortfolioModule.js"/>
+/// <reference path="galleryServicesModule.js"/>
+/// <reference path="greensock/uncompressed/TweenMax.js"/>
 
 function moduleUpdate_slideshow() {
     var winW = $(window).width();
@@ -189,6 +192,7 @@ function moduleUpdate_contact() {
 }
 
 function moduleUpdate_gallery() {
+
     var textPageInstanceHolder = $(txt_modCont);
     var textPageInstance = $("#module-galleries", textPageInstanceHolder);
     var galleryHolder = $("#module-galleries-holder", textPageInstance);
@@ -210,11 +214,12 @@ function moduleUpdate_gallery() {
     galleryLines = numberLines;
 
     $(".thumb-holder", galleryHolder).css("margin-right", "");
-    $(".thumb-holder" + ":nth-child(" + galleryColumns + "n+" + galleryColumns + ")", galleryHolder).css("margin-right", "0px");
+    $(".thumb-holder" + ":nth-child(" + galleryColumns + "n+" + galleryColumns + ")", galleryHolder)
+        .css("margin-right", "0px");
 
     moduleUpdate(textPageInstanceHolder, textPageInstance, $("div:first", textPageInstance), sideType);
     if (previewGalleryOpen == true) {
-        updatePreviewMediaPosition()
+        updatePreviewMediaPosition();
     }
 }
 
@@ -286,13 +291,13 @@ $(window).resize(
         /*BACKGROUND CHECK*/
         if ($showModuleBackground != null) resizeImage($showModuleBackground);
 
-        var scrollbar_v1 = $("#module-container #module-scrollbar-holder");
-        var scrollbar_v2 = $("#module-container #module-scrollbar-holder_v2");
-        var availScrollbar = (scrollbar_v1.length > 0) ? scrollbar_v1 : scrollbar_v2;
+        var scrollbarV1 = $("#module-container #module-scrollbar-holder");
+        var scrollbarV2 = $("#module-container #module-scrollbar-holder_v2");
+        var availScrollbar = (scrollbarV1.length > 0) ? scrollbarV1 : scrollbarV2;
         var winW = $(window).width();
         var winH = $(window).height();
         var menuHiderH = parseInt($("#menu-container #menu-hider").height(), 10);
-        //TODO: i don't know why 66
+        
         var menW = getMenuWidth();
         var menH = getMenuHeight();
 

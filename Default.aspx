@@ -41,6 +41,7 @@
     <script type="text/javascript" src="js/mainMenu.js"> </script>
     <script type="text/javascript" src="js/portfolioPage.js"> </script>
     <script type="text/javascript" src="js/columnsPortfolioModule.js"> </script>
+    <script type="text/javascript" src="js/galleryServicesModule.js"> </script>
     <script type="text/javascript" src="js/mc.modules.animation.js"> </script>
     <script type="text/javascript" src="js/resizing.js"> </script>
     <link rel="stylesheet" href="js/video-js/video-js.min.css" media="screen" />
@@ -116,7 +117,7 @@
                         </div>
                     </div>  
 
-                    <div class="menu-option-holder" data-module-type="page_columns" data-side="none">
+                    <div class="menu-option-holder" data-module-type="gallery" data-side="none">
                         <div id="menu-option-background" class="menu-option-background"> </div>
                         <div id="menu-option-text" class="menu-option-text">
                             <a href="#services.html" data-path-href="html/services/">SERVICES</a>
