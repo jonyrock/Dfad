@@ -473,15 +473,15 @@ footer
 }*/
 #footer-social-holder ul .twitter{ background-position:0 -100px; }
 #footer-social-holder ul .facebook{ background-position:-30px -100px; }
-#footer-social-holder ul li.google{ background-position:-60px -100px; }
-#footer-social-holder ul li.dribbble{ background-position:-90px -100px; }
-#footer-social-holder ul li.flickr{ background-position:-120px -100px; }
+#footer-social-holder ul li.linkedin{ background-position:-60px -100px; }
+#footer-social-holder ul li.youtube{ background-position:-90px -100px; }
+#footer-social-holder ul li.vkontakte{ background-position:-120px -100px; }
 
 #footer-social-holder ul li.twitter:hover{ background-position:0px -130px; }
 #footer-social-holder ul li.facebook:hover{ background-position:-30px -130px; }
-#footer-social-holder ul li.google:hover{ background-position:-60px -130px; }
-#footer-social-holder ul li.dribbble:hover{ background-position:-90px -130px; }
-#footer-social-holder ul li.flickr:hover{ background-position:-120px -130px; }
+#footer-social-holder ul li.linkedin:hover{ background-position:-60px -130px; }
+#footer-social-holder ul li.youtube:hover{ background-position:-90px -130px; }
+#footer-social-holder ul li.vkontakte:hover{ background-position:-120px -130px; }
 
 #footer-text
 {
