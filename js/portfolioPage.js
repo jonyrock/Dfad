@@ -43,10 +43,8 @@ function moduleFullWidthGallery() {
     storeFullWidthPreviewMedia();
     galleryItem.click(
         function () {
-            currIndex = 0;
             changeFWPreviewMediaDesc(-1);
             var index = $(".full-width-item").index(this);
-            currIndex = index;
             if (moduleList != null) moduleList.disableList();
             $("#full-width-preview-media-holder").find("#preview-media-holder").empty();
             loadFullWidthPreview(index);
@@ -127,6 +125,7 @@ function updateFullWidthPreviewPosition() {
 }
 
 function loadFullWidthPreview(index) {
+    currIndex = index;
     previewFullWidthOpen = true;
     var fullWidthPreview = $("#full-width-preview");
     var fwMediaContainer = $("#full-width-preview-media-holder");
