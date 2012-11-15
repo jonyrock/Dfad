@@ -15,12 +15,8 @@ function modulePageColumns() {
     var textPageInstance = $("#module-columns", textPageInstanceHolder);
 
     if (textPageInstance.length <= 0) return;
-    var modulePositionType = textPageInstanceHolder.attr("data-id");
-    var moduleWidth = textPageInstanceHolder.width();
-    var moduleHeight = textPageInstanceHolder.height();
     var columnItemWrapper = $("#module-columns-wrapper", textPageInstanceHolder);
-    var columnPrevWrapper = $("#module-columns-preview-wrapper", textPageInstanceHolder);
-
+    
     if (touchDevice == 1) {
         columnItemWrapper.css("overflow", "").css("-webkit-overflow-scrolling", "");
         columnItemWrapper.css("overflow", "auto").css("-webkit-overflow-scrolling", "touch");
@@ -59,29 +55,7 @@ function modulePageColumns() {
             });
     }
 
-    var columnsPrevItemMediaArr = new Array();
-    var previewWidth = $("#module-columns-preview-holder", columnPrevWrapper).width();
-    columnPrevWrapper.css("display", "inline");
-
-    $(columnPrevWrapper, textPageInstance).find(".columns-preview-horizontal-fix").each(
-        function () {
-            $(this).css("width", 9999999);
-            var cPIH = $("ul", this);
-            var cPI = $("ul li", this);
-            var i = 0;
-            cPI.each(function () {
-                var mediaSrc = $(".columns-preview-media", this).attr("data-src");
-                columnsPrevItemArr[i] = $(this);
-                columnsPrevItemMediaArr[i] = mediaSrc;
-                i++;
-                $(this).css("width", previewWidth);
-                $(this).css("display", "none");
-            });
-            $(this).css("width", previewWidth);
-            cPIH.css("width", cPIH.width());
-        });
-
-    columnPrevWrapper.css("display", "none");
+    
     var columnTopPos = 0;
     totalColPreviews = $(".columns-preview-horizontal-fix ul", textPageInstance).children().length;
     thumbHolderClass.unbind("click");
@@ -98,168 +72,12 @@ function modulePageColumns() {
                 columnTopPos = columnItemWrapper.scrollTop();
             }
             TweenMax.to(columnItemWrapper, .4, { css: { opacity: "0" }, easing: Sine.easeOut, onComplete: function () { columnItemWrapper.css("display", "none"); } });
-            var i = 0;
-            for (i; i < totalColPreviews; i++) {
-                if (i == columnsPreviewIndex) {
-                    columnsPrevItemArr[i].css("display", "inline");
-                } else {
-                    columnsPrevItemArr[i].css("display", "none");
-                }
-            }
-            $(".columns-preview-counter span", "#columns-preview-controls").empty().append((index + 1) + "/" + totalColPreviews);
+
+            //TODO: exec full view load
             loadColumnsPreview(index);
         });
 
-    function loadColumnsPreview(index) {
-        var prevListW = $("#module-columns-preview-holder").width();
-        var elMargR = parseInt($("li:first", ".columns-preview-horizontal-fix ul").css("margin-right"), 10);
-        var scrollValue = index * (prevListW + elMargR);
-        if (moduleList != null) {
-            moduleList.disableList();
-        }
-        previewAnimDone = false;
-
-        if (columnsPreviewOpen == false) {
-            columnsPreviewOpen = true;
-            $(".columns-preview-horizontal-fix ul").css("left", -scrollValue);
-            columnPrevWrapper.css("opacity", "0").css("display", "inline");
-            TweenMax.to(columnPrevWrapper, .6, { css: { opacity: "1" }, delay: 0.3, easing: Sine.easeOut });
-            checkColumnsPreviewScrollbar(columnsPreviewOpen);
-        } else {
-            TweenMax.to($("#module-columns-preview", textPageInstance), .3, { css: { top: "0px" }, easing: Sine.easeOut });
-            TweenMax.to($(".columns-preview-horizontal-fix ul"), 0.6, { css: { left: -scrollValue }, delay: 0.1, easing: Sine.easeOut, onComplete: checkColumnsPreviewScrollbar, onCompleteParams: [columnsPreviewOpen] });
-        }
-        $(".columns-preview-counter span", "#columns-preview-controls").empty().append((index + 1) + "/" + totalColPreviews);
-    }
-
-    function checkColumnsPreviewScrollbar(previewOpen) {
-        if (moduleList != null) {
-            moduleList.enableList();
-        }
-        enableColumnsPreviewClose(true);
-        if (moduleList != null) {
-            moduleList.destroy(false);
-            moduleList = null;
-        }
-        var i = 0;
-        for (i; i < totalColPreviews; i++) {
-            if (i != columnsPreviewIndex) {
-                columnsPrevItemArr[i].css("display", "none");
-            }
-        }
-
-        moduleUpdate(textPageInstanceHolder, columnPrevWrapper, $("div:first", columnPrevWrapper), sideType);
-        var previewColMediaParent = $(".columns-preview-media", columnsPrevItemArr[columnsPreviewIndex]);
-        if ($("img", previewColMediaParent).length <= 0) {
-            previewColMediaParent.empty().append('<img width="100%" class="opacity_0" onload="animateColPreviewMedia(this)" />');
-            $("img", previewColMediaParent).attr("src", columnsPrevItemMediaArr[columnsPreviewIndex]);
-        } else {
-            previewAnimDone = true;
-            if (touchDevice == 1) {
-                $("div:first", columnPrevWrapper).css("height", "");
-                $("div:first", columnPrevWrapper).css("height", $("div:first", columnPrevWrapper).height());
-            }
-        }
-        colPreviewItemDisplay("inline");
-    }
-
-    /*initial close enabled*/
-    enableColumnsPreviewClose(true);
-
-    function enableColumnsPreviewClose(enable) {
-        $(".columns-preview-close", textPageInstance).unbind("click");
-        if (enable == true) {
-            $(".columns-preview-close", textPageInstance).click(function () { click_ColumnsPreviewClose(); });
-            TweenMax.to($(".columns-preview-close", textPageInstance), .4, { css: { opacity: "1" }, easing: Sine.easeOut })
-        } else {
-            TweenMax.to($(".columns-preview-close", textPageInstance), .4, { css: { opacity: "0.5" }, easing: Sine.easeOut })
-        }
-    }
-
-    function click_ColumnsPreviewClose() {
-        columnsPreviewOpen = false;
-        TweenMax.to($(t_scrBarV2), .3, { css: { opacity: "0" }, easing: Sine.easeOut });
-        TweenMax.to(columnPrevWrapper, .4, { css: { opacity: "0" }, easing: Sine.easeOut, onComplete: hideColumnsPreview });
-
-    }
-
-    function hideColumnsPreview() {
-        $("div:first", columnPrevWrapper).css("height", "");
-        columnPrevWrapper.css("opacity", "0").css("display", "none");
-        $(t_scrBarV2).css("display", "none");
-        $(".columns-preview-horizontal-fix ul", textPageInstance).find("li").each(function () { $(this).css("display", "none"); });
-        $(".columns-preview-horizontal-fix ul", textPageInstance).css("left", "0");
-        if (moduleList != null) {
-            moduleList.resetPosition(0);
-            moduleList.disableList();
-            moduleList.destroy();
-            moduleList = null;
-        }
-        columnItemWrapper.css("opacity", "0").css("display", "inline");
-        moduleUpdate_page_columns(columnTopPos);
-
-        TweenMax.to(columnItemWrapper, .6, { css: { opacity: "1" }, easing: Sine.easeOut });
-        $("#filter-buttons-holder", textPageInstance).find(".filter-button").each(
-            function () {
-                var obj = $(this);
-                var dataF = obj.attr("data-filter");
-                if (dataF != undefined && dataF == "*") {
-                    obj.addClass("selected");
-                    TweenMax.to(obj, .3, { css: { color: "#ffffff", backgroundColor: themeColor }, ease: Sine.easeOut });
-                } else {
-                    if (obj.hasClass("selected") == true) {
-                        obj.removeClass("selected").css("color", "#3f3f3f").css("background-color", "transparent");
-                    }
-                }
-            });
-    }
-
-    var initBackColor = rgb2hex($(".columns-preview-backward .columns-preview-backg").css("background-color"));
-    $(".columns-preview-backward, .columns-preview-forward, .columns-preview-close").unbind("mouseenter mouseleave");
-    $(".columns-preview-backward, .columns-preview-forward, .columns-preview-close").hover(
-        function () { TweenMax.to($(".columns-preview-backg", this), 0.3, { css: { backgroundColor: themeColor }, easing: Sine.easeOut }); },
-        function () { TweenMax.to($(".columns-preview-backg", this), 0.3, { css: { backgroundColor: initBackColor }, easing: Sine.easeOut }); }
-    );
-    $(".columns-preview-backward, .columns-preview-forward", textPageInstance).click(
-        function () {
-            var index = columnsPreviewIndex;
-            if ($(this).hasClass("columns-preview-backward") == true) {
-                index--;
-                changeColPreviewMedia(index);
-            } else if ($(this).hasClass("columns-preview-forward") == true) {
-                index++;
-                changeColPreviewMedia(index);
-            }
-        });
-    $(".columns-preview-horizontal-fix ul").wipetouch({
-        tapToClick: false, /* if user taps the screen, triggers a click event*/
-        preventDefault: false,
-        wipeLeft: function (result) {
-            var index = columnsPreviewIndex;
-            index++;
-            changeColPreviewMedia(index)
-        },
-        wipeRight: function (result) {
-            var index = columnsPreviewIndex;
-            index--;
-            changeColPreviewMedia(index)
-        }
-    });
-
-    function changeColPreviewMedia(index) {
-        if (index < 0) {
-            index = 0;
-        }
-        if (index > totalColPreviews - 1) {
-            index = totalColPreviews - 1;
-        }
-        if (index == columnsPreviewIndex) {
-            return;
-        }
-        enableColumnsPreviewClose(false)
-        columnsPreviewIndex = index;
-        loadColumnsPreview(columnsPreviewIndex);
-    }
+    function loadColumnsPreview(index) {}
 
     var $filterContainer = $("#module-columns-holder", textPageInstance);
     $originalDataPos = getOriginalPos($filterContainer);
@@ -433,7 +251,7 @@ function getDirectionCSS($element, coordinates) {
             toClass = { instance: 'hover-slideTopLeft', val1: "0px", val2: "0px" };
             break;
     }
-    ;
+    
     return { from: fromClass, to: toClass };
 }
 
@@ -465,8 +283,7 @@ function checkColumnSize(adjustPreview) {
     }
     if (thumbType == "half-thumb-holder") {
         maxColumns = 2;
-    }
-    var maxWidth = (columns > 1) ? textPageInstance.width() : container.width();
+    }   
 
     if (columns > maxColumns) {
         columns = maxColumns;
@@ -487,7 +304,7 @@ function checkColumnSize(adjustPreview) {
     if (adjustPreview != undefined && adjustPreview == true) {
         var thumbNewW = columns * (elementW + marginRight) - marginRight
         var newWidth = thumbNewW + parseInt($("#module-columns-container").css("margin-left"), 10) + parseInt($("#module-columns-container").css("margin-right"), 10);
-        $("#module-columns-preview-holder", textPageInstance).css("width", thumbNewW + "px");
+        
 
         if (thumbNewW < 768) {
             prevMedia.css("width", thumbNewW + "px");
@@ -496,22 +313,7 @@ function checkColumnSize(adjustPreview) {
             prevMedia.css("width", "");
             prevDesc.css("margin-left", "").css("width", "");
         }
-        var previewWidth = thumbNewW;
-        if (columnsPreviewOpen == false) {
-            $("#module-columns-preview", textPageInstance).css("display", "inline");
-        }
-        $(textPageInstance).find(".columns-preview-horizontal-fix").each(
-            function () {
-                var columPrevItemHolder = $("ul", this);
-                var columPrevItem = $("ul li", this);
-                $(this).css("width", 9999999);
-                columPrevItem.each(function () { $(this).css("width", previewWidth); });
-                var realW = columPrevItemHolder.width();
-                columPrevItem.each(function () { if (columnsPreviewOpen == false) $(this).css("display", "none"); });
-                $(this).css("width", previewWidth);
-                columPrevItemHolder.css("width", realW);
-            });
-        var prevListW = $("#module-columns-preview-holder").width();
+        
         var elMargR = parseInt($("li:first", ".columns-preview-horizontal-fix ul").css("margin-right"), 10);
         $(".columns-preview-horizontal-fix ul").css("left", -(columnsPreviewIndex * (prevListW + elMargR)));
     }
@@ -551,7 +353,7 @@ function checkColumnSize(adjustPreview) {
         $("#module-columns-container").css("width", thumbNewW + "px");
         container.css("height", newH + "px");
         container.css("width", thumbNewW + "px");
-        $("#module-columns-preview-holder", textPageInstance).css("width", thumbNewW + "px");
+        
         if (thumbNewW < 768) {
             prevMedia.css("width", thumbNewW + "px");
             prevDesc.css("margin-left", "0px").css("width", "100%");
@@ -561,36 +363,8 @@ function checkColumnSize(adjustPreview) {
         }
     }
 
-    var columnPrevWrapper = $("#module-columns-preview-wrapper", textPageInstanceHolder);
-    var previewWidth = $("#module-columns-preview-holder", columnPrevWrapper).width();
-    if (columnsPreviewOpen == false) {
-        columnPrevWrapper.css("display", "inline");
-    }
-    $(columnPrevWrapper, textPageInstance).find(".columns-preview-horizontal-fix").each(
-        function () {
-            $(this).css("width", 9999999);
-            var cPIH = $("ul", this);
-            var cPI = $("ul li", this);
-            cPI.each(function () { $(this).css("width", previewWidth); });
-            cPIH.css("width", cPIH.width());
-            $(this).css("width", previewWidth);
-            cPI.each(function () {
-                if (columnsPreviewOpen == false) {
-                    $(this).css("display", "none");
-                }
-            });
-        });
-    if (columnsPreviewOpen == false) {
-        columnPrevWrapper.css("display", "none");
-    }
 }
 
-function colPreviewItemDisplay(display) {
-    var i = 0;
-    for (i; i < totalColPreviews; i++) {
-        columnsPrevItemArr[i].css("display", display);
-    }
-}
 
 function animateColPreviewMedia(src) {
     var inst = $(src);
