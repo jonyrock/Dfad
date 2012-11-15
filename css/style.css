@@ -3590,6 +3590,28 @@ h1, h2, h3, h4, h5, h6
 	border: 1px solid #777777;	
 }
 
+/*------------------------------------------------------------------*/
+/*						TOUCH DEVICES								*/
+/*------------------------------------------------------------------*/
+@media only screen and (min-width: 1060px) and (max-width: 1220px)
+{
+    .module-galleries { width: 722px; }
+}
+	
+@media only screen and (min-width: 828px) and (max-width: 1060px)
+{
+	.module-galleries{ width: 486px; }
+}
+@media only screen and (min-width: 540px) and (max-width: 820px)
+{
+	.module-galleries{ width: 486px; }
+}
+@media only screen and (max-width: 479px)
+{	
+	.module-galleries{ width: 100%; }
+} 
+
+
 /* dropbox */
 
 #filter-buttons-dropdown
