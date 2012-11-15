@@ -138,9 +138,9 @@
                             <ul>
                                 <li class="twitter"><a href="http://www.twitter.com/dfad_tv" target="_blank"></a></li>
                                 <li class="facebook"><a href="http://www.facebook.com/pages/DFAD-Audio-Branding-Sound-Marketing-music-sound-voice/161478367312187?ref=hl" target="_blank"></a></li>
-                                <li class="google"><a href="http://www.youtube.com/user/DFADTV" target="_blank"></a></li>
-                                <li class="dribbble"><a href="http://www.dribbble.com" target="_blank"></a></li>
-                                <li class="flickr"><a href="http://www.flickr.com" target="_blank"></a></li>
+                                <li class="linkedin"><a href="http://www.linkedin.com/company/dfad---music-sound-and-voice-supervision" target="_blank"></a></li>
+                                <li class="youtube"><a href="http://www.youtube.com/user/DFADTV" target="_blank"></a></li>
+                                <li class="vkontakte"><a href="http://vk.com/public32980868" target="_blank"></a></li>
                             </ul>
                         </div>                   
                     </div>    
