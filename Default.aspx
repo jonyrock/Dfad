@@ -116,7 +116,7 @@
                         </div>
                     </div>  
 
-                    <div class="menu-option-holder" data-module-type="page_columns" data-side="none">
+                    <div class="menu-option-holder" data-module-type="gallery" data-side="none">
                         <div id="menu-option-background" class="menu-option-background"> </div>
                         <div id="menu-option-text" class="menu-option-text">
                             <a href="#services.html" data-path-href="html/services/">SERVICES</a>
