@@ -1,11 +1,18 @@
-﻿var columnsPreviewOpen = false;
+﻿/// <reference path="portfolioPage.js"/>
+
+var columnsPreviewOpen = false;
 var previewAnimDone = true;
 var columnsPreviewIndex = 0;
 var columnsPrevItemArr = "";
 var totalColPreviews = 0;
 var $originalDataPos = 0;
 
+function modulePageColumnsUpdatePreviewMediaArr() {
+    
+}
+
 function modulePageColumns() {
+    
     columnsPreviewOpen = false;
     previewAnimDone = true;
     columnsPreviewIndex = 0;
@@ -55,30 +62,19 @@ function modulePageColumns() {
             });
     }
 
-    
     var columnTopPos = 0;
     totalColPreviews = $(".columns-preview-horizontal-fix ul", textPageInstance).children().length;
     thumbHolderClass.unbind("click");
     thumbHolderClass.click(
         function () {
             var index = $(thumbHolderClass).index(this);
-            columnsPreviewIndex = index;
-            if (moduleList != null) {
-                moduleList.disableList();
-                columnTopPos = moduleList.currentPosition();
-                TweenMax.to($(t_scrBarV2), .3, { css: { opacity: "0" }, easing: Sine.easeOut, onComplete: function () { $(t_scrBarV2).css("display", "none"); } });
-            }
-            if (touchDevice == 1) {
-                columnTopPos = columnItemWrapper.scrollTop();
-            }
-            TweenMax.to(columnItemWrapper, .4, { css: { opacity: "0" }, easing: Sine.easeOut, onComplete: function () { columnItemWrapper.css("display", "none"); } });
+            
+            modulePageColumnsUpdatePreviewMediaArr();
+            loadFullWidthPreview(index); 
 
-            //TODO: exec full view load
-            loadColumnsPreview(index);
         });
 
-    function loadColumnsPreview(index) {}
-
+    
     var $filterContainer = $("#module-columns-holder", textPageInstance);
     $originalDataPos = getOriginalPos($filterContainer);
     if (touchDevice == 0)
@@ -149,6 +145,10 @@ function modulePageColumns() {
     $("#filter-buttons-holder").attr("data-folded", "true");
     if (needToShowDropdown)
         $("#filter-buttons-dropdown").hide();
+
+    // set portfolio full view page
+    setFullWidthPreview();
+    storeFullWidthPreviewMedia();
 
     $(window).trigger("resize");
 }
@@ -364,7 +364,6 @@ function checkColumnSize(adjustPreview) {
     }
 
 }
-
 
 function animateColPreviewMedia(src) {
     var inst = $(src);

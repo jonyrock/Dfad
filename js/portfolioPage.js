@@ -63,7 +63,6 @@ function storeFullWidthPreviewMedia() {
                     '" title="' + $(this).attr("data-title") + '"' +
                     ' alt="' + $(this).attr("data-alt") + '" />';
             } else if ($(this).attr("id") == "video-wrapper") {
-                var videoType = $(this).attr("data-type");
                 previewMediaArr[i] = $(this);
             } else if ($(this).attr("id") == "video-wrapper-collection") {
                 previewMediaArr[i] = $(this);
@@ -153,9 +152,6 @@ function loadFullWidthPreview(index) {
     var mediaContW = $(window).width() - infoWidth;
     var mediaContH = $(window).height();
     fwMediaContainer.attr("style", "width:" + mediaContW + "px; height:" + mediaContH + "px;");
-
-    //$(".preview-arrow-close").css("right", infoWidth);
-    //$(".preview-arrow-forward").css("right", infoWidth);
 
     function showHideFullWidthPreviewInfo(show) {
         previewInfoHolder.css("position", "fixed");
