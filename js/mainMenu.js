@@ -220,9 +220,13 @@ function storeMenuArr() {
 }
 
 function menuOptionIn(idx1, idx2) {
-    var backgroundBlock = menuOptionsArr[idx1][2].attr("class", "menu-option-background-selected");
+    //TODO: optimize it
+    $(".menu-option-background-selected").hide();
+    menuOptionsArr[idx1][2].attr("class", "menu-option-background-selected");
+    menuOptionsArr[idx1][2].show();
 }
 
+//TODO: remove or use
 function menuOptionOut(idx1, idx2, disableIdx1) {
     
     
