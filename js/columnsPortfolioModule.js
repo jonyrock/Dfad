@@ -187,7 +187,7 @@ function onFilterComplete(index, container, child, hide) {
                 function () {
                     var sType = $("#template-menu").attr("data-side");
                     moduleUpdate(textPageInstanceHolder, textPageInstance, $("div:first", textPageInstance), sType, true, false);
-                    //moduleUpdate_page_columns();
+                    $("#module-columns").css("top","0px");
                     if (moduleList != null) moduleList.enableList();
                 }
         });
