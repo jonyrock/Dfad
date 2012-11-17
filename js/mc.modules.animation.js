@@ -346,7 +346,7 @@ function activateHoverMenu() {
     $("#menu-container").bind("mouseenter", overMenu);
     $("#menu-hider-icon").bind("mouseenter", menuHiderOver);
     $("#menu-hider-icon").bind("mouseleave", menuHiderOver);
-    $("#menu-container").bind("mouseleave", outMenu);
+    $("#module-container").bind("mouseenter", outMenu);
 }
 
 /* menu hider over */
@@ -377,6 +377,7 @@ function overMenu() {
 /* out menu */
 
 function outMenu() {
+    //alert("out");
     if (menuActive == true) return;
     isOverMenu = false;
     var winW = $(window).width(),
