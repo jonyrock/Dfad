@@ -1782,20 +1782,23 @@ function animateMedia(img) {
     TweenMax.to(img, 0.4, { css: { opacity: "1" }, easing: Sine.easeOut });
 }
 
-var name = "", email = "", phone = "", messg = "",
-    nameDefTxt = "", emailDefTxt = "", phoneDefTxt = "", messgDefTxt = "",
-    resetBtn = "", sendBtn = "", sendBtnText = "", btnTextSend = "";
+var name, email, phone, messg,
+    nameDefTxt, emailDefTxt, phoneDefTxt, messgDefTxt,
+    resetBtn, sendBtn, sendBtnText, btnTextSend;
 
 function contactFormSetup() {
-    name = $("#contact-form #name"),
-    email = $("#contact-form #email"),
-    phone = $("#contact-form #phone"),
+    
+    return;
+
+    name = $("#contact-form #name");
+    email = $("#contact-form #email");
+    phone = $("#contact-form #phone");
     messg = $("#contact-form #message");
 
-    nameDefTxt = name.val(),
-    emailDefTxt = email.val(),
-    phoneDefTxt = phone.val(),
-    messgDefTxt = messg.val();
+    nameDefTxt = $("#contact-form #name").val();
+    emailDefTxt = $("#contact-form #email").val();
+    phoneDefTxt = $("#contact-form #phone").val();
+    messgDefTxt = $("#contact-form #message").val();
 
     resetBtn = $("#contact-form #form-reset");
     sendBtn = $("#contact-form #form-send");
