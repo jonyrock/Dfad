@@ -29,6 +29,7 @@ $(function () {
     });
 
     $(".menu-option-text a").click(function () {
+        if($(this).parent().parent().find(".menu-option-background-selected").length > 0) return;
         $(".menu-option-background-selected").hide()
         .attr("class", "menu-option-background").parent()
         .attr("data-activeEffect", "false");
