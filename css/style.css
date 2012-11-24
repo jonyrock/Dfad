@@ -186,12 +186,19 @@ body
 .menu-option-text,
 .sub-menu-option-text
 {	
-	width: 190px;
+	width: 100%;
 }
+
+.menu-option-background
+{
+    margin-left: 100%;
+}
+
 .menu-option-background,
-.menu-option-background-selected{
-    margin-left: 20px;
-    width:190px;
+.menu-option-background-selected
+{
+    width:100%;
+    margin-left: 20px
 }
 .menu-option-text
 {
@@ -301,6 +308,7 @@ submenu holder has overflow hidden */
 .menu-option-holder, .sub-menu-option-holder
 {
 	margin-bottom: 1px;
+    overflow: hidden;
 }
 .menu-option-holder:hover, .sub-menu-option-holder:hover
 {

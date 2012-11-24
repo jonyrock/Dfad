@@ -1,38 +1,31 @@
 ﻿
 var menuLastHoverText;
+var menuAnimEase = Quad.easeOut;
+var menuAnimDuration = 0.2;
+
+var menuWidth = 200 + "px";
+var submenuWidth = 0;
+var oldMenuData = "";
+var menuData = "";
 
 $(function () {
 
     $(".menu-option-holder").mouseenter(function () {
-        var myLastHover = $(this).find("a").text();
-        var parentBlock = this;
-        menuLastHoverText = myLastHover;
-        if ($(this).attr("data-activeEffect") == "true") return;
-        $(this).attr("data-activeEffect", "true");
-        $(this).find(".menu-option-background").fadeIn("medium", function () {
-            $(parentBlock).attr("data-activeEffect", "false");
-            if (menuLastHoverText != myLastHover) {
-                $(this).trigger("mouseleave");
-                return;
-            }
-        });
+        if ($(this).find(".menu-option-background-selected").length > 0) return;
+        var back = $(this).find(".menu-option-background").show();
+        TweenMax.to(back, menuAnimDuration, { css: { marginLeft: "20px"}, ease: menuAnimEase });
     });
 
     $(".menu-option-holder").mouseleave(function () {
-        if ($(this).attr("data-activeEffect") == "true") {
-            if ($(this).find("a").text() == menuLastHoverText)
-                menuLastHoverText = "x";
-            return;
-        }
-        $(this).find(".menu-option-background").hide();
-        return;
+        if ($(this).find(".menu-option-background-selected").length > 0) return;
+        var back = $(this).find(".menu-option-background");
+        TweenMax.to(back, menuAnimDuration, { css: { marginLeft: "100%"}, ease: menuAnimEase });
     });
 
     $(".menu-option-text a").click(function () {
         if($(this).parent().parent().find(".menu-option-background-selected").length > 0) return;
         $(".menu-option-background-selected").hide()
-        .attr("class", "menu-option-background").parent()
-        .attr("data-activeEffect", "false");
+        .attr("class", "menu-option-background");
     });
 
 });
@@ -221,10 +214,10 @@ function storeMenuArr() {
 }
 
 function menuOptionIn(idx1, idx2) {
-    //TODO: optimize it
-    $(".menu-option-background-selected").hide();
+    if (menuOptionsArr[idx1][2].attr("class") == "menu-option-background-selected") return;
+    $(".menu-option-background-selected").attr("style", "").attr("class", "menu-option-background");
     menuOptionsArr[idx1][2].attr("class", "menu-option-background-selected");
-    menuOptionsArr[idx1][2].show();
+    menuOptionsArr[idx1][2].attr("style", "");
 }
 
 //TODO: remove or use
@@ -250,14 +243,7 @@ function menuOptionHover(event) {
 
 function hideSubmenu(obj) { obj.css('opacity', '0').css('display', 'none'); }
 
-var menuAnimEase = Quad.easeOut;
-/* Circ.easeOut  Quad.easeOut*/
-var menuAnimDuration = 0.15;
-/* 0.6  or  0.3*/
-var menuWidth = 0;
-var submenuWidth = 0;
-var oldMenuData = "";
-var menuData = "";
+
 
 
 function menuOptionClicked(val, mType, sType, hrefPath) {
