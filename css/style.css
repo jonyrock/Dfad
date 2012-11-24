@@ -206,12 +206,9 @@ body
     margin-top:2px;
 }
 
-
-.menu-option-background-selected,
-
 .menu-option-background
 {
-    display: none;    
+    display: none;
 }
 
 .sub-menu-holder

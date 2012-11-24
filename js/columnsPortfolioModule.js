@@ -146,7 +146,9 @@ function modulePageColumns() {
     list.selectbox().bind("change", function () {
         var val = $(this).val();
         var searchText = 'div[data-filter="' + val + '"]';
+        $("#filter-buttons-holder .filter-button").attr("style", "").hide();
         $("#filter-buttons-holder").find(searchText).trigger("click");
+        
     });
     //TODO: move it to lib
     $("#filter-buttons-holder .jquery-selectbox-moreButton").text("▼");
