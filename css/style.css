@@ -418,6 +418,15 @@ footer
    /* visibility:hidden;*/
     z-index: 11;        
 }
+
+@media only screen and (max-height: 580px)
+{
+    footer
+    {
+        top:470px; /* 580 - 110 = 470 */
+    }
+}
+
 #footer-social
 {
     position:relative;
