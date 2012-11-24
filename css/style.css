@@ -208,11 +208,6 @@ body
 
 
 .menu-option-background-selected,
-.menu-option-background
-{
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-}
 
 .menu-option-background
 {
@@ -326,6 +321,7 @@ submenu holder has overflow hidden */
 .sub-menu-option-text
 {
 	height:34px;
+	margin-top:2px;
 }
 
 .menu-option-background, 
