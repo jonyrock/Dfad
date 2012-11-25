@@ -24,11 +24,16 @@ $(function () {
 
     $(".menu-option-text a").click(function () {
         var menuOptionHolder = $(this).parent().parent();
-        if (menuOptionHolder.find(".menu-option-background-selected").length > 0) return;
-        $(".menu-option-background-selected").hide()
-        .attr("class", "menu-option-background");
-        if (menuOptionHolder.find(".sub-menu-holder").length > 0) {
+        var isComplex = menuOptionHolder.find(".sub-menu-holder").length > 0;
+        if (menuOptionHolder.find(".menu-option-background-selected").length > 0 && !isComplex) return;
+        $(".menu-option-background-selected").hide().attr("class", "menu-option-background");
+        if (isComplex && window.location.hash.indexOf("index") == -1) {
+            menuOptionHolder.find("#menu-option-background").attr("style", "");
             menuOptionHolder.find("a[href='#index.html']").trigger("click");
+        } 
+        if(isComplex && window.location.hash.indexOf("index") != -1) {
+            menuOptionHolder.find("#menu-option-background")
+                .attr("class", "menu-option-background-selected").attr("style", "");
         }
         
     });
