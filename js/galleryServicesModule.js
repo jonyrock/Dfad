@@ -71,15 +71,7 @@ function moduleGallery() {
             });
     galleryItem.click(
         function () {
-            var index = $(".thumb-holder").index(this);
-            currGalleryThumbID = index;
-            currPreviewElem = galleryPreviewMediaArr[index];
-            setPreviewLoadHTML();
-            galleryTopPos = parseInt($("div:first", textPageInstance).css("top"), 10);
-            TweenMax.to(textPageInstance, .6, { css: { opacity: "0" }, ease: Circ.easeOut, onComplete: showGalleryPreview });
-            if (moduleList != null) {
-                moduleList.disableList();
-            }
+            window.location.hash = "services/" + $(this).attr("data-page");
         });
 
 

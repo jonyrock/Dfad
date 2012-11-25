@@ -23,9 +23,14 @@ $(function () {
     });
 
     $(".menu-option-text a").click(function () {
-        if($(this).parent().parent().find(".menu-option-background-selected").length > 0) return;
+        var menuOptionHolder = $(this).parent().parent();
+        if (menuOptionHolder.find(".menu-option-background-selected").length > 0) return;
         $(".menu-option-background-selected").hide()
         .attr("class", "menu-option-background");
+        if (menuOptionHolder.find(".sub-menu-holder").length > 0) {
+            menuOptionHolder.find("a[href='#index.html']").trigger("click");
+        }
+        
     });
 
 });
