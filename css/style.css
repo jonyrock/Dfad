@@ -1824,12 +1824,19 @@ footer
 {
 	clear:both;
 	position:relative;
-	float:left;
 	z-index:3;
-	width:100%;
+	width:85%;
 	height:330px;
 	visibility:hidden;
+    margin: auto;
 }
+
+#module-contact .title-holder
+{
+    text-align: center;
+    width: 100%
+}
+
 .module-contact-background
 {
   	position:relative;
@@ -1840,10 +1847,11 @@ footer
 }
 #module-contact-holder
 {
-	position:absolute;
-	width: 635px;	
-	right:0;
+	float: left;
+	width: 24%;
 	top:25%;
+    margin-left: 4.5%;
+    margin-right: 4.5%;
 }
 .contact-information
 {
