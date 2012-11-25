@@ -59,11 +59,7 @@
         params.bgcolor = "#000000";
         params.allowFullScreen = "true";
         _V_.options.flash.params = params;
-    </script>
-    <style type="text/css">.no-js { }
-
-                                                                                                         .lt-ie9 { }
-    </style>    
+    </script> 
 </head>
 
 <body>
