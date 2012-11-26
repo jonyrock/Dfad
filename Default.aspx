@@ -5,8 +5,8 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,IE=8,chrome=1" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <meta itemprop="image" content="assets/favicon.png" />
-        <link rel="shortcut icon" type="image/png" href="http://www.dfempire.com/favicon.png" />
+        <meta itemprop="image" content="assets/favicon.ico" />
+        <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
     
     
         <title>DFAD USA</title>
