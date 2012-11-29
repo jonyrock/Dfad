@@ -235,6 +235,7 @@ function firstRunLoaded(response, status, xhr) {
         break;
     case "success":
         TweenMax.to($(".main-template-loader"), .3, { css: { opacity: "0" }, ease: Sine.easeOut, onComplete: removeTemplateLoader });
+        onModuleContentLoaded();
         break;
     }
 }
@@ -242,8 +243,7 @@ function firstRunLoaded(response, status, xhr) {
 /* menu width */
 
 function getMenuWidth() {
-    //TODO: I don't know why 10
-    return $("#menu-container").width();// + $("#menu-hider-background").width() - 10;
+    return $("#menu-container").width();
 }
 
 /* menu height */
@@ -2348,6 +2348,7 @@ function moduleLoaded(response, status, xhr) {
                 $("#module-container").attr("id", "module-container-old").attr("style", containerStyle);
                 $("#load-container").css("visibility", "hidden").attr('id', 'module-container').attr("style", containerStyle);
                 $("#module-container-old").after($("#module-container"));
+                onModuleContentLoaded();
                 $("#template-wrapper").after('<div id="load-container"></div>'); //.css("left", get_OffsetWidth() + "px" )                        
                 showModule();
                 clearCustomInterval(showModuleInterval);
@@ -2355,6 +2356,13 @@ function moduleLoaded(response, status, xhr) {
         }
         
         break;
+    }
+}
+
+function onModuleContentLoaded() {
+    // add scrollbar if there is not
+    if ($("#module-container #module-scrollbar-holder_v2").length == 0) {
+        $("#module-container").append('<div id="module-scrollbar-holder_v2"><div id="module-scrollbar-background" class="opacity_8"></div><div id="module-scrollbar-dragger"></div></div>');
     }
 }
 
