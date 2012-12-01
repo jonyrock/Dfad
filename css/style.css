@@ -300,13 +300,12 @@ submenu holder has overflow hidden */
 
 .menu-option-holder, .sub-menu-option-holder
 {
-	margin-bottom: 1px;
+	margin-bottom: 4px;
     overflow: hidden;
 }
 .menu-option-holder:hover, .sub-menu-option-holder:hover
 {
 	cursor: pointer;
-	cursor: hand;		
 }
 
 .menu-option-holder,
@@ -318,8 +317,7 @@ submenu holder has overflow hidden */
 .sub-menu-option-background-selected,
 .sub-menu-option-text
 {
-	height:34px;
-	margin-top:2px;
+	height:34px;	
 }
 
 .menu-option-background, 
