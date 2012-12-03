@@ -1828,6 +1828,7 @@ footer
 	height:330px;
 	visibility:hidden;
     margin: auto;
+    margin-top: 50px
 }
 
 #module-contact .title-holder
@@ -3704,4 +3705,17 @@ h1, h2, h3, h4, h5, h6
 form .error .jquery-selectbox {
 	color: #d00;
 	border-color: #d00;	
+}
+
+
+#module-contact-map-container
+{
+    visibility: visible;
+    background: url("/assets/media/contact/contacts_map.jpg");
+    height: 450px;
+}
+
+#module-contact-page-holder
+{
+    position: relative;
 }
