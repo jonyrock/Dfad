@@ -106,6 +106,7 @@ body
 .menu-option-background-selected
 {
     background-color:#333333;
+    -webkit-backface-visibility:hidden;
 }
 
 #menu-hider-icon,
