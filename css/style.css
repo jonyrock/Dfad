@@ -188,19 +188,23 @@ body
 .sub-menu-option-text
 {	
 	width: 100%;
-}
-
-.menu-option-background
-{
-    margin-left: 100%;
+    
 }
 
 .menu-option-background,
 .menu-option-background-selected
 {
     width:100%;
-    margin-left: 20px
+    margin-left: 0;
+    position: relative;
+    left:20px;
 }
+
+.menu-option-background
+{
+    left:240px;
+}
+
 .menu-option-text
 {
     margin-left: 20px;

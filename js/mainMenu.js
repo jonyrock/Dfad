@@ -13,13 +13,13 @@ $(function () {
     $(".menu-option-holder").mouseenter(function () {
         if ($(this).find(".menu-option-background-selected").length > 0) return;
         var back = $(this).find(".menu-option-background").show();
-        TweenMax.to(back, menuAnimDuration, { css: { marginLeft: "20px"}, ease: menuAnimEase });
+        TweenMax.to(back, menuAnimDuration, { css: { left: "20px"}, ease: menuAnimEase });
     });
 
     $(".menu-option-holder").mouseleave(function () {
         if ($(this).find(".menu-option-background-selected").length > 0) return;
         var back = $(this).find(".menu-option-background");
-        TweenMax.to(back, menuAnimDuration, { css: { marginLeft: "100%"}, ease: menuAnimEase });
+        TweenMax.to(back, menuAnimDuration, { css: { left: "240px"}, ease: menuAnimEase });
     });
 
     $(".menu-option-text a").click(function () {
