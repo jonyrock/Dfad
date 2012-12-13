@@ -3715,7 +3715,7 @@ form .error .jquery-selectbox {
 #module-contact-map-container
 {
     visibility: visible;
-    background: url("/assets/media/contact/contacts_map.jpg");
+    background: #cecece;
     height: 450px;
 }
 

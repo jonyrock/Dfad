@@ -42,6 +42,7 @@
         <script type="text/javascript" src="js/portfolioPage.js"> </script>
         <script type="text/javascript" src="js/columnsPortfolioModule.js"> </script>
         <script type="text/javascript" src="js/galleryServicesModule.js"> </script>
+        <script type="text/javascript" src="js/contactModule.js"> </script>
         <script type="text/javascript" src="js/mc.modules.animation.js"> </script>
         <script type="text/javascript" src="js/resizing.js"> </script>
         <link rel="stylesheet" href="js/video-js/video-js.min.css" media="screen" />
@@ -59,7 +60,8 @@
             params.bgcolor = "#000000";
             params.allowFullScreen = "true";
             _V_.options.flash.params = params;
-        </script> 
+        </script>
+        <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
     </head>
 
     <body>
