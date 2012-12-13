@@ -80,7 +80,7 @@ function moduleContactInitMap() {
     var markerNorthAmerica = new google.maps.Marker({
         position: new google.maps.LatLng(34.069074, -118.40664),
         map: map,
-        icon: " assets/media/contact/contact_map_pin_north_america.png"
+        icon: "/assets/media/contact/contact_map_pin_north_america.png"
     });
 
     var markerMiddleEast = new google.maps.Marker({
