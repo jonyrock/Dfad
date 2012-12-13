@@ -72,17 +72,27 @@ function moduleContactInitMap() {
 
     //markers
     var markerEurope = new google.maps.Marker({
-        position: new google.maps.LatLng(59.711276, 30.397134),
+        position: new google.maps.LatLng(59.925211, 30.370191),
         map: map,
-        title: "Hello World!",
-        icon: "/assets/media/contact/contact_map_pin.png"
+        icon: "/assets/media/contact/contact_map_pin_europe.png"
     });
 
-    var northAmerica = new google.maps.Marker({
-        position: new google.maps.LatLng(34.02065, -118.490493),
+    var markerNorthAmerica = new google.maps.Marker({
+        position: new google.maps.LatLng(34.069074, -118.40664),
         map: map,
-        title: "Hello World!",
-        icon: "/assets/media/contact/contact_map_pin.png"
+        icon: " assets/media/contact/contact_map_pin_north_america.png"
+    });
+
+    var markerMiddleEast = new google.maps.Marker({
+        position: new google.maps.LatLng(59.924899, 30.370363),
+        map: map,
+        icon: "assets/media/contact/contact_map_pin_middle_east.png"
+    });
+
+    var markerSouthEast = new google.maps.Marker({
+        position: new google.maps.LatLng(25.259601, 55.323715),
+        map: map,
+        icon: "assets/media/contact/contact_map_pin_south_east.png"
     });
 
     
