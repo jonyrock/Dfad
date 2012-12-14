@@ -84,7 +84,7 @@ function moduleContactInitMap() {
     });
 
     var markerMiddleEast = new google.maps.Marker({
-        position: new google.maps.LatLng(59.924899, 30.370363),
+        position: new google.maps.LatLng(25.258669, 55.340538),
         map: map,
         icon: "assets/media/contact/contact_map_pin_middle_east.png"
     });
