@@ -80,19 +80,29 @@ function moduleContactInitMap() {
     var markerNorthAmerica = new google.maps.Marker({
         position: new google.maps.LatLng(34.069074, -118.40664),
         map: map,
-        icon: "/assets/media/contact/contact_map_pin_north_america.png"
+        draggable : true, 
+        icon:  { 
+            url: "/assets/media/contact/contact_map_pin_north_america.png",
+            anchor: new google.maps.Point(43, 47)
+        }
     });
 
     var markerMiddleEast = new google.maps.Marker({
         position: new google.maps.LatLng(25.258669, 55.340538),
         map: map,
-        icon: "assets/media/contact/contact_map_pin_middle_east.png"
+        icon:  { 
+            url: "assets/media/contact/contact_map_pin_middle_east.png",
+            anchor: new google.maps.Point(43, 47)
+        }
     });
 
     var markerSouthEast = new google.maps.Marker({
         position: new google.maps.LatLng(25.259601, 55.323715),
         map: map,
-        icon: "assets/media/contact/contact_map_pin_south_east.png"
+        icon:  { 
+            url: "assets/media/contact/contact_map_pin_south_east.png",
+            anchor: new google.maps.Point(43, 47)
+        }
     });
 
     
