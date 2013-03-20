@@ -1200,12 +1200,11 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
         var totalMinusSize = 0;
         var activScrollbar = availScrollbar.length;
         if (availScrollbar.length > 0) {
-            if (winW >= 768) {
-                availScrollbar.css("height", winH).css("top", "0px");
-            } else {
-                availScrollbar.css("height", (winH - menuHiderH) + "px");
-                totalMinusSize = menH;
-            }
+
+            availScrollbar.css("height", winH).css("top", "0px");
+            // 481 = <menu width> + <page_columns 1 colums (the thinnest page)>
+            if(winW < 481) availScrollbar.css("height", "0");
+            
         }
         if (pModH >= cConH) {
             if (availScrollbar.length > 0 && availScrollbar.css("display") != "none") {

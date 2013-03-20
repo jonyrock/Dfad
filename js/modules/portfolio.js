@@ -1,4 +1,4 @@
-﻿/// <reference path="libs/jquery.tinyscrollbar.js"/>
+/// <reference path="libs/jquery.tinyscrollbar.js"/>
 /// <reference path="mc.modules.animation.js"/>
 
 /*================= FULL WIDTH GALLERY =====================*/
