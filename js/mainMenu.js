@@ -1,4 +1,3 @@
-﻿
 var menuLastHoverText;
 var menuAnimEase = Quad.easeOut;
 var menuAnimDuration = 0.4;
@@ -9,7 +8,7 @@ var oldMenuData = "";
 var menuData = "";
 
 $(function () {
-
+    
     $(".menu-option-holder").mouseenter(function () {
         if ($(this).find(".menu-option-background-selected").length > 0) return;
         var back = $(this).find(".menu-option-background").show();
@@ -26,15 +25,15 @@ $(function () {
         var menuOptionHolder = $(this).parent().parent();
         var isComplex = menuOptionHolder.find(".sub-menu-holder").length > 0;
         if (menuOptionHolder.find(".menu-option-background-selected").length > 0 && !isComplex) return;
+        // hide others
         $(".menu-option-background-selected").hide().attr("class", "menu-option-background");
+        if(!isComplex)
+            $(menuOptionHolder).find("#menu-option-background").attr("class", "menu-option-background-selected");
+        
         if (isComplex && window.location.hash.indexOf("index") == -1) {
-            menuOptionHolder.find("#menu-option-background").attr("style", "");
             menuOptionHolder.find("a[href='#index.html']").trigger("click");
         } 
-        if(isComplex && window.location.hash.indexOf("index") != -1) {
-            menuOptionHolder.find("#menu-option-background")
-                .attr("class", "menu-option-background-selected").attr("style", "");
-        }
+
         
     });
 
