@@ -27,7 +27,6 @@ var customPageStartURL = "#portfolio.html";
 var customPageStartSide = "none";
 var customPageStartType = "full_width_gallery";
 
-var phpUrlPath = "php/contact_synergy.php"; // WTF?
 var contactFormDemo = false;
 /* SET IT TO FALSE FOR CONTACT FORM TO WORK */
 /* end   GENERAL CUSTOMIZATION PROPERTIES */

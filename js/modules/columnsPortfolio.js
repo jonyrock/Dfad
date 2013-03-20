@@ -18,8 +18,6 @@ function loadFullWidthPreviewFromThumb(thumb) {
     $("#module-columns-holder .fourth-thumb-holder").each(function () {
         
         var code = $(this).attr("data-id");
-        
-        
 
         if (code == modulePageColumnsCurrentSelectedId ||
             modulePageColumnsCurrentSelectedId == "*") {
