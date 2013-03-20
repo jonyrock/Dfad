@@ -12,7 +12,7 @@ function moduleContact() {
     var mapH = mapHolder.height();
 
     var currWindowW = $(window).width() - get_OffsetWidth() - $(t_scrBarV2).width();
-    if (touchDevice == 1) {
+    if (touchDevice) {
         currWindowW = $(window).width() - templateMenuW;
     }
     textPageInstance.css("width", currWindowW);

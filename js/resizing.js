@@ -1,8 +1,3 @@
-﻿/// <reference path="mc.modules.animation.js"/>
-/// <reference path="columnsPortfolioModule.js"/>
-/// <reference path="galleryServicesModule.js"/>
-/// <reference path="greensock/uncompressed/TweenMax.js"/>
-
 function moduleUpdate_slideshow() {
     var winW = $(window).width();
     if ($("#slideshow-thumbs-content").length > 0) {
@@ -106,14 +101,14 @@ function moduleUpdate_full_width(animate) {
     var modWrapper = $("#module-wrapper", textPageInstance);
     if (textPageInstance.length <= 0) return;
     var currWindowW = $(window).width() - get_OffsetWidth();
-    if (touchDevice == 1) {
+    if (touchDevice) {
         currWindowW = $(window).width() - templateMenuW;
     }
 
     var tempWidth = textPageInstance.width();
     textPageInstance.css("width", currWindowW);
 
-    if ($("#module-full-width-holder-text", modWrapper).height() > $(window).height() && touchDevice == 0) {
+    if ($("#module-full-width-holder-text", modWrapper).height() > $(window).height() && !touchDevice) {
         currWindowW = currWindowW - $(t_scrBarV2).width();
     }
 
@@ -149,7 +144,7 @@ function moduleUpdate_news() {
         }
 
         moduleUpdate(textPageInstanceHolder, $("#module-news-preview-holder", textPageInstance), $("#module-news-preview-container", textPageInstance), "custom", 0);
-        if (touchDevice == 1) {
+        if (touchDevice) {
             $("#module-news-preview-container", textPageInstance).css("height", "");
             $("#module-news-preview-container", textPageInstance).css("height", $("#module-news-preview-container", textPageInstance).height());
         }
@@ -177,7 +172,7 @@ function moduleUpdate_contact() {
     }
 
     var currWindowW = $(window).width() - get_OffsetWidth() - $(t_scrBarV2).width();
-    if (touchDevice == 1) {
+    if (touchDevice) {
         currWindowW = $(window).width() - templateMenuW;
     }
     textPageInstance.css("width", currWindowW);
@@ -262,7 +257,7 @@ function moduleUpdate_page_columns(customStartPos) {
             if (i != columnsPreviewIndex) columnsPrevItemArr[i].css("display", "none");
         }
         moduleUpdate(textPageInstanceHolder, columnPrevWrapper, $("div:first", columnPrevWrapper), sideType, null, null, 0);
-        if (touchDevice == 1) {
+        if (touchDevice) {
             $("div:first", columnPrevWrapper).css("height", "");
             $("div:first", columnPrevWrapper).css("height", $("div:first", columnPrevWrapper).height());
         }

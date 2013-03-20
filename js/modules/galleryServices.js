@@ -55,7 +55,7 @@ function moduleGallery() {
     var backgOutColor = rgb2hex(galleryItem.css("background-color"));
     var text1BaseColor = rgb2hex($(".thumb-tag p", galleryItem).css("color"));
 
-    if (touchDevice == 0)
+    if (!touchDevice)
         galleryItem.hover(
             function (event) {
                 customHoverAnimation("over", event, $(this), $("#thumb-image-hover", this));
@@ -355,7 +355,7 @@ function showGalleryPreviewMedia() {
 }
 
 function addControlsListeners() {
-    if (touchDevice == 0) {
+    if (!touchDevice) {
         var initOpacity = $(".module-galleries-preview-arrow-backward .module-galleries-preview-arrow-backg").css("opacity");
         var initBackColor = rgb2hex($(".module-galleries-preview-arrow-backward .module-galleries-preview-arrow-backg").css("background-color"));
         var prevControls = $(".module-galleries-preview-arrow-backward, .module-galleries-preview-arrow-forward, .module-galleries-preview-arrow-close");

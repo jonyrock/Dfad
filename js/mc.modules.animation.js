@@ -10,7 +10,7 @@ var templateBaseURL = "http://" + window.location.host + "/";
 var themeColor = "#00aaff";
 //var moduleContainerMarginLeft = 308;
 var moduleContainerMarginLeft = 240;
-var menuActive = true;
+var menuActive = true;http://javascript.info/tutorial/with-operator
 var menuHoverActive = true;
 var menuOptionHoverMarginLeft = 18;
 var menuOptionHoverWidth = 200;
@@ -34,18 +34,16 @@ $(document).ready(function() {
     $(window).error(function(msg, url, line) {
         console.log("error: ", msg, " url: ", url, " line: ", line);
     });
-    if (readyAndLoad == 2) {
-        checkIfTouchDevice();
-    }
+    
+    if (readyAndLoad == 2) prepareTemplate();
+        
 });
 /* end ready function */
 
 /* start load function */
-$(window).load(function() {
+$(function() {
     readyAndLoad++;
-    if (readyAndLoad == 2) {
-        checkIfTouchDevice();
-    }
+    if (readyAndLoad == 2) prepareTemplate();
 });
 /* end load function */
 
@@ -55,22 +53,13 @@ var firstRun = true;
 var isOverMenu = false;
 var templateMenuW = 0;
 var videojsHolder = "";
+var touchDevice = "ontouchstart" in window;
 /* end GENERAL JS PROPERTIES */
 
 /*================= GENERAL TXT NAMES ==========================*/
 var t_scrBarV1 = "#module-scrollbar-holder";
 var t_scrBarV2 = "#module-scrollbar-holder_v2";
 var txt_modCont = "#module-container #module-container-holder";
-
-
-var touchDevice = 0;
-
-function checkIfTouchDevice() {
-    touchDevice = !!("ontouchstart" in window) ? 1 : 0;
-    prepareTemplate();
-}
-
-//remove the template loader
 
 function removeTemplateLoader() {
     $(".main-template-loader").remove();
@@ -315,13 +304,13 @@ function menuHideClick() {
             css: {left: menuVal + "px"},
             ease: Sine.easeInOut,
             onComplete: function() {
-                if (touchDevice == 0)
+                if (!touchDevice)
                     activateHoverMenu();
             }
         });
 
     } else {
-        if (touchDevice == 0)
+        if (!touchDevice)
             disableHoverMenu();
         menuActive = true;
         isOverMenu = false;
@@ -766,7 +755,7 @@ function slideshowShowThumbs() {
         thumbsList.destroy();
         thumbsList = null;
     }
-    if (touchDevice == 0) {
+    if (!touchDevice) {
         thumbsList = $("#slideshow-thumbs-content").McCustomList({scrollDirection: "horizontal", scrollType: "linear"});
         thumbsList.setupList({
             scrollContainer: $('#slideshow-thumbs-container'),
@@ -820,7 +809,7 @@ function slideshowShowThumbs() {
                 thumbsList.listAutoScroll(1);
         });
     } else {
-        if (touchDevice == 1) {
+        if (touchDevice) {
             var thumbArrBack = $("#slideshow-thumbs-holder .slideshow-thumbs-arrow-backward");
             var thumbArrForw = $("#slideshow-thumbs-holder .slideshow-thumbs-arrow-forward");
             thumbArrBack.css("display", "none");
@@ -849,7 +838,7 @@ function slideshowShowThumbs() {
     var thumbsHolder = $('#slideshow-thumbs');
     var val = -Math.abs(thumbsHolder.width() - get_OffsetWidth()) / 2;
     thumbsHolder.attr("style", "margin-left:" + val + "px; bottom: -84px; visibility: visible;");
-    if (touchDevice == 1) {
+    if (touchDevice) {
         $('.horizontal-fix-slideshow-thumbs').css("width", 999999);
         $('#slideshow-thumbs-container').css("width", $('#slideshow-thumbs-container').width());
         $('.horizontal-fix-slideshow-thumbs').css("width", '');
@@ -1089,7 +1078,7 @@ function moduleHome2() {
     }
     var contentLi = $(".home-layout2-content ul li");
     var baseColor = rgb2hex($(".layout2-description p", contentLi).css("color"));
-    if (touchDevice == 0)
+    if (!touchDevice)
         if (contentLi.length > 0) {
             contentLi.hover(
                     function() {
@@ -1196,7 +1185,7 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
     var menH = getMenuHeight();
     var menuHiderH = (menuActive == true) ? parseInt($("#menu-container").height(), 10) : parseInt($("#menu-container #menu-hider").height(), 10);
 
-    if (touchDevice == 0) {
+    if (!touchDevice) {
         var totalMinusSize = 0;
         var activScrollbar = availScrollbar.length;
         if (availScrollbar.length > 0) {
@@ -1468,7 +1457,7 @@ function moduleNews() {
 
     moduleUpdate(textPageInstanceHolder, $("#module-news-vertical-holder", textPageInstance), $("#module-news-vertical-holder div:first", textPageInstance), sideType);
 
-    if (touchDevice == 1) {
+    if (touchDevice) {
         $("#module-news-vertical-holder").css("overflow", "auto").css("-webkit-overflow-scrolling", "touch");
         newsPrvH.css("overflow", "auto").css("-webkit-overflow-scrolling", "touch");
     }
@@ -1588,7 +1577,7 @@ function moduleNews() {
             previewNewsMediaParent.empty().append('<img width="100%" class="opacity_0" onload="animateNewsPreviewMedia(this)" />');
             $("img", previewNewsMediaParent).attr("src", newsPrevItemMediaArr[previewNewsIndex]);
         } else {
-            if (touchDevice == 1) {
+            if (touchDevice) {
                 $("#module-news-preview-container", textPageInstance).css("height", "");
                 $("#module-news-preview-container", textPageInstance).css("height", $("#module-news-preview-container", textPageInstance).height());
             }
@@ -1715,7 +1704,7 @@ function moduleShowreel() {
 
     var showreelVideo = $("#video-wrapper", textPageInstanceHolder);
     var media = $("#module-showreel-holder", textPageInstance);
-    if (touchDevice == 1) {
+    if (touchDevice) {
         if (showreelVideo.children().length > 0) {
             tempVid = $("div:first", showreelVideo);
             media.empty();
@@ -1759,7 +1748,7 @@ function reverseEndModuleShowreel() {
 
     var showreelVideo = $("#video-wrapper", textPageInstanceHolder);
     var media = $("#module-showreel-holder", textPageInstance);
-    if (touchDevice == 1) {
+    if (touchDevice) {
         if (showreelVideo.children().length > 0) {
             tempVid = $("div:first", showreelVideo);
             media.empty();
@@ -1796,7 +1785,7 @@ function moduleFullscreenVideo() {
         fullscreenVideo.attr("data-height", height);
 
         var media = $("#fullscreen-video-holder", textPageInstance);
-        if (touchDevice == 1) {
+        if (touchDevice) {
             if (fullscreenVideo.children().length > 0) {
                 tempVid = $("div:first", fullscreenVideo);
                 media.empty();
@@ -1887,12 +1876,12 @@ function moduleFullWidth() {
     }
     var currWindowW = $(window).width() - get_OffsetWidth();
     var media = $("#module-full-width-media");
-    if (touchDevice == 1) {
+    if (touchDevice) {
         currWindowW = $(window).width() - templateMenuW;
     }
 
     textPageInstance.css("width", currWindowW);
-    if ($("#module-full-width-holder-text", textPageInstance).height() > $(window).height() && touchDevice == 0) {
+    if ($("#module-full-width-holder-text", textPageInstance).height() > $(window).height() && !touchDevice) {
         currWindowW = currWindowW - $(t_scrBarV2).width();
     }
     textPageInstanceHolder.css("opacity", "0");
@@ -1906,7 +1895,7 @@ function moduleFullWidth() {
         $("img", media).css("opacity", "0").attr("src", media.attr("data-src"));
     } else {
         var vidMedia = $("#video-wrapper", media);
-        if (touchDevice == 1) {
+        if (touchDevice) {
             if (vidMedia.children().length > 0) {
                 tempVid = $("div:first", vidMedia);
                 media.empty();

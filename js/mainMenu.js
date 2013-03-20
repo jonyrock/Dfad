@@ -49,7 +49,7 @@ function menuListeners() {
     function hideSubmenu(obj) { obj.css('opacity', '0').css('display', 'none'); }
 
     var submOptBackSel = "sub-menu-option-background-selected";
-    if (touchDevice == 0)
+    if (!touchDevice){
         $(".sub-menu-option-holder").hover(
             function () {
                 var submOptBack = $(".sub-menu-option-background", this);
@@ -64,33 +64,14 @@ function menuListeners() {
                     TweenMax.to(elem, menuAnimDuration, { css: { marginLeft: submenuWidth, width: "0px" }, ease: menuAnimEase });
                     TweenMax.to($(".sub-menu-option-text a", this), menuAnimDuration, { css: { color: menuTextOutColor }, ease: menuAnimEase });
                 }
-            });
-    // MENU & SUBMENU -- CLICK LISTENER	        
+            }
+        );
+    }
+    // MENU & SUBMENU -- CLICK LISTENER	     
     $(".menu-option-holder").click(
         function (event) {
             event.preventDefault();
             var idx = $(".menu-option-holder").index(this);
-
-            if (touchDevice == 1) {
-                if (menuOptionsArr[idx][6] != "null") {
-                    if (touchMenuID != -1 && touchMenuID != idx) {
-                        menuOptionHover({ data: { idx: touchMenuID }, type: "mouseleave" });
-                    }
-                    menuOptionHover({ data: { idx: idx }, type: "mouseenter" });
-                    touchMenuID = idx;
-                    if (touchRemoveOn == false) {
-                        touchRemoveOn = true;
-                        var moduleContainer = document.getElementById("module-container");
-                        moduleContainer.addEventListener("touchstart", touchContainer, false);
-                    }
-                } else {
-                    if (touchMenuID != -1 && touchMenuID != idx) {
-                        menuOptionHover({ data: { idx: touchMenuID }, type: "mouseleave" });
-                        touchMenuID = -1;
-                    }
-                }
-            }
-
             if (menuOptionID != idx && $(this).attr("data-module-type") != undefined && $(this).attr("data-module-type") != "#") {
                 if (loadedContent == false) return;
                 menuOptionsArr[idx][2].attr("class", "menu-option-background-selected");
@@ -98,7 +79,7 @@ function menuListeners() {
                 menuOptionID = idx;
                 submenuOptionID = -1;
 
-                if (touchDevice == 1) {
+                if (touchDevice) {
                     menuOptionIn(menuOptionID, submenuOptionID);
                 }
 
@@ -116,7 +97,8 @@ function menuListeners() {
                     $(window).bind('hashchange', onTemplateHashChange);
                 }, 400);
             }
-        });
+        }
+    );
 
 
     subCloseInterval = "";
@@ -137,7 +119,7 @@ function menuListeners() {
                 menuOptionsArr[currMenuOptionID][2].attr("class", "menu-option-background-selected");
                 subMenu[submenuOptIdx][2].attr("class", "sub-menu-option-background-selected");
 
-                if (touchDevice == 1) {
+                if (touchDevice) {
                     menuOptionIn(currMenuOptionID, submenuOptIdx);
                     clearCustomInterval(subCloseInterval);
                     subCloseInterval = setInterval(function () {
@@ -218,7 +200,7 @@ function storeMenuArr() {
         menuOptionsArr[index][4] = extraWidth - parseInt(menOptText.css("padding-left"), 10);
         menuOptionsArr[index][5] = subHol;
         menuOptionsArr[index][6] = subOptArr;
-        if (touchDevice == 0) menu.bind("mouseenter mouseleave", { idx: index }, menuOptionHover);
+        if (!touchDevice) menu.bind("mouseenter mouseleave", { idx: index }, menuOptionHover);
     });
 }
 

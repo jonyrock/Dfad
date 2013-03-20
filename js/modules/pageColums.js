@@ -44,7 +44,7 @@ function modulePageColumns() {
     if (textPageInstance.length <= 0) return;
     var columnItemWrapper = $("#module-columns-wrapper", textPageInstanceHolder);
     
-    if (touchDevice == 1) {
+    if (touchDevice) {
         columnItemWrapper.css("overflow", "").css("-webkit-overflow-scrolling", "");
         columnItemWrapper.css("overflow", "auto").css("-webkit-overflow-scrolling", "touch");
     }
@@ -61,7 +61,7 @@ function modulePageColumns() {
     var backgOutColor = rgb2hex(thumbHolderClass.css("background-color"));
     var text1BaseColor = rgb2hex($(".thumb-tag h1", thumbHolderClass).css("color"));
     var text2BaseColor = rgb2hex($(".thumb-tag h2", thumbHolderClass).css("color"));
-    if (touchDevice == 0) {
+    if (!touchDevice) {
         thumbHolderClass.unbind("mouseenter mouseleave");
         thumbHolderClass.hover(
             function (event) {
@@ -88,7 +88,7 @@ function modulePageColumns() {
     
     var $filterContainer = $("#module-columns-holder", textPageInstance);
     $originalDataPos = getOriginalPos($filterContainer);
-    if (touchDevice == 0)
+    if (!touchDevice)
         $("#filter-buttons-holder .filter-button", textPageInstance).hover(
             function () {
                 if ($(this).hasClass("selected") == true) return;
@@ -122,7 +122,7 @@ function modulePageColumns() {
             ///$(this).attr("style", "");
             if ($("#filter-buttons-holder").attr("data-folded") == "true")
                 $(this).hide();
-            if (touchDevice == 1) {
+            if (touchDevice) {
                 TweenMax.to($(this), .3, {
                     css: { color: "#ffffff", backgroundColor: themeColor },
                     ease: Sine.easeOut
@@ -381,7 +381,7 @@ function checkColumnSize(adjustPreview) {
 function animateColPreviewMedia(src) {
     var inst = $(src);
     var parent = $(src).parent();
-    if (touchDevice == 0) {
+    if (!touchDevice) {
         TweenMax.to($(src).parent(), .3, { css: { height: inst.height() }, easing: Sine.easeOut });
     } else {
         parent.css("height", inst.height());

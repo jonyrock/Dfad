@@ -1,7 +1,3 @@
-/// <reference path="libs/jquery.tinyscrollbar.js"/>
-/// <reference path="mc.modules.animation.js"/>
-
-/*================= FULL WIDTH GALLERY =====================*/
 var initialNumberColumns = 4;
 var maximNumberColumns = 4;
 var initialThumbW = 0;
@@ -25,7 +21,7 @@ function moduleFullWidthGallery() {
     initialThumbW = galleryItem.width();
     initialThumbH = galleryItem.height();
 
-    if (touchDevice == 1) {
+    if (touchDevice) {
         currWindowW = $(window).width() - get_OffsetWidth();
     }
     checkItems();
@@ -389,7 +385,7 @@ function checkItems() {
         return;
     }
 
-    if (touchDevice == 1) {
+    if (touchDevice) {
         currWindowW = $(window).width() - get_OffsetWidth();
     }
     textPageInstance.css("width", currWindowW);
@@ -450,7 +446,7 @@ function checkItems() {
             }
             /* we have added img width= 100.5% in CSS file so we don't need to tween the 'img' anymore'; 
                    100.5% to fill the extra -0.5px that sometime appears on resizing*/
-            if (touchDevice == 0) {
+            if (!touchDevice) {
                 TweenMax.to($("img", this), 0.6, { css: { width: Math.round(itemW), height: Math.round(itemH) }, easing: Sine.easeOut });
                 TweenMax.to($(this), 0.6, { css: { width: Math.round(itemW), height: Math.round(itemH), left: lefV, top: topV }, easing: Sine.easeOut });
             } else {
