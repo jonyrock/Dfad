@@ -1,15 +1,11 @@
-﻿/// <reference path="mainMenu.js" />
-/// <reference path="greensock/uncompressed/TweenMax.js"/>
-/// <reference path="portfolioPage.js" />
-/// <reference path="libs/jquery.selectbox-0.6.1.js" />
 /**
  * VERSION: 1.0
  * DATE: 2012-09-20
  * 
- * @author: mediacreed, mediacreed.com
+ * @author: mediacreed, mediacreed.com (jonyrock edited exclusivelly to dfad.com)
  **/
- 
- /* start GENERAL CUSTOMIZATION PROPERTIES */
+
+/* start GENERAL CUSTOMIZATION PROPERTIES */
 var templateBaseURL = "http://" + window.location.host + "/";
 var themeColor = "#00aaff";
 //var moduleContainerMarginLeft = 308;
@@ -19,7 +15,7 @@ var menuHoverActive = true;
 var menuOptionHoverMarginLeft = 18;
 var menuOptionHoverWidth = 200;
 /* it will change to false if menuActive == true. If 'menuActive' 
-                                        is false and this true than on hover it will show the menu */
+ is false and this true than on hover it will show the menu */
 var menuTextOutColor = "#FFF";
 
 var customPageStart = true;
@@ -34,9 +30,9 @@ var contactFormDemo = false;
 
 
 /* start ready function */
-$(document).ready(function () {
+$(document).ready(function() {
     readyAndLoad++;
-    $(window).error(function (msg, url, line) {
+    $(window).error(function(msg, url, line) {
         console.log("error: ", msg, " url: ", url, " line: ", line);
     });
     if (readyAndLoad == 2) {
@@ -46,16 +42,11 @@ $(document).ready(function () {
 /* end ready function */
 
 /* start load function */
-$(window).load(function () {
+$(window).load(function() {
     readyAndLoad++;
-    if (templateBaseURL == "http://www.your_domain.com/" || templateBaseURL == "null") {
-        $("body").empty().css("visibility", "visible").append("<br/><span>Please check the documentation on page 4 on how to change the 'templateBaseURL' path!!!</span>");
-        return;
-    }
     if (readyAndLoad == 2) {
         checkIfTouchDevice();
     }
-    
 });
 /* end load function */
 
@@ -67,7 +58,7 @@ var templateMenuW = 0;
 var videojsHolder = "";
 /* end GENERAL JS PROPERTIES */
 
-/*================= GENERAL  TXT NAMES ==========================*/
+/*================= GENERAL TXT NAMES ==========================*/
 var t_scrBarV1 = "#module-scrollbar-holder";
 var t_scrBarV2 = "#module-scrollbar-holder_v2";
 var txt_modCont = "#module-container #module-container-holder";
@@ -201,10 +192,10 @@ function setMobileMenuOption(option) {
 
 function onTemplateHashChange(event, runLoad) {
     var url = window.location.hash + "",
-        oldMenuID = menuOptionID,
-        oldSubID = submenuOptionID,
-        disabMenu = true,
-        tempMenuData = menuData;
+            oldMenuID = menuOptionID,
+            oldSubID = submenuOptionID,
+            disabMenu = true,
+            tempMenuData = menuData;
 
     url = url.replace("#", "");
     url = url.substring(url.lastIndexOf("/") + 1);
@@ -230,13 +221,13 @@ function onTemplateHashChange(event, runLoad) {
 function firstRunLoaded(response, status, xhr) {
     $(window).bind('hashchange', onTemplateHashChange);
     switch (status) {
-    case "error":
-        console.log("Error loading the INDEX page: " + response);
-        break;
-    case "success":
-        TweenMax.to($(".main-template-loader"), .3, { css: { opacity: "0" }, ease: Sine.easeOut, onComplete: removeTemplateLoader });
-        onModuleContentLoaded();
-        break;
+        case "error":
+            console.log("Error loading the INDEX page: " + response);
+            break;
+        case "success":
+            TweenMax.to($(".main-template-loader"), .3, {css: {opacity: "0"}, ease: Sine.easeOut, onComplete: removeTemplateLoader});
+            onModuleContentLoaded();
+            break;
     }
 }
 
@@ -263,7 +254,7 @@ function settingsForScreens() {
     var menuHiderH = parseInt($("#menu-container #menu-hider").height(), 10);
     var menuHiderIconH = parseInt($("#menu-container #menu-hider #menu-hider-icon").height(), 10);
     $("#menu-hider-icon").click(menuHideClick);
-    
+
     $("#menu-container").css('left', -moduleContainerMarginLeft + 'px');
     $("#menu-container").css('visibility', 'visible');
 
@@ -276,18 +267,18 @@ function settingsForScreens() {
 
     $("footer").css('display', 'inline');
     TweenMax.to($("#menu-container"), .4, {
-        css: { left: "0px" },
+        css: {left: "0px"},
         ease: Sine.easeInOut, delay: 0.5, onComplete: endStartupAnimation
     });
     /*end start-up animation*/
-    
+
     $("#template-smpartphone-menu select").change(
-        function() {
-            if ($(this).val() != "#") {
-                var hashURL = updateMenu($(this).val(), prevURL, undefined, false);
-                window.location.hash = hashURL;
-            }
-        });
+            function() {
+                if ($(this).val() != "#") {
+                    var hashURL = updateMenu($(this).val(), prevURL, undefined, false);
+                    window.location.hash = hashURL;
+                }
+            });
 }
 
 var delayInterval = "";
@@ -311,31 +302,33 @@ function endModuleStart() {
 
 function menuHideClick() {
     var winW = $(window).width(),
-        winH = $(window).height();
+            winH = $(window).height();
     if (menuActive == true) {
         menuActive = false;
         alwaysUpdate();
 
         var menuHider = ($("#menu-hider").length > 0) ? parseInt($("#menu-hider").width(), 10) : 0,
-            menuWidth = parseInt($("#menu-container").css("width"), 10) - menuHider,
-            menuVal = 0;
+                menuWidth = parseInt($("#menu-container").css("width"), 10) - menuHider,
+                menuVal = 0;
         var targetOffset = $("#menu-hider-background").width() - menuWidth;
-        TweenMax.to($("#template-wrapper"), .4, { css: { left: targetOffset + "px" }, ease: Sine.easeInOut });
+        TweenMax.to($("#template-wrapper"), .4, {css: {left: targetOffset + "px"}, ease: Sine.easeInOut});
         TweenMax.to($("#menu-container"), .4, {
-            css: { left: menuVal + "px" },
+            css: {left: menuVal + "px"},
             ease: Sine.easeInOut,
-            onComplete: function () {
-                if (touchDevice == 0) activateHoverMenu();
+            onComplete: function() {
+                if (touchDevice == 0)
+                    activateHoverMenu();
             }
         });
 
     } else {
-        if (touchDevice == 0) disableHoverMenu();
+        if (touchDevice == 0)
+            disableHoverMenu();
         menuActive = true;
         isOverMenu = false;
         alwaysUpdate();
-        TweenMax.to($("#template-wrapper"), .4, { css: { left: "0px", top: "0px" }, ease: Sine.easeInOut });
-        TweenMax.to($("#menu-container"), .4, { css: { left: "0px" }, top: "0px", ease: Sine.easeInOut });
+        TweenMax.to($("#template-wrapper"), .4, {css: {left: "0px", top: "0px"}, ease: Sine.easeInOut});
+        TweenMax.to($("#menu-container"), .4, {css: {left: "0px"}, top: "0px", ease: Sine.easeInOut});
     }
 
 }
@@ -367,10 +360,11 @@ function disableHoverMenu() {
 /* over menu */
 
 function overMenu() {
-    if (menuActive == true) return;
+    if (menuActive == true)
+        return;
     isOverMenu = true;
-    TweenMax.to($("#template-wrapper"), .4, { css: { left: "0px", top: "0px" }, ease: Sine.easeInOut });
-    TweenMax.to($("#menu-container"), .4, { css: { left: "0px", top: "0px" }, ease: Sine.easeInOut });
+    TweenMax.to($("#template-wrapper"), .4, {css: {left: "0px", top: "0px"}, ease: Sine.easeInOut});
+    TweenMax.to($("#menu-container"), .4, {css: {left: "0px", top: "0px"}, ease: Sine.easeInOut});
     alwaysUpdate();
 }
 
@@ -378,16 +372,17 @@ function overMenu() {
 
 function outMenu() {
     //alert("out");
-    if (menuActive == true) return;
+    if (menuActive == true)
+        return;
     isOverMenu = false;
     var winW = $(window).width(),
-        winH = $(window).height();
+            winH = $(window).height();
 
     var menuWidth = parseInt($("#menu-container").css("width"), 10) - parseInt($("#menu-hider").width(), 10),
-        menuVal = 0;
+            menuVal = 0;
     var targetOffset = $("#menu-hider-background").width() - menuWidth;
-    TweenMax.to($("#template-wrapper"), .4, { css: { left: targetOffset + "px", top: "0px" }, ease: Sine.easeInOut });
-    TweenMax.to($("#menu-container"), .4, { css: { left: menuVal + "px", top: "0px" }, ease: Sine.easeInOut });
+    TweenMax.to($("#template-wrapper"), .4, {css: {left: targetOffset + "px", top: "0px"}, ease: Sine.easeInOut});
+    TweenMax.to($("#menu-container"), .4, {css: {left: menuVal + "px", top: "0px"}, ease: Sine.easeInOut});
 
     alwaysUpdate()
 }
@@ -395,21 +390,23 @@ function outMenu() {
 /* always update */
 
 function alwaysUpdate() {
-    if (currentSlide != null) resizeImage(currentSlide, true); /* ONLY IF SLIDESHOW ACTIVE */
-    if ($showModuleBackground != null) resizeImage($showModuleBackground, true); /*BACKGROUND CHECK*/
+    if (currentSlide != null)
+        resizeImage(currentSlide, true); /* ONLY IF SLIDESHOW ACTIVE */
+    if ($showModuleBackground != null)
+        resizeImage($showModuleBackground, true); /*BACKGROUND CHECK*/
 
     var winW = $(window).width();
     var winH = $(window).height();
     var newModContW = winW - get_OffsetWidth();
     var newModContH = winH;
     var cModuleType = $("#template-menu").attr("data-current-module-type")
-    
-    var menuHiderH = parseInt($("#menu-container #menu-hider").height(), 10),
-        menuHeight = winH - menuHiderH;
-    newModContH = menuHeight;
-    
 
-    TweenMax.to($("#module-container"), .4, { css: { width: newModContW + "px", height: newModContH + "px" }, ease: Sine.easeInOut });
+    var menuHiderH = parseInt($("#menu-container #menu-hider").height(), 10),
+            menuHeight = winH - menuHiderH;
+    newModContH = menuHeight;
+
+
+    TweenMax.to($("#module-container"), .4, {css: {width: newModContW + "px", height: newModContH + "px"}, ease: Sine.easeInOut});
 
     if ($("#module-container-old") != null && $("#module-container-old").length > 0) {
         if ($("#module-container-old #module-background-holder").length > 0) {
@@ -423,13 +420,13 @@ function alwaysUpdate() {
     var thumbsHolder = $('#slideshow-thumbs');
     if (thumbsHolder.length > 0) {
         var val = (newModContW - thumbsHolder.width()) * .5;
-        TweenMax.to(thumbsHolder, .4, { css: { marginLeft: val }, easing: Sine.easeOut });
+        TweenMax.to(thumbsHolder, .4, {css: {marginLeft: val}, easing: Sine.easeOut});
     }
     var slideHolder = $("#slideshow .slideshow-slide", $("#module-container"));
     if (slideHolder.length > 0) {
         $("#slideshow-captions", slideHolder).each(function() {
             $(this).css("top", (newModContH * 0.3) + "px");
-            TweenMax.to($(this), .4, { css: { width: (newModContW * 0.5) + "px" }, ease: Sine.easeInOut });
+            TweenMax.to($(this), .4, {css: {width: (newModContW * 0.5) + "px"}, ease: Sine.easeInOut});
         });
     }
 
@@ -438,7 +435,7 @@ function alwaysUpdate() {
     if (modulePosition == "module-position-bc" || modulePosition == "module-position-cc") {
         if (moduleContainerHolder.length > 0) {
             var value = Math.round((newModContW - $(":first", moduleContainerHolder).width()) * 0.5);
-            TweenMax.to(moduleContainerHolder, .4, { css: { left: value }, easing: Sine.easeOut });
+            TweenMax.to(moduleContainerHolder, .4, {css: {left: value}, easing: Sine.easeOut});
         }
     }
 
@@ -452,7 +449,7 @@ function alwaysUpdate() {
     var contactModule = $("#module-contact #module-contact-holder");
     if (contactModule.length > 0) {
         moduleUpdate_contact();
-        TweenMax.to(contactModule, .4, { css: { left: (newModContW - contactModule.width()) * .5 }, easing: Sine.easeOut });
+        TweenMax.to(contactModule, .4, {css: {left: (newModContW - contactModule.width()) * .5}, easing: Sine.easeOut});
     }
     var fullWidModule = $("#module-full-width");
     if (fullWidModule.length > 0) {
@@ -488,7 +485,7 @@ function showModule() {
             return;
         }
         firstMediaLoaded = false;
-        TweenMax.to($("#loading-animation"), .3, { css: { right: "-104px" }, delay: .3, ease: Circ.easeOut });
+        TweenMax.to($("#loading-animation"), .3, {css: {right: "-104px"}, delay: .3, ease: Circ.easeOut});
         if (isOtherURL == true) {
             urlChanged();
         } else {
@@ -511,19 +508,19 @@ function showModule() {
                 $showModuleBackground = null;
                 $showModuleBackgroundSolid.css('display', 'inline').css("opacity", "0").css("visibility", "visible");
                 TweenMax.to($showModuleBackgroundSolid, .4, {
-                    css: { opacity: "1" },
+                    css: {opacity: "1"},
                     delay: .4,
                     ease: Sine.easeOut,
                     onComplete:
-                        function() {
-                            if (isOtherURL == true) {
-                                urlChanged();
-                            } else {
-                                startModule();
+                            function() {
+                                if (isOtherURL == true) {
+                                    urlChanged();
+                                } else {
+                                    startModule();
+                                }
                             }
-                        }
                 });
-                TweenMax.to($("#loading-animation"), .3, { css: { right: "-104px" }, ease: Circ.easeOut });
+                TweenMax.to($("#loading-animation"), .3, {css: {right: "-104px"}, ease: Circ.easeOut});
             }
         } else {
             $showModuleBackground = null;
@@ -531,7 +528,7 @@ function showModule() {
             if (isOtherURL == true) {
                 urlChanged();
             } else {
-                TweenMax.to($("#loading-animation"), .3, { css: { right: "-104px" }, delay: .3, ease: Circ.easeOut, onComplete: startModule });
+                TweenMax.to($("#loading-animation"), .3, {css: {right: "-104px"}, delay: .3, ease: Circ.easeOut, onComplete: startModule});
             }
         }
     }
@@ -546,17 +543,17 @@ function animateModuleBackground() {
         showDone = false;
         backLoaded = false;
         TweenMax.to($("#loading-animation"), .3, {
-            css: { right: "-104px" },
+            css: {right: "-104px"},
             delay: .3,
             ease: Circ.easeOut,
             onComplete:
-                function() {
-                    if (isOtherURL == true) {
-                        urlChanged();
-                    } else {
-                        hideAnimationCompleted();
+                    function() {
+                        if (isOtherURL == true) {
+                            urlChanged();
+                        } else {
+                            hideAnimationCompleted();
+                        }
                     }
-                }
         });
     }
 }
@@ -569,16 +566,16 @@ function hideAnimationCompleted() {
         resizeImage($showModuleBackground);
         $showModuleBackground.css('display', 'inline').css("opacity", "0").css("visibility", "visible").css("left", (-60) + "px");
         TweenMax.to($showModuleBackground, .6, {
-            css: { opacity: "1", left: "0px" },
+            css: {opacity: "1", left: "0px"},
             ease: Circ.easeOut,
             onComplete:
-                function() {
-                    if (isOtherURL == true) {
-                        urlChanged();
-                    } else {
-                        startModule();
+                    function() {
+                        if (isOtherURL == true) {
+                            urlChanged();
+                        } else {
+                            startModule();
+                        }
                     }
-                }
         });
     }
 }
@@ -600,48 +597,48 @@ function startModule() {
     endShowPage();
     templateCollectGarbage();
     switch (moduleType) {
-    case "slideshow":
-        moduleSlideshow();
-        break;
-    case "home2":
-        moduleHome2();
-        break;
-    case "home3":
-        moduleHome3();
-        break;
-    case "banner":
-        moduleBanner();
-        break;
-    case "text_page":
-        moduleTextPage();
-        break;
-    case "news":
-        moduleNews();
-        break;
-    case "contact":
-        moduleContact();
-        break;
-    case "showreel":
-        moduleShowreel();
-        break;
-    case "gallery":
-        moduleGallery();
-        break;
-    case "full_width":
-        moduleFullWidth();
-        break;
-    case "full_width_gallery":
-        moduleFullWidthGallery();
-        break;
-    case "page_columns":
-        modulePageColumns();
-        break;
-    case "fullscreen_video":
-        moduleFullscreenVideo();
-        break;
-    case "pricing_tables":
-        modulePricingTables();
-        break;
+        case "slideshow":
+            moduleSlideshow();
+            break;
+        case "home2":
+            moduleHome2();
+            break;
+        case "home3":
+            moduleHome3();
+            break;
+        case "banner":
+            moduleBanner();
+            break;
+        case "text_page":
+            moduleTextPage();
+            break;
+        case "news":
+            moduleNews();
+            break;
+        case "contact":
+            moduleContact();
+            break;
+        case "showreel":
+            moduleShowreel();
+            break;
+        case "gallery":
+            moduleGallery();
+            break;
+        case "full_width":
+            moduleFullWidth();
+            break;
+        case "full_width_gallery":
+            moduleFullWidthGallery();
+            break;
+        case "page_columns":
+            modulePageColumns();
+            break;
+        case "fullscreen_video":
+            moduleFullscreenVideo();
+            break;
+        case "pricing_tables":
+            modulePricingTables();
+            break;
     }
 }
 
@@ -653,7 +650,9 @@ function endShowPage() {
         /*endModuleStart();*/
     }
     if ($("#module-container-old").length > 0) {
-        $("body").find("#module-container-old").each(function() { $(this).empty().remove(); });
+        $("body").find("#module-container-old").each(function() {
+            $(this).empty().remove();
+        });
     }
     $(window).trigger("resize");
 }
@@ -684,7 +683,7 @@ function moduleSlideshow() {
     currentSlide.css("opacity", "0");
     storeAllSlides();
     $("#module-container").css('visibility', 'visible');
-    TweenMax.to(currentSlide, .6, { css: { opacity: "1", left: "0px" }, ease: Circ.easeOut, onComplete: slideshowShowThumbs });
+    TweenMax.to(currentSlide, .6, {css: {opacity: "1", left: "0px"}, ease: Circ.easeOut, onComplete: slideshowShowThumbs});
 }
 
 function onFirstMediaLoaded() {
@@ -718,7 +717,8 @@ function storeAllSlides() {
         i++;
     });
     slideshowLimit = i++;
-    if (slidesArray[0][1].length != 0) captionAvailable = true;
+    if (slidesArray[0][1].length != 0)
+        captionAvailable = true;
     currentThumb = $('#slideshow-thumbs-container .slideshow-thumb-holder').slice(0, 1);
     if (currentThumb.hasClass('thumb-selected') == false) {
         $(currentThumb).addClass('thumb-selected');
@@ -730,7 +730,7 @@ function storeAllSlides() {
 function startTimer() {
     if (timerSlideshow == null) {
         timerSlideshow = $.timer(checkSlideshowTimer);
-        timerSlideshow.set({ time: timerSec * 1000, autostart: false });
+        timerSlideshow.set({time: timerSec * 1000, autostart: false});
     }
 }
 
@@ -748,7 +748,9 @@ function checkSlideshowTimer() {
     stopOrHidePrevCaptions();
 }
 
-function stopSlideshowTimer() { timerSlideshow.stop(); }
+function stopSlideshowTimer() {
+    timerSlideshow.stop();
+}
 
 function deleteSlideshowTimer() {
     if (timerSlideshow != null) {
@@ -766,7 +768,7 @@ function slideshowShowThumbs() {
         thumbsList = null;
     }
     if (touchDevice == 0) {
-        thumbsList = $("#slideshow-thumbs-content").McCustomList({ scrollDirection: "horizontal", scrollType: "linear" });
+        thumbsList = $("#slideshow-thumbs-content").McCustomList({scrollDirection: "horizontal", scrollType: "linear"});
         thumbsList.setupList({
             scrollContainer: $('#slideshow-thumbs-container'),
             mouseWheelSupport: "yes",
@@ -779,19 +781,19 @@ function slideshowShowThumbs() {
             horizFixHolder: $('.horizontal-fix-slideshow-thumbs')
         });
         $("#slideshow-thumbs-container").find(".slideshow-thumb-holder").hover(
-            function(event) {
-                if ($(this).hasClass('thumb-selected') == false) {
-                    customHoverAnimation("over", event, $(this), $("#thumb-image-hover", this));
-                    TweenMax.to($("img", this), .6, { css: { borderColor: themeColor }, ease: Circ.easeOut });
+                function(event) {
+                    if ($(this).hasClass('thumb-selected') == false) {
+                        customHoverAnimation("over", event, $(this), $("#thumb-image-hover", this));
+                        TweenMax.to($("img", this), .6, {css: {borderColor: themeColor}, ease: Circ.easeOut});
+                    }
+                },
+                function(event) {
+                    var color = '#ffffff';
+                    if ($(this).hasClass('thumb-selected') == false) {
+                        customHoverAnimation("out", event, $(this), $("#thumb-image-hover", this));
+                        TweenMax.to($("img", this), .6, {css: {borderColor: color}, ease: Circ.easeOut});
+                    }
                 }
-            },
-            function(event) {
-                var color = '#ffffff';
-                if ($(this).hasClass('thumb-selected') == false) {
-                    customHoverAnimation("out", event, $(this), $("#thumb-image-hover", this));
-                    TweenMax.to($("img", this), .6, { css: { borderColor: color }, ease: Circ.easeOut });
-                }
-            }
         );
         var instanceArr = $(".slideshow-thumbs-arrow-backward .slideshow-thumbs-arrow-backg");
         var initOpacity = instanceArr.css("opacity");
@@ -801,20 +803,22 @@ function slideshowShowThumbs() {
         var thumbArrForw = $("#slideshow-thumbs-holder .slideshow-thumbs-arrow-forward");
         bothArrows.unbind('mouseenter mouseleave');
         bothArrows.hover(
-            function() {
-                TweenMax.to($(".slideshow-thumbs-arrow-backg", this), 0.3, { css: { opacity: "1", backgroundColor: themeColor }, easing: Sine.easeOut });
-            },
-            function() {
-                TweenMax.to($(".slideshow-thumbs-arrow-backg", this), 0.3, { css: { opacity: initOpacity, backgroundColor: initBackColor }, easing: Sine.easeOut });
-            }
+                function() {
+                    TweenMax.to($(".slideshow-thumbs-arrow-backg", this), 0.3, {css: {opacity: "1", backgroundColor: themeColor}, easing: Sine.easeOut});
+                },
+                function() {
+                    TweenMax.to($(".slideshow-thumbs-arrow-backg", this), 0.3, {css: {opacity: initOpacity, backgroundColor: initBackColor}, easing: Sine.easeOut});
+                }
         );
         thumbArrBack.unbind("click");
         thumbArrForw.unbind("click");
         thumbArrForw.click(function() {
-            if (thumbsList != null) thumbsList.listAutoScroll(-1);
+            if (thumbsList != null)
+                thumbsList.listAutoScroll(-1);
         });
         thumbArrBack.click(function() {
-            if (thumbsList != null) thumbsList.listAutoScroll(1);
+            if (thumbsList != null)
+                thumbsList.listAutoScroll(1);
         });
     } else {
         if (touchDevice == 1) {
@@ -833,10 +837,12 @@ function slideshowShowThumbs() {
     var slideshowThumbsCont = $("#slideshow-thumbs-container .slideshow-thumb-holder");
     slideshowThumbsCont.click(function() {
         var index = slideshowThumbsCont.index(this);
-        if (slideshowCurrID == index) return;
+        if (slideshowCurrID == index)
+            return;
         slideshowPrevID = slideshowCurrID;
         slideshowCurrID = index;
-        if (timerSlideshow != null) timerSlideshow.stop();
+        if (timerSlideshow != null)
+            timerSlideshow.stop();
         $(spanEmpty).empty().append((index + 1) + '/' + total);
         changeThumbsSelection(this);
         stopOrHidePrevCaptions();
@@ -854,7 +860,7 @@ function slideshowShowThumbs() {
     startTimer();
     initialThumbContW = $("#slideshow-thumbs-content").width();
     moduleUpdate_slideshow();
-    TweenMax.to(thumbsHolder, .6, { css: { bottom: "4px" }, delay: 0.6, ease: Circ.easeOut, onComplete: checkCaption });
+    TweenMax.to(thumbsHolder, .6, {css: {bottom: "4px"}, delay: 0.6, ease: Circ.easeOut, onComplete: checkCaption});
 }
 
 var initialThumbContW = 0;
@@ -864,14 +870,14 @@ function changeThumbsSelection(cThumb) {
     var color = "#ffffff";
     if (oldThumb.length > 0) {
         oldThumb.removeClass('thumb-selected');
-        TweenMax.to($("#thumb-image-hover", oldThumb), .3, { css: { left: "-100%", top: "0%" }, ease: Sine.easeInOut });
-        TweenMax.to($('img', oldThumb), .6, { css: { borderColor: color }, ease: Circ.easeOut });
+        TweenMax.to($("#thumb-image-hover", oldThumb), .3, {css: {left: "-100%", top: "0%"}, ease: Sine.easeInOut});
+        TweenMax.to($('img', oldThumb), .6, {css: {borderColor: color}, ease: Circ.easeOut});
     }
     currentThumb = $(cThumb);
     if (currentThumb.hasClass('thumb-selected') == false) {
         currentThumb.addClass('thumb-selected');
-        TweenMax.to($("#thumb-image-hover", currentThumb), .3, { css: { left: "0", top: "0%" }, ease: Sine.easeInOut });
-        TweenMax.to($('img', currentThumb), .6, { css: { borderColor: themeColor }, ease: Circ.easeOut });
+        TweenMax.to($("#thumb-image-hover", currentThumb), .3, {css: {left: "0", top: "0%"}, ease: Sine.easeInOut});
+        TweenMax.to($('img', currentThumb), .6, {css: {borderColor: themeColor}, ease: Circ.easeOut});
     }
 }
 
@@ -885,30 +891,34 @@ function changeSlideshowSlides(prevSlideID, currSlideID) {
     }
     slidesArray[currSlideID][0].attr("id", "slide-current");
     currentSlide = slidesArray[currSlideID][0];
-    if (currentSlide.css("style") != undefined) currentSlide.removeAttr('style');
+    if (currentSlide.css("style") != undefined)
+        currentSlide.removeAttr('style');
 
     currentSlide.attr("style", "z-index: 2; display:list-item; left: 0px; visibility: visible;");
     resizeImage(currentSlide);
     currentSlide.css("opacity", "0");
     var parentCur = currentSlide.parent(currentSlide);
     parentCur.css("position", "absolute").css("z-index", "2");
-    TweenMax.to(currentSlide, .6, { css: { opacity: "1" }, ease: Sine.easeOut, onComplete: completeSlideTransition });
+    TweenMax.to(currentSlide, .6, {css: {opacity: "1"}, ease: Sine.easeOut, onComplete: completeSlideTransition});
 }
 
 function completeSlideTransition() {
     var i = 0;
     var total = slidesArray.length;
     for (i = 0; i < total; i++) {
-        if (i != slideshowPrevID && i != slideshowCurrID) slidesArray[i][0].attr("style", "display:none; opacity: 0; visibility: hidden;");
+        if (i != slideshowPrevID && i != slideshowCurrID)
+            slidesArray[i][0].attr("style", "display:none; opacity: 0; visibility: hidden;");
     }
-    if (oldSlide != '') oldSlide.attr("style", "display:none; opacity: 0; visibility: hidden;");
+    if (oldSlide != '')
+        oldSlide.attr("style", "display:none; opacity: 0; visibility: hidden;");
     checkCaption();
 }
 
 var showingInProgress = 0;
 
 function checkCaption() {
-    if (showingInProgress == 1) return;
+    if (showingInProgress == 1)
+        return;
     if (slideshowAutoPlay == true && timerSlideshow != null) {
         /*checkSlideshowTimer();*/
         timerSlideshow.play(true);
@@ -928,9 +938,9 @@ function checkCaption() {
             var styleValue = "top:" + topY + "px; left:" + val + "px; display:inline-block; opacity:1;";
             obj.attr("style", styleValue);
             if (i == total - 1) {
-                TweenMax.to(obj, 5, { css: { left: -(width + windowW * .5) + 'px' }, ease: SlowMo.ease.config(0.7, 0.96), onComplete: resetShowing });
+                TweenMax.to(obj, 5, {css: {left: -(width + windowW * .5) + 'px'}, ease: SlowMo.ease.config(0.7, 0.96), onComplete: resetShowing});
             } else {
-                TweenMax.to(obj, 5, { css: { left: windowW * .5 + 'px' }, ease: SlowMo.ease.config(0.7, 0.96) });
+                TweenMax.to(obj, 5, {css: {left: windowW * .5 + 'px'}, ease: SlowMo.ease.config(0.7, 0.96)});
             }
         }
     }
@@ -966,9 +976,9 @@ function stopOrHidePrevCaptions() {
             var topY = windowH * .3 + i * 45;
             var obj = slidesArray[slideshowPrevID][1][i];
             if (i == total - 1) {
-                TweenMax.to(obj, .2, { css: { left: -(width + windowW * .5) + 'px', opacity: "0" }, ease: Sine.easeOut, onComplete: runOtherSlide });
+                TweenMax.to(obj, .2, {css: {left: -(width + windowW * .5) + 'px', opacity: "0"}, ease: Sine.easeOut, onComplete: runOtherSlide});
             } else {
-                TweenMax.to(obj, .2, { css: { left: windowW * .5 + 'px', opacity: "0" }, ease: Sine.easeOut });
+                TweenMax.to(obj, .2, {css: {left: windowW * .5 + 'px', opacity: "0"}, ease: Sine.easeOut});
             }
         }
     } else {
@@ -976,7 +986,9 @@ function stopOrHidePrevCaptions() {
     }
 }
 
-function runOtherSlide() { changeSlideshowSlides(slideshowPrevID, slideshowCurrID); }
+function runOtherSlide() {
+    changeSlideshowSlides(slideshowPrevID, slideshowCurrID);
+}
 
 /*================= HOME 2 ================================*/
 var stdCurrIndex = 0;
@@ -985,13 +997,14 @@ var stdPrevIndex = 0;
 function moduleHome2() {
     var textPageInstanceHolder = $(txt_modCont);
     var textPageInstance = $("#module-home-layout2", textPageInstanceHolder);
-    if (textPageInstance.length <= 0) return;
+    if (textPageInstance.length <= 0)
+        return;
 
     moduleUpdate_home2();
 
     var val = parseInt(textPageInstanceHolder.css("left"), 10);
     textPageInstanceHolder.attr("style", "left: 100%; visibility: visible;");
-    TweenMax.to(textPageInstanceHolder, .6, { css: { left: val }, ease: Circ.easeOut });
+    TweenMax.to(textPageInstanceHolder, .6, {css: {left: val}, ease: Circ.easeOut});
 
     var slidesBannArray = [];
     var stdBannCont = $("#standard-banner-controls");
@@ -1001,74 +1014,78 @@ function moduleHome2() {
     stdBannCont.css("margin-left", -(stdBannCont.width() * .5));
 
     $("#standard-banner").find("a").each(
-        function() {
-            var dataSrc = $("#dataSrc", this);
-            if (dataSrc.length > 0) {
-                var imgTag = '<img src="' + dataSrc.attr("data-src") + '" />';
-                dataSrc.after(imgTag).remove();
+            function() {
+                var dataSrc = $("#dataSrc", this);
+                if (dataSrc.length > 0) {
+                    var imgTag = '<img src="' + dataSrc.attr("data-src") + '" />';
+                    dataSrc.after(imgTag).remove();
+                }
+                slidesBannArray[i] = $(this)
+                i++;
             }
-            slidesBannArray[i] = $(this)
-            i++;
-        }
     );
     i = 0;
     stdBannCont.find("#control-pin").each(
-        function() {
-            controlPinArr[i] = $(this)
-            i++;
-        }
+            function() {
+                controlPinArr[i] = $(this)
+                i++;
+            }
     );
 
     controlPin.hover(
-        function() {
-            if ($(this).hasClass("selected") == false)
-                TweenMax.to($(".control-pin-hover", this), .3, { css: { opacity: "1" }, easing: Sine.easeOut });
-        },
-        function() {
-            if ($(this).hasClass("selected") == false)
-                TweenMax.to($(".control-pin-hover", this), .3, { css: { opacity: "0" }, easing: Sine.easeOut });
-        }
+            function() {
+                if ($(this).hasClass("selected") == false)
+                    TweenMax.to($(".control-pin-hover", this), .3, {css: {opacity: "1"}, easing: Sine.easeOut});
+            },
+            function() {
+                if ($(this).hasClass("selected") == false)
+                    TweenMax.to($(".control-pin-hover", this), .3, {css: {opacity: "0"}, easing: Sine.easeOut});
+            }
     );
 
     controlPin.click(function() {
         stdPrevIndex = stdCurrIndex;
         stdCurrIndex = $(controlPin).index(this);
-        if (stdCurrIndex == stdPrevIndex) return;
+        if (stdCurrIndex == stdPrevIndex)
+            return;
         controlPinArr[stdPrevIndex].removeClass("selected");
         controlPinArr[stdCurrIndex].addClass("selected");
-        TweenMax.to($(".control-pin-hover", controlPinArr[stdPrevIndex]), .3, { css: { opacity: "0" }, easing: Sine.easeOut });
-        TweenMax.to($(".control-pin-hover", controlPinArr[stdCurrIndex]), .3, { css: { opacity: "1" }, easing: Sine.easeOut });
+        TweenMax.to($(".control-pin-hover", controlPinArr[stdPrevIndex]), .3, {css: {opacity: "0"}, easing: Sine.easeOut});
+        TweenMax.to($(".control-pin-hover", controlPinArr[stdCurrIndex]), .3, {css: {opacity: "1"}, easing: Sine.easeOut});
         changeHome2Slides();
     });
 
     function changeHome2Slides() {
         slidesBannArray[stdCurrIndex].attr("class", "selected opacity_0");
         TweenMax.to(slidesBannArray[stdPrevIndex], .6, {
-            css: { opacity: "0" },
+            css: {opacity: "0"},
             easing: Sine.easeOut,
             onComplete:
-                function() { hideOtherBannerSlides(); }                
+                    function() {
+                        hideOtherBannerSlides();
+                    }
         });
-        TweenMax.to(slidesBannArray[stdCurrIndex], .6, { css: { opacity: "1" }, easing: Sine.easeOut });
+        TweenMax.to(slidesBannArray[stdCurrIndex], .6, {css: {opacity: "1"}, easing: Sine.easeOut});
     }
 
     function hideOtherBannerSlides() {
         var i = 0;
         var t = slidesBannArray.length;
         for (i = 0; i < t; i++) {
-            if (i != stdCurrIndex) slidesBannArray[i].attr("class", "");
+            if (i != stdCurrIndex)
+                slidesBannArray[i].attr("class", "");
         }
     }
 
     var clients = $(".home-layout-clients a");
     if (clients.length > 0) {
         clients.hover(
-            function() {
-                TweenMax.to($(".client-over", this), .6, { css: { opacity: "1" }, easing: Sine.easeOut });
-            },
-            function() {
-                TweenMax.to($(".client-over", this), .6, { css: { opacity: "0" }, easing: Sine.easeOut });
-            }
+                function() {
+                    TweenMax.to($(".client-over", this), .6, {css: {opacity: "1"}, easing: Sine.easeOut});
+                },
+                function() {
+                    TweenMax.to($(".client-over", this), .6, {css: {opacity: "0"}, easing: Sine.easeOut});
+                }
         );
     }
     var contentLi = $(".home-layout2-content ul li");
@@ -1076,19 +1093,21 @@ function moduleHome2() {
     if (touchDevice == 0)
         if (contentLi.length > 0) {
             contentLi.hover(
-                function() {
-                    TweenMax.to($(".layout2-description p", this), .6, { css: { color: themeColor }, easing: Sine.easeOut });
-                    TweenMax.to($("div:first", this), 0.3, { css: { top: "-5px" }, easing: Sine.easeOut });
-                },
-                function() {
-                    TweenMax.to($(".layout2-description p", this), .6, { css: { color: baseColor }, easing: Sine.easeOut });
-                    TweenMax.to($("div:first", this), 0.3, { css: { top: "0px" }, easing: Sine.easeOut });
-                }
+                    function() {
+                        TweenMax.to($(".layout2-description p", this), .6, {css: {color: themeColor}, easing: Sine.easeOut});
+                        TweenMax.to($("div:first", this), 0.3, {css: {top: "-5px"}, easing: Sine.easeOut});
+                    },
+                    function() {
+                        TweenMax.to($(".layout2-description p", this), .6, {css: {color: baseColor}, easing: Sine.easeOut});
+                        TweenMax.to($("div:first", this), 0.3, {css: {top: "0px"}, easing: Sine.easeOut});
+                    }
             );
         }
 }
 
-function animateBannerHome2(img) { TweenMax.to(img, 0.4, { css: { opacity: "1" }, easing: Sine.easeOut }); }
+function animateBannerHome2(img) {
+    TweenMax.to(img, 0.4, {css: {opacity: "1"}, easing: Sine.easeOut});
+}
 
 /*================= END HOME 2 ============================*/
 
@@ -1099,39 +1118,40 @@ function moduleHome3() {
     var textPageInstanceHolder = $(txt_modCont);
     var textPageInstance = $("#module-home-layout3", textPageInstanceHolder);
     var modWrapper = $("#module-wrapper", textPageInstance);
-    if (textPageInstance.length <= 0) return;
+    if (textPageInstance.length <= 0)
+        return;
 
     moduleUpdate_home3();
 
     var val = parseInt(textPageInstanceHolder.css("left"), 10);
     textPageInstanceHolder.css("left", "100%").css("visibility", "visible");
-    TweenMax.to(textPageInstanceHolder, .6, { css: { left: val }, ease: Circ.easeOut });
+    TweenMax.to(textPageInstanceHolder, .6, {css: {left: val}, ease: Circ.easeOut});
 
     var homeLayoutVideo = $("#video-wrapper", textPageInstanceHolder);
     templateAddMediaVideo(homeLayoutVideo.attr("data-video-type"), homeLayoutVideo, undefined);
 
     $("#home-advertise1, #home-advertise2", textPageInstanceHolder).hover(
-        function() {
-            var back = $(".advertise-details", this);
-            TweenMax.to(back, .3, { css: { backgroundColor: "#3f3f3f" }, ease: Sine.easeOut });
-            TweenMax.to($("span", back), .3, { css: { color: "#f1f1f1" }, ease: Sine.easeOut });
-        },
-        function() {
-            var back = $(".advertise-details", this);
-            TweenMax.to(back, .3, { css: { backgroundColor: "#f1f1f1" }, ease: Sine.easeOut });
-            TweenMax.to($("span", back), .3, { css: { color: "#0c0c0c" }, ease: Sine.easeOut });
-        }
+            function() {
+                var back = $(".advertise-details", this);
+                TweenMax.to(back, .3, {css: {backgroundColor: "#3f3f3f"}, ease: Sine.easeOut});
+                TweenMax.to($("span", back), .3, {css: {color: "#f1f1f1"}, ease: Sine.easeOut});
+            },
+            function() {
+                var back = $(".advertise-details", this);
+                TweenMax.to(back, .3, {css: {backgroundColor: "#f1f1f1"}, ease: Sine.easeOut});
+                TweenMax.to($("span", back), .3, {css: {color: "#0c0c0c"}, ease: Sine.easeOut});
+            }
     );
 
     var clients = $(".home-layout-clients a");
     if (clients.length > 0) {
         clients.hover(
-            function() {
-                TweenMax.to($(".client-over", this), .6, { css: { opacity: "1" }, easing: Sine.easeOut });
-            },
-            function() {
-                TweenMax.to($(".client-over", this), .6, { css: { opacity: "0" }, easing: Sine.easeOut });
-            }
+                function() {
+                    TweenMax.to($(".client-over", this), .6, {css: {opacity: "1"}, easing: Sine.easeOut});
+                },
+                function() {
+                    TweenMax.to($(".client-over", this), .6, {css: {opacity: "0"}, easing: Sine.easeOut});
+                }
         );
     }
     clearCustomInterval(homeInterval);
@@ -1158,7 +1178,8 @@ function getElementStyle(elem) {
 var updateInterval = "";
 
 function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
-    if (endPreviousModule == true) return;
+    if (endPreviousModule == true)
+        return;
     var extrH = parseInt($("#module-container").css("top"), 10)
     var pModH = getElem_W_H(pMod, "h") - extrH;
     var pModW = getElem_W_H(pMod, "w");
@@ -1189,13 +1210,16 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
         }
         if (pModH >= cConH) {
             if (availScrollbar.length > 0 && availScrollbar.css("display") != "none") {
-                TweenMax.to(availScrollbar, .6, { css: { opacity: "0" }, ease: Quad.easeOut, onComplete: function() { availScrollbar.css("display", "none"); } });
+                TweenMax.to(availScrollbar, .6, {css: {opacity: "0"}, ease: Quad.easeOut, onComplete: function() {
+                        availScrollbar.css("display", "none");
+                    }});
             }
             if (moduleList != null) {
                 moduleList.destroy();
                 moduleList = null;
             }
-            if (noRepos == true) return;
+            if (noRepos == true)
+                return;
             var valTop = pModH - cConH;
             if (modSide == "none") {
                 if (mPos != "module-position-bc") {
@@ -1207,7 +1231,7 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
                 cCon.css("top", Math.round(valTop * 0.5) + "px");
             } else if (modSide == "custom") {
                 if (anim == true) {
-                    TweenMax.to(cCon, .3, { css: { top: "0px" }, ease: Sine.easeOut });
+                    TweenMax.to(cCon, .3, {css: {top: "0px"}, ease: Sine.easeOut});
                 } else {
                     cCon.css("top", "0px");
                 }
@@ -1215,7 +1239,7 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
             if (mPos == "module-position-bc" || mPos == "module-position-cc") {
                 var value = Math.round((($("#module-container").width() - pConW) * .5 /*+ get_OffsetWidth()*/));
                 if (anim == true) {
-                    TweenMax.to(pMod, .6, { css: { left: value + "px" }, ease: Sine.easeOut });
+                    TweenMax.to(pMod, .6, {css: {left: value + "px"}, ease: Sine.easeOut});
                 } else {
                     pMod.css("left", value + "px");
                 }
@@ -1223,22 +1247,22 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
         } else {
             if (availScrollbar.length > 0) {
                 switch (modSide) {
-                case "none":
-                    pCon.parent(pCon).css("top", "0px");
-                    cCon.parent(cCon).css("top", "0px");
-                    break;
-                case "height":
-                    cCon.css("top", "0px");
-                    break;
+                    case "none":
+                        pCon.parent(pCon).css("top", "0px");
+                        cCon.parent(cCon).css("top", "0px");
+                        break;
+                    case "height":
+                        cCon.css("top", "0px");
+                        break;
                 }
                 TweenMax.killTweensOf(availScrollbar);
                 if (availScrollbar.css("display") == "none") {
                     availScrollbar.css("opacity", "0").css("display", "inline");
                 }
-                TweenMax.to(availScrollbar, .6, { css: { opacity: "1" }, ease: Quad.easeOut });
+                TweenMax.to(availScrollbar, .6, {css: {opacity: "1"}, ease: Quad.easeOut});
             }
             if (moduleList == null) {
-                moduleList = pMod.McCustomList({ scrollDirection: "vertical", scrollType: "linear" });
+                moduleList = pMod.McCustomList({scrollDirection: "vertical", scrollType: "linear"});
                 moduleList.setupList({
                     scrollContainer: cCon,
                     mouseWheelSupport: "yes",
@@ -1260,7 +1284,7 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
                     pCon.parent(pCon).css("top", "0px");
                 }
                 if (anim == true) {
-                    TweenMax.to(pMod, .6, { css: { left: value + "px" }, ease: Sine.easeOut });
+                    TweenMax.to(pMod, .6, {css: {left: value + "px"}, ease: Sine.easeOut});
                 } else {
                     pMod.css("left", value + "px");
                 }
@@ -1270,33 +1294,35 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
         /*remove scrollbar if present and add overflow for touch devices*/
         var valTop = pModH - cConH;
         switch (modSide) {
-        case "none":
-            if (pModH >= cConH && pCon.length > 0) {
-                if (mPos != "module-position-bc") {
-                    pCon.parent(pCon).css("top", Math.round(valTop * 0.5) + "px");
+            case "none":
+                if (pModH >= cConH && pCon.length > 0) {
+                    if (mPos != "module-position-bc") {
+                        pCon.parent(pCon).css("top", Math.round(valTop * 0.5) + "px");
+                    } else {
+                        pCon.parent(pCon).css("top", Math.round(valTop) + "px");
+                    }
                 } else {
-                    pCon.parent(pCon).css("top", Math.round(valTop) + "px");
+                    pCon.parent(pCon).css("top", "0px");
                 }
-            } else {
-                pCon.parent(pCon).css("top", "0px");
-            }
-            break;
-        case "height":
-            if (cCon.length > 0) cCon.css("top", "0px");
-            break;
-        case "width":
-            break;
-        case "custom":
-            if (cCon.length > 0)
-                if (anim == true) {
-                    TweenMax.to(cCon, .3, { css: { top: "0px" }, ease: Sine.easeOut });
-                } else {
+                break;
+            case "height":
+                if (cCon.length > 0)
                     cCon.css("top", "0px");
-                }
-            break;
+                break;
+            case "width":
+                break;
+            case "custom":
+                if (cCon.length > 0)
+                    if (anim == true) {
+                        TweenMax.to(cCon, .3, {css: {top: "0px"}, ease: Sine.easeOut});
+                    } else {
+                        cCon.css("top", "0px");
+                    }
+                break;
         }
 
-        if (cCon.length <= 0 || pCon.length <= 0) return;
+        if (cCon.length <= 0 || pCon.length <= 0)
+            return;
         pCon.css("overflow", "").css("-webkit-overflow-scrolling", "");
         clearCustomInterval(updateInterval);
         updateInterval = setInterval(function() {
@@ -1305,10 +1331,10 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
         }, 100);
 
         if (currModuleType == "news" && previewNewsOpen == true) {
-            TweenMax.to(pCon, .3, { scrollTop: 0, easing: Sine.easeOut });
+            TweenMax.to(pCon, .3, {scrollTop: 0, easing: Sine.easeOut});
         }
         if (currModuleType == "page_columns" && columnsPreviewOpen == true) {
-            TweenMax.to(pCon, .3, { scrollTop: 0, easing: Sine.easeOut });
+            TweenMax.to(pCon, .3, {scrollTop: 0, easing: Sine.easeOut});
         } else if (currModuleType == "page_columns" && columnsPreviewOpen == false) {
             pCon.scrollTop(custStartPos)
         }
@@ -1323,7 +1349,7 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
             }
             var value = Math.round((($("#module-container").width() - pConW) * .5 /*+ get_OffsetWidth()*/));
             if (anim == true) {
-                TweenMax.to(pMod, .6, { css: { left: value + "px" }, ease: Sine.easeOut });
+                TweenMax.to(pMod, .6, {css: {left: value + "px"}, ease: Sine.easeOut});
             } else {
                 pMod.css("left", value + "px");
             }
@@ -1348,38 +1374,39 @@ function moduleTextPage() {
     var moduleHeight = textPageInstanceHolder.height();
 
     moduleEnd = true;
-    if (textPageInstance.length <= 0) return;
+    if (textPageInstance.length <= 0)
+        return;
     endModuleFunction = endModuleTextPage;
 
     switch (modulePositionType) {
-    case "module-position-lb":
-        break;
-    case "module-position-lc":
-        var val = (-moduleWidth) + "px";
-        moduleUpdate(textPageInstance, modWrapper, $("div:first", modWrapper), sideType);
-        textPageInstanceHolder.attr("style", getElementStyle(textPageInstanceHolder) + " left:" + val + "; visibility: visible;");
-        TweenMax.to(textPageInstanceHolder, .6, { css: { left: "0px" }, ease: Circ.easeInOut, onComplete: moduleUpdate_text_page }); /*get_OffsetWidth() +*/
-        break;
-    case "module-position-bc":
-        moduleUpdate(textPageInstanceHolder, modWrapper, $("div:first", modWrapper), sideType);
-        var val = parseInt(textPageInstance.css("top"), 10) + "px";
-        textPageInstanceHolder.css("top", moduleHeight).css("visibility", "visible");
-        TweenMax.to(textPageInstanceHolder, .6, { css: { top: "0px" }, ease: Circ.easeInOut, onComplete: moduleUpdate_text_page });
-        break;
-    case "module-position-rc":
-        textPageInstanceHolder.css("position", "fixed");
-        moduleUpdate(textPageInstance, modWrapper, $("div:first", modWrapper), sideType);
-        var val = (-moduleWidth) + "px";
-        textPageInstanceHolder.attr("style", getElementStyle(textPageInstanceHolder) + " position: fixed; right:" + val + "; visibility: visible;");
-        TweenMax.to(textPageInstanceHolder, .6, { css: { right: "0px" }, ease: Circ.easeInOut, onComplete: moduleUpdate_text_page });
-        break;
-    case "module-position-cc":
-        moduleUpdate(textPageInstanceHolder, modWrapper, $("div:first", modWrapper), sideType);
-        var val = parseInt(textPageInstanceHolder.css("left"), 10);
-        textPageInstanceHolder.attr("style", getElementStyle(textPageInstanceHolder) + " left: 100%; visibility: visible;");
+        case "module-position-lb":
+            break;
+        case "module-position-lc":
+            var val = (-moduleWidth) + "px";
+            moduleUpdate(textPageInstance, modWrapper, $("div:first", modWrapper), sideType);
+            textPageInstanceHolder.attr("style", getElementStyle(textPageInstanceHolder) + " left:" + val + "; visibility: visible;");
+            TweenMax.to(textPageInstanceHolder, .6, {css: {left: "0px"}, ease: Circ.easeInOut, onComplete: moduleUpdate_text_page}); /*get_OffsetWidth() +*/
+            break;
+        case "module-position-bc":
+            moduleUpdate(textPageInstanceHolder, modWrapper, $("div:first", modWrapper), sideType);
+            var val = parseInt(textPageInstance.css("top"), 10) + "px";
+            textPageInstanceHolder.css("top", moduleHeight).css("visibility", "visible");
+            TweenMax.to(textPageInstanceHolder, .6, {css: {top: "0px"}, ease: Circ.easeInOut, onComplete: moduleUpdate_text_page});
+            break;
+        case "module-position-rc":
+            textPageInstanceHolder.css("position", "fixed");
+            moduleUpdate(textPageInstance, modWrapper, $("div:first", modWrapper), sideType);
+            var val = (-moduleWidth) + "px";
+            textPageInstanceHolder.attr("style", getElementStyle(textPageInstanceHolder) + " position: fixed; right:" + val + "; visibility: visible;");
+            TweenMax.to(textPageInstanceHolder, .6, {css: {right: "0px"}, ease: Circ.easeInOut, onComplete: moduleUpdate_text_page});
+            break;
+        case "module-position-cc":
+            moduleUpdate(textPageInstanceHolder, modWrapper, $("div:first", modWrapper), sideType);
+            var val = parseInt(textPageInstanceHolder.css("left"), 10);
+            textPageInstanceHolder.attr("style", getElementStyle(textPageInstanceHolder) + " left: 100%; visibility: visible;");
 
-        TweenMax.to(textPageInstanceHolder, .6, { css: { left: val }, ease: Circ.easeOut, onComplete: moduleUpdate_text_page });
-        break;
+            TweenMax.to(textPageInstanceHolder, .6, {css: {left: val}, ease: Circ.easeOut, onComplete: moduleUpdate_text_page});
+            break;
     }
 }
 
@@ -1390,28 +1417,30 @@ function endModuleTextPage() {
     var moduleHeight = textPageInstance.height();
     endPreviousModule = true;
     switch (modulePositionType) {
-    case "module-position-lb":
-        break;
-    case "module-position-lc":
-        var val = (-moduleWidth) + "px";
-        TweenMax.to(textPageInstance, .6, { css: { left: val }, ease: Circ.easeInOut, onComplete: endModuleComplete });
-        break;
-    case "module-position-bc":
-        TweenMax.to(textPageInstance, .6, { css: { top: moduleHeight + "px" }, ease: Circ.easeInOut, onComplete: endModuleComplete });
-        break;
-    case "module-position-rc":
-        var val = (-moduleWidth) + "px";
-        TweenMax.to(textPageInstance, .6, { css: { right: val }, ease: Circ.easeInOut, onComplete: endModuleComplete });
-        break;
-    case "module-position-cc":
-        var val = $(window).width() + get_OffsetWidth() + "px";
-        TweenMax.to(textPageInstance, .6, { css: { left: val }, ease: Circ.easeInOut, onComplete: endModuleComplete });
-        break;
+        case "module-position-lb":
+            break;
+        case "module-position-lc":
+            var val = (-moduleWidth) + "px";
+            TweenMax.to(textPageInstance, .6, {css: {left: val}, ease: Circ.easeInOut, onComplete: endModuleComplete});
+            break;
+        case "module-position-bc":
+            TweenMax.to(textPageInstance, .6, {css: {top: moduleHeight + "px"}, ease: Circ.easeInOut, onComplete: endModuleComplete});
+            break;
+        case "module-position-rc":
+            var val = (-moduleWidth) + "px";
+            TweenMax.to(textPageInstance, .6, {css: {right: val}, ease: Circ.easeInOut, onComplete: endModuleComplete});
+            break;
+        case "module-position-cc":
+            var val = $(window).width() + get_OffsetWidth() + "px";
+            TweenMax.to(textPageInstance, .6, {css: {left: val}, ease: Circ.easeInOut, onComplete: endModuleComplete});
+            break;
     }
     endModuleFunction = null;
 }
 
-function endModuleComplete() { endPreviousModule = false; }
+function endModuleComplete() {
+    endPreviousModule = false;
+}
 
 /*================= NEWS ===================================*/
 var previewNewsOpen = false;
@@ -1448,7 +1477,7 @@ function moduleNews() {
 
     var val = (-moduleWidth) + "px";
     textPageInstanceHolder.attr("style", "left:" + val + "; visibility:visible;");
-    TweenMax.to(textPageInstanceHolder, .6, { css: { left: "0px" }, delay: 0.1, ease: Circ.easeInOut });
+    TweenMax.to(textPageInstanceHolder, .6, {css: {left: "0px"}, delay: 0.1, ease: Circ.easeInOut});
     endModuleFunction = endModuleTextPage;
     moduleEnd = true;
 
@@ -1474,8 +1503,12 @@ function moduleNews() {
     var newsList = $("#module-news-vertical-holder");
     var prevItemW = $("." + shortNP + "-horizontal-fix").width();
     readMoreBtn.hover(
-        function() { TweenMax.to($(this), 0.6, { css: { backgroundColor: themeColor }, easing: Sine.easeOut }); },
-        function() { TweenMax.to($(this), 0.6, { css: { backgroundColor: basicColor }, easing: Sine.easeOut }); }
+            function() {
+                TweenMax.to($(this), 0.6, {css: {backgroundColor: themeColor}, easing: Sine.easeOut});
+            },
+            function() {
+                TweenMax.to($(this), 0.6, {css: {backgroundColor: basicColor}, easing: Sine.easeOut});
+            }
     );
 
     var newsPreviewControls = $("#" + shortNP + "-controls");
@@ -1486,12 +1519,12 @@ function moduleNews() {
     var nwsItemTitle = $(".news-item-vertical-title", $(".news-item-vertical:first", textPageInstance));
     var nwsTitleColor = rgb2hex(nwsItemTitle.css("color"));
     nwsItem.hover(
-        function() {
-            TweenMax.to($(".news-item-vertical-title", this), .6, { css: { color: themeColor }, easing: Sine.easeOut });
-        },
-        function() {
-            TweenMax.to($(".news-item-vertical-title", this), .6, { css: { color: nwsTitleColor }, easing: Sine.easeOut });
-        }
+            function() {
+                TweenMax.to($(".news-item-vertical-title", this), .6, {css: {color: themeColor}, easing: Sine.easeOut});
+            },
+            function() {
+                TweenMax.to($(".news-item-vertical-title", this), .6, {css: {color: nwsTitleColor}, easing: Sine.easeOut});
+            }
     );
     nwsItem.click(function() {
         previewNewsIndex = nwsItem.index(this);
@@ -1505,7 +1538,9 @@ function moduleNews() {
             moduleList.disableList();
             newsItemTopPos = moduleList.currentPosition();
             var ts = $(t_scrBarV1);
-            TweenMax.to(ts, .3, { css: { opacity: "0" }, easing: Sine.easeOut, onComplete: function() { ts.css("display", "none"); } });
+            TweenMax.to(ts, .3, {css: {opacity: "0"}, easing: Sine.easeOut, onComplete: function() {
+                    ts.css("display", "none");
+                }});
         }
         newsPrvH.css("display", "inline");
         var newsListW = $(newsList).width() + $(newsList).position().left + 30;
@@ -1518,8 +1553,8 @@ function moduleNews() {
             }
         }
         $(".news-preview-counter span").empty().append((index + 1) + "/" + totalPreviews);
-        TweenMax.to(newsList, .6, { css: { left: -newsListW }, delay: 0.1, easing: Sine.easeOut })
-        TweenMax.to([newsPrvU, newsPreviewControls], .6, { css: { left: "0px" }, delay: 0.1, easing: Sine.easeOut, onComplete: loadNewsVerticalPreview, onCompleteParams: [index] });
+        TweenMax.to(newsList, .6, {css: {left: -newsListW}, delay: 0.1, easing: Sine.easeOut})
+        TweenMax.to([newsPrvU, newsPreviewControls], .6, {css: {left: "0px"}, delay: 0.1, easing: Sine.easeOut, onComplete: loadNewsVerticalPreview, onCompleteParams: [index]});
     }
 
     function loadNewsVerticalPreview(index) {
@@ -1531,7 +1566,7 @@ function moduleNews() {
             checkScrollBar(previewNewsOpen);
         } else {
             $(".news-preview-counter span").empty().append((index + 1) + "/" + totalPreviews);
-            TweenMax.to(newsPrvU, 0.6, { css: { left: -scrollValue }, delay: 0.1, easing: Sine.easeOut, onComplete: checkScrollBar, onCompleteParams: [previewNewsOpen] });
+            TweenMax.to(newsPrvU, 0.6, {css: {left: -scrollValue}, delay: 0.1, easing: Sine.easeOut, onComplete: checkScrollBar, onCompleteParams: [previewNewsOpen]});
         }
     }
 
@@ -1565,25 +1600,32 @@ function moduleNews() {
 
     var initBackColor = rgb2hex($("." + shortNP + "-backward ." + shortNP + "-backg").css("background-color"));
     $("." + shortNP + "-backward, ." + shortNP + "-forward, ." + shortNP + "-close").hover(
-        function() { TweenMax.to($("." + shortNP + "-backg", this), 0.3, { css: { backgroundColor: themeColor }, easing: Sine.easeOut }); },
-        function() { TweenMax.to($("." + shortNP + "-backg", this), 0.3, { css: { backgroundColor: initBackColor }, easing: Sine.easeOut }); }
+            function() {
+                TweenMax.to($("." + shortNP + "-backg", this), 0.3, {css: {backgroundColor: themeColor}, easing: Sine.easeOut});
+            },
+            function() {
+                TweenMax.to($("." + shortNP + "-backg", this), 0.3, {css: {backgroundColor: initBackColor}, easing: Sine.easeOut});
+            }
     );
     $("." + shortNP + "-backward, ." + shortNP + "-forward", textPageInstance).click(
-        function() {
-            var index = previewNewsIndex;
-            if ($(this).hasClass("" + shortNP + "-backward") == true) {
-                index--;
-                changeNewsPreviewMedia(index);
-            } else if ($(this).hasClass("" + shortNP + "-forward") == true) {
-                index++;
-                changeNewsPreviewMedia(index);
-            }
-        });
+            function() {
+                var index = previewNewsIndex;
+                if ($(this).hasClass("" + shortNP + "-backward") == true) {
+                    index--;
+                    changeNewsPreviewMedia(index);
+                } else if ($(this).hasClass("" + shortNP + "-forward") == true) {
+                    index++;
+                    changeNewsPreviewMedia(index);
+                }
+            });
 
     function changeNewsPreviewMedia(index) {
-        if (index < 0) index = 0;
-        if (index > totalPreviews - 1) index = totalPreviews - 1;
-        if (index == previewNewsIndex) return;
+        if (index < 0)
+            index = 0;
+        if (index > totalPreviews - 1)
+            index = totalPreviews - 1;
+        if (index == previewNewsIndex)
+            return;
         enablePreviewClose(false)
         previewNewsIndex = index;
         loadNewsVerticalPreview(previewNewsIndex);
@@ -1611,10 +1653,12 @@ function moduleNews() {
         var newsPreviewCloseBtn = $("." + shortNP + "-close", textPageInstance);
         newsPreviewCloseBtn.unbind("click");
         if (enable == true) {
-            newsPreviewCloseBtn.click(function() { click_PreviewClose(); });
-            TweenMax.to(newsPreviewCloseBtn, .4, { css: { opacity: "1" }, easing: Sine.easeOut });
+            newsPreviewCloseBtn.click(function() {
+                click_PreviewClose();
+            });
+            TweenMax.to(newsPreviewCloseBtn, .4, {css: {opacity: "1"}, easing: Sine.easeOut});
         } else {
-            TweenMax.to(newsPreviewCloseBtn, .4, { css: { opacity: "0.5" }, easing: Sine.easeOut });
+            TweenMax.to(newsPreviewCloseBtn, .4, {css: {opacity: "0.5"}, easing: Sine.easeOut});
         }
     }
 
@@ -1627,9 +1671,9 @@ function moduleNews() {
                 newsPrevItemArr[i].css("display", "none");
             }
         }
-        TweenMax.to([newsPrvU, newsPreviewControls], 0.6, { css: { left: $(newsList).width() }, delay: 0.1, easing: Sine.easeOut });
-        TweenMax.to($(t_scrBarV1), .3, { css: { opacity: "0" }, easing: Sine.easeOut });
-        TweenMax.to(newsList, .6, { css: { left: "0" }, delay: 0.1, easing: Sine.easeOut, onComplete: disableNewsPreview })
+        TweenMax.to([newsPrvU, newsPreviewControls], 0.6, {css: {left: $(newsList).width()}, delay: 0.1, easing: Sine.easeOut});
+        TweenMax.to($(t_scrBarV1), .3, {css: {opacity: "0"}, easing: Sine.easeOut});
+        TweenMax.to(newsList, .6, {css: {left: "0"}, delay: 0.1, easing: Sine.easeOut, onComplete: disableNewsPreview})
     }
 
     function disableNewsPreview() {
@@ -1645,8 +1689,8 @@ function moduleNews() {
 
 function animateNewsPreviewMedia(src) {
     var inst = $(src);
-    TweenMax.to($(src).parent(), .3, { css: { height: inst.height() }, easing: Sine.easeOut });
-    TweenMax.to(inst, .4, { css: { opacity: '1' }, easing: Sine.easeOut, onComplete: moduleUpdate_news });
+    TweenMax.to($(src).parent(), .3, {css: {height: inst.height()}, easing: Sine.easeOut});
+    TweenMax.to(inst, .4, {css: {opacity: '1'}, easing: Sine.easeOut, onComplete: moduleUpdate_news});
 }
 
 function newsPreviewItemDisplay(display) {
@@ -1683,9 +1727,10 @@ function moduleShowreel() {
         showreelVideo = $("#video-wrapper", textPageInstanceHolder);
     }
     showreelVideo.empty();
-    if (showreelVideo.length > 0) templateAddMediaVideo(showreelVideo.attr("data-video-type"), showreelVideo, undefined)
+    if (showreelVideo.length > 0)
+        templateAddMediaVideo(showreelVideo.attr("data-video-type"), showreelVideo, undefined)
 
-    TweenMax.to(textPageInstance, .4, { css: { width: moduleWidth + "px" }, ease: Quad.easeOut });
+    TweenMax.to(textPageInstance, .4, {css: {width: moduleWidth + "px"}, ease: Quad.easeOut});
     endModuleFunction = endModuleShowreel;
     moduleEnd = true;
 }
@@ -1694,7 +1739,7 @@ function endModuleShowreel() {
     var textPageInstance = $("#module-showreel");
     var moduleWidth = textPageInstance.width();
     TweenMax.to(textPageInstance, .6, {
-        css: { width: "0px" },
+        css: {width: "0px"},
         ease: Quad.easeInOut,
         onComplete: function() {
             destroyVideoJS();
@@ -1729,7 +1774,7 @@ function reverseEndModuleShowreel() {
     if (showreelVideo.length > 0) {
         templateAddMediaVideo(showreelVideo.attr("data-video-type"), showreelVideo, undefined);
     }
-    TweenMax.to(textPageInstance, .4, { css: { width: moduleWidth + "px" }, ease: Quad.easeOut });
+    TweenMax.to(textPageInstance, .4, {css: {width: moduleWidth + "px"}, ease: Quad.easeOut});
     endModuleFunction = endModuleShowreel;
     moduleEnd = true;
 }
@@ -1745,7 +1790,7 @@ function moduleFullscreenVideo() {
     textPageInstance.css("opacity", "0");
     textPageInstance.attr("style", "width:" + width + "px; height:" + height + "px;");
     textPageInstanceHolder.css("visibility", "visible");
-    TweenMax.to(textPageInstance, .6, { css: { opacity: "1" }, ease: Circ.easeOut });
+    TweenMax.to(textPageInstance, .6, {css: {opacity: "1"}, ease: Circ.easeOut});
 
     var fullscreenVideo = $("#video-wrapper", textPageInstanceHolder);
     if (fullscreenVideo.length > 0) {
@@ -1774,7 +1819,8 @@ function modulePricingTables() {
     var textPageInstanceHolder = $(txt_modCont);
     var textPageInstance = $("#module-pricing", textPageInstanceHolder);
 
-    if (textPageInstance.length <= 0) return;
+    if (textPageInstance.length <= 0)
+        return;
 
     var moduleWidth = textPageInstanceHolder.width();
     var moduleHeight = textPageInstanceHolder.height();
@@ -1782,45 +1828,53 @@ function modulePricingTables() {
 
     var val = parseInt(textPageInstanceHolder.css("left"), 10);
     textPageInstanceHolder.css("left", "100%").css("visibility", "visible");
-    TweenMax.to(textPageInstanceHolder, .5, { css: { left: val }, delay: 0.1, ease: Circ.easeOut });
+    TweenMax.to(textPageInstanceHolder, .5, {css: {left: val}, delay: 0.1, ease: Circ.easeOut});
 
     $("#pricing-column-holder", textPageInstance).hover(
-        function() {
-            $(this).css('z-index', 2);
-            if ($.browser.msie) {
-                if ($.browser.version != "8.0" && ($.browser.version == "9.0" && isIE9Std() == true))
-                    if ($(this).hasClass("shadow-side-all-pricing-tables") == false) $(this).addClass("shadow-side-all-pricing-tables");
-            } else {
-                if ($(this).hasClass("shadow-side-all-pricing-tables") == false) $(this).addClass("shadow-side-all-pricing-tables");
+            function() {
+                $(this).css('z-index', 2);
+                if ($.browser.msie) {
+                    if ($.browser.version != "8.0" && ($.browser.version == "9.0" && isIE9Std() == true))
+                        if ($(this).hasClass("shadow-side-all-pricing-tables") == false)
+                            $(this).addClass("shadow-side-all-pricing-tables");
+                } else {
+                    if ($(this).hasClass("shadow-side-all-pricing-tables") == false)
+                        $(this).addClass("shadow-side-all-pricing-tables");
+                }
+                TweenMax.to($("div:first", this), .4, {css: {backgroundColor: themeColor}, ease: Sine.easeOut});
+            },
+            function() {
+                $(this).css('z-index', 1);
+                if ($.browser.msie) {
+                    if ($.browser.version != "8.0" && ($.browser.version == "9.0" && isIE9Std() == true))
+                        if ($(this).hasClass("shadow-side-all-pricing-tables") == true)
+                            $(this).removeClass("shadow-side-all-pricing-tables");
+                } else {
+                    if ($(this).hasClass("shadow-side-all-pricing-tables") == true)
+                        $(this).removeClass("shadow-side-all-pricing-tables");
+                }
+                TweenMax.to($("div:first", this), .4, {css: {backgroundColor: "#909090"}, ease: Sine.easeOut});
             }
-            TweenMax.to($("div:first", this), .4, { css: { backgroundColor: themeColor }, ease: Sine.easeOut });
-        },
-        function() {
-            $(this).css('z-index', 1);
-            if ($.browser.msie) {
-                if ($.browser.version != "8.0" && ($.browser.version == "9.0" && isIE9Std() == true))
-                    if ($(this).hasClass("shadow-side-all-pricing-tables") == true) $(this).removeClass("shadow-side-all-pricing-tables");
-            } else {
-                if ($(this).hasClass("shadow-side-all-pricing-tables") == true) $(this).removeClass("shadow-side-all-pricing-tables");
-            }
-            TweenMax.to($("div:first", this), .4, { css: { backgroundColor: "#909090" }, ease: Sine.easeOut });
-        }
     );
     $("#pricing-column-holder #pricing-buy-holder", textPageInstance).hover(
-        function() { TweenMax.to($(this), .4, { css: { backgroundColor: themeColor }, ease: Sine.easeOut }); },
-        function() { TweenMax.to($(this), .4, { css: { backgroundColor: "#3F3F3F" }, ease: Sine.easeOut }); }
+            function() {
+                TweenMax.to($(this), .4, {css: {backgroundColor: themeColor}, ease: Sine.easeOut});
+            },
+            function() {
+                TweenMax.to($(this), .4, {css: {backgroundColor: "#3F3F3F"}, ease: Sine.easeOut});
+            }
     );
 }
 
 function customHoverAnimation(type, event, parent, child) {
-    var directionCSS = getDirectionCSS(parent, { x: event.pageX, y: event.pageY });
+    var directionCSS = getDirectionCSS(parent, {x: event.pageX, y: event.pageY});
     if (type == "over") {
         child.removeClass();
         child.css("left", directionCSS.from.val1);
         child.css("top", directionCSS.from.val2);
-        TweenMax.to(child, .3, { css: { left: directionCSS.to.val1, top: directionCSS.to.val2 }, ease: Sine.easeInOut });
+        TweenMax.to(child, .3, {css: {left: directionCSS.to.val1, top: directionCSS.to.val2}, ease: Sine.easeInOut});
     } else if (type == "out") {
-        TweenMax.to(child, .3, { css: { left: directionCSS.from.val1, top: directionCSS.from.val2 }, ease: Sine.easeInOut });
+        TweenMax.to(child, .3, {css: {left: directionCSS.from.val1, top: directionCSS.from.val2}, ease: Sine.easeInOut});
     }
 }
 
@@ -1847,7 +1901,7 @@ function moduleFullWidth() {
     textPageInstanceHolder.css("visibility", "visible");
     media.css("height", "200px");
 
-    TweenMax.to(textPageInstanceHolder, .6, { css: { opacity: "1" }, ease: Circ.easeOut });
+    TweenMax.to(textPageInstanceHolder, .6, {css: {opacity: "1"}, ease: Circ.easeOut});
 
     if (media.attr("data-src") != undefined) {
         media.empty().append('<img onload="animateFullWidthMedia(this)" width="100%" />')
@@ -1879,15 +1933,15 @@ function moduleFullWidth() {
 
 function animateFullWidthMedia(src) {
     var inst = $(src);
-    TweenMax.to($(src).parent(), .4, { css: { height: inst.height() }, easing: Sine.easeOut });
+    TweenMax.to($(src).parent(), .4, {css: {height: inst.height()}, easing: Sine.easeOut});
     TweenMax.to(inst, .4, {
-        css: { opacity: '1' },
+        css: {opacity: '1'},
         easing: Sine.easeOut,
         onComplete:
-            function() {
-                $(src).parent().css("overflow", "visible").css("height", "");
-                moduleUpdate_full_width(true);
-            }
+                function() {
+                    $(src).parent().css("overflow", "visible").css("height", "");
+                    moduleUpdate_full_width(true);
+                }
     });
 }
 
@@ -1897,24 +1951,24 @@ function animateFullWidthMedia(src) {
 
 function footerListeners() {
     $("#footer-social").find("#footer-social-holder").find("a").each(
-        function() {
-            var aTitle = $("img", this).attr("title");
-            $(this).hover(
-                function() {
-                    $("#footer-social-tooltip").css("opacity", "0");
-                    $("#footer-social-tooltip").css("display", "inline");
-                    $("#footer-social-tooltip").css("visibility", "visible");
-                    $("#footer-social-tooltip").empty();
-                    $("#footer-social-tooltip").append('<span>' + aTitle + '</span>');
-                    TweenMax.to($("#footer-social-tooltip"), .6, { css: { opacity: "1" }, ease: Circ.easeOut });
-                },
-                function() {
-                    $("#footer-social-tooltip").css("opacity", "0");
-                    $("#footer-social-tooltip").css("display", "none");
-                    $("#footer-social-tooltip").css("visibility", "hidden");
-                    $("#footer-social-tooltip").empty();
-                });
-        });
+            function() {
+                var aTitle = $("img", this).attr("title");
+                $(this).hover(
+                        function() {
+                            $("#footer-social-tooltip").css("opacity", "0");
+                            $("#footer-social-tooltip").css("display", "inline");
+                            $("#footer-social-tooltip").css("visibility", "visible");
+                            $("#footer-social-tooltip").empty();
+                            $("#footer-social-tooltip").append('<span>' + aTitle + '</span>');
+                            TweenMax.to($("#footer-social-tooltip"), .6, {css: {opacity: "1"}, ease: Circ.easeOut});
+                        },
+                        function() {
+                            $("#footer-social-tooltip").css("opacity", "0");
+                            $("#footer-social-tooltip").css("display", "none");
+                            $("#footer-social-tooltip").css("visibility", "hidden");
+                            $("#footer-social-tooltip").empty();
+                        });
+            });
 }
 
 /*----------------- end footerListeners -------------------*/
@@ -1947,7 +2001,7 @@ function activateAnimationLoading() {
     TweenMax.killTweensOf(loadAnim);
     loadAnim.css("right", "-104px").css("display", "inline").css("visibility", "visible");
     if (loadAnim.length > 0) {
-        TweenMax.to(loadAnim, .3, { css: { right: "0px" }, delay: delayAnimationLoading, ease: Circ.easeOut, onComplete: doLoad });
+        TweenMax.to(loadAnim, .3, {css: {right: "0px"}, delay: delayAnimationLoading, ease: Circ.easeOut, onComplete: doLoad});
     } else {
         doLoad();
     }
@@ -1990,7 +2044,7 @@ function loadModule(url) {
         prevURL = url;
         loadContainer.empty().load(url + ' #module-container > *', moduleLoaded);
     }
-    
+
 }
 
 var showModuleInterval = "";
@@ -1998,38 +2052,39 @@ var cc = 0;
 
 function moduleLoaded(response, status, xhr) {
     switch (status) {
-    case "error":
-        console.log("Error loading the page: " + response);
-        break;
-    case "success":
-        if (prevURL != loadURL) {
-            clearCustomInterval(showModuleInterval);
-        } else {
-            clearCustomInterval(showModuleInterval);
-            showModuleInterval = setInterval(function () {
-                if (menuData[2] == oldMenuData[2]) {
-                    clearCustomInterval(showModuleInterval);
-                    loadedContent = true;
-                    var loadAnim = $("#loading-animation");
-                    if (loadAnim.length > 0) {
-                        TweenMax.to(loadAnim, .3, { css: { right: "-104px" }, ease: Circ.easeOut });
-                    }
-                    return;
-                }
-                setMenuData(menuData);
-                var containerStyle = $("#module-container").attr("style");
-                if (containerStyle == undefined) containerStyle = "";
-                $("#module-container").attr("id", "module-container-old").attr("style", containerStyle);
-                $("#load-container").css("visibility", "hidden").attr('id', 'module-container').attr("style", containerStyle);
-                $("#module-container-old").after($("#module-container"));
-                onModuleContentLoaded();
-                $("#template-wrapper").after('<div id="load-container"></div>'); //.css("left", get_OffsetWidth() + "px" )                        
-                showModule();
+        case "error":
+            console.log("Error loading the page: " + response);
+            break;
+        case "success":
+            if (prevURL != loadURL) {
                 clearCustomInterval(showModuleInterval);
-            }, 50);
-        }
-        
-        break;
+            } else {
+                clearCustomInterval(showModuleInterval);
+                showModuleInterval = setInterval(function() {
+                    if (menuData[2] == oldMenuData[2]) {
+                        clearCustomInterval(showModuleInterval);
+                        loadedContent = true;
+                        var loadAnim = $("#loading-animation");
+                        if (loadAnim.length > 0) {
+                            TweenMax.to(loadAnim, .3, {css: {right: "-104px"}, ease: Circ.easeOut});
+                        }
+                        return;
+                    }
+                    setMenuData(menuData);
+                    var containerStyle = $("#module-container").attr("style");
+                    if (containerStyle == undefined)
+                        containerStyle = "";
+                    $("#module-container").attr("id", "module-container-old").attr("style", containerStyle);
+                    $("#load-container").css("visibility", "hidden").attr('id', 'module-container').attr("style", containerStyle);
+                    $("#module-container-old").after($("#module-container"));
+                    onModuleContentLoaded();
+                    $("#template-wrapper").after('<div id="load-container"></div>'); //.css("left", get_OffsetWidth() + "px" )                        
+                    showModule();
+                    clearCustomInterval(showModuleInterval);
+                }, 50);
+            }
+
+            break;
     }
 }
 
@@ -2074,7 +2129,7 @@ function get_OffsetWidth() {
 /*----------------- start Utils Methods -------------------*/
 
 function animateMedia(img) {
-    TweenMax.to(img, 0.4, { css: { opacity: "1" }, easing: Sine.easeOut });
+    TweenMax.to(img, 0.4, {css: {opacity: "1"}, easing: Sine.easeOut});
 }
 
 function templateAddMediaVideo(videoType, elem, elemParent) {
@@ -2084,7 +2139,7 @@ function templateAddMediaVideo(videoType, elem, elemParent) {
     var videoEmbedCode = "";
     if (videoType == "standalone") {
         videoEmbedCode += '<video id="standalone-wrapper" class="video-js vjs-default-skin" controls preload="none" width="' + elem.attr("data-width") + '" height="' + elem.attr("data-height") + '"'
-            + 'poster="' + elem.attr("data-poster") + '">';
+                + 'poster="' + elem.attr("data-poster") + '">';
         for (var i = 1; i <= 3; i++) {
             videoEmbedCode += '<source src="' + $(elem).attr("data-url" + i) + '" type="' + $(elem).attr("data-type" + i) + '" />';
         }
@@ -2095,12 +2150,12 @@ function templateAddMediaVideo(videoType, elem, elemParent) {
             if ($.browser.version == "8.0" || ($.browser.version == "9.0" && isIE9Std() == false)) {
                 url = url.replace("http://www.youtube.com/embed/", "http://www.youtube.com/v/");
                 videoEmbedCode = '<object width="' + elem.attr("data-width") + '" height="' + elem.attr("data-height") + '">' + '<param name="movie" value="' + url + '?fs=1&enablejsapi=1"></param>' +
-                    '<param name="allowFullScreen" value="true"></param>' +
-                    '<param name="allowScriptAccess" value="always"></param>' +
-                    '<embed id="ytplayer" src="' + url + '?fs=1&enablejsapi=1"' + 'type="application/x-shockwave-flash"' +
-                    'allowfullscreen="true"' + 'allowscriptaccess="always"' + 'width="' + elem.attr("data-width") + '" height="' + elem.attr("data-height") + '">' +
-                    '</embed>' +
-                    '</object>';
+                        '<param name="allowFullScreen" value="true"></param>' +
+                        '<param name="allowScriptAccess" value="always"></param>' +
+                        '<embed id="ytplayer" src="' + url + '?fs=1&enablejsapi=1"' + 'type="application/x-shockwave-flash"' +
+                        'allowfullscreen="true"' + 'allowscriptaccess="always"' + 'width="' + elem.attr("data-width") + '" height="' + elem.attr("data-height") + '">' +
+                        '</embed>' +
+                        '</object>';
             }
         }
     }
@@ -2109,14 +2164,14 @@ function templateAddMediaVideo(videoType, elem, elemParent) {
     parent.css("opacity", "0").css("visibility", "visible");
     if (videoType == "standalone") {
         var ready = false;
-        videojsHolder = _V_("standalone-wrapper", { }, function() {
+        videojsHolder = _V_("standalone-wrapper", {}, function() {
             if (ready == false) {
                 ready = true;
-                TweenMax.to([$("#standalone-wrapper"), parent], .6, { css: { opacity: "1" }, ease: Circ.easeOut });
+                TweenMax.to([$("#standalone-wrapper"), parent], .6, {css: {opacity: "1"}, ease: Circ.easeOut});
             }
         });
     } else {
-        TweenMax.to(parent, .6, { css: { opacity: "1" }, ease: Circ.easeOut });
+        TweenMax.to(parent, .6, {css: {opacity: "1"}, ease: Circ.easeOut});
     }
 }
 
@@ -2133,7 +2188,7 @@ function destroyVideoJS() {
         videojsHolder.tech.destroy(); /* destroy the parts of the player which are specific to html5 or flash */
         videojsHolder.destroy(); /* destroy the player */
         $(videojsHolder.el).remove(); /* remove the entire player from the dom */
-        videojsHolder.players = { };
+        videojsHolder.players = {};
     }
 }
 
@@ -2148,14 +2203,14 @@ function resizeImage(image, animate) {
     image.removeAttr('width');
     image.removeAttr('height');
     var ww = $(window).width() - get_OffsetWidth(),
-        wh = $(window).height(),
-        iw = image.width(),
-        ih = image.height(),
-        rw = wh / ww,
-        ri = ih / iw,
-        newWidth, newHeight,
-        newLeft, newTop,
-        properties;
+            wh = $(window).height(),
+            iw = image.width(),
+            ih = image.height(),
+            rw = wh / ww,
+            ri = ih / iw,
+            newWidth, newHeight,
+            newLeft, newTop,
+            properties;
 
     if (rw > ri) {
         newWidth = wh / ri;
@@ -2167,7 +2222,7 @@ function resizeImage(image, animate) {
     if (animate == undefined || animate == false) {
         image.css("width", newWidth).css("height", newHeight);
     } else if (animate == true) {
-        TweenMax.to(image, .6, { css: { width: newWidth, height: newHeight }, ease: Sine.easeOut });
+        TweenMax.to(image, .6, {css: {width: newWidth, height: newHeight}, ease: Sine.easeOut});
     }
 }
 
@@ -2186,10 +2241,11 @@ function rgb2hex(rgb) {
 }
 
 function mobileConsole(text, value, clear, displayConsole) {
-    if (clear != undefined && clear == true) $("#console-log").empty();
+    if (clear != undefined && clear == true)
+        $("#console-log").empty();
     $("#console-log").append('<span>' + text + ' ' + value + '</span>');
     if (displayConsole == true) {
         $("#console-log").css("display", "inline");
     }
 }
-	/*----------------- end Utils Methods ---------------------*/
+/*----------------- end Utils Methods ---------------------*/

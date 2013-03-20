@@ -1,5 +1,3 @@
-﻿/*================= CONTACT ================================*/
-
 function moduleContact() {
     var textPageInstanceHolder = $(txt_modCont);
     var textPageInstance = $("#module-wrapper", textPageInstanceHolder);
