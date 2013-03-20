@@ -1,4 +1,4 @@
-﻿/// <reference path="portfolioPage.js"/>
+/// <reference path="portfolioPage.js"/>
 
 var columnsPreviewOpen = false;
 var previewAnimDone = true;
@@ -9,6 +9,7 @@ var $originalDataPos = 0;
 var modulePageColumnsCurrentSelectedId = "*";
 var previewMediaArrAll = Array();
 var previewMediaDescArrAll = Array();
+var modulePageColumnsInitedAndNocheckColumnSize = false;
 
 function loadFullWidthPreviewFromThumb(thumb) {
     $("#module-columns-holder .fourth-thumb-holder").attr("data-selected", "false");
@@ -23,16 +24,15 @@ function loadFullWidthPreviewFromThumb(thumb) {
             modulePageColumnsCurrentSelectedId == "*") {
             j++;
         }
-        if ($(this).attr("data-selected") == "true") {
-            i = j;
-        }
+        if ($(this).attr("data-selected") == "true") i = j;
+        
     });
     
     loadFullWidthPreview(i);
 }
 
 function modulePageColumns() {
-    
+    modulePageColumnsInitedAndNocheckColumnSize = true;
     columnsPreviewOpen = false;
     previewAnimDone = true;
     columnsPreviewIndex = 0;
@@ -48,8 +48,7 @@ function modulePageColumns() {
         columnItemWrapper.css("overflow", "").css("-webkit-overflow-scrolling", "");
         columnItemWrapper.css("overflow", "auto").css("-webkit-overflow-scrolling", "touch");
     }
-
-    checkColumnSize();
+    
     moduleUpdate(textPageInstanceHolder, columnItemWrapper, $("div:first", columnItemWrapper), sideType);
 
     var val = Math.abs($("#module-container").width() - textPageInstanceHolder.width()) * .5;
@@ -287,6 +286,9 @@ var initialColumns = 0;
 var maxColumns = 4;
 
 function checkColumnSize(adjustPreview) {
+    if(adjustPreview){
+        alert("asdas");
+    }
     var textPageInstanceHolder = $(txt_modCont);
     var textPageInstance = $("#module-columns", textPageInstanceHolder);
     var modulePositionType = textPageInstanceHolder.attr("data-id");
@@ -327,23 +329,8 @@ function checkColumnSize(adjustPreview) {
         initialColumns--;
     }
 
-    if (adjustPreview != undefined && adjustPreview == true) {
-        var thumbNewW = columns * (elementW + marginRight) - marginRight
-        var newWidth = thumbNewW + parseInt($("#module-columns-container").css("margin-left"), 10) + parseInt($("#module-columns-container").css("margin-right"), 10);
-        
-
-        if (thumbNewW < 768) {
-            prevMedia.css("width", thumbNewW + "px");
-            prevDesc.css("margin-left", "0px").css("width", "100%");
-        } else {
-            prevMedia.css("width", "");
-            prevDesc.css("margin-left", "").css("width", "");
-        }
-        
-        var elMargR = parseInt($("li:first", ".columns-preview-horizontal-fix ul").css("margin-right"), 10);
-        $(".columns-preview-horizontal-fix ul").css("left", -(columnsPreviewIndex * (prevListW + elMargR)));
-    }
-    if (initialColumns != columns) {
+    if (initialColumns != columns || !modulePageColumnsInitedAndNocheckColumnSize) {
+        modulePageColumnsInitedAndNocheckColumnSize = false;
         var lin = 0;
         var col = 0
         var newH = 0;
