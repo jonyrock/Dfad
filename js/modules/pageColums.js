@@ -151,13 +151,16 @@ function modulePageColumns() {
     });
     //TODO: move it to lib
     $("#filter-buttons-holder .jquery-selectbox-moreButton").text("▼");
+    $("#filter-buttons-holder .jquery-selectbox-currentItem").click(function(){
+      $(this).parent().find(".jquery-selectbox-moreButton").trigger("click");
+    })
     $("#filter-buttons-holder .jquery-selectbox-list").css("height", "");
     $("#filter-buttons-holder .jquery-selectbox").css("width", "");
     $("#filter-buttons-holder .jquery-selectbox-list").css("width", "");
 
     $("#filter-buttons-holder").attr("data-folded", "true");
-    if (needToShowDropdown)
-        $("#filter-buttons-dropdown").hide();
+    
+    if (needToShowDropdown) $("#filter-buttons-dropdown").hide();
 
     // set portfolio full view page
     setFullWidthPreview();
@@ -300,25 +303,20 @@ function checkColumnSize(adjustPreview) {
 
     if (textPageInstance.length <= 0) return;
 
-    if (thumbType == "fourth-thumb-holder") {
-        maxColumns = 4;
-    }
-    if (thumbType == "third-thumb-holder") {
-        maxColumns = 3;
-    }
-    if (thumbType == "half-thumb-holder") {
-        maxColumns = 2;
-    }   
-
-    if (columns > maxColumns) {
-        columns = maxColumns;
-    }
+    if (thumbType == "fourth-thumb-holder") maxColumns = 4;
+    if (thumbType == "third-thumb-holder")  maxColumns = 3;
+    if (thumbType == "half-thumb-holder")   maxColumns = 2;
+    
+    if (columns > maxColumns) columns = maxColumns;
+    
 
     initialColumns = columns;
     var prevMedia = $(".columns-preview-media");
     var prevDesc = $(".columns-preview-description");
     var thumbNewW = columns * (elementW + marginRight) - marginRight
-    var newWidth = thumbNewW + parseInt($("#module-columns-container").css("margin-left"), 10) + parseInt($("#module-columns-container").css("margin-right"), 10);
+    var newWidth = thumbNewW 
+            + parseInt($("#module-columns-container").css("margin-left"), 10) 
+            + parseInt($("#module-columns-container").css("margin-right"), 10);
     if (visibleWidth < newWidth) {
         if (columns > 1) columns--;
         else initialColumns--;
