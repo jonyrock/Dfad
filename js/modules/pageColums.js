@@ -32,7 +32,7 @@ function loadFullWidthPreviewFromThumb(thumb) {
 }
 
 function modulePageColumns() {
-    modulePageColumnsInitedAndNocheckColumnSize = true;
+    modulePageColumnsInitedAndNocheckColumnSize = false;
     columnsPreviewOpen = false;
     previewAnimDone = true;
     columnsPreviewIndex = 0;
@@ -286,9 +286,6 @@ var initialColumns = 0;
 var maxColumns = 4;
 
 function checkColumnSize(adjustPreview) {
-    if(adjustPreview){
-        alert("asdas");
-    }
     var textPageInstanceHolder = $(txt_modCont);
     var textPageInstance = $("#module-columns", textPageInstanceHolder);
     var modulePositionType = textPageInstanceHolder.attr("data-id");
@@ -330,7 +327,7 @@ function checkColumnSize(adjustPreview) {
     }
 
     if (initialColumns != columns || !modulePageColumnsInitedAndNocheckColumnSize) {
-        modulePageColumnsInitedAndNocheckColumnSize = false;
+        modulePageColumnsInitedAndNocheckColumnSize = true;
         var lin = 0;
         var col = 0
         var newH = 0;
