@@ -10,12 +10,17 @@ var menuData = "";
 $(function () {
     
     $(".menu-option-holder").mouseenter(function () {
+        if(touchDevice){
+            $(this).find("a").trigger("click");
+            return;
+        }
         if ($(this).find(".menu-option-background-selected").length > 0) return;
         var back = $(this).find(".menu-option-background").show();
         TweenMax.to(back, menuAnimDuration, { css: { left: "20px"}, ease: menuAnimEase });
     });
 
     $(".menu-option-holder").mouseleave(function () {
+        if(touchDevice) return;
         if ($(this).find(".menu-option-background-selected").length > 0) return;
         var back = $(this).find(".menu-option-background");
         TweenMax.to(back, menuAnimDuration, { css: { left: "240px"}, ease: menuAnimEase });
@@ -24,7 +29,9 @@ $(function () {
     $(".menu-option-text a").click(function () {
         var menuOptionHolder = $(this).parent().parent();
         var isComplex = menuOptionHolder.find(".sub-menu-holder").length > 0;
-        if (menuOptionHolder.find(".menu-option-background-selected").length > 0 && !isComplex) return;
+        if (menuOptionHolder.find(".menu-option-background-selected").length > 0 && !isComplex){ 
+             return;
+        }
         // hide others
         $(".menu-option-background-selected").hide().attr("class", "menu-option-background");
         if(!isComplex)
@@ -205,7 +212,8 @@ function storeMenuArr() {
 }
 
 function menuOptionIn(idx1, idx2) {
-    if (menuOptionsArr[idx1][2].attr("class") == "menu-option-background-selected") return;
+    
+    //if (menuOptionsArr[idx1][2].attr("class") == "menu-option-background-selected") return;
     $(".menu-option-background-selected").attr("style", "").attr("class", "menu-option-background");
     menuOptionsArr[idx1][2].attr("class", "menu-option-background-selected");
     menuOptionsArr[idx1][2].attr("style", "");
