@@ -124,6 +124,13 @@ function loadFullWidthPreview(index) {
     currIndex = index;
     previewFullWidthOpen = true;
     var fullWidthPreview = $("#full-width-preview");
+    
+    $(fullWidthPreview).wipetouch({
+            allowDiagonal: false,
+            wipeLeft: function(result) { changeFullWidthPreviewMedia(1); },
+            wipeRight: function(result) { changeFullWidthPreviewMedia(-1); },
+    });
+    
     var fwMediaContainer = $("#full-width-preview-media-holder");
     if (fullWidthPreview.length <= 0) return;
     fullWidthPreview.css("opacity", "0");
@@ -349,7 +356,11 @@ function fullWidthFadeInMedia(mediaType) {
 
 var animationLoadFWPreviewDone = true;
 
+
+
+
 function changeFullWidthPreviewMedia(value) {
+    if(!previewFullWidthOpen) return;
     var nextThumbID = currIndex + value;
     if (nextThumbID > previewMediaArr.length - 1) {
         nextThumbID = 0;
@@ -380,13 +391,13 @@ function changeFullWidthPreviewMedia(value) {
     if(value > 0 && touchDevice){
         var me = $(".preview-arrow-forward");
         $(me).find(".preview-arrow-backg").css("backgroundColor", themeColor);
-        TweenMax.to($(".preview-arrow-backg", me), 1, 
+        TweenMax.to($(".preview-arrow-backg", me), .3, 
             { css: { backgroundColor: initBackColor }, easing: Sine.easeOut }); 
     }
     if(value < 0 && touchDevice){
         var me = $(".preview-arrow-backward");
         $(me).find(".preview-arrow-backg").css("backgroundColor", themeColor);
-        TweenMax.to($(".preview-arrow-backg", me), 1, 
+        TweenMax.to($(".preview-arrow-backg", me), .3, 
             { css: { backgroundColor: initBackColor }, easing: Sine.easeOut }); 
     }
         
