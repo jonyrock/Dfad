@@ -296,12 +296,16 @@ function animateFullWidthPreviewMedia() {
 
 var justOpenedPreivew = true;
 
+function getInitBackColor(){
+    return rgb2hex($(".preview-arrow-backward .preview-arrow-backg").css("background-color"));
+}
+
 function fullWidthFadeInMedia(mediaType) {
     if (mediaType == "preview-media-image") {
         TweenMax.to($("#preview-media-load"), .6, { css: { opacity: "1" }, ease: Circ.easeOut });
     }
 
-    if (justOpenedPreivew == true) {
+    if (justOpenedPreivew) {
         justOpenedPreivew = false;
         var fwMediaContainer = $("#full-width-preview-media-holder");
         var tW = fwMediaContainer.width() - 60;
@@ -313,25 +317,31 @@ function fullWidthFadeInMedia(mediaType) {
         prevControlForw.css("opacity", "1").css("display", "inline");
         //TweenMax.to([prevControlClose, prevControlBack, prevControlForw], .6, { css: { opacity: "1" }, ease: Circ.easeInOut });
         var initOpacity = 1;
-        var initBackColor = rgb2hex($(".preview-arrow-backward .preview-arrow-backg").css("background-color"));
+        var initBackColor = getInitBackColor();
         $(".preview-arrow-backward, .preview-arrow-forward, .preview-arrow-close").unbind('mouseenter mouseleave');
-        $(".preview-arrow-backward, .preview-arrow-forward, .preview-arrow-close").hover(
-            function () { TweenMax.to($(".preview-arrow-backg", this), 0.3, { css: { backgroundColor: themeColor }, easing: Sine.easeOut }); },
-            function () { TweenMax.to($(".preview-arrow-backg", this), 0.3, { css: { backgroundColor: initBackColor }, easing: Sine.easeOut }); }
-        );
+        
+        if(!touchDevice) {
+            $(".preview-arrow-backward, .preview-arrow-forward, .preview-arrow-close").hover(
+                function () { TweenMax.to($(".preview-arrow-backg", this), 0.3, 
+                    { css: { backgroundColor: themeColor }, easing: Sine.easeOut }); },
+                function () { TweenMax.to($(".preview-arrow-backg", this), 0.3, 
+                    { css: { backgroundColor: initBackColor }, easing: Sine.easeOut }); }
+            );
+        } 
+            
         $(".preview-arrow-backward").unbind("click");
         $(".preview-arrow-forward").unbind("click");
         $(".preview-arrow-backward").click(
             function () {
                 TweenMax.to($(".full-width-preview-media-loader"), .3, { css: { opacity: "1" }, easing: Sine.easeOut });
                 changeFullWidthPreviewMedia(-1);
-            });
+        });
         $(".preview-arrow-forward").click(
             function () {
                 TweenMax.to($(".full-width-preview-media-loader"), .3, { css: { opacity: "1" }, easing: Sine.easeOut });
                 changeFullWidthPreviewMedia(1);
-            });
-
+        });
+        
         //update counter
         changeFullWidthPreviewMedia(0);
     }
@@ -364,6 +374,23 @@ function changeFullWidthPreviewMedia(value) {
 
     //update counter
     $("#full-width-preview .preview-counter span").text((currIndex + 1) + "/" + previewMediaArr.length);
+    
+    var initBackColor = getInitBackColor();
+    
+    if(value > 0 && touchDevice){
+        var me = $(".preview-arrow-forward");
+        $(me).find(".preview-arrow-backg").css("backgroundColor", themeColor);
+        TweenMax.to($(".preview-arrow-backg", me), 1, 
+            { css: { backgroundColor: initBackColor }, easing: Sine.easeOut }); 
+    }
+    if(value < 0 && touchDevice){
+        var me = $(".preview-arrow-backward");
+        $(me).find(".preview-arrow-backg").css("backgroundColor", themeColor);
+        TweenMax.to($(".preview-arrow-backg", me), 1, 
+            { css: { backgroundColor: initBackColor }, easing: Sine.easeOut }); 
+    }
+        
+    
 }
 
 function setFullWidthPreview() {
