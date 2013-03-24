@@ -126,7 +126,8 @@ function loadFullWidthPreview(index) {
     previewFullWidthOpen = true;
     var fullWidthPreview = $("#full-width-preview");
     
-    if(touchDevice){
+    if(touchDevice && $("#full-width-preview").attr("hasWipeTouch") === undefined){
+        $("#full-width-preview").attr("hasWipeTouch","true");
         $(fullWidthPreview).wipetouch({
                 allowDiagonal: false,
                 wipeLeft: function(result) { changeFullWidthPreviewMedia(1); },
