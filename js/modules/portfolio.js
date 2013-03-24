@@ -117,7 +117,8 @@ function updateFullWidthPreviewPosition() {
         var mediaBackMarginLeft = -mediaBackNewW * .5;
         $("#preview-media-holder").attr("style", "width: 100%; height: 100%; margin: 0px; top: 50%; left: 50%; margin-top:" + mediaBackMarginTop + "px; margin-left:" + mediaBackMarginLeft + "px;");
     }
-    $("#preview-media-holder #scrollbar1").tinyscrollbar_update();
+    if(!touchDevice)
+        $("#preview-media-holder #scrollbar1").tinyscrollbar_update();
 }
 
 function loadFullWidthPreview(index) {
@@ -126,11 +127,11 @@ function loadFullWidthPreview(index) {
     var fullWidthPreview = $("#full-width-preview");
     
     if(touchDevice){
-    $(fullWidthPreview).wipetouch({
-            allowDiagonal: false,
-            wipeLeft: function(result) { changeFullWidthPreviewMedia(1); },
-            wipeRight: function(result) { changeFullWidthPreviewMedia(-1); },
-    });
+        $(fullWidthPreview).wipetouch({
+                allowDiagonal: false,
+                wipeLeft: function(result) { changeFullWidthPreviewMedia(1); },
+                wipeRight: function(result) { changeFullWidthPreviewMedia(-1); },
+        });
     }
     
     var fwMediaContainer = $("#full-width-preview-media-holder");
@@ -243,12 +244,17 @@ function loadFullWidthMedia() {
 
         var prevMediaHolder = $("#preview-media-holder");
         prevMediaHolder.attr("style", "width: 100%; height: 100%; margin: 0px;");
-
-        prevMediaHolder.append('<div id="scrollbar1"></div>');
-        prevMediaHolder = prevMediaHolder.find("#scrollbar1");
-        prevMediaHolder.append('<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>');
+        
+        if(!touchDevice){
+            prevMediaHolder.append('<div id="scrollbar1"></div>');
+            prevMediaHolder = prevMediaHolder.find("#scrollbar1");
+            prevMediaHolder.append('<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>');
+        }
         prevMediaHolder.append('<div class="viewport"><div class="overview"></div></div>');
+        
         var tergetBlockHolder = prevMediaHolder.find(".viewport .overview");
+        
+        
         
         var i = 0;
         currPreviewElem.find("#video-wrapper").each(function () {
@@ -262,16 +268,18 @@ function loadFullWidthMedia() {
         });
 
         
-
         // set design
         TweenMax.to($(".full-width-preview-media-loader"), .3, { css: { opacity: "0" }, easing: Sine.easeOut });
         loadingAnimationDone = true;
         animationLoadFWPreviewDone = true;
         fullWidthFadeInMedia(mediaType);
         
-        prevMediaHolder.tinyscrollbar();
-
-            
+        if(touchDevice){
+            $(tergetBlockHolder).css("overflow", "auto").css("height", "100%")
+                    .css("-webkit-overflow-scrolling", "touch").parent().css("height","100%");
+        } else {
+            prevMediaHolder.tinyscrollbar();
+        }
 
     }
 
