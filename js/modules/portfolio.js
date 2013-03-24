@@ -125,11 +125,13 @@ function loadFullWidthPreview(index) {
     previewFullWidthOpen = true;
     var fullWidthPreview = $("#full-width-preview");
     
+    if(touchDevice){
     $(fullWidthPreview).wipetouch({
             allowDiagonal: false,
             wipeLeft: function(result) { changeFullWidthPreviewMedia(1); },
             wipeRight: function(result) { changeFullWidthPreviewMedia(-1); },
     });
+    }
     
     var fwMediaContainer = $("#full-width-preview-media-holder");
     if (fullWidthPreview.length <= 0) return;
@@ -250,7 +252,8 @@ function loadFullWidthMedia() {
         
         var i = 0;
         currPreviewElem.find("#video-wrapper").each(function () {
-            tergetBlockHolder.append('<div id="video-wrapper' + i + '" style="width:100%"></div>');
+            tergetBlockHolder.append('<div id="video-wrapper' + i 
+                    + '" style="width:100%; height:' + prevMediaHolder.height() + 'px"></div>');
             templateAddMediaVideo(
                 $(this).attr("data-video-type"),
                 $(this),
@@ -265,8 +268,10 @@ function loadFullWidthMedia() {
         loadingAnimationDone = true;
         animationLoadFWPreviewDone = true;
         fullWidthFadeInMedia(mediaType);
-
+        
         prevMediaHolder.tinyscrollbar();
+
+            
 
     }
 
@@ -347,7 +352,8 @@ function fullWidthFadeInMedia(mediaType) {
             function () {
                 TweenMax.to($(".full-width-preview-media-loader"), .3, { css: { opacity: "1" }, easing: Sine.easeOut });
                 changeFullWidthPreviewMedia(1);
-        });
+            }
+        );
         
         //update counter
         changeFullWidthPreviewMedia(0);
