@@ -40,6 +40,7 @@ function moduleContact() {
     moduleEnd = true;
 
     moduleContactInitMap();
+    moduleUpdate_contact();
 }
 
 function moduleContactInitMap() {

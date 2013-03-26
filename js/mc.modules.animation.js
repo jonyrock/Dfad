@@ -10,7 +10,7 @@ var templateBaseURL = "http://" + window.location.host + "/";
 var themeColor = "#00aaff";
 //var moduleContainerMarginLeft = 308;
 var moduleContainerMarginLeft = 240;
-var menuActive = true;http://javascript.info/tutorial/with-operator
+var menuActive = true;
 var menuHoverActive = true;
 var menuOptionHoverMarginLeft = 18;
 var menuOptionHoverWidth = 200;
@@ -1278,68 +1278,17 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
             }
         }
     } else {
-        /*remove scrollbar if present and add overflow for touch devices*/
-        var valTop = pModH - cConH;
-        switch (modSide) {
-            case "none":
-                if (pModH >= cConH && pCon.length > 0) {
-                    if (mPos != "module-position-bc") {
-                        pCon.parent(pCon).css("top", Math.round(valTop * 0.5) + "px");
-                    } else {
-                        pCon.parent(pCon).css("top", Math.round(valTop) + "px");
-                    }
-                } else {
-                    pCon.parent(pCon).css("top", "0px");
-                }
-                break;
-            case "height":
-                if (cCon.length > 0)
-                    cCon.css("top", "0px");
-                break;
-            case "width":
-                break;
-            case "custom":
-                if (cCon.length > 0)
-                    if (anim == true) {
-                        TweenMax.to(cCon, .3, {css: {top: "0px"}, ease: Sine.easeOut});
-                    } else {
-                        cCon.css("top", "0px");
-                    }
-                break;
-        }
-
-        if (cCon.length <= 0 || pCon.length <= 0)
-            return;
-        pCon.css("overflow", "").css("-webkit-overflow-scrolling", "");
-        clearCustomInterval(updateInterval);
-        updateInterval = setInterval(function() {
-            pCon.css("overflow", "auto").css("-webkit-overflow-scrolling", "touch");
-            clearCustomInterval(updateInterval);
-        }, 100);
-
-        if (currModuleType == "news" && previewNewsOpen == true) {
-            TweenMax.to(pCon, .3, {scrollTop: 0, easing: Sine.easeOut});
-        }
-        if (currModuleType == "page_columns" && columnsPreviewOpen == true) {
-            TweenMax.to(pCon, .3, {scrollTop: 0, easing: Sine.easeOut});
-        } else if (currModuleType == "page_columns" && columnsPreviewOpen == false) {
-            pCon.scrollTop(custStartPos)
-        }
-
-        if (mPos == "module-position-bc" || mPos == "module-position-cc") {
-            if (currModuleType == "text_page" && modSide == "none") {
-                $("#module-text-page", $(txt_modCont)).css("height", "");
-            }
-            if (winH <= pConH && $("#module-text-page", $(txt_modCont)).length > 0) {
-                $("#module-text-page", $(txt_modCont)).css("height", "");
-                $("#module-text-page", $(txt_modCont)).css("height", "100%");
-            }
-            var value = Math.round((($("#module-container").width() - pConW) * .5 /*+ get_OffsetWidth()*/));
-            if (anim == true) {
-                TweenMax.to(pMod, .6, {css: {left: value + "px"}, ease: Sine.easeOut});
-            } else {
-                pMod.css("left", value + "px");
-            }
+        pCon.css("overflow", "auto")
+            .css("-webkit-overflow-scrolling", "touch");
+        var menuWidth = $("#menu-container").width();
+        var maxPossibleWidth = winW - menuWidth;
+        //alert($(pCon).att)
+        if(cConW > maxPossibleWidth){
+            pCon.css("width", maxPossibleWidth + "px");
+        } else {
+            //TODO: do it in a better way
+            if(cCon.attr("id") == "module-galleries-holder")
+            pCon.css("left", ((maxPossibleWidth - cConW) / 2) +"px");
         }
     }
 }
@@ -1864,74 +1813,6 @@ function customHoverAnimation(type, event, parent, child) {
         TweenMax.to(child, .3, {css: {left: directionCSS.from.val1, top: directionCSS.from.val2}, ease: Sine.easeInOut});
     }
 }
-
-/*================= FULL WIDTH =============================*/
-
-function moduleFullWidth() {
-    var textPageInstanceHolder = $(txt_modCont);
-    var textPageInstance = $("#module-full-width", textPageInstanceHolder);
-    var modWrapper = $("#module-wrapper", textPageInstance);
-    if (textPageInstance.length <= 0) {
-        return;
-    }
-    var currWindowW = $(window).width() - get_OffsetWidth();
-    var media = $("#module-full-width-media");
-    if (touchDevice) {
-        currWindowW = $(window).width() - templateMenuW;
-    }
-
-    textPageInstance.css("width", currWindowW);
-    if ($("#module-full-width-holder-text", textPageInstance).height() > $(window).height() && !touchDevice) {
-        currWindowW = currWindowW - $(t_scrBarV2).width();
-    }
-    textPageInstanceHolder.css("opacity", "0");
-    textPageInstanceHolder.css("visibility", "visible");
-    media.css("height", "200px");
-
-    TweenMax.to(textPageInstanceHolder, .6, {css: {opacity: "1"}, ease: Circ.easeOut});
-
-    if (media.attr("data-src") != undefined) {
-        media.empty().append('<img onload="animateFullWidthMedia(this)" width="100%" />')
-        $("img", media).css("opacity", "0").attr("src", media.attr("data-src"));
-    } else {
-        var vidMedia = $("#video-wrapper", media);
-        if (touchDevice) {
-            if (vidMedia.children().length > 0) {
-                tempVid = $("div:first", vidMedia);
-                media.empty();
-                media.append(tempVid);
-
-            }
-        }
-        vidMedia = $("#video-wrapper", media);
-
-        if (vidMedia.length > 0) {
-            textPageInstance.css("width", currWindowW);
-            vidMedia.attr("data-width", media.width());
-            media.css("height", vidMedia.attr("data-height"));
-            moduleUpdate(textPageInstanceHolder, modWrapper, $("div:first", modWrapper), sideType);
-            templateAddMediaVideo(vidMedia.attr("data-video-type"), vidMedia, undefined);
-            moduleUpdate_full_width(true);
-        } else {
-            moduleUpdate_full_width(true);
-        }
-    }
-}
-
-function animateFullWidthMedia(src) {
-    var inst = $(src);
-    TweenMax.to($(src).parent(), .4, {css: {height: inst.height()}, easing: Sine.easeOut});
-    TweenMax.to(inst, .4, {
-        css: {opacity: '1'},
-        easing: Sine.easeOut,
-        onComplete:
-                function() {
-                    $(src).parent().css("overflow", "visible").css("height", "");
-                    moduleUpdate_full_width(true);
-                }
-    });
-}
-
 /*----------------- end Modules Methods -------------------*/
 
 /*----------------- start footerListeners -----------------*/

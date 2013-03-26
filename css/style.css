@@ -1849,7 +1849,7 @@ footer
     height:330px;
     background-color:#FFFFFF;	
 }
-#module-contact-holder
+.module-contact-holder
 {
     float: left;
     min-width: 188px;
