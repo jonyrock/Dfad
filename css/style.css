@@ -180,7 +180,13 @@ body
 }
 .template-menu
 {
-    width:230px    
+    width:216px;
+    clear:both;
+    position:relative;
+    margin-left: 20px;
+    float:left;
+    z-index:9;
+    overflow: hidden;
 }
 .menu-option-holder, 
 .menu-option-background-selected,
@@ -207,7 +213,6 @@ body
 
 .menu-option-text
 {
-    margin-left: 20px;
     margin-top:2px;
 }
 
@@ -293,15 +298,6 @@ submenu holder has overflow hidden */
     left: 55px;
     cursor: pointer;
 }
-.template-menu
-{
-    clear:both;
-    position:relative;
-    float:left;
-    padding:0;	
-    z-index:9;
-    overflow: hidden;
-}
 
 .menu-option-holder, .sub-menu-option-holder
 {
@@ -338,15 +334,16 @@ submenu holder has overflow hidden */
 {
     position:absolute;
     z-index:2;
+    width: 196px;
 }
 .menu-option-text a, .menu-option-sign, .sub-menu-option-text a
 {
     display:block;
     padding-top:10px;
     padding-bottom:10px;
-    padding-left:14px;
     font-family: PT Sans Caption, Arial; /*'Open Sans',sans-serif;*/
-    font-size: 12px;	
+    font-size: 12px;
+    padding-left: 14px;
     /*letter-spacing:1px;*/
     color: #FFF;
     overflow:hidden;	
