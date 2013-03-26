@@ -9,33 +9,9 @@ var menuData = "";
 
 $(function () {
     
-    $(".menu-option-holder").mouseenter(function () {
-        if(touchDevice){
-            $(this).find("a").trigger("click");
-            return;
-        }
-        if ($(this).find(".menu-option-background-selected").length > 0) return;
-        var back = $(this).find(".menu-option-background").show();
-        TweenMax.to(back, menuAnimDuration, { css: { left: "20px"}, ease: menuAnimEase });
-    });
-    
-    if(!touchDevice)
-    $(".menu-option-holder").mouseleave(function () {
-        if ($(this).find(".menu-option-background-selected").length > 0) return;
-        var back = $(this).find(".menu-option-background");
-        TweenMax.to(back, menuAnimDuration, { css: { left: "240px"}, ease: menuAnimEase });
-    });
-
     $(".menu-option-text a").click(function () {
         var menuOptionHolder = $(this).parent().parent();
         var isComplex = menuOptionHolder.find(".sub-menu-holder").length > 0;
-        if (menuOptionHolder.find(".menu-option-background-selected").length > 0 && !isComplex){ 
-             return;
-        }
-        // hide others
-        $(".menu-option-background-selected").hide().attr("class", "menu-option-background");
-        if(!isComplex)
-            $(menuOptionHolder).find("#menu-option-background").attr("class", "menu-option-background-selected");
         
         if (isComplex && window.location.hash.indexOf("index") == -1) {
             menuOptionHolder.find("a[href='#index.html']").trigger("click");
@@ -47,34 +23,13 @@ $(function () {
 });
 
 function menuListeners() {
-    menuWidth = "200px";
+    
     /* We add 2 px in order to fix the 2px margin on the right. Since sub menu holder */
     /* has overflow hidden the 2px will fill the gap in IE 8 and in the other browser it won't be shown. */
-    submenuWidth = "200px";
-    /* MENU & SUBMENU -- OVER & OUT LISTENER */
-
+    
     function hideSubmenu(obj) { obj.css('opacity', '0').css('display', 'none'); }
 
-    var submOptBackSel = "sub-menu-option-background-selected";
-    if (!touchDevice){
-        $(".sub-menu-option-holder").hover(
-            function () {
-                var submOptBack = $(".sub-menu-option-background", this);
-                var elem = submOptBack.length == 1 ? submOptBack : $("." + submOptBackSel, this);
-                TweenMax.to(elem, 0.1, { css: { marginLeft: "0px", width: submenuWidth }, ease: menuAnimEase });
-                TweenMax.to($(".sub-menu-option-text a", this), menuAnimDuration, { css: { color: "#FFF" }, ease: menuAnimEase });
-            },
-            function () {
-                if ($('div:first', this).hasClass(submOptBackSel) == false) {
-                    var submOptBack = $(".sub-menu-option-background", this);
-                    var elem = submOptBack.length == 1 ? submOptBack : $("." + submOptBackSel, this);
-                    TweenMax.to(elem, menuAnimDuration, { css: { marginLeft: submenuWidth, width: "0px" }, ease: menuAnimEase });
-                    TweenMax.to($(".sub-menu-option-text a", this), menuAnimDuration, { css: { color: menuTextOutColor }, ease: menuAnimEase });
-                }
-            }
-        );
-    }
-    // MENU & SUBMENU -- CLICK LISTENER	     
+
     $(".menu-option-holder").click(
         function (event) {
             //alert("me click!");
@@ -82,8 +37,6 @@ function menuListeners() {
             var idx = $(".menu-option-holder").index(this);
             if (menuOptionID != idx && $(this).attr("data-module-type") != undefined && $(this).attr("data-module-type") != "#") {
                 if (loadedContent == false) return;
-                menuOptionsArr[idx][2].attr("class", "menu-option-background-selected");
-                menuOptionOut(menuOptionID, submenuOptionID);
                 menuOptionID = idx;
                 submenuOptionID = -1;
 
@@ -124,8 +77,6 @@ function menuListeners() {
                     return;
                 }
                 var subMenu = menuOptionsArr[currMenuOptionID][6];
-                menuOptionsArr[currMenuOptionID][2].attr("class", "menu-option-background-selected");
-                subMenu[submenuOptIdx][2].attr("class", "sub-menu-option-background-selected");
 
                 if (touchDevice) {
                     menuOptionIn(currMenuOptionID, submenuOptIdx);
@@ -141,7 +92,6 @@ function menuListeners() {
                 if (menuOptionID == currMenuOptionID) {
                     disableIdx1 = true;
                 }
-                menuOptionOut(menuOptionID, submenuOptionID, disableIdx1);
                 menuOptionID = currMenuOptionID;
                 submenuOptionID = submenuOptIdx;
 
@@ -212,13 +162,11 @@ function storeMenuArr() {
     });
 }
 
-function menuOptionIn(idx1, idx2) {
-    menuOptionsArr[idx1][2].attr("class", "menu-option-background-selected");
-    menuOptionsArr[idx1][2].attr("style", "");
-}
+//TODO: imp init hover
+function menuOptionIn(idx1, idx2) {  }
 
-//TODO: remove or use
-function menuOptionOut(idx1, idx2, disableIdx1) {}
+//TODO: react when change hash
+function menuOptionOut(oldMenuID, oldSubID, disabMenu){}
 
 function setMenuData(val) {
     oldMenuData = val;
@@ -326,6 +274,7 @@ function touchContainer() {
     var moduleContainer = document.getElementById("module-container");
     moduleContainer.removeEventListener("touchstart", touchContainer, false);
 }
+
 function updateMenu(currentURL, prevURL, sameURLParent, animate) {
     currentURL = currentURL.replace("#", "");
     prevURL = prevURL.replace("#", "");
