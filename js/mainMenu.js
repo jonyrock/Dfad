@@ -23,34 +23,13 @@ $(function () {
 });
 
 function menuListeners() {
-    menuWidth = "200px";
+    
     /* We add 2 px in order to fix the 2px margin on the right. Since sub menu holder */
     /* has overflow hidden the 2px will fill the gap in IE 8 and in the other browser it won't be shown. */
-    submenuWidth = "200px";
-    /* MENU & SUBMENU -- OVER & OUT LISTENER */
-
+    
     function hideSubmenu(obj) { obj.css('opacity', '0').css('display', 'none'); }
 
-    var submOptBackSel = "sub-menu-option-background-selected";
-    if (!touchDevice){
-        $(".sub-menu-option-holder").hover(
-            function () {
-                var submOptBack = $(".sub-menu-option-background", this);
-                var elem = submOptBack.length == 1 ? submOptBack : $("." + submOptBackSel, this);
-                TweenMax.to(elem, 0.1, { css: { marginLeft: "0px", width: submenuWidth }, ease: menuAnimEase });
-                TweenMax.to($(".sub-menu-option-text a", this), menuAnimDuration, { css: { color: "#FFF" }, ease: menuAnimEase });
-            },
-            function () {
-                if ($('div:first', this).hasClass(submOptBackSel) == false) {
-                    var submOptBack = $(".sub-menu-option-background", this);
-                    var elem = submOptBack.length == 1 ? submOptBack : $("." + submOptBackSel, this);
-                    TweenMax.to(elem, menuAnimDuration, { css: { marginLeft: submenuWidth, width: "0px" }, ease: menuAnimEase });
-                    TweenMax.to($(".sub-menu-option-text a", this), menuAnimDuration, { css: { color: menuTextOutColor }, ease: menuAnimEase });
-                }
-            }
-        );
-    }
-    // MENU & SUBMENU -- CLICK LISTENER	     
+
     $(".menu-option-holder").click(
         function (event) {
             //alert("me click!");
