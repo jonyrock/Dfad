@@ -77,6 +77,7 @@ function menuListeners() {
     // MENU & SUBMENU -- CLICK LISTENER	     
     $(".menu-option-holder").click(
         function (event) {
+            //alert("me click!");
             event.preventDefault();
             var idx = $(".menu-option-holder").index(this);
             if (menuOptionID != idx && $(this).attr("data-module-type") != undefined && $(this).attr("data-module-type") != "#") {
