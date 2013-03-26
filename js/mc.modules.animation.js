@@ -162,19 +162,7 @@ function checkWhatToLoad() {
     $("#module-container").load(hrefPath + url + ' #module-container > *', firstRunLoaded);
 }
 
-/* select the current mobile option */
 
-function setMobileMenuOption(option) {
-    var i = 0;
-    option = option.replace("#", "");
-    $("#template-smpartphone-menu select").find("option").each(function() {
-        var optVal = $(this).attr("value").replace("#", "");
-        if (optVal == option) {
-            $(this).attr("selected", "selected");
-        }
-        i++;
-    });
-}
 
 /* on template hash change */
 

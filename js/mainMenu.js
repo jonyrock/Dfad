@@ -18,9 +18,9 @@ $(function () {
         var back = $(this).find(".menu-option-background").show();
         TweenMax.to(back, menuAnimDuration, { css: { left: "20px"}, ease: menuAnimEase });
     });
-
+    
+    if(!touchDevice)
     $(".menu-option-holder").mouseleave(function () {
-        if(touchDevice) return;
         if ($(this).find(".menu-option-background-selected").length > 0) return;
         var back = $(this).find(".menu-option-background");
         TweenMax.to(back, menuAnimDuration, { css: { left: "240px"}, ease: menuAnimEase });
@@ -213,18 +213,12 @@ function storeMenuArr() {
 }
 
 function menuOptionIn(idx1, idx2) {
-    
-    //if (menuOptionsArr[idx1][2].attr("class") == "menu-option-background-selected") return;
-    $(".menu-option-background-selected").attr("style", "").attr("class", "menu-option-background");
     menuOptionsArr[idx1][2].attr("class", "menu-option-background-selected");
     menuOptionsArr[idx1][2].attr("style", "");
 }
 
 //TODO: remove or use
-function menuOptionOut(idx1, idx2, disableIdx1) {
-    
-    
-}
+function menuOptionOut(idx1, idx2, disableIdx1) {}
 
 function setMenuData(val) {
     oldMenuData = val;
@@ -237,14 +231,23 @@ function setMenuData(val) {
     endPreviousModule = false;
 }
 
-function menuOptionHover(event) {
-    
-}
+function menuOptionHover(event) {}
 
 function hideSubmenu(obj) { obj.css('opacity', '0').css('display', 'none'); }
 
+/* select the current mobile option */
 
-
+function setMobileMenuOption(option) {
+    var i = 0;
+    option = option.replace("#", "");
+    $("#template-smpartphone-menu select").find("option").each(function() {
+        var optVal = $(this).attr("value").replace("#", "");
+        if (optVal == option) {
+            $(this).attr("selected", "selected");
+        }
+        i++;
+    });
+}
 
 function menuOptionClicked(val, mType, sType, hrefPath) {
 
