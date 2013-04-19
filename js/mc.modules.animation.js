@@ -157,7 +157,6 @@ function checkWhatToLoad() {
     hrefPath = oldMenuData[3];
     hrefPath = (hrefPath == undefined) ? "" : hrefPath;
 
-    setMobileMenuOption(oldMenuData[2]);
     $("#module-container").empty();
     $("#module-container").load(hrefPath + url + ' #module-container > *', firstRunLoaded);
 }
@@ -183,8 +182,6 @@ function onTemplateHashChange(event, runLoad) {
     }
     menuOptionOut(oldMenuID, oldSubID, disabMenu);
     menuData = (menuOptionsArr[menuOptionID][1] != "null") ? menuOptionsArr[menuOptionID][1] : menuOptionsArr[menuOptionID][6][submenuOptionID][1];
-    setMobileMenuOption(menuData[2]);
-    touchContainer();
     urlChanged();
 }
 
@@ -2105,3 +2102,208 @@ function mobileConsole(text, value, clear, displayConsole) {
     }
 }
 /*----------------- end Utils Methods ---------------------*/
+
+
+
+/* menu hadlers */
+
+
+function menuOptionClicked(val, mType, sType, hrefPath) {
+
+    if (val != "#") {
+        var url = '';
+        if ($("#template-menu").attr("data-current-module-type") == "slideshow") {
+            deleteSlideshowTimer();
+        }
+        currModuleType = mType;
+        sideType = sType;
+        hrefPath = (hrefPath == undefined) ? "" : hrefPath;
+        url = templateBaseURL + hrefPath + val.replace('#', '');
+
+        if (prevURL == '') {
+            prevURL = url;
+        } else {
+            prevURL = loadURL;
+        }
+        loadURL = url;
+
+        stopCurrentLoading();
+        if (endModuleFunction != null) {
+            delayAnimationLoading = 0.3;
+            if (moduleEnd == true) {
+                moduleEnd = false;
+                endModuleFunction();
+            }
+        } else {
+            delayAnimationLoading = 0.1;
+        }
+
+        if (menuData[2] != oldMenuData[2]) {
+            loadedContent = true;
+            activateAnimationLoading();
+        } else {
+            loadedContent = true;
+            var loadAnim = $("#loading-animation");
+            if (loadAnim.length > 0) {
+                TweenMax.to(loadAnim, .3, {
+                    css : {
+                        right : "-104px"
+                    },
+                    ease : Circ.easeOut
+                });
+            }
+            if (endModuleFunction == null) {
+
+                switch (menuData[0]) {
+                    case "news":
+                        var textPageInstanceHolder = $(txt_modCont);
+                        TweenMax.to(textPageInstanceHolder, .6, {
+                            css : {
+                                left : "0px"
+                            },
+                            delay : 0.1,
+                            ease : Circ.easeInOut
+                        });
+                        /*get_OffsetWidth() +*/
+                        endModuleFunction = endModuleTextPage;
+                        moduleEnd = true;
+                        break;
+                    case "text_page":
+                        moduleTextPage();
+                        break;
+                    case "gallery":
+                        endModuleGallery(true);
+                        endModuleFunction = endModuleGallery;
+                        break;
+                    case "showreel":
+                        reverseEndModuleShowreel();
+                        break;
+                }
+            }
+        }
+    }
+}
+
+
+function updateMenu(currentURL, prevURL, sameURLParent, animate) {
+    currentURL = currentURL.replace("#", "");
+    prevURL = prevURL.replace("#", "");
+
+    var returnURL = "", i = 0, j = 0, tempMenuID = 0, tempSubmID = 0, idx = menuOptionsArr.length;
+
+    while (idx--) {
+        if (menuOptionsArr[idx][1] != "null") {
+            if (currentURL == menuOptionsArr[idx][1][2]) {
+                returnURL = "#" + menuOptionsArr[idx][1][2];
+                setMenuData(menuOptionsArr[idx][1]);
+                menuOptionID = idx;
+                submenuOptionID = -1;
+                if (animate == true) {
+                    menuOptionIn(menuOptionID, submenuOptionID);
+                }
+                idx = 0;
+            }
+        } else {
+            var subMenu = menuOptionsArr[idx][6];
+            var subLength = subMenu.length;
+            while (subLength--) {
+                if (currentURL == subMenu[subLength][1][2]) {
+                    returnURL = subMenu[subLength][0];
+                    setMenuData(subMenu[subLength][1]);
+                    menuOptionID = idx;
+                    submenuOptionID = subLength;
+                    if (animate == true) {
+                        menuOptionIn(menuOptionID, submenuOptionID);
+                    }
+                    idx = 0;
+                }
+            }
+        }
+    }
+    return returnURL;
+}
+
+function menuListeners() {
+
+    /* We add 2 px in order to fix the 2px margin on the right. Since sub menu holder */
+    /* has overflow hidden the 2px will fill the gap in IE 8 and in the other browser it won't be shown. */
+
+    function hideSubmenu(obj) {
+        obj.css('opacity', '0').css('display', 'none');
+    }
+    
+    $(".menu-option-holder").click(function(event) {
+        //alert("me click!");
+        event.preventDefault();
+        var idx = $(".menu-option-holder").index(this);
+        if (menuOptionID != idx && $(this).attr("data-module-type") != undefined 
+            && $(this).attr("data-module-type") != "#") {
+            
+            if (loadedContent == false)
+                return;
+            menuOptionID = idx;
+            submenuOptionID = -1;
+            
+            var hashURL = "#" + menuOptionsArr[idx][1][2];
+            menuData = menuOptionsArr[idx][1];
+            $(window).unbind('hashchange', onTemplateHashChange);
+            window.location.hash = hashURL;
+            clearCustomInterval(delayInterval);
+            delayInterval = setInterval(function() {
+                menuOptionClicked(menuData[2], menuData[0], menuData[1], menuData[3]);
+                clearCustomInterval(delayInterval);
+                $(window).bind('hashchange', onTemplateHashChange);
+            }, 400);
+        
+        }
+    });
+
+    subCloseInterval = "";
+    $(".sub-menu-holder .sub-menu-option-holder").click(function(event) {
+        event.preventDefault();
+        var submenuParent = $(this).parent().get(0);
+        var menuParent = $(submenuParent).parent().get(0);
+        currMenuOptionID = $(menuParent).index();
+        var submenuOptIdx = $(this).index();
+        if (submenuOptionID == submenuOptIdx && menuOptionID == currMenuOptionID) {
+            return false;
+        } else {
+            if (loadedContent == false) {
+                return;
+            }
+            var subMenu = menuOptionsArr[currMenuOptionID][6];
+
+            if (touchDevice) {
+                menuOptionIn(currMenuOptionID, submenuOptIdx);
+                clearCustomInterval(subCloseInterval);
+                subCloseInterval = setInterval(function() {
+                    clearCustomInterval(subCloseInterval);
+                }, 200);
+
+            }
+
+            var disableIdx1 = undefined;
+            if (menuOptionID == currMenuOptionID) {
+                disableIdx1 = true;
+            }
+            menuOptionID = currMenuOptionID;
+            submenuOptionID = submenuOptIdx;
+
+            var hashURL = subMenu[submenuOptIdx][0];
+
+            menuData = subMenu[submenuOptIdx][1];
+            $(window).unbind('hashchange', onTemplateHashChange);
+            window.location.hash = hashURL;
+
+            clearCustomInterval(delayInterval);
+            delayInterval = setInterval(function() {
+                menuOptionClicked(menuData[2], menuData[0], menuData[1], menuData[3]);
+                clearCustomInterval(delayInterval);
+                $(window).bind('hashchange', onTemplateHashChange);
+            }, 400);
+        }
+        event.stopPropagation();
+    });
+}
+
+
