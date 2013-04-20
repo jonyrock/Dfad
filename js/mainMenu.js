@@ -7,6 +7,8 @@ var submenuWidth = 0;
 var oldMenuData = "";
 var menuData = "";
 
+var mainMenuAnimation = new MainMenuAnimation();
+
 $(function() {
 
     $(".menu-option-text a").click(function() {
@@ -41,7 +43,8 @@ function storeMenuArr() {
             var subMenu = [];
             subHol = menu.find(".sub-menu-holder");
             subHol.children().each(function(index, elem) {
-                var submenu = $(elem), subOptTxt = $(".sub-menu-option-text a", this), subOptHref = String(subOptTxt.attr("href")), subOptHrefPath = subOptTxt.attr("data-path-href");
+                var submenu = $(elem), subOptTxt = $(".sub-menu-option-text a", this), subOptHref = String(subOptTxt.attr("href")), 
+                subOptHrefPath = subOptTxt.attr("data-path-href");
                 subMenu[index] = [];
                 subMenu[index][0] = "#" + menOptText.text().toLowerCase() + "/" + subOptHref.replace("#", "");
                 subMenu[index][1] = [submenu.attr("data-module-type"), submenu.attr("data-side"), subOptHref.replace("#", ""), subOptHrefPath];
@@ -51,7 +54,8 @@ function storeMenuArr() {
             subOptArr = subMenu;
             menuOptionsArr[index][1] = "null";
         } else {
-            menuOptionsArr[index][1] = [menu.attr("data-module-type"), menu.attr("data-side"), String(menOptText.attr("href")).replace("#", ""), menOptText.attr("data-path-href")];
+            menuOptionsArr[index][1] = [menu.attr("data-module-type"), menu.attr("data-side"), String(menOptText.attr("href")).replace("#", ""), 
+            menOptText.attr("data-path-href")];
         }
         menuOptionsArr[index][2] = $(".menu-option-background", menu);
         menuOptionsArr[index][3] = (subOptArr == "null") ? [menOptText] : [menOptText, $(".menu-option-text div", menu)];
@@ -61,9 +65,9 @@ function storeMenuArr() {
     });
 }
 
-//TODO: imp init hover
+//TODO: bind to MainMenuAnimation
 function menuOptionIn(idx1, idx2) {
- //   alert("option in " + idx1 + " " + idx2);
+	mainMenuAnimation.setActive(idx1);
 }
 
 function setMenuData(val) {
@@ -76,6 +80,18 @@ function setMenuData(val) {
     $("#template-menu").attr("data-href", val[2]);
     endPreviousModule = false;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
