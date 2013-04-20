@@ -63,12 +63,7 @@ function storeMenuArr() {
 
 //TODO: imp init hover
 function menuOptionIn(idx1, idx2) {
-    alert("option in " + idx1 + " " + idx2);
-}
-
-//TODO: react when change hash
-function menuOptionOut(oldMenuID, oldSubID, disabMenu) {
-    alert("option out " + idx1 + " " + idx2);
+ //   alert("option in " + idx1 + " " + idx2);
 }
 
 function setMenuData(val) {
@@ -82,13 +77,7 @@ function setMenuData(val) {
     endPreviousModule = false;
 }
 
-function menuOptionHover(event) {
-    
-}
 
-function hideSubmenu(obj) {
-    
-}
 
 
 

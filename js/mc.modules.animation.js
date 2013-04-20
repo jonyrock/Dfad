@@ -180,7 +180,6 @@ function onTemplateHashChange(event, runLoad) {
     if (oldMenuID != menuOptionID) {
         disabMenu = undefined;
     }
-    menuOptionOut(oldMenuID, oldSubID, disabMenu);
     menuData = (menuOptionsArr[menuOptionID][1] != "null") ? menuOptionsArr[menuOptionID][1] : menuOptionsArr[menuOptionID][6][submenuOptionID][1];
     urlChanged();
 }
@@ -2227,10 +2226,6 @@ function menuListeners() {
 
     /* We add 2 px in order to fix the 2px margin on the right. Since sub menu holder */
     /* has overflow hidden the 2px will fill the gap in IE 8 and in the other browser it won't be shown. */
-
-    function hideSubmenu(obj) {
-        obj.css('opacity', '0').css('display', 'none');
-    }
     
     $(".menu-option-holder").click(function(event) {
         //alert("me click!");
