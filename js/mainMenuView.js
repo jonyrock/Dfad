@@ -30,24 +30,36 @@ function MainMenuView() {
 	    });
 	}
 	
+	// helper function to solve closure problem
+	// http://stackoverflow.com/questions/1140973/how-to-pass-local-variables-when-assigning-mouseover-via-anonymous-function          
+	function menuItemIn (item) {
+	    return function(){
+            item.back.show();
+            TweenMax.to(
+                item.back, 
+                MainMenuView.menuAnimDuration, 
+                { css: { left: "0px"}, ease: MainMenuView.menuAnimEase }
+             );	        
+	    }
+	}
+	
+	function menuItemOut (item) {
+        return function(){
+            if(item.selected) 
+                return;
+            TweenMax.to(
+                item.back, 
+                MainMenuView.menuAnimDuration, 
+                { css: { left: me.menuHolderWidth + "px"}, ease: MainMenuView.menuAnimEase }
+            );   
+        }
+    }
+	
 	function initHoveringAnimation() {
 	    for(var i in me.items) {
-	        var item = me.items[i];
-	        $(item.holder).mouseenter(function() {
-                // TODO: use item.back instead
-                var back = $(this).find(".menu-option-background");
-                back.show();
-                TweenMax.to(back, 
-                    MainMenuView.menuAnimDuration, 
-                    { css: { left: "0px"}, ease: MainMenuView.menuAnimEase });
-	       });
-	       $(item.holder).mouseleave(function() {
-                if(item.selected) return;
-                var back = $(this).find(".menu-option-background");
-                TweenMax.to(back, 
-                    MainMenuView.menuAnimDuration, 
-                    { css: { left: me.menuHolderWidth + "px"}, ease: MainMenuView.menuAnimEase });
-            });
+            var item = me.items[i];
+            $(item.holder).mouseenter(menuItemIn(item));
+            $(item.holder).mouseleave(menuItemOut(item));
         }
 	}
 	
@@ -58,16 +70,17 @@ MainMenuView.prototype.setActive = function (menuItemIndex) {
     for(var i in this.items) {
         var item = this.items[i];
         if(item.index == menuItemIndex) {
-            item.fixed = true;
-            if(!touchDevice) {
+            item.selected = true;
+            if(!touchDevice) 
                 $(item.holder).trigger("mouseenter");
-            } else {
+            else 
                 $(item.back).show().css("left", "0px");
-            }
         } else {
-            item.fixed = false;
+            item.selected = false;
             if(!touchDevice)
                 $(item.holder).trigger("mouseleave");
+            else
+                $(item.back).hide();
         }
     }
 }
