@@ -2094,18 +2094,8 @@ function menuOptionClicked(val, mType, sType, hrefPath) {
         loadURL = url;
 
         stopCurrentLoading();
-        //TODO: i hope that it will stop sleepin in fast menu choosin
         if(endModuleFunction !== null && loadedContent) 
-            endModuleFunction();  
-        // if (endModuleFunction != null) {
-            // delayAnimationLoading = 0.03;
-            // if (moduleEnd == true) {
-                // moduleEnd = false;
-                // endModuleFunction();
-            // }
-        // } else {
-            // delayAnimationLoading = 0.01;
-        // }
+            endModuleFunction();
 
         if (menuData[2] != oldMenuData[2]) {
             loadedContent = true;
