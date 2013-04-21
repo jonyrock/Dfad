@@ -95,7 +95,6 @@ function prepareTemplate() {
             }
         });
         storeMenuArr();
-        menuListeners();
         checkWhatToLoad();
         templateFirstRun = false;
     } else {
@@ -225,7 +224,7 @@ function settingsForScreens() {
 
     var menuHiderH = parseInt($("#menu-container #menu-hider").height(), 10);
     var menuHiderIconH = parseInt($("#menu-container #menu-hider #menu-hider-icon").height(), 10);
-    $("#menu-hider-icon").click(menuHideClick);
+    //$("#menu-hider-icon").click(menuHideClick);
 
     $("#menu-container").css('left', -moduleContainerMarginLeft + 'px');
     $("#menu-container").css('visibility', 'visible');
@@ -270,40 +269,6 @@ function endModuleStart() {
 
 }
 
-/*menu hide click*/
-
-function menuHideClick() {
-    var winW = $(window).width(),
-            winH = $(window).height();
-    if (menuActive == true) {
-        menuActive = false;
-        alwaysUpdate();
-
-        var menuHider = ($("#menu-hider").length > 0) ? parseInt($("#menu-hider").width(), 10) : 0,
-                menuWidth = parseInt($("#menu-container").css("width"), 10) - menuHider,
-                menuVal = 0;
-        var targetOffset = $("#menu-hider-background").width() - menuWidth;
-        TweenMax.to($("#template-wrapper"), .4, {css: {left: targetOffset + "px"}, ease: Sine.easeInOut});
-        TweenMax.to($("#menu-container"), .4, {
-            css: {left: menuVal + "px"},
-            ease: Sine.easeInOut,
-            onComplete: function() {
-                if (!touchDevice)
-                    activateHoverMenu();
-            }
-        });
-
-    } else {
-        if (!touchDevice)
-            disableHoverMenu();
-        menuActive = true;
-        isOverMenu = false;
-        alwaysUpdate();
-        TweenMax.to($("#template-wrapper"), .4, {css: {left: "0px", top: "0px"}, ease: Sine.easeInOut});
-        TweenMax.to($("#menu-container"), .4, {css: {left: "0px"}, top: "0px", ease: Sine.easeInOut});
-    }
-
-}
 
 /* activate hover menu */
 
@@ -1945,6 +1910,11 @@ function onModuleContentLoaded() {
     if ($("#module-container #module-scrollbar-holder_v2").length == 0) {
         $("#module-container").append('<div id="module-scrollbar-holder_v2"><div id="module-scrollbar-background" class="opacity_8"></div><div id="module-scrollbar-dragger"></div></div>');
     }
+    
+    if(menuOptionClickedLastUnloaded !== null) {
+       //$(menuOptionClickedLastUnloaded).trigger("click");
+       menuOptionClickedLastUnloaded = null;
+    }
 }
 
 /*------------------- end module load functions -----------*/
@@ -2103,11 +2073,12 @@ function mobileConsole(text, value, clear, displayConsole) {
 /*----------------- end Utils Methods ---------------------*/
 
 
+var menuOptionClickedLastUnloaded = null; 
 
 /* menu hadlers */
-
-
 function menuOptionClicked(val, mType, sType, hrefPath) {
+    
+    
 
     if (val != "#") {
         var url = '';
@@ -2222,83 +2193,23 @@ function updateMenu(currentURL, prevURL, sameURLParent, animate) {
     return returnURL;
 }
 
-function menuListeners() {
 
-    /* We add 2 px in order to fix the 2px margin on the right. Since sub menu holder */
-    /* has overflow hidden the 2px will fill the gap in IE 8 and in the other browser it won't be shown. */
-    
-    $(".menu-option-holder").click(function(event) {
-        //alert("me click!");
-        event.preventDefault();
-        var idx = $(".menu-option-holder").index(this);
-        if (menuOptionID != idx && $(this).attr("data-module-type") != undefined 
-            && $(this).attr("data-module-type") != "#") {
-            
-            if (loadedContent == false)
-                return;
-            menuOptionID = idx;
-            submenuOptionID = -1;
-            
-            var hashURL = "#" + menuOptionsArr[idx][1][2];
-            menuData = menuOptionsArr[idx][1];
-            $(window).unbind('hashchange', onTemplateHashChange);
-            window.location.hash = hashURL;
-            clearCustomInterval(delayInterval);
-            delayInterval = setInterval(function() {
-                menuOptionClicked(menuData[2], menuData[0], menuData[1], menuData[3]);
-                clearCustomInterval(delayInterval);
-                $(window).bind('hashchange', onTemplateHashChange);
-            }, 400);
-        
-        }
-    });
 
-    subCloseInterval = "";
-    $(".sub-menu-holder .sub-menu-option-holder").click(function(event) {
-        event.preventDefault();
-        var submenuParent = $(this).parent().get(0);
-        var menuParent = $(submenuParent).parent().get(0);
-        currMenuOptionID = $(menuParent).index();
-        var submenuOptIdx = $(this).index();
-        if (submenuOptionID == submenuOptIdx && menuOptionID == currMenuOptionID) {
-            return false;
-        } else {
-            if (loadedContent == false) {
-                return;
-            }
-            var subMenu = menuOptionsArr[currMenuOptionID][6];
 
-            if (touchDevice) {
-                menuOptionIn(currMenuOptionID, submenuOptIdx);
-                clearCustomInterval(subCloseInterval);
-                subCloseInterval = setInterval(function() {
-                    clearCustomInterval(subCloseInterval);
-                }, 200);
 
-            }
 
-            var disableIdx1 = undefined;
-            if (menuOptionID == currMenuOptionID) {
-                disableIdx1 = true;
-            }
-            menuOptionID = currMenuOptionID;
-            submenuOptionID = submenuOptIdx;
 
-            var hashURL = subMenu[submenuOptIdx][0];
 
-            menuData = subMenu[submenuOptIdx][1];
-            $(window).unbind('hashchange', onTemplateHashChange);
-            window.location.hash = hashURL;
 
-            clearCustomInterval(delayInterval);
-            delayInterval = setInterval(function() {
-                menuOptionClicked(menuData[2], menuData[0], menuData[1], menuData[3]);
-                clearCustomInterval(delayInterval);
-                $(window).bind('hashchange', onTemplateHashChange);
-            }, 400);
-        }
-        event.stopPropagation();
-    });
-}
+
+
+
+
+
+
+
+
+
+
 
 

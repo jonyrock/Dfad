@@ -20,7 +20,6 @@ function MainMenuView() {
 	function selectItem(item) {
 	    me.items.find("." + MainMenuView.menuItemBackground).hide();
 	    $(item).find("." + MainMenuView.menuItemBackground).show().css("left","0px");
-	    
 	}
 	
 }

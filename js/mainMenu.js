@@ -10,7 +10,6 @@ var menuData = "";
 var mainMenuView = new MainMenuView();
 
 $(function() {
-
     $(".menu-option-text a").click(function() {
         var menuOptionHolder = $(this).parent().parent();
         var isComplex = menuOptionHolder.find(".sub-menu-holder").length > 0;
@@ -18,9 +17,7 @@ $(function() {
         if (isComplex && window.location.hash.indexOf("index") == -1) {
             menuOptionHolder.find("a[href='#index.html']").trigger("click");
         }
-
     });
-
 });
 
 var currModuleType = '';
@@ -65,7 +62,6 @@ function storeMenuArr() {
     });
 }
 
-//TODO: bind to MainMenuAnimation
 function menuOptionIn(idx1, idx2) {
 	mainMenuView.setActive(idx1);
 }
