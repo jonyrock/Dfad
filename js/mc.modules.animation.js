@@ -2,7 +2,7 @@
  * VERSION: 1.0
  * DATE: 2012-09-20
  * 
- * @author: mediacreed, mediacreed.com (jonyrock edited exclusivelly to dfad.com)
+ * @author: mediacreed, mediacreed.com, @jonyrock exclusively to dfad.com
  **/
 
 /* start GENERAL CUSTOMIZATION PROPERTIES */
@@ -12,8 +12,6 @@ var themeColor = "#00aaff";
 var moduleContainerMarginLeft = 240;
 var menuActive = true;
 var menuHoverActive = true;
-var menuOptionHoverMarginLeft = 18;
-var menuOptionHoverWidth = 200;
 /* it will change to false if menuActive == true. If 'menuActive' 
  is false and this true than on hover it will show the menu */
 var menuTextOutColor = "#FFF";
@@ -24,10 +22,8 @@ var customPageStartSide = "none";
 var customPageStartType = "full_width_gallery";
 
 var contactFormDemo = false;
-/* SET IT TO FALSE FOR CONTACT FORM TO WORK */
-/* end   GENERAL CUSTOMIZATION PROPERTIES */
 
-var loadURL;
+
 
 /* start ready function */
 $(document).ready(function() {
@@ -55,6 +51,7 @@ var isOverMenu = false;
 var templateMenuW = 0;
 var videojsHolder = "";
 var touchDevice = "ontouchstart" in window;
+var loadURL;
 /* end GENERAL JS PROPERTIES */
 
 /*================= GENERAL TXT NAMES ==========================*/
@@ -2097,15 +2094,18 @@ function menuOptionClicked(val, mType, sType, hrefPath) {
         loadURL = url;
 
         stopCurrentLoading();
-        if (endModuleFunction != null) {
-            delayAnimationLoading = 0.3;
-            if (moduleEnd == true) {
-                moduleEnd = false;
-                endModuleFunction();
-            }
-        } else {
-            delayAnimationLoading = 0.1;
-        }
+        //TODO: i hope that it will stop sleepin in fast menu choosin
+        if(endModuleFunction !== null && loadedContent) 
+            endModuleFunction();  
+        // if (endModuleFunction != null) {
+            // delayAnimationLoading = 0.03;
+            // if (moduleEnd == true) {
+                // moduleEnd = false;
+                // endModuleFunction();
+            // }
+        // } else {
+            // delayAnimationLoading = 0.01;
+        // }
 
         if (menuData[2] != oldMenuData[2]) {
             loadedContent = true;
@@ -2114,7 +2114,7 @@ function menuOptionClicked(val, mType, sType, hrefPath) {
             loadedContent = true;
             var loadAnim = $("#loading-animation");
             if (loadAnim.length > 0) {
-                TweenMax.to(loadAnim, .3, {
+                TweenMax.to(loadAnim, .25, {
                     css : {
                         right : "-104px"
                     },
@@ -2126,7 +2126,7 @@ function menuOptionClicked(val, mType, sType, hrefPath) {
                 switch (menuData[0]) {
                     case "news":
                         var textPageInstanceHolder = $(txt_modCont);
-                        TweenMax.to(textPageInstanceHolder, .6, {
+                        TweenMax.to(textPageInstanceHolder, .3, {
                             css : {
                                 left : "0px"
                             },
