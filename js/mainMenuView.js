@@ -18,12 +18,12 @@ function MainMenuView() {
 	});
 	
 	function selectItem(item) {
-	    me.items.find("." + MainMenuView.menuItemBackground).hide();
-	    $(item).find("." + MainMenuView.menuItemBackground).show().css("left","0px");
+	    
 	}
 	
 }
 
 MainMenuView.prototype.setActive = function (menuItemIndex) {
-    this.items.eq(menuItemIndex).trigger('click');
+    this.items.find("." + MainMenuView.menuItemBackground).hide();
+    this.items.eq(menuItemIndex).find("." + MainMenuView.menuItemBackground).show().css("left","0px");
 }

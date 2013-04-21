@@ -27,6 +27,7 @@ var contactFormDemo = false;
 /* SET IT TO FALSE FOR CONTACT FORM TO WORK */
 /* end   GENERAL CUSTOMIZATION PROPERTIES */
 
+var loadURL;
 
 /* start ready function */
 $(document).ready(function() {
@@ -2078,8 +2079,6 @@ var menuOptionClickedLastUnloaded = null;
 /* menu hadlers */
 function menuOptionClicked(val, mType, sType, hrefPath) {
     
-    
-
     if (val != "#") {
         var url = '';
         if ($("#template-menu").attr("data-current-module-type") == "slideshow") {

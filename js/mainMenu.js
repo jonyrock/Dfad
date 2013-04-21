@@ -1,9 +1,3 @@
-var menuLastHoverText;
-var menuAnimEase = Quad.easeOut;
-var menuAnimDuration = 0.4;
-
-var menuWidth = 200 + "px";
-var submenuWidth = 0;
 var oldMenuData = "";
 var menuData = "";
 
