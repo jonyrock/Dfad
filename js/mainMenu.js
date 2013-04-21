@@ -7,7 +7,7 @@ var submenuWidth = 0;
 var oldMenuData = "";
 var menuData = "";
 
-var mainMenuAnimation = new MainMenuAnimation();
+var mainMenuView = new MainMenuView();
 
 $(function() {
 
@@ -67,7 +67,7 @@ function storeMenuArr() {
 
 //TODO: bind to MainMenuAnimation
 function menuOptionIn(idx1, idx2) {
-	mainMenuAnimation.setActive(idx1);
+	mainMenuView.setActive(idx1);
 }
 
 function setMenuData(val) {
