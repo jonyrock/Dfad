@@ -20,8 +20,7 @@ function loadFullWidthPreviewFromThumb(thumb) {
         
         var code = $(this).attr("data-id");
 
-        if (code == modulePageColumnsCurrentSelectedId ||
-            modulePageColumnsCurrentSelectedId == "*") {
+        if (code == modulePageColumnsCurrentSelectedId || modulePageColumnsCurrentSelectedId == "*") {
             j++;
         }
         if ($(this).attr("data-selected") == "true") i = j;
@@ -119,7 +118,6 @@ function modulePageColumns() {
                     }
                 });
             $(this).addClass("selected");
-            ///$(this).attr("style", "");
             if ($("#filter-buttons-holder").attr("data-folded") == "true")
                 $(this).hide();
             if (touchDevice) {
@@ -334,7 +332,6 @@ function checkColumnSize(adjustPreview) {
         var newH = 0;
         var count = 0;
         var lastChild = null;
-        //alert(modulePageColumnsCurrentSelectedId);
         container.children().each(
             function () {
                 if(modulePageColumnsCurrentSelectedId != "*" && 
@@ -356,8 +353,7 @@ function checkColumnSize(adjustPreview) {
             }
         );
         
-        
-        newH = parseInt($(lastChild).css("top"), 10) + 150;
+        newH = parseInt($(lastChild).css("top"), 10) + $(lastChild).height() ;
         
         $originalDataPos = getOriginalPos(container);
         var thumbNewW = columns * (elementW + marginRight) - marginRight
@@ -409,14 +405,14 @@ function moduleUpdate_page_columns(customStartPos) {
         if (customStartPos == undefined) {
             customStartPos = 0;
         }
-        moduleUpdate(textPageInstanceHolder, columnItemWrapper, $("div:first", columnItemWrapper), sideType, null, null, customStartPos);
+        moduleUpdate(textPageInstanceHolder, columnItemWrapper, $("div:first", columnItemWrapper), "custom", null, null, customStartPos);
     } else {
         if (previewAnimDone == false) return;
         var i = 0;
         for (i; i < totalColPreviews; i++) {
             if (i != columnsPreviewIndex) columnsPrevItemArr[i].css("display", "none");
         }
-        moduleUpdate(textPageInstanceHolder, columnPrevWrapper, $("div:first", columnPrevWrapper), sideType, null, null, 0);
+        moduleUpdate(textPageInstanceHolder, columnPrevWrapper, $("div:first", columnPrevWrapper), "custom", null, null, 0);
         if (touchDevice) {
             $("div:first", columnPrevWrapper).css("height", "");
             $("div:first", columnPrevWrapper).css("height", $("div:first", columnPrevWrapper).height());
