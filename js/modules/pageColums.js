@@ -192,6 +192,7 @@ function onFilterComplete(index, container, child, hide) {
                     var sType = $("#template-menu").attr("data-side");
                     $("#module-columns").css("top","0px");
                     if (moduleList != null) moduleList.enableList();
+                    moduleUpdate_page_columns();
                 }
         });
     }
@@ -332,7 +333,8 @@ function checkColumnSize(adjustPreview) {
         var col = 0
         var newH = 0;
         var count = 0;
-        var total = container.children().length;
+        var lastChild = null;
+        //var total = container.children().length;
         container.children().each(
             function () {
                 if (col < columns) {
@@ -349,12 +351,14 @@ function checkColumnSize(adjustPreview) {
                     col++;
                 }
                 $(this).css("opacity", "1");
-                if (count == total - 1) {
-                    newH = parseInt($(this).css("top"), 10) + $(this).height();
-                }
+                lastChild = this;
                 count++;
             }
         );
+        
+        
+        newH = parseInt($(lastChild).css("top"), 10) + $(lastChild).height();
+        
         $originalDataPos = getOriginalPos(container);
         var thumbNewW = columns * (elementW + marginRight) - marginRight
         var newWidth = thumbNewW + parseInt($("#module-columns-container").css("margin-left"), 10) 
