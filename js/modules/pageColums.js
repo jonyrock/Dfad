@@ -334,25 +334,22 @@ function checkColumnSize(adjustPreview) {
         var newH = 0;
         var count = 0;
         var lastChild = null;
-        //var total = container.children().length;
         container.children().each(
             function () {
-                if (col < columns) {
-                    var topVal = lin * (elementH + marginBottom);
-                    var leftVal = col * (elementW + marginRight);
-                    $(this).css("position", "absolute").css("left", leftVal + "px").css("top", topVal + "px");
-                    col++;
-                } else {
+                
+                if(col == columns){
                     col = 0;
                     lin++;
-                    var topVal = lin * (elementH + marginBottom);
-                    var leftVal = col * (elementH + marginRight);
-                    $(this).css("position", "absolute").css("left", leftVal + "px").css("top", topVal + "px");
-                    col++;
                 }
-                $(this).css("opacity", "1");
+                
+                var topVal = lin * (elementH + marginBottom);
+                var leftVal = col * (elementW + marginRight);
+                $(this).css("position", "absolute").css("left", leftVal + "px").css("top", topVal + "px");
+                col++;
+                    
                 lastChild = this;
                 count++;
+                
             }
         );
         
