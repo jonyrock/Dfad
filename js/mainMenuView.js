@@ -1,6 +1,13 @@
-MainMenuView.menuHolder         = "#template-menu";
+/**
+ * VERSION: 1.0
+ * DATE: 2013-04-22
+ * 
+ * @author: @jonyrock exclusively to dfad.com
+ **/
+
+MainMenuView.menuHolder         = "#template-menu";            // any jqery selector
 MainMenuView.menuItemHolder     = "menu-option-holder";        // some class name
-MainMenuView.menuItemBackground = "menu-option-background";    // some class in div
+MainMenuView.menuItemBackground = "menu-option-background";    // some class name
 MainMenuView.menuAnimDuration   = 0.4;
 MainMenuView.menuAnimEase       = Quad.easeOut;
 
@@ -66,7 +73,6 @@ function MainMenuView() {
 }
 
 MainMenuView.prototype.setActive = function (menuItemIndex) {
-    
     for(var i in this.items) {
         var item = this.items[i];
         if(item.index == menuItemIndex) {
