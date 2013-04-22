@@ -115,7 +115,9 @@ function updateFullWidthPreviewPosition() {
         var mediaBackNewH = $(elem).height() + previewBorderSize * 2;
         var mediaBackMarginTop = -mediaBackNewH * .5;
         var mediaBackMarginLeft = -mediaBackNewW * .5;
-        $("#preview-media-holder").attr("style", "width: 100%; height: 100%; margin: 0px; top: 50%; left: 50%; margin-top:" + mediaBackMarginTop + "px; margin-left:" + mediaBackMarginLeft + "px;");
+        $("#preview-media-holder").attr("style", "width: 100%; height: 100%; margin: 0px; top: 50%; left: 50%; margin-top:" 
+                + mediaBackMarginTop + "px; margin-left:" 
+                + mediaBackMarginLeft + "px;");
     }
     if(!touchDevice)
         $("#preview-media-holder #scrollbar1").tinyscrollbar_update();
@@ -170,7 +172,9 @@ function loadFullWidthPreview(index) {
             TweenMax.to(previewInfoHolder, .3, { css: { right: "0px" }, delay: 0.1, ease: Quad.easeInOut });
         } else {
             TweenMax.to(fwMediaContainer, .3, { css: { opacity: "0" }, ease: Circ.easeInOut });
-            TweenMax.to([$(".preview-arrow-close"), $(".preview-arrow-forward"), $(".preview-arrow-backward")], .3, { css: { opacity: "0" }, ease: Circ.easeInOut });
+            TweenMax.to([$(".preview-arrow-close"), 
+                $(".preview-arrow-forward"), 
+                $(".preview-arrow-backward")], .3, { css: { opacity: "0" }, ease: Circ.easeInOut });
             TweenMax.to(previewInfoHolder, .3, { css: { right: val }, ease: Circ.easeInOut, onComplete: hideFullWidthPreview });
 
         }
@@ -232,7 +236,10 @@ function loadFullWidthMedia() {
         var mediaBackMarginTop = -mediaBackNewH * .5;
         var mediaBackMarginLeft = -mediaBackNewW * .5;
 
-        prevMediaHolder.attr("style", "width: " + mediaBackNewW + "px; height: " + mediaBackNewH + "px; margin: 0px; top: 50%; left: 50%; margin-top:" + mediaBackMarginTop + "px; margin-left:" + mediaBackMarginLeft + "px;");
+        prevMediaHolder.attr("style", "width: " + mediaBackNewW + "px; height: " 
+                + mediaBackNewH + "px; margin: 0px; top: 50%; left: 50%; margin-top:" 
+                + mediaBackMarginTop + "px; margin-left:" 
+                + mediaBackMarginLeft + "px;");
         prevMediaHolder.append('<div id="video-wrapper"></div>');
         templateAddMediaVideo($(currPreviewElem).attr("data-video-type"), $(currPreviewElem), $("#video-wrapper"));
 
@@ -306,7 +313,9 @@ function animateFullWidthPreviewMedia() {
         var mediaBackMarginTop = -mediaBackNewH * .5;
         var mediaBackMarginLeft = -mediaBackNewW * .5;
         var prevMediaHolder = $("#preview-media-holder");
-        prevMediaHolder.attr("style", "width: " + mediaBackNewW + "px; height: " + mediaBackNewH + "px; margin: 0px; top: 50%; left: 50%; margin-top:" + mediaBackMarginTop + "px; margin-left:" + mediaBackMarginLeft + "px;");
+        prevMediaHolder.attr("style", "width: " + mediaBackNewW + "px; height: " 
+                                + mediaBackNewH + "px; margin: 0px; top: 50%; left: 50%; margin-top:" 
+                                + mediaBackMarginTop + "px; margin-left:" + mediaBackMarginLeft + "px;");
         TweenMax.to($(".full-width-preview-media-loader"), .3, { css: { opacity: "0" }, easing: Sine.easeOut });
         fullWidthFadeInMedia(mediaType);
         loadingAnimationDone = true;
@@ -315,9 +324,11 @@ function animateFullWidthPreviewMedia() {
 
 var justOpenedPreivew = true;
 
-function getInitBackColor(){
-    return rgb2hex($(".preview-arrow-backward .preview-arrow-backg").css("background-color"));
-}
+//TODO: remove it
+// function getInitBackColor(){
+    // alert(rgb2hex($(".preview-arrow-backward .preview-arrow-backg").css("background-color")));
+    // return rgb2hex($(".preview-arrow-backward .preview-arrow-backg").css("background-color"));
+// }
 
 function fullWidthFadeInMedia(mediaType) {
     if (mediaType == "preview-media-image") {
@@ -336,7 +347,6 @@ function fullWidthFadeInMedia(mediaType) {
         prevControlForw.css("opacity", "1").css("display", "inline");
         //TweenMax.to([prevControlClose, prevControlBack, prevControlForw], .6, { css: { opacity: "1" }, ease: Circ.easeInOut });
         var initOpacity = 1;
-        var initBackColor = getInitBackColor();
         $(".preview-arrow-backward, .preview-arrow-forward, .preview-arrow-close").unbind('mouseenter mouseleave');
         
         if(!touchDevice) {
@@ -370,7 +380,13 @@ function fullWidthFadeInMedia(mediaType) {
 var animationLoadFWPreviewDone = true;
 
 
-
+function touchDeviceButtonhangeFullWidthPreviewMediaEffect(buttonBack){
+    TweenLite.killTweensOf(buttonBack);
+    $(buttonBack).css("backgroundColor", themeColor);
+    TweenMax.to(
+        $(buttonBack), 2,
+        { css: { backgroundColor: initBackColor }, easing: Sine.easeOut });
+}
 
 function changeFullWidthPreviewMedia(value) {
     if(!previewFullWidthOpen) return;
@@ -399,22 +415,14 @@ function changeFullWidthPreviewMedia(value) {
     //update counter
     $("#full-width-preview .preview-counter span").text((currIndex + 1) + "/" + previewMediaArr.length);
     
-    var initBackColor = getInitBackColor();
-    
-    if(value > 0 && touchDevice){
-        var me = $(".preview-arrow-forward");
-        $(me).find(".preview-arrow-backg").css("backgroundColor", themeColor);
-        TweenMax.to($(".preview-arrow-backg", me), .3, 
-            { css: { backgroundColor: initBackColor }, easing: Sine.easeOut }); 
+    if(value > 0 && touchDevice) {
+        var back = $(".preview-arrow-forward .preview-arrow-backg");
+        touchDeviceButtonhangeFullWidthPreviewMediaEffect(back);
     }
-    if(value < 0 && touchDevice){
-        var me = $(".preview-arrow-backward");
-        $(me).find(".preview-arrow-backg").css("backgroundColor", themeColor);
-        TweenMax.to($(".preview-arrow-backg", me), .3, 
-            { css: { backgroundColor: initBackColor }, easing: Sine.easeOut }); 
+    if(value < 0 && touchDevice) {
+        var back = $(".preview-arrow-backward .preview-arrow-backg");
+        touchDeviceButtonhangeFullWidthPreviewMediaEffect(back);
     }
-        
-    
 }
 
 function setFullWidthPreview() {
@@ -499,7 +507,8 @@ function checkItems() {
                    100.5% to fill the extra -0.5px that sometime appears on resizing*/
             if (!touchDevice) {
                 TweenMax.to($("img", this), 0.6, { css: { width: Math.round(itemW), height: Math.round(itemH) }, easing: Sine.easeOut });
-                TweenMax.to($(this), 0.6, { css: { width: Math.round(itemW), height: Math.round(itemH), left: lefV, top: topV }, easing: Sine.easeOut });
+                TweenMax.to($(this), 0.6, { css: { width: Math.round(itemW), height: Math.round(itemH), left: lefV, top: topV }, 
+                    easing: Sine.easeOut });
             } else {
                 $("img", this).css("width", Math.round(itemW)).css("height", Math.round(itemH));
                 $(this).css("width", Math.round(itemW)).css("height", Math.round(itemH)).css("left", lefV).css("top", topV);

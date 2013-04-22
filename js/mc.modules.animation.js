@@ -8,6 +8,7 @@
 /* start GENERAL CUSTOMIZATION PROPERTIES */
 var templateBaseURL = "http://" + window.location.host + "/";
 var themeColor = "#00aaff";
+var initBackColor = "#3f3f3f";
 //var moduleContainerMarginLeft = 308;
 var moduleContainerMarginLeft = 240;
 var menuActive = true;
