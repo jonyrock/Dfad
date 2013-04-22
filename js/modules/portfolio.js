@@ -324,11 +324,6 @@ function animateFullWidthPreviewMedia() {
 
 var justOpenedPreivew = true;
 
-//TODO: remove it
-// function getInitBackColor(){
-    // alert(rgb2hex($(".preview-arrow-backward .preview-arrow-backg").css("background-color")));
-    // return rgb2hex($(".preview-arrow-backward .preview-arrow-backg").css("background-color"));
-// }
 
 function fullWidthFadeInMedia(mediaType) {
     if (mediaType == "preview-media-image") {
