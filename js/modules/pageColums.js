@@ -334,17 +334,20 @@ function checkColumnSize(adjustPreview) {
         var newH = 0;
         var count = 0;
         var lastChild = null;
+        //alert(modulePageColumnsCurrentSelectedId);
         container.children().each(
             function () {
-                
-                if(col == columns){
+                if(modulePageColumnsCurrentSelectedId != "*" && 
+                   modulePageColumnsCurrentSelectedId != $(this).attr("data-id"))
+                        return;
+                if(col == columns) {
                     col = 0;
                     lin++;
                 }
                 
                 var topVal = lin * (elementH + marginBottom);
                 var leftVal = col * (elementW + marginRight);
-                $(this).css("position", "absolute").css("left", leftVal + "px").css("top", topVal + "px");
+                $(this).css("left", leftVal + "px").css("top", topVal + "px");
                 col++;
                     
                 lastChild = this;
@@ -354,7 +357,7 @@ function checkColumnSize(adjustPreview) {
         );
         
         
-        newH = parseInt($(lastChild).css("top"), 10) + $(lastChild).height();
+        newH = parseInt($(lastChild).css("top"), 10) + 150;
         
         $originalDataPos = getOriginalPos(container);
         var thumbNewW = columns * (elementW + marginRight) - marginRight
