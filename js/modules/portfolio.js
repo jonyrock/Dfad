@@ -121,6 +121,7 @@ function updateFullWidthPreviewPosition() {
         $("#preview-media-holder #scrollbar1").tinyscrollbar_update();
 }
 
+// TODO: move it in separate file because it is used in columns
 function loadFullWidthPreview(index) {
     currIndex = index;
     previewFullWidthOpen = true;
@@ -242,7 +243,7 @@ function loadFullWidthMedia() {
     }
 
     if (mediaType == "video-wrapper-collection") {
-
+        //alert("it is collection");
         var prevMediaHolder = $("#preview-media-holder");
         prevMediaHolder.attr("style", "width: 100%; height: 100%; margin: 0px;");
         
@@ -255,17 +256,13 @@ function loadFullWidthMedia() {
         
         var tergetBlockHolder = prevMediaHolder.find(".viewport .overview");
         
-        
-        
-        var i = 0;
-        currPreviewElem.find("#video-wrapper").each(function () {
+        currPreviewElem.find("#video-wrapper").each(function (i) {
             tergetBlockHolder.append('<div id="video-wrapper' + i 
                     + '" style="width:100%; height:' + prevMediaHolder.height() + 'px"></div>');
             templateAddMediaVideo(
                 $(this).attr("data-video-type"),
                 $(this),
                 $("#video-wrapper" + i));
-            i++;
         });
 
         
@@ -279,7 +276,8 @@ function loadFullWidthMedia() {
             $(tergetBlockHolder).css("overflow", "auto").css("height", "100%")
                     .css("-webkit-overflow-scrolling", "touch").parent().css("height","100%");
         } else {
-            prevMediaHolder.tinyscrollbar();
+            if(currPreviewElem.find("#video-wrapper").length > 1)
+                prevMediaHolder.tinyscrollbar();
         }
 
     }
