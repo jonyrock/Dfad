@@ -221,53 +221,6 @@ function moduleUpdate_full_width_gallery() {
     }
 }
 
-function moduleUpdate_page_columns(customStartPos) {
-    var textPageInstanceHolder = $(txt_modCont);
-    var textPageInstance = $("#module-columns", textPageInstanceHolder);
-    var modulePositionType = textPageInstanceHolder.attr("data-id");
-    var columnItemWrapper = $("#module-columns-wrapper", textPageInstance);
-    var columnPrevWrapper = $("#module-columns-preview-wrapper", textPageInstance);
-
-    if (textPageInstance.length <= 0) return;
-    checkColumnSize(columnsPreviewOpen);
-
-    var val = Math.abs($("#module-container").width() - textPageInstanceHolder.width()) * .5;
-    TweenMax.to(textPageInstanceHolder, .2, { css: { left: val }, ease: Circ.easeOut });
-
-    if (columnsPreviewOpen == false) {
-        if (customStartPos == undefined) {
-            customStartPos = 0;
-        }
-        moduleUpdate(textPageInstanceHolder, columnItemWrapper, $("div:first", columnItemWrapper), sideType, null, null, customStartPos);
-    } else {
-        if (previewAnimDone == false) return;
-        var i = 0;
-        for (i; i < totalColPreviews; i++) {
-            if (i != columnsPreviewIndex) columnsPrevItemArr[i].css("display", "none");
-        }
-        moduleUpdate(textPageInstanceHolder, columnPrevWrapper, $("div:first", columnPrevWrapper), sideType, null, null, 0);
-        if (touchDevice) {
-            $("div:first", columnPrevWrapper).css("height", "");
-            $("div:first", columnPrevWrapper).css("height", $("div:first", columnPrevWrapper).height());
-        }
-        colPreviewItemDisplay("inline");
-    }
-
-    // buttons folding
-    if ($("#module-container #filter-buttons-holder").length > 0) {
-        var buttonsHolder = $("#module-container #filter-buttons-holder");
-        if (buttonsHolder.width() > 900) {
-            buttonsHolder.find(".filter-button").show();
-            buttonsHolder.find("#filter-buttons-dropdown").hide();
-            buttonsHolder.attr("data-folded", "false");
-        } else {
-            buttonsHolder.find(".filter-button").hide();
-            buttonsHolder.find("#filter-buttons-dropdown").show();
-            buttonsHolder.attr("data-folded", "true");
-        }
-    }
-}
-
 $(window).resize(
     function () {
         /*SLIDESHOW CHECK*/
@@ -342,7 +295,7 @@ $(window).resize(
                 moduleUpdate_full_width_gallery();
                 break;
             case "page_columns":
-                moduleUpdate_page_columns();
+                moduleUpdate_page_columns(); // moved to pageColumns.js
                 break;
         }
         moduleType = null;
