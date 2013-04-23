@@ -48,7 +48,7 @@ function modulePageColumns() {
         columnItemWrapper.css("overflow", "auto").css("-webkit-overflow-scrolling", "touch");
     }
     
-    moduleUpdate(textPageInstanceHolder, columnItemWrapper, $("div:first", columnItemWrapper), sideType);
+    moduleUpdate(textPageInstanceHolder, columnItemWrapper, $("div:first", columnItemWrapper), "custom");
 
     var val = Math.abs($("#module-container").width() - textPageInstanceHolder.width()) * .5;
     textPageInstanceHolder.css("left", "100%").css("visibility", "visible");
@@ -167,7 +167,7 @@ function modulePageColumns() {
     previewMediaArrAll = previewMediaArr.slice(0);
     previewMediaDescArrAll = previewMediaDescArr.slice(0);
 
-    $(window).trigger("resize");
+    checkColumnSize();
 }
 
 var containerTotalH = 0;
@@ -331,7 +331,6 @@ function checkColumnSize(adjustPreview) {
         var col = 0
         var newH = 0;
         var count = 0;
-        var lastChild = null;
         container.children().each(
             function () {
                 if(modulePageColumnsCurrentSelectedId != "*" && 
@@ -346,14 +345,11 @@ function checkColumnSize(adjustPreview) {
                 var leftVal = col * (elementW + marginRight);
                 $(this).css("left", leftVal + "px").css("top", topVal + "px");
                 col++;
-                    
-                lastChild = this;
                 count++;
-                
             }
         );
         
-        newH = parseInt($(lastChild).css("top"), 10) + $(lastChild).height() ;
+        newH = Math.ceil(count / columns) * (elementH + marginBottom);
         
         $originalDataPos = getOriginalPos(container);
         var thumbNewW = columns * (elementW + marginRight) - marginRight
