@@ -5,7 +5,6 @@ var previewAnimDone = true;
 var columnsPreviewIndex = 0;
 var columnsPrevItemArr = "";
 var totalColPreviews = 0;
-var $originalDataPos = 0;
 var modulePageColumnsCurrentSelectedId = "*";
 var previewMediaArrAll = Array();
 var previewMediaDescArrAll = Array();
@@ -292,26 +291,11 @@ function checkColumnSize(adjustPreview) {
         var newH = 0;
         var count = 0;
         
-        /*container.children().each(
-        function () {
-            if ($(this).attr("data-id") != selector && selector != "*") {
-                TweenMax.to($(this), .6, { css: { opacity: "0", left: originalDataPos[j].x, top: originalDataPos[j].y }, easing: Sine.easeOut);
-            } else {
-                window.previewMediaArr[j] = previewMediaArrAll[i];
-                window.previewMediaDescArr[j] = previewMediaDescArrAll[i];
-                var valLeft = originalDataPos[j].x;
-                var valTop = originalDataPos[j].y;
-                TweenMax.to($(this), .6, { css: { opacity: "1", left: valLeft, top: valTop }, easing: Sine.easeOut);
-                j++;
-            }
-            i++;
-     });*/
-        
         container.children().each(
             function () {
                 if(modulePageColumnsCurrentSelectedId != "*" && 
                    modulePageColumnsCurrentSelectedId != $(this).attr("data-id")){
-                    $(this).hide();
+                    TweenMax.to($(this), .6, {  css: { opacity: "0", left: "0px", top: "0px" }, easing: Sine.easeOut });
                     return;
                 }
                 $(this).show();
@@ -322,7 +306,7 @@ function checkColumnSize(adjustPreview) {
                 
                 var topVal = lin * (elementH + marginBottom);
                 var leftVal = col * (elementW + marginRight);
-                $(this).css("left", leftVal + "px").css("top", topVal + "px");
+                TweenMax.to($(this), .6, {  css: {opacity: "1", left: leftVal + "px", top: topVal + "px" }, easing: Sine.easeOut });
                 col++;
                 count++;
             }
