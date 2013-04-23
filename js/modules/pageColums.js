@@ -38,6 +38,7 @@ function modulePageColumns() {
     columnsPrevItemArr = new Array();
     totalColPreviews = 0;
     var textPageInstanceHolder = $(txt_modCont);
+    modulePageColumnsCurrentSelectedId = "*";
     var textPageInstance = $("#module-columns", textPageInstanceHolder);
 
     if (textPageInstance.length <= 0) return;
@@ -166,8 +167,9 @@ function modulePageColumns() {
 
     previewMediaArrAll = previewMediaArr.slice(0);
     previewMediaDescArrAll = previewMediaDescArr.slice(0);
-
-    checkColumnSize();
+    
+    moduleUpdate_page_columns();
+    
 }
 
 var containerTotalH = 0;
