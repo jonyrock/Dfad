@@ -127,7 +127,7 @@ function modulePageColumns() {
                     ease: Sine.easeOut
                 });
             }
-            filterContent($filterContainer, selector, $originalDataPos, onFilterComplete);
+            filterContent($filterContainer, selector, $originalDataPos);
             return false;
         });
 
@@ -174,30 +174,6 @@ function modulePageColumns() {
 
 var containerTotalH = 0;
 
-function onFilterComplete(index, container, child, hide) {
-    var total = container.children().length - 1;
-    if (hide == false) {
-        containerTotalH = child.position().top + parseInt(child.css("margin-bottom"), 10) + child.height();
-    }
-
-    if (index == total) {
-        var textPageInstanceHolder = $(txt_modCont);
-        var textPageInstance = $("#module-columns-wrapper", textPageInstanceHolder);
-        container.css("height", containerTotalH);
-        TweenMax.to($("div:first", textPageInstance), .3, {
-            css: { top: "0px" },
-            easing: Sine.easeOut,
-            onComplete:
-                function () {
-                    var sType = $("#template-menu").attr("data-side");
-                    $("#module-columns").css("top","0px");
-                    if (moduleList != null) moduleList.enableList();
-                    moduleUpdate_page_columns();
-                }
-        });
-    }
-}
-
 function getOriginalPos(container) {
     var i = 0;
     var posArray = new Array();
@@ -217,35 +193,17 @@ function getOriginalPos(container) {
     return posArray;
 }
 
-function filterContent(container, selector, originalDataPos, onCompleteFunction) {
-
+function filterContent(container, selector, originalDataPos) {
     modulePageColumnsCurrentSelectedId = selector;
-
-    var i = 0;
-    var j = 0;
-    if (i == 0 && moduleList != null) {
-        moduleList.disableList();
-    }
-    
     window.previewMediaArr = Array();
     window.previewMediaDescArr = Array();
-   
-    container.children().each(
-        function () {
-            if ($(this).attr("data-id") != selector && selector != "*") {
-                TweenMax.to($(this), .6, { css: { opacity: "0", left: originalDataPos[j].x, top: originalDataPos[j].y }, 
-                easing: Sine.easeOut, onComplete: onCompleteFunction, onCompleteParams: [i, container, $(this), true] });
-            } else {
-                window.previewMediaArr[j] = previewMediaArrAll[i];
-                window.previewMediaDescArr[j] = previewMediaDescArrAll[i];
-                var valLeft = originalDataPos[j].x;
-                var valTop = originalDataPos[j].y;
-                TweenMax.to($(this), .6, { css: { opacity: "1", left: valLeft, top: valTop }, easing: Sine.easeOut, 
-                onComplete: onCompleteFunction, onCompleteParams: [i, container, $(this), false] });
-                j++;
-            }
-            i++;
-        });
+    container.children().each( function (i) {
+        if ($(this).attr("data-id") != selector && selector != "*") 
+            return;
+        window.previewMediaArr.push(previewMediaArrAll[i]);
+        window.previewMediaDescArr.push(previewMediaDescArrAll[i]);
+    });
+    moduleUpdate_page_columns();
 }
 
 function getDirectionCSS($element, coordinates) {
@@ -333,11 +291,30 @@ function checkColumnSize(adjustPreview) {
         var col = 0
         var newH = 0;
         var count = 0;
+        
+        /*container.children().each(
+        function () {
+            if ($(this).attr("data-id") != selector && selector != "*") {
+                TweenMax.to($(this), .6, { css: { opacity: "0", left: originalDataPos[j].x, top: originalDataPos[j].y }, easing: Sine.easeOut);
+            } else {
+                window.previewMediaArr[j] = previewMediaArrAll[i];
+                window.previewMediaDescArr[j] = previewMediaDescArrAll[i];
+                var valLeft = originalDataPos[j].x;
+                var valTop = originalDataPos[j].y;
+                TweenMax.to($(this), .6, { css: { opacity: "1", left: valLeft, top: valTop }, easing: Sine.easeOut);
+                j++;
+            }
+            i++;
+     });*/
+        
         container.children().each(
             function () {
                 if(modulePageColumnsCurrentSelectedId != "*" && 
-                   modulePageColumnsCurrentSelectedId != $(this).attr("data-id"))
-                        return;
+                   modulePageColumnsCurrentSelectedId != $(this).attr("data-id")){
+                    $(this).hide();
+                    return;
+                }
+                $(this).show();
                 if(col == columns) {
                     col = 0;
                     lin++;
