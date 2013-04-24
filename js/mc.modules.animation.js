@@ -1,7 +1,7 @@
 /**
  * VERSION: 1.0
  * DATE: 2012-09-20
- * 
+ *
  * @author: mediacreed, mediacreed.com, @jonyrock exclusively to dfad.com
  **/
 
@@ -13,7 +13,7 @@ var initBackColor = "#3f3f3f";
 var moduleContainerMarginLeft = 240;
 var menuActive = true;
 var menuHoverActive = true;
-/* it will change to false if menuActive == true. If 'menuActive' 
+/* it will change to false if menuActive == true. If 'menuActive'
  is false and this true than on hover it will show the menu */
 var menuTextOutColor = "#FFF";
 
@@ -24,24 +24,24 @@ var customPageStartType = "full_width_gallery";
 
 var contactFormDemo = false;
 
-
-
 /* start ready function */
 $(document).ready(function() {
     readyAndLoad++;
     $(window).error(function(msg, url, line) {
         console.log("error: ", msg, " url: ", url, " line: ", line);
     });
-    
-    if (readyAndLoad == 2) prepareTemplate();
-        
+
+    if (readyAndLoad == 2)
+        prepareTemplate();
+
 });
 /* end ready function */
 
 /* start load function */
 $(function() {
     readyAndLoad++;
-    if (readyAndLoad == 2) prepareTemplate();
+    if (readyAndLoad == 2)
+        prepareTemplate();
 });
 /* end load function */
 
@@ -54,6 +54,10 @@ var videojsHolder = "";
 var touchDevice = "ontouchstart" in window;
 var loadURL;
 /* end GENERAL JS PROPERTIES */
+
+var endModuleFunction = null;
+var endPreviousModule = false;
+var previousModuleType = "";
 
 /*================= GENERAL TXT NAMES ==========================*/
 var t_scrBarV1 = "#module-scrollbar-holder";
@@ -159,16 +163,10 @@ function checkWhatToLoad() {
     $("#module-container").load(hrefPath + url + ' #module-container > *', firstRunLoaded);
 }
 
-
-
 /* on template hash change */
 
 function onTemplateHashChange(event, runLoad) {
-    var url = window.location.hash + "",
-            oldMenuID = menuOptionID,
-            oldSubID = submenuOptionID,
-            disabMenu = true,
-            tempMenuData = menuData;
+    var url = window.location.hash + "", oldMenuID = menuOptionID, oldSubID = submenuOptionID, disabMenu = true, tempMenuData = menuData;
 
     url = url.replace("#", "");
     url = url.substring(url.lastIndexOf("/") + 1);
@@ -184,8 +182,6 @@ function onTemplateHashChange(event, runLoad) {
 
 /* update menu */
 
-
-
 /* on first run loaded html page */
 
 function firstRunLoaded(response, status, xhr) {
@@ -195,7 +191,13 @@ function firstRunLoaded(response, status, xhr) {
             console.log("Error loading the INDEX page: " + response);
             break;
         case "success":
-            TweenMax.to($(".main-template-loader"), .3, {css: {opacity: "0"}, ease: Sine.easeOut, onComplete: removeTemplateLoader});
+            TweenMax.to($(".main-template-loader"), .3, {
+                css : {
+                    opacity : "0"
+                },
+                ease : Sine.easeOut,
+                onComplete : removeTemplateLoader
+            });
             onModuleContentLoaded();
             break;
     }
@@ -237,18 +239,21 @@ function settingsForScreens() {
 
     $("footer").css('display', 'inline');
     TweenMax.to($("#menu-container"), .4, {
-        css: {left: "0px"},
-        ease: Sine.easeInOut, delay: 0.5, onComplete: endStartupAnimation
+        css : {
+            left : "0px"
+        },
+        ease : Sine.easeInOut,
+        delay : 0.5,
+        onComplete : endStartupAnimation
     });
     /*end start-up animation*/
 
-    $("#template-smpartphone-menu select").change(
-            function() {
-                if ($(this).val() != "#") {
-                    var hashURL = updateMenu($(this).val(), prevURL, undefined, false);
-                    window.location.hash = hashURL;
-                }
-            });
+    $("#template-smpartphone-menu select").change(function() {
+        if ($(this).val() != "#") {
+            var hashURL = updateMenu($(this).val(), prevURL, undefined, false);
+            window.location.hash = hashURL;
+        }
+    });
 }
 
 var delayInterval = "";
@@ -267,7 +272,6 @@ function endStartupAnimation() {
 function endModuleStart() {
 
 }
-
 
 /* activate hover menu */
 
@@ -299,8 +303,20 @@ function overMenu() {
     if (menuActive == true)
         return;
     isOverMenu = true;
-    TweenMax.to($("#template-wrapper"), .4, {css: {left: "0px", top: "0px"}, ease: Sine.easeInOut});
-    TweenMax.to($("#menu-container"), .4, {css: {left: "0px", top: "0px"}, ease: Sine.easeInOut});
+    TweenMax.to($("#template-wrapper"), .4, {
+        css : {
+            left : "0px",
+            top : "0px"
+        },
+        ease : Sine.easeInOut
+    });
+    TweenMax.to($("#menu-container"), .4, {
+        css : {
+            left : "0px",
+            top : "0px"
+        },
+        ease : Sine.easeInOut
+    });
     alwaysUpdate();
 }
 
@@ -311,14 +327,24 @@ function outMenu() {
     if (menuActive == true)
         return;
     isOverMenu = false;
-    var winW = $(window).width(),
-            winH = $(window).height();
+    var winW = $(window).width(), winH = $(window).height();
 
-    var menuWidth = parseInt($("#menu-container").css("width"), 10) - parseInt($("#menu-hider").width(), 10),
-            menuVal = 0;
+    var menuWidth = parseInt($("#menu-container").css("width"), 10) - parseInt($("#menu-hider").width(), 10), menuVal = 0;
     var targetOffset = $("#menu-hider-background").width() - menuWidth;
-    TweenMax.to($("#template-wrapper"), .4, {css: {left: targetOffset + "px", top: "0px"}, ease: Sine.easeInOut});
-    TweenMax.to($("#menu-container"), .4, {css: {left: menuVal + "px", top: "0px"}, ease: Sine.easeInOut});
+    TweenMax.to($("#template-wrapper"), .4, {
+        css : {
+            left : targetOffset + "px",
+            top : "0px"
+        },
+        ease : Sine.easeInOut
+    });
+    TweenMax.to($("#menu-container"), .4, {
+        css : {
+            left : menuVal + "px",
+            top : "0px"
+        },
+        ease : Sine.easeInOut
+    });
 
     alwaysUpdate()
 }
@@ -327,9 +353,11 @@ function outMenu() {
 
 function alwaysUpdate() {
     if (currentSlide != null)
-        resizeImage(currentSlide, true); /* ONLY IF SLIDESHOW ACTIVE */
+        resizeImage(currentSlide, true);
+    /* ONLY IF SLIDESHOW ACTIVE */
     if ($showModuleBackground != null)
-        resizeImage($showModuleBackground, true); /*BACKGROUND CHECK*/
+        resizeImage($showModuleBackground, true);
+    /*BACKGROUND CHECK*/
 
     var winW = $(window).width();
     var winH = $(window).height();
@@ -337,12 +365,16 @@ function alwaysUpdate() {
     var newModContH = winH;
     var cModuleType = $("#template-menu").attr("data-current-module-type")
 
-    var menuHiderH = parseInt($("#menu-container #menu-hider").height(), 10),
-            menuHeight = winH - menuHiderH;
+    var menuHiderH = parseInt($("#menu-container #menu-hider").height(), 10), menuHeight = winH - menuHiderH;
     newModContH = menuHeight;
 
-
-    TweenMax.to($("#module-container"), .4, {css: {width: newModContW + "px", height: newModContH + "px"}, ease: Sine.easeInOut});
+    TweenMax.to($("#module-container"), .4, {
+        css : {
+            width : newModContW + "px",
+            height : newModContH + "px"
+        },
+        ease : Sine.easeInOut
+    });
 
     if ($("#module-container-old") != null && $("#module-container-old").length > 0) {
         if ($("#module-container-old #module-background-holder").length > 0) {
@@ -356,13 +388,23 @@ function alwaysUpdate() {
     var thumbsHolder = $('#slideshow-thumbs');
     if (thumbsHolder.length > 0) {
         var val = (newModContW - thumbsHolder.width()) * .5;
-        TweenMax.to(thumbsHolder, .4, {css: {marginLeft: val}, easing: Sine.easeOut});
+        TweenMax.to(thumbsHolder, .4, {
+            css : {
+                marginLeft : val
+            },
+            easing : Sine.easeOut
+        });
     }
     var slideHolder = $("#slideshow .slideshow-slide", $("#module-container"));
     if (slideHolder.length > 0) {
         $("#slideshow-captions", slideHolder).each(function() {
             $(this).css("top", (newModContH * 0.3) + "px");
-            TweenMax.to($(this), .4, {css: {width: (newModContW * 0.5) + "px"}, ease: Sine.easeInOut});
+            TweenMax.to($(this), .4, {
+                css : {
+                    width : (newModContW * 0.5) + "px"
+                },
+                ease : Sine.easeInOut
+            });
         });
     }
 
@@ -371,7 +413,12 @@ function alwaysUpdate() {
     if (modulePosition == "module-position-bc" || modulePosition == "module-position-cc") {
         if (moduleContainerHolder.length > 0) {
             var value = Math.round((newModContW - $(":first", moduleContainerHolder).width()) * 0.5);
-            TweenMax.to(moduleContainerHolder, .4, {css: {left: value}, easing: Sine.easeOut});
+            TweenMax.to(moduleContainerHolder, .4, {
+                css : {
+                    left : value
+                },
+                easing : Sine.easeOut
+            });
         }
     }
 
@@ -385,7 +432,12 @@ function alwaysUpdate() {
     var contactModule = $("#module-contact #module-contact-holder");
     if (contactModule.length > 0) {
         moduleUpdate_contact();
-        TweenMax.to(contactModule, .4, {css: {left: (newModContW - contactModule.width()) * .5}, easing: Sine.easeOut});
+        TweenMax.to(contactModule, .4, {
+            css : {
+                left : (newModContW - contactModule.width()) * .5
+            },
+            easing : Sine.easeOut
+        });
     }
     var fullWidModule = $("#module-full-width");
     if (fullWidModule.length > 0) {
@@ -421,7 +473,13 @@ function showModule() {
             return;
         }
         firstMediaLoaded = false;
-        TweenMax.to($("#loading-animation"), .3, {css: {right: "-104px"}, delay: .3, ease: Circ.easeOut});
+        TweenMax.to($("#loading-animation"), .3, {
+            css : {
+                right : "-104px"
+            },
+            delay : .3,
+            ease : Circ.easeOut
+        });
         if (isOtherURL == true) {
             urlChanged();
         } else {
@@ -444,19 +502,25 @@ function showModule() {
                 $showModuleBackground = null;
                 $showModuleBackgroundSolid.css('display', 'inline').css("opacity", "0").css("visibility", "visible");
                 TweenMax.to($showModuleBackgroundSolid, .4, {
-                    css: {opacity: "1"},
-                    delay: .4,
-                    ease: Sine.easeOut,
-                    onComplete:
-                            function() {
-                                if (isOtherURL == true) {
-                                    urlChanged();
-                                } else {
-                                    startModule();
-                                }
-                            }
+                    css : {
+                        opacity : "1"
+                    },
+                    delay : .4,
+                    ease : Sine.easeOut,
+                    onComplete : function() {
+                        if (isOtherURL == true) {
+                            urlChanged();
+                        } else {
+                            startModule();
+                        }
+                    }
                 });
-                TweenMax.to($("#loading-animation"), .3, {css: {right: "-104px"}, ease: Circ.easeOut});
+                TweenMax.to($("#loading-animation"), .3, {
+                    css : {
+                        right : "-104px"
+                    },
+                    ease : Circ.easeOut
+                });
             }
         } else {
             $showModuleBackground = null;
@@ -464,7 +528,14 @@ function showModule() {
             if (isOtherURL == true) {
                 urlChanged();
             } else {
-                TweenMax.to($("#loading-animation"), .3, {css: {right: "-104px"}, delay: .3, ease: Circ.easeOut, onComplete: startModule});
+                TweenMax.to($("#loading-animation"), .3, {
+                    css : {
+                        right : "-104px"
+                    },
+                    delay : .3,
+                    ease : Circ.easeOut,
+                    onComplete : startModule
+                });
             }
         }
     }
@@ -479,17 +550,18 @@ function animateModuleBackground() {
         showDone = false;
         backLoaded = false;
         TweenMax.to($("#loading-animation"), .3, {
-            css: {right: "-104px"},
-            delay: .3,
-            ease: Circ.easeOut,
-            onComplete:
-                    function() {
-                        if (isOtherURL == true) {
-                            urlChanged();
-                        } else {
-                            hideAnimationCompleted();
-                        }
-                    }
+            css : {
+                right : "-104px"
+            },
+            delay : .3,
+            ease : Circ.easeOut,
+            onComplete : function() {
+                if (isOtherURL == true) {
+                    urlChanged();
+                } else {
+                    hideAnimationCompleted();
+                }
+            }
         });
     }
 }
@@ -502,23 +574,23 @@ function hideAnimationCompleted() {
         resizeImage($showModuleBackground);
         $showModuleBackground.css('display', 'inline').css("opacity", "0").css("visibility", "visible").css("left", (-60) + "px");
         TweenMax.to($showModuleBackground, .6, {
-            css: {opacity: "1", left: "0px"},
-            ease: Circ.easeOut,
-            onComplete:
-                    function() {
-                        if (isOtherURL == true) {
-                            urlChanged();
-                        } else {
-                            startModule();
-                        }
-                    }
+            css : {
+                opacity : "1",
+                left : "0px"
+            },
+            ease : Circ.easeOut,
+            onComplete : function() {
+                if (isOtherURL == true) {
+                    urlChanged();
+                } else {
+                    startModule();
+                }
+            }
         });
     }
 }
 
-var endModuleFunction = null;
-var endPreviousModule = false;
-var previousModuleType = "";
+
 /* start module */
 
 function startModule() {
@@ -619,7 +691,14 @@ function moduleSlideshow() {
     currentSlide.css("opacity", "0");
     storeAllSlides();
     $("#module-container").css('visibility', 'visible');
-    TweenMax.to(currentSlide, .6, {css: {opacity: "1", left: "0px"}, ease: Circ.easeOut, onComplete: slideshowShowThumbs});
+    TweenMax.to(currentSlide, .6, {
+        css : {
+            opacity : "1",
+            left : "0px"
+        },
+        ease : Circ.easeOut,
+        onComplete : slideshowShowThumbs
+    });
 }
 
 function onFirstMediaLoaded() {
@@ -666,7 +745,10 @@ function storeAllSlides() {
 function startTimer() {
     if (timerSlideshow == null) {
         timerSlideshow = $.timer(checkSlideshowTimer);
-        timerSlideshow.set({time: timerSec * 1000, autostart: false});
+        timerSlideshow.set({
+            time : timerSec * 1000,
+            autostart : false
+        });
     }
 }
 
@@ -704,33 +786,43 @@ function slideshowShowThumbs() {
         thumbsList = null;
     }
     if (!touchDevice) {
-        thumbsList = $("#slideshow-thumbs-content").McCustomList({scrollDirection: "horizontal", scrollType: "linear"});
-        thumbsList.setupList({
-            scrollContainer: $('#slideshow-thumbs-container'),
-            mouseWheelSupport: "yes",
-            buttonsSupport: "no",
-            draggerContainer: null,
-            draggerScroll: null,
-            totalMinusSize: 0,
-            scrollSpeed: 112,
-            offsetSize: -4, /* this is the margin right of the thumbs. On the last thumbs we have this margin */
-            horizFixHolder: $('.horizontal-fix-slideshow-thumbs')
+        thumbsList = $("#slideshow-thumbs-content").McCustomList({
+            scrollDirection : "horizontal",
+            scrollType : "linear"
         });
-        $("#slideshow-thumbs-container").find(".slideshow-thumb-holder").hover(
-                function(event) {
-                    if ($(this).hasClass('thumb-selected') == false) {
-                        customHoverAnimation("over", event, $(this), $("#thumb-image-hover", this));
-                        TweenMax.to($("img", this), .6, {css: {borderColor: themeColor}, ease: Circ.easeOut});
-                    }
-                },
-                function(event) {
-                    var color = '#ffffff';
-                    if ($(this).hasClass('thumb-selected') == false) {
-                        customHoverAnimation("out", event, $(this), $("#thumb-image-hover", this));
-                        TweenMax.to($("img", this), .6, {css: {borderColor: color}, ease: Circ.easeOut});
-                    }
-                }
-        );
+        thumbsList.setupList({
+            scrollContainer : $('#slideshow-thumbs-container'),
+            mouseWheelSupport : "yes",
+            buttonsSupport : "no",
+            draggerContainer : null,
+            draggerScroll : null,
+            totalMinusSize : 0,
+            scrollSpeed : 112,
+            offsetSize : -4, /* this is the margin right of the thumbs. On the last thumbs we have this margin */
+            horizFixHolder : $('.horizontal-fix-slideshow-thumbs')
+        });
+        $("#slideshow-thumbs-container").find(".slideshow-thumb-holder").hover(function(event) {
+            if ($(this).hasClass('thumb-selected') == false) {
+                customHoverAnimation("over", event, $(this), $("#thumb-image-hover", this));
+                TweenMax.to($("img", this), .6, {
+                    css : {
+                        borderColor : themeColor
+                    },
+                    ease : Circ.easeOut
+                });
+            }
+        }, function(event) {
+            var color = '#ffffff';
+            if ($(this).hasClass('thumb-selected') == false) {
+                customHoverAnimation("out", event, $(this), $("#thumb-image-hover", this));
+                TweenMax.to($("img", this), .6, {
+                    css : {
+                        borderColor : color
+                    },
+                    ease : Circ.easeOut
+                });
+            }
+        });
         var instanceArr = $(".slideshow-thumbs-arrow-backward .slideshow-thumbs-arrow-backg");
         var initOpacity = instanceArr.css("opacity");
         var initBackColor = rgb2hex(instanceArr.css("background-color"));
@@ -738,14 +830,23 @@ function slideshowShowThumbs() {
         var thumbArrBack = $("#slideshow-thumbs-holder .slideshow-thumbs-arrow-backward");
         var thumbArrForw = $("#slideshow-thumbs-holder .slideshow-thumbs-arrow-forward");
         bothArrows.unbind('mouseenter mouseleave');
-        bothArrows.hover(
-                function() {
-                    TweenMax.to($(".slideshow-thumbs-arrow-backg", this), 0.3, {css: {opacity: "1", backgroundColor: themeColor}, easing: Sine.easeOut});
+        bothArrows.hover(function() {
+            TweenMax.to($(".slideshow-thumbs-arrow-backg", this), 0.3, {
+                css : {
+                    opacity : "1",
+                    backgroundColor : themeColor
                 },
-                function() {
-                    TweenMax.to($(".slideshow-thumbs-arrow-backg", this), 0.3, {css: {opacity: initOpacity, backgroundColor: initBackColor}, easing: Sine.easeOut});
-                }
-        );
+                easing : Sine.easeOut
+            });
+        }, function() {
+            TweenMax.to($(".slideshow-thumbs-arrow-backg", this), 0.3, {
+                css : {
+                    opacity : initOpacity,
+                    backgroundColor : initBackColor
+                },
+                easing : Sine.easeOut
+            });
+        });
         thumbArrBack.unbind("click");
         thumbArrForw.unbind("click");
         thumbArrForw.click(function() {
@@ -796,7 +897,14 @@ function slideshowShowThumbs() {
     startTimer();
     initialThumbContW = $("#slideshow-thumbs-content").width();
     moduleUpdate_slideshow();
-    TweenMax.to(thumbsHolder, .6, {css: {bottom: "4px"}, delay: 0.6, ease: Circ.easeOut, onComplete: checkCaption});
+    TweenMax.to(thumbsHolder, .6, {
+        css : {
+            bottom : "4px"
+        },
+        delay : 0.6,
+        ease : Circ.easeOut,
+        onComplete : checkCaption
+    });
 }
 
 var initialThumbContW = 0;
@@ -806,14 +914,36 @@ function changeThumbsSelection(cThumb) {
     var color = "#ffffff";
     if (oldThumb.length > 0) {
         oldThumb.removeClass('thumb-selected');
-        TweenMax.to($("#thumb-image-hover", oldThumb), .3, {css: {left: "-100%", top: "0%"}, ease: Sine.easeInOut});
-        TweenMax.to($('img', oldThumb), .6, {css: {borderColor: color}, ease: Circ.easeOut});
+        TweenMax.to($("#thumb-image-hover", oldThumb), .3, {
+            css : {
+                left : "-100%",
+                top : "0%"
+            },
+            ease : Sine.easeInOut
+        });
+        TweenMax.to($('img', oldThumb), .6, {
+            css : {
+                borderColor : color
+            },
+            ease : Circ.easeOut
+        });
     }
     currentThumb = $(cThumb);
     if (currentThumb.hasClass('thumb-selected') == false) {
         currentThumb.addClass('thumb-selected');
-        TweenMax.to($("#thumb-image-hover", currentThumb), .3, {css: {left: "0", top: "0%"}, ease: Sine.easeInOut});
-        TweenMax.to($('img', currentThumb), .6, {css: {borderColor: themeColor}, ease: Circ.easeOut});
+        TweenMax.to($("#thumb-image-hover", currentThumb), .3, {
+            css : {
+                left : "0",
+                top : "0%"
+            },
+            ease : Sine.easeInOut
+        });
+        TweenMax.to($('img', currentThumb), .6, {
+            css : {
+                borderColor : themeColor
+            },
+            ease : Circ.easeOut
+        });
     }
 }
 
@@ -835,13 +965,19 @@ function changeSlideshowSlides(prevSlideID, currSlideID) {
     currentSlide.css("opacity", "0");
     var parentCur = currentSlide.parent(currentSlide);
     parentCur.css("position", "absolute").css("z-index", "2");
-    TweenMax.to(currentSlide, .6, {css: {opacity: "1"}, ease: Sine.easeOut, onComplete: completeSlideTransition});
+    TweenMax.to(currentSlide, .6, {
+        css : {
+            opacity : "1"
+        },
+        ease : Sine.easeOut,
+        onComplete : completeSlideTransition
+    });
 }
 
 function completeSlideTransition() {
     var i = 0;
     var total = slidesArray.length;
-    for (i = 0; i < total; i++) {
+    for ( i = 0; i < total; i++) {
         if (i != slideshowPrevID && i != slideshowCurrID)
             slidesArray[i][0].attr("style", "display:none; opacity: 0; visibility: hidden;");
     }
@@ -865,7 +1001,7 @@ function checkCaption() {
         var total = slidesArray[slideshowCurrID][1].length;
         var windowH = $(window).height();
         var windowW = $(window).width();
-        for (i = 0; i < total; i++) {
+        for ( i = 0; i < total; i++) {
             var obj = slidesArray[slideshowCurrID][1][i];
             obj.css('width', '');
             var width = slidesArray[slideshowCurrID][2][i] + 10;
@@ -874,9 +1010,20 @@ function checkCaption() {
             var styleValue = "top:" + topY + "px; left:" + val + "px; display:inline-block; opacity:1;";
             obj.attr("style", styleValue);
             if (i == total - 1) {
-                TweenMax.to(obj, 5, {css: {left: -(width + windowW * .5) + 'px'}, ease: SlowMo.ease.config(0.7, 0.96), onComplete: resetShowing});
+                TweenMax.to(obj, 5, {
+                    css : {
+                        left : -(width + windowW * .5) + 'px'
+                    },
+                    ease : SlowMo.ease.config(0.7, 0.96),
+                    onComplete : resetShowing
+                });
             } else {
-                TweenMax.to(obj, 5, {css: {left: windowW * .5 + 'px'}, ease: SlowMo.ease.config(0.7, 0.96)});
+                TweenMax.to(obj, 5, {
+                    css : {
+                        left : windowW * .5 + 'px'
+                    },
+                    ease : SlowMo.ease.config(0.7, 0.96)
+                });
             }
         }
     }
@@ -887,7 +1034,7 @@ function resetShowing() {
     if (slidesArray[slideshowCurrID][1].length != 0) {
         var i = 0;
         var total = slidesArray[slideshowCurrID][1].length;
-        for (i = 0; i < total; i++) {
+        for ( i = 0; i < total; i++) {
             slidesArray[slideshowCurrID][1][i].css("opacity", "0");
         }
     }
@@ -907,14 +1054,27 @@ function stopOrHidePrevCaptions() {
         var total = slidesArray[slideshowPrevID][2].length;
         var windowH = $(window).height();
         var windowW = $(window).width();
-        for (i = 0; i < total; i++) {
+        for ( i = 0; i < total; i++) {
             var width = slidesArray[slideshowPrevID][2][i];
             var topY = windowH * .3 + i * 45;
             var obj = slidesArray[slideshowPrevID][1][i];
             if (i == total - 1) {
-                TweenMax.to(obj, .2, {css: {left: -(width + windowW * .5) + 'px', opacity: "0"}, ease: Sine.easeOut, onComplete: runOtherSlide});
+                TweenMax.to(obj, .2, {
+                    css : {
+                        left : -(width + windowW * .5) + 'px',
+                        opacity : "0"
+                    },
+                    ease : Sine.easeOut,
+                    onComplete : runOtherSlide
+                });
             } else {
-                TweenMax.to(obj, .2, {css: {left: windowW * .5 + 'px', opacity: "0"}, ease: Sine.easeOut});
+                TweenMax.to(obj, .2, {
+                    css : {
+                        left : windowW * .5 + 'px',
+                        opacity : "0"
+                    },
+                    ease : Sine.easeOut
+                });
             }
         }
     } else {
@@ -940,7 +1100,12 @@ function moduleHome2() {
 
     var val = parseInt(textPageInstanceHolder.css("left"), 10);
     textPageInstanceHolder.attr("style", "left: 100%; visibility: visible;");
-    TweenMax.to(textPageInstanceHolder, .6, {css: {left: val}, ease: Circ.easeOut});
+    TweenMax.to(textPageInstanceHolder, .6, {
+        css : {
+            left : val
+        },
+        ease : Circ.easeOut
+    });
 
     var slidesBannArray = [];
     var stdBannCont = $("#standard-banner-controls");
@@ -949,35 +1114,38 @@ function moduleHome2() {
     var i = 0;
     stdBannCont.css("margin-left", -(stdBannCont.width() * .5));
 
-    $("#standard-banner").find("a").each(
-            function() {
-                var dataSrc = $("#dataSrc", this);
-                if (dataSrc.length > 0) {
-                    var imgTag = '<img src="' + dataSrc.attr("data-src") + '" />';
-                    dataSrc.after(imgTag).remove();
-                }
-                slidesBannArray[i] = $(this)
-                i++;
-            }
-    );
+    $("#standard-banner").find("a").each(function() {
+        var dataSrc = $("#dataSrc", this);
+        if (dataSrc.length > 0) {
+            var imgTag = '<img src="' + dataSrc.attr("data-src") + '" />';
+            dataSrc.after(imgTag).remove();
+        }
+        slidesBannArray[i] = $(this)
+        i++;
+    });
     i = 0;
-    stdBannCont.find("#control-pin").each(
-            function() {
-                controlPinArr[i] = $(this)
-                i++;
-            }
-    );
+    stdBannCont.find("#control-pin").each(function() {
+        controlPinArr[i] = $(this)
+        i++;
+    });
 
-    controlPin.hover(
-            function() {
-                if ($(this).hasClass("selected") == false)
-                    TweenMax.to($(".control-pin-hover", this), .3, {css: {opacity: "1"}, easing: Sine.easeOut});
-            },
-            function() {
-                if ($(this).hasClass("selected") == false)
-                    TweenMax.to($(".control-pin-hover", this), .3, {css: {opacity: "0"}, easing: Sine.easeOut});
-            }
-    );
+    controlPin.hover(function() {
+        if ($(this).hasClass("selected") == false)
+            TweenMax.to($(".control-pin-hover", this), .3, {
+                css : {
+                    opacity : "1"
+                },
+                easing : Sine.easeOut
+            });
+    }, function() {
+        if ($(this).hasClass("selected") == false)
+            TweenMax.to($(".control-pin-hover", this), .3, {
+                css : {
+                    opacity : "0"
+                },
+                easing : Sine.easeOut
+            });
+    });
 
     controlPin.click(function() {
         stdPrevIndex = stdCurrIndex;
@@ -986,28 +1154,44 @@ function moduleHome2() {
             return;
         controlPinArr[stdPrevIndex].removeClass("selected");
         controlPinArr[stdCurrIndex].addClass("selected");
-        TweenMax.to($(".control-pin-hover", controlPinArr[stdPrevIndex]), .3, {css: {opacity: "0"}, easing: Sine.easeOut});
-        TweenMax.to($(".control-pin-hover", controlPinArr[stdCurrIndex]), .3, {css: {opacity: "1"}, easing: Sine.easeOut});
+        TweenMax.to($(".control-pin-hover", controlPinArr[stdPrevIndex]), .3, {
+            css : {
+                opacity : "0"
+            },
+            easing : Sine.easeOut
+        });
+        TweenMax.to($(".control-pin-hover", controlPinArr[stdCurrIndex]), .3, {
+            css : {
+                opacity : "1"
+            },
+            easing : Sine.easeOut
+        });
         changeHome2Slides();
     });
 
     function changeHome2Slides() {
         slidesBannArray[stdCurrIndex].attr("class", "selected opacity_0");
         TweenMax.to(slidesBannArray[stdPrevIndex], .6, {
-            css: {opacity: "0"},
-            easing: Sine.easeOut,
-            onComplete:
-                    function() {
-                        hideOtherBannerSlides();
-                    }
+            css : {
+                opacity : "0"
+            },
+            easing : Sine.easeOut,
+            onComplete : function() {
+                hideOtherBannerSlides();
+            }
         });
-        TweenMax.to(slidesBannArray[stdCurrIndex], .6, {css: {opacity: "1"}, easing: Sine.easeOut});
+        TweenMax.to(slidesBannArray[stdCurrIndex], .6, {
+            css : {
+                opacity : "1"
+            },
+            easing : Sine.easeOut
+        });
     }
 
     function hideOtherBannerSlides() {
         var i = 0;
         var t = slidesBannArray.length;
-        for (i = 0; i < t; i++) {
+        for ( i = 0; i < t; i++) {
             if (i != stdCurrIndex)
                 slidesBannArray[i].attr("class", "");
         }
@@ -1015,34 +1199,63 @@ function moduleHome2() {
 
     var clients = $(".home-layout-clients a");
     if (clients.length > 0) {
-        clients.hover(
-                function() {
-                    TweenMax.to($(".client-over", this), .6, {css: {opacity: "1"}, easing: Sine.easeOut});
+        clients.hover(function() {
+            TweenMax.to($(".client-over", this), .6, {
+                css : {
+                    opacity : "1"
                 },
-                function() {
-                    TweenMax.to($(".client-over", this), .6, {css: {opacity: "0"}, easing: Sine.easeOut});
-                }
-        );
+                easing : Sine.easeOut
+            });
+        }, function() {
+            TweenMax.to($(".client-over", this), .6, {
+                css : {
+                    opacity : "0"
+                },
+                easing : Sine.easeOut
+            });
+        });
     }
     var contentLi = $(".home-layout2-content ul li");
     var baseColor = rgb2hex($(".layout2-description p", contentLi).css("color"));
     if (!touchDevice)
         if (contentLi.length > 0) {
-            contentLi.hover(
-                    function() {
-                        TweenMax.to($(".layout2-description p", this), .6, {css: {color: themeColor}, easing: Sine.easeOut});
-                        TweenMax.to($("div:first", this), 0.3, {css: {top: "-5px"}, easing: Sine.easeOut});
+            contentLi.hover(function() {
+                TweenMax.to($(".layout2-description p", this), .6, {
+                    css : {
+                        color : themeColor
                     },
-                    function() {
-                        TweenMax.to($(".layout2-description p", this), .6, {css: {color: baseColor}, easing: Sine.easeOut});
-                        TweenMax.to($("div:first", this), 0.3, {css: {top: "0px"}, easing: Sine.easeOut});
-                    }
-            );
+                    easing : Sine.easeOut
+                });
+                TweenMax.to($("div:first", this), 0.3, {
+                    css : {
+                        top : "-5px"
+                    },
+                    easing : Sine.easeOut
+                });
+            }, function() {
+                TweenMax.to($(".layout2-description p", this), .6, {
+                    css : {
+                        color : baseColor
+                    },
+                    easing : Sine.easeOut
+                });
+                TweenMax.to($("div:first", this), 0.3, {
+                    css : {
+                        top : "0px"
+                    },
+                    easing : Sine.easeOut
+                });
+            });
         }
 }
 
 function animateBannerHome2(img) {
-    TweenMax.to(img, 0.4, {css: {opacity: "1"}, easing: Sine.easeOut});
+    TweenMax.to(img, 0.4, {
+        css : {
+            opacity : "1"
+        },
+        easing : Sine.easeOut
+    });
 }
 
 /*================= END HOME 2 ============================*/
@@ -1061,34 +1274,63 @@ function moduleHome3() {
 
     var val = parseInt(textPageInstanceHolder.css("left"), 10);
     textPageInstanceHolder.css("left", "100%").css("visibility", "visible");
-    TweenMax.to(textPageInstanceHolder, .6, {css: {left: val}, ease: Circ.easeOut});
+    TweenMax.to(textPageInstanceHolder, .6, {
+        css : {
+            left : val
+        },
+        ease : Circ.easeOut
+    });
 
     var homeLayoutVideo = $("#video-wrapper", textPageInstanceHolder);
     templateAddMediaVideo(homeLayoutVideo.attr("data-video-type"), homeLayoutVideo, undefined);
 
-    $("#home-advertise1, #home-advertise2", textPageInstanceHolder).hover(
-            function() {
-                var back = $(".advertise-details", this);
-                TweenMax.to(back, .3, {css: {backgroundColor: "#3f3f3f"}, ease: Sine.easeOut});
-                TweenMax.to($("span", back), .3, {css: {color: "#f1f1f1"}, ease: Sine.easeOut});
+    $("#home-advertise1, #home-advertise2", textPageInstanceHolder).hover(function() {
+        var back = $(".advertise-details", this);
+        TweenMax.to(back, .3, {
+            css : {
+                backgroundColor : "#3f3f3f"
             },
-            function() {
-                var back = $(".advertise-details", this);
-                TweenMax.to(back, .3, {css: {backgroundColor: "#f1f1f1"}, ease: Sine.easeOut});
-                TweenMax.to($("span", back), .3, {css: {color: "#0c0c0c"}, ease: Sine.easeOut});
-            }
-    );
+            ease : Sine.easeOut
+        });
+        TweenMax.to($("span", back), .3, {
+            css : {
+                color : "#f1f1f1"
+            },
+            ease : Sine.easeOut
+        });
+    }, function() {
+        var back = $(".advertise-details", this);
+        TweenMax.to(back, .3, {
+            css : {
+                backgroundColor : "#f1f1f1"
+            },
+            ease : Sine.easeOut
+        });
+        TweenMax.to($("span", back), .3, {
+            css : {
+                color : "#0c0c0c"
+            },
+            ease : Sine.easeOut
+        });
+    });
 
     var clients = $(".home-layout-clients a");
     if (clients.length > 0) {
-        clients.hover(
-                function() {
-                    TweenMax.to($(".client-over", this), .6, {css: {opacity: "1"}, easing: Sine.easeOut});
+        clients.hover(function() {
+            TweenMax.to($(".client-over", this), .6, {
+                css : {
+                    opacity : "1"
                 },
-                function() {
-                    TweenMax.to($(".client-over", this), .6, {css: {opacity: "0"}, easing: Sine.easeOut});
-                }
-        );
+                easing : Sine.easeOut
+            });
+        }, function() {
+            TweenMax.to($(".client-over", this), .6, {
+                css : {
+                    opacity : "0"
+                },
+                easing : Sine.easeOut
+            });
+        });
     }
     clearCustomInterval(homeInterval);
     homeInterval = setInterval(function() {
@@ -1140,14 +1382,21 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
 
             availScrollbar.css("height", winH).css("top", "0px");
             // 481 = <menu width> + <page_columns 1 colums (the thinnest page)>
-            if(winW < 481) availScrollbar.css("height", "0");
-            
+            if (winW < 481)
+                availScrollbar.css("height", "0");
+
         }
         if (pModH >= cConH) {
             if (availScrollbar.length > 0 && availScrollbar.css("display") != "none") {
-                TweenMax.to(availScrollbar, .6, {css: {opacity: "0"}, ease: Quad.easeOut, onComplete: function() {
+                TweenMax.to(availScrollbar, .6, {
+                    css : {
+                        opacity : "0"
+                    },
+                    ease : Quad.easeOut,
+                    onComplete : function() {
                         availScrollbar.css("display", "none");
-                    }});
+                    }
+                });
             }
             if (moduleList != null) {
                 moduleList.destroy();
@@ -1166,7 +1415,12 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
                 cCon.css("top", Math.round(valTop * 0.5) + "px");
             } else if (modSide == "custom") {
                 if (anim == true) {
-                    TweenMax.to(cCon, .3, {css: {top: "0px"}, ease: Sine.easeOut});
+                    TweenMax.to(cCon, .3, {
+                        css : {
+                            top : "0px"
+                        },
+                        ease : Sine.easeOut
+                    });
                 } else {
                     cCon.css("top", "0px");
                 }
@@ -1174,7 +1428,12 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
             if (mPos == "module-position-bc" || mPos == "module-position-cc") {
                 var value = Math.round((($("#module-container").width() - pConW) * .5 /*+ get_OffsetWidth()*/));
                 if (anim == true) {
-                    TweenMax.to(pMod, .6, {css: {left: value + "px"}, ease: Sine.easeOut});
+                    TweenMax.to(pMod, .6, {
+                        css : {
+                            left : value + "px"
+                        },
+                        ease : Sine.easeOut
+                    });
                 } else {
                     pMod.css("left", value + "px");
                 }
@@ -1194,21 +1453,29 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
                 if (availScrollbar.css("display") == "none") {
                     availScrollbar.css("opacity", "0").css("display", "inline");
                 }
-                TweenMax.to(availScrollbar, .6, {css: {opacity: "1"}, ease: Quad.easeOut});
+                TweenMax.to(availScrollbar, .6, {
+                    css : {
+                        opacity : "1"
+                    },
+                    ease : Quad.easeOut
+                });
             }
             if (moduleList == null) {
-                moduleList = pMod.McCustomList({scrollDirection: "vertical", scrollType: "linear"});
+                moduleList = pMod.McCustomList({
+                    scrollDirection : "vertical",
+                    scrollType : "linear"
+                });
                 moduleList.setupList({
-                    scrollContainer: cCon,
-                    mouseWheelSupport: "yes",
-                    buttonsSupport: "no",
-                    draggerContainer: availScrollbar,
-                    draggerScroll: $("#module-scrollbar-dragger", availScrollbar),
-                    totalMinusSize: totalMinusSize,
-                    scrollSpeed: 100,
-                    offsetSize: 0,
-                    horizFixHolder: null,
-                    customStartPos: custStartPos
+                    scrollContainer : cCon,
+                    mouseWheelSupport : "yes",
+                    buttonsSupport : "no",
+                    draggerContainer : availScrollbar,
+                    draggerScroll : $("#module-scrollbar-dragger", availScrollbar),
+                    totalMinusSize : totalMinusSize,
+                    scrollSpeed : 100,
+                    offsetSize : 0,
+                    horizFixHolder : null,
+                    customStartPos : custStartPos
                 });
             } else {
                 moduleList.updateCustomList(totalMinusSize);
@@ -1219,24 +1486,28 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
                     pCon.parent(pCon).css("top", "0px");
                 }
                 if (anim == true) {
-                    TweenMax.to(pMod, .6, {css: {left: value + "px"}, ease: Sine.easeOut});
+                    TweenMax.to(pMod, .6, {
+                        css : {
+                            left : value + "px"
+                        },
+                        ease : Sine.easeOut
+                    });
                 } else {
                     pMod.css("left", value + "px");
                 }
             }
         }
     } else {
-        pCon.css("overflow", "auto")
-            .css("-webkit-overflow-scrolling", "touch");
+        pCon.css("overflow", "auto").css("-webkit-overflow-scrolling", "touch");
         var menuWidth = $("#menu-container").width();
         var maxPossibleWidth = winW - menuWidth;
         //alert($(pCon).att)
-        if(cConW > maxPossibleWidth){
+        if (cConW > maxPossibleWidth) {
             pCon.css("width", maxPossibleWidth + "px");
         } else {
             //TODO: do it in a better way
-            if(cCon.attr("id") == "module-galleries-holder")
-            pCon.css("left", ((maxPossibleWidth - cConW) / 2) +"px");
+            if (cCon.attr("id") == "module-galleries-holder")
+                pCon.css("left", ((maxPossibleWidth - cConW) / 2) + "px");
         }
     }
 }
@@ -1269,27 +1540,52 @@ function moduleTextPage() {
             var val = (-moduleWidth) + "px";
             moduleUpdate(textPageInstance, modWrapper, $("div:first", modWrapper), sideType);
             textPageInstanceHolder.attr("style", getElementStyle(textPageInstanceHolder) + " left:" + val + "; visibility: visible;");
-            TweenMax.to(textPageInstanceHolder, .6, {css: {left: "0px"}, ease: Circ.easeInOut, onComplete: moduleUpdate_text_page}); /*get_OffsetWidth() +*/
+            TweenMax.to(textPageInstanceHolder, .6, {
+                css : {
+                    left : "0px"
+                },
+                ease : Circ.easeInOut,
+                onComplete : moduleUpdate_text_page
+            });
+            /*get_OffsetWidth() +*/
             break;
         case "module-position-bc":
             moduleUpdate(textPageInstanceHolder, modWrapper, $("div:first", modWrapper), sideType);
             var val = parseInt(textPageInstance.css("top"), 10) + "px";
             textPageInstanceHolder.css("top", moduleHeight).css("visibility", "visible");
-            TweenMax.to(textPageInstanceHolder, .6, {css: {top: "0px"}, ease: Circ.easeInOut, onComplete: moduleUpdate_text_page});
+            TweenMax.to(textPageInstanceHolder, .6, {
+                css : {
+                    top : "0px"
+                },
+                ease : Circ.easeInOut,
+                onComplete : moduleUpdate_text_page
+            });
             break;
         case "module-position-rc":
             textPageInstanceHolder.css("position", "fixed");
             moduleUpdate(textPageInstance, modWrapper, $("div:first", modWrapper), sideType);
             var val = (-moduleWidth) + "px";
             textPageInstanceHolder.attr("style", getElementStyle(textPageInstanceHolder) + " position: fixed; right:" + val + "; visibility: visible;");
-            TweenMax.to(textPageInstanceHolder, .6, {css: {right: "0px"}, ease: Circ.easeInOut, onComplete: moduleUpdate_text_page});
+            TweenMax.to(textPageInstanceHolder, .6, {
+                css : {
+                    right : "0px"
+                },
+                ease : Circ.easeInOut,
+                onComplete : moduleUpdate_text_page
+            });
             break;
         case "module-position-cc":
             moduleUpdate(textPageInstanceHolder, modWrapper, $("div:first", modWrapper), sideType);
             var val = parseInt(textPageInstanceHolder.css("left"), 10);
             textPageInstanceHolder.attr("style", getElementStyle(textPageInstanceHolder) + " left: 100%; visibility: visible;");
 
-            TweenMax.to(textPageInstanceHolder, .6, {css: {left: val}, ease: Circ.easeOut, onComplete: moduleUpdate_text_page});
+            TweenMax.to(textPageInstanceHolder, .6, {
+                css : {
+                    left : val
+                },
+                ease : Circ.easeOut,
+                onComplete : moduleUpdate_text_page
+            });
             break;
     }
 }
@@ -1305,18 +1601,42 @@ function endModuleTextPage() {
             break;
         case "module-position-lc":
             var val = (-moduleWidth) + "px";
-            TweenMax.to(textPageInstance, .6, {css: {left: val}, ease: Circ.easeInOut, onComplete: endModuleComplete});
+            TweenMax.to(textPageInstance, .6, {
+                css : {
+                    left : val
+                },
+                ease : Circ.easeInOut,
+                onComplete : endModuleComplete
+            });
             break;
         case "module-position-bc":
-            TweenMax.to(textPageInstance, .6, {css: {top: moduleHeight + "px"}, ease: Circ.easeInOut, onComplete: endModuleComplete});
+            TweenMax.to(textPageInstance, .6, {
+                css : {
+                    top : moduleHeight + "px"
+                },
+                ease : Circ.easeInOut,
+                onComplete : endModuleComplete
+            });
             break;
         case "module-position-rc":
             var val = (-moduleWidth) + "px";
-            TweenMax.to(textPageInstance, .6, {css: {right: val}, ease: Circ.easeInOut, onComplete: endModuleComplete});
+            TweenMax.to(textPageInstance, .6, {
+                css : {
+                    right : val
+                },
+                ease : Circ.easeInOut,
+                onComplete : endModuleComplete
+            });
             break;
         case "module-position-cc":
             var val = $(window).width() + get_OffsetWidth() + "px";
-            TweenMax.to(textPageInstance, .6, {css: {left: val}, ease: Circ.easeInOut, onComplete: endModuleComplete});
+            TweenMax.to(textPageInstance, .6, {
+                css : {
+                    left : val
+                },
+                ease : Circ.easeInOut,
+                onComplete : endModuleComplete
+            });
             break;
     }
     endModuleFunction = null;
@@ -1361,7 +1681,13 @@ function moduleNews() {
 
     var val = (-moduleWidth) + "px";
     textPageInstanceHolder.attr("style", "left:" + val + "; visibility:visible;");
-    TweenMax.to(textPageInstanceHolder, .6, {css: {left: "0px"}, delay: 0.1, ease: Circ.easeInOut});
+    TweenMax.to(textPageInstanceHolder, .6, {
+        css : {
+            left : "0px"
+        },
+        delay : 0.1,
+        ease : Circ.easeInOut
+    });
     endModuleFunction = endModuleTextPage;
     moduleEnd = true;
 
@@ -1386,14 +1712,21 @@ function moduleNews() {
     var basicColor = rgb2hex(readMoreBtn.css("background-color"));
     var newsList = $("#module-news-vertical-holder");
     var prevItemW = $("." + shortNP + "-horizontal-fix").width();
-    readMoreBtn.hover(
-            function() {
-                TweenMax.to($(this), 0.6, {css: {backgroundColor: themeColor}, easing: Sine.easeOut});
+    readMoreBtn.hover(function() {
+        TweenMax.to($(this), 0.6, {
+            css : {
+                backgroundColor : themeColor
             },
-            function() {
-                TweenMax.to($(this), 0.6, {css: {backgroundColor: basicColor}, easing: Sine.easeOut});
-            }
-    );
+            easing : Sine.easeOut
+        });
+    }, function() {
+        TweenMax.to($(this), 0.6, {
+            css : {
+                backgroundColor : basicColor
+            },
+            easing : Sine.easeOut
+        });
+    });
 
     var newsPreviewControls = $("#" + shortNP + "-controls");
     var newsPrevItemMargRight = parseInt($("li:first", newsPrvU).css("margin-right"), 10);
@@ -1402,14 +1735,21 @@ function moduleNews() {
     var nwsItem = $(".news-item-vertical", textPageInstance);
     var nwsItemTitle = $(".news-item-vertical-title", $(".news-item-vertical:first", textPageInstance));
     var nwsTitleColor = rgb2hex(nwsItemTitle.css("color"));
-    nwsItem.hover(
-            function() {
-                TweenMax.to($(".news-item-vertical-title", this), .6, {css: {color: themeColor}, easing: Sine.easeOut});
+    nwsItem.hover(function() {
+        TweenMax.to($(".news-item-vertical-title", this), .6, {
+            css : {
+                color : themeColor
             },
-            function() {
-                TweenMax.to($(".news-item-vertical-title", this), .6, {css: {color: nwsTitleColor}, easing: Sine.easeOut});
-            }
-    );
+            easing : Sine.easeOut
+        });
+    }, function() {
+        TweenMax.to($(".news-item-vertical-title", this), .6, {
+            css : {
+                color : nwsTitleColor
+            },
+            easing : Sine.easeOut
+        });
+    });
     nwsItem.click(function() {
         previewNewsIndex = nwsItem.index(this);
         newsItemClick(previewNewsIndex);
@@ -1422,9 +1762,15 @@ function moduleNews() {
             moduleList.disableList();
             newsItemTopPos = moduleList.currentPosition();
             var ts = $(t_scrBarV1);
-            TweenMax.to(ts, .3, {css: {opacity: "0"}, easing: Sine.easeOut, onComplete: function() {
+            TweenMax.to(ts, .3, {
+                css : {
+                    opacity : "0"
+                },
+                easing : Sine.easeOut,
+                onComplete : function() {
                     ts.css("display", "none");
-                }});
+                }
+            });
         }
         newsPrvH.css("display", "inline");
         var newsListW = $(newsList).width() + $(newsList).position().left + 30;
@@ -1437,8 +1783,22 @@ function moduleNews() {
             }
         }
         $(".news-preview-counter span").empty().append((index + 1) + "/" + totalPreviews);
-        TweenMax.to(newsList, .6, {css: {left: -newsListW}, delay: 0.1, easing: Sine.easeOut})
-        TweenMax.to([newsPrvU, newsPreviewControls], .6, {css: {left: "0px"}, delay: 0.1, easing: Sine.easeOut, onComplete: loadNewsVerticalPreview, onCompleteParams: [index]});
+        TweenMax.to(newsList, .6, {
+            css : {
+                left : -newsListW
+            },
+            delay : 0.1,
+            easing : Sine.easeOut
+        })
+        TweenMax.to([newsPrvU, newsPreviewControls], .6, {
+            css : {
+                left : "0px"
+            },
+            delay : 0.1,
+            easing : Sine.easeOut,
+            onComplete : loadNewsVerticalPreview,
+            onCompleteParams : [index]
+        });
     }
 
     function loadNewsVerticalPreview(index) {
@@ -1450,7 +1810,15 @@ function moduleNews() {
             checkScrollBar(previewNewsOpen);
         } else {
             $(".news-preview-counter span").empty().append((index + 1) + "/" + totalPreviews);
-            TweenMax.to(newsPrvU, 0.6, {css: {left: -scrollValue}, delay: 0.1, easing: Sine.easeOut, onComplete: checkScrollBar, onCompleteParams: [previewNewsOpen]});
+            TweenMax.to(newsPrvU, 0.6, {
+                css : {
+                    left : -scrollValue
+                },
+                delay : 0.1,
+                easing : Sine.easeOut,
+                onComplete : checkScrollBar,
+                onCompleteParams : [previewNewsOpen]
+            });
         }
     }
 
@@ -1483,25 +1851,31 @@ function moduleNews() {
     }
 
     var initBackColor = rgb2hex($("." + shortNP + "-backward ." + shortNP + "-backg").css("background-color"));
-    $("." + shortNP + "-backward, ." + shortNP + "-forward, ." + shortNP + "-close").hover(
-            function() {
-                TweenMax.to($("." + shortNP + "-backg", this), 0.3, {css: {backgroundColor: themeColor}, easing: Sine.easeOut});
+    $("." + shortNP + "-backward, ." + shortNP + "-forward, ." + shortNP + "-close").hover(function() {
+        TweenMax.to($("." + shortNP + "-backg", this), 0.3, {
+            css : {
+                backgroundColor : themeColor
             },
-            function() {
-                TweenMax.to($("." + shortNP + "-backg", this), 0.3, {css: {backgroundColor: initBackColor}, easing: Sine.easeOut});
-            }
-    );
-    $("." + shortNP + "-backward, ." + shortNP + "-forward", textPageInstance).click(
-            function() {
-                var index = previewNewsIndex;
-                if ($(this).hasClass("" + shortNP + "-backward") == true) {
-                    index--;
-                    changeNewsPreviewMedia(index);
-                } else if ($(this).hasClass("" + shortNP + "-forward") == true) {
-                    index++;
-                    changeNewsPreviewMedia(index);
-                }
-            });
+            easing : Sine.easeOut
+        });
+    }, function() {
+        TweenMax.to($("." + shortNP + "-backg", this), 0.3, {
+            css : {
+                backgroundColor : initBackColor
+            },
+            easing : Sine.easeOut
+        });
+    });
+    $("." + shortNP + "-backward, ." + shortNP + "-forward", textPageInstance).click(function() {
+        var index = previewNewsIndex;
+        if ($(this).hasClass("" + shortNP + "-backward") == true) {
+            index--;
+            changeNewsPreviewMedia(index);
+        } else if ($(this).hasClass("" + shortNP + "-forward") == true) {
+            index++;
+            changeNewsPreviewMedia(index);
+        }
+    });
 
     function changeNewsPreviewMedia(index) {
         if (index < 0)
@@ -1515,15 +1889,16 @@ function moduleNews() {
         loadNewsVerticalPreview(previewNewsIndex);
     }
 
+
     newsPrvU.wipetouch({
-        tapToClick: false, /*if user taps the screen, triggers a click event*/
-        preventDefault: false,
-        wipeLeft: function(result) {
+        tapToClick : false, /*if user taps the screen, triggers a click event*/
+        preventDefault : false,
+        wipeLeft : function(result) {
             var index = previewNewsIndex;
             index++;
             changeNewsPreviewMedia(index)
         },
-        wipeRight: function(result) {
+        wipeRight : function(result) {
             var index = previewNewsIndex;
             index--;
             changeNewsPreviewMedia(index)
@@ -1540,9 +1915,19 @@ function moduleNews() {
             newsPreviewCloseBtn.click(function() {
                 click_PreviewClose();
             });
-            TweenMax.to(newsPreviewCloseBtn, .4, {css: {opacity: "1"}, easing: Sine.easeOut});
+            TweenMax.to(newsPreviewCloseBtn, .4, {
+                css : {
+                    opacity : "1"
+                },
+                easing : Sine.easeOut
+            });
         } else {
-            TweenMax.to(newsPreviewCloseBtn, .4, {css: {opacity: "0.5"}, easing: Sine.easeOut});
+            TweenMax.to(newsPreviewCloseBtn, .4, {
+                css : {
+                    opacity : "0.5"
+                },
+                easing : Sine.easeOut
+            });
         }
     }
 
@@ -1555,9 +1940,27 @@ function moduleNews() {
                 newsPrevItemArr[i].css("display", "none");
             }
         }
-        TweenMax.to([newsPrvU, newsPreviewControls], 0.6, {css: {left: $(newsList).width()}, delay: 0.1, easing: Sine.easeOut});
-        TweenMax.to($(t_scrBarV1), .3, {css: {opacity: "0"}, easing: Sine.easeOut});
-        TweenMax.to(newsList, .6, {css: {left: "0"}, delay: 0.1, easing: Sine.easeOut, onComplete: disableNewsPreview})
+        TweenMax.to([newsPrvU, newsPreviewControls], 0.6, {
+            css : {
+                left : $(newsList).width()
+            },
+            delay : 0.1,
+            easing : Sine.easeOut
+        });
+        TweenMax.to($(t_scrBarV1), .3, {
+            css : {
+                opacity : "0"
+            },
+            easing : Sine.easeOut
+        });
+        TweenMax.to(newsList, .6, {
+            css : {
+                left : "0"
+            },
+            delay : 0.1,
+            easing : Sine.easeOut,
+            onComplete : disableNewsPreview
+        })
     }
 
     function disableNewsPreview() {
@@ -1569,12 +1972,24 @@ function moduleNews() {
         }
         moduleUpdate(textPageInstanceHolder, $("#module-news-vertical-holder", textPageInstance), $("#module-news-vertical-holder div:first", textPageInstance), sideType, null, null, newsItemTopPos);
     }
+
 }
 
 function animateNewsPreviewMedia(src) {
     var inst = $(src);
-    TweenMax.to($(src).parent(), .3, {css: {height: inst.height()}, easing: Sine.easeOut});
-    TweenMax.to(inst, .4, {css: {opacity: '1'}, easing: Sine.easeOut, onComplete: moduleUpdate_news});
+    TweenMax.to($(src).parent(), .3, {
+        css : {
+            height : inst.height()
+        },
+        easing : Sine.easeOut
+    });
+    TweenMax.to(inst, .4, {
+        css : {
+            opacity : '1'
+        },
+        easing : Sine.easeOut,
+        onComplete : moduleUpdate_news
+    });
 }
 
 function newsPreviewItemDisplay(display) {
@@ -1583,7 +1998,6 @@ function newsPreviewItemDisplay(display) {
         newsPrevItemArr[i].css("display", display);
     }
 }
-
 
 /*================= SHOWREEL ===============================*/
 
@@ -1614,7 +2028,12 @@ function moduleShowreel() {
     if (showreelVideo.length > 0)
         templateAddMediaVideo(showreelVideo.attr("data-video-type"), showreelVideo, undefined)
 
-    TweenMax.to(textPageInstance, .4, {css: {width: moduleWidth + "px"}, ease: Quad.easeOut});
+    TweenMax.to(textPageInstance, .4, {
+        css : {
+            width : moduleWidth + "px"
+        },
+        ease : Quad.easeOut
+    });
     endModuleFunction = endModuleShowreel;
     moduleEnd = true;
 }
@@ -1623,9 +2042,11 @@ function endModuleShowreel() {
     var textPageInstance = $("#module-showreel");
     var moduleWidth = textPageInstance.width();
     TweenMax.to(textPageInstance, .6, {
-        css: {width: "0px"},
-        ease: Quad.easeInOut,
-        onComplete: function() {
+        css : {
+            width : "0px"
+        },
+        ease : Quad.easeInOut,
+        onComplete : function() {
             destroyVideoJS();
         }
     });
@@ -1658,7 +2079,12 @@ function reverseEndModuleShowreel() {
     if (showreelVideo.length > 0) {
         templateAddMediaVideo(showreelVideo.attr("data-video-type"), showreelVideo, undefined);
     }
-    TweenMax.to(textPageInstance, .4, {css: {width: moduleWidth + "px"}, ease: Quad.easeOut});
+    TweenMax.to(textPageInstance, .4, {
+        css : {
+            width : moduleWidth + "px"
+        },
+        ease : Quad.easeOut
+    });
     endModuleFunction = endModuleShowreel;
     moduleEnd = true;
 }
@@ -1674,7 +2100,12 @@ function moduleFullscreenVideo() {
     textPageInstance.css("opacity", "0");
     textPageInstance.attr("style", "width:" + width + "px; height:" + height + "px;");
     textPageInstanceHolder.css("visibility", "visible");
-    TweenMax.to(textPageInstance, .6, {css: {opacity: "1"}, ease: Circ.easeOut});
+    TweenMax.to(textPageInstance, .6, {
+        css : {
+            opacity : "1"
+        },
+        ease : Circ.easeOut
+    });
 
     var fullscreenVideo = $("#video-wrapper", textPageInstanceHolder);
     if (fullscreenVideo.length > 0) {
@@ -1712,79 +2143,117 @@ function modulePricingTables() {
 
     var val = parseInt(textPageInstanceHolder.css("left"), 10);
     textPageInstanceHolder.css("left", "100%").css("visibility", "visible");
-    TweenMax.to(textPageInstanceHolder, .5, {css: {left: val}, delay: 0.1, ease: Circ.easeOut});
+    TweenMax.to(textPageInstanceHolder, .5, {
+        css : {
+            left : val
+        },
+        delay : 0.1,
+        ease : Circ.easeOut
+    });
 
-    $("#pricing-column-holder", textPageInstance).hover(
-            function() {
-                $(this).css('z-index', 2);
-                if ($.browser.msie) {
-                    if ($.browser.version != "8.0" && ($.browser.version == "9.0" && isIE9Std() == true))
-                        if ($(this).hasClass("shadow-side-all-pricing-tables") == false)
-                            $(this).addClass("shadow-side-all-pricing-tables");
-                } else {
-                    if ($(this).hasClass("shadow-side-all-pricing-tables") == false)
-                        $(this).addClass("shadow-side-all-pricing-tables");
-                }
-                TweenMax.to($("div:first", this), .4, {css: {backgroundColor: themeColor}, ease: Sine.easeOut});
+    $("#pricing-column-holder", textPageInstance).hover(function() {
+        $(this).css('z-index', 2);
+        if ($.browser.msie) {
+            if ($.browser.version != "8.0" && ($.browser.version == "9.0" && isIE9Std() == true))
+                if ($(this).hasClass("shadow-side-all-pricing-tables") == false)
+                    $(this).addClass("shadow-side-all-pricing-tables");
+        } else {
+            if ($(this).hasClass("shadow-side-all-pricing-tables") == false)
+                $(this).addClass("shadow-side-all-pricing-tables");
+        }
+        TweenMax.to($("div:first", this), .4, {
+            css : {
+                backgroundColor : themeColor
             },
-            function() {
-                $(this).css('z-index', 1);
-                if ($.browser.msie) {
-                    if ($.browser.version != "8.0" && ($.browser.version == "9.0" && isIE9Std() == true))
-                        if ($(this).hasClass("shadow-side-all-pricing-tables") == true)
-                            $(this).removeClass("shadow-side-all-pricing-tables");
-                } else {
-                    if ($(this).hasClass("shadow-side-all-pricing-tables") == true)
-                        $(this).removeClass("shadow-side-all-pricing-tables");
-                }
-                TweenMax.to($("div:first", this), .4, {css: {backgroundColor: "#909090"}, ease: Sine.easeOut});
-            }
-    );
-    $("#pricing-column-holder #pricing-buy-holder", textPageInstance).hover(
-            function() {
-                TweenMax.to($(this), .4, {css: {backgroundColor: themeColor}, ease: Sine.easeOut});
+            ease : Sine.easeOut
+        });
+    }, function() {
+        $(this).css('z-index', 1);
+        if ($.browser.msie) {
+            if ($.browser.version != "8.0" && ($.browser.version == "9.0" && isIE9Std() == true))
+                if ($(this).hasClass("shadow-side-all-pricing-tables") == true)
+                    $(this).removeClass("shadow-side-all-pricing-tables");
+        } else {
+            if ($(this).hasClass("shadow-side-all-pricing-tables") == true)
+                $(this).removeClass("shadow-side-all-pricing-tables");
+        }
+        TweenMax.to($("div:first", this), .4, {
+            css : {
+                backgroundColor : "#909090"
             },
-            function() {
-                TweenMax.to($(this), .4, {css: {backgroundColor: "#3F3F3F"}, ease: Sine.easeOut});
-            }
-    );
+            ease : Sine.easeOut
+        });
+    });
+    $("#pricing-column-holder #pricing-buy-holder", textPageInstance).hover(function() {
+        TweenMax.to($(this), .4, {
+            css : {
+                backgroundColor : themeColor
+            },
+            ease : Sine.easeOut
+        });
+    }, function() {
+        TweenMax.to($(this), .4, {
+            css : {
+                backgroundColor : "#3F3F3F"
+            },
+            ease : Sine.easeOut
+        });
+    });
 }
 
 function customHoverAnimation(type, event, parent, child) {
-    var directionCSS = getDirectionCSS(parent, {x: event.pageX, y: event.pageY});
+    var directionCSS = getDirectionCSS(parent, {
+        x : event.pageX,
+        y : event.pageY
+    });
     if (type == "over") {
         child.removeClass();
         child.css("left", directionCSS.from.val1);
         child.css("top", directionCSS.from.val2);
-        TweenMax.to(child, .3, {css: {left: directionCSS.to.val1, top: directionCSS.to.val2}, ease: Sine.easeInOut});
+        TweenMax.to(child, .3, {
+            css : {
+                left : directionCSS.to.val1,
+                top : directionCSS.to.val2
+            },
+            ease : Sine.easeInOut
+        });
     } else if (type == "out") {
-        TweenMax.to(child, .3, {css: {left: directionCSS.from.val1, top: directionCSS.from.val2}, ease: Sine.easeInOut});
+        TweenMax.to(child, .3, {
+            css : {
+                left : directionCSS.from.val1,
+                top : directionCSS.from.val2
+            },
+            ease : Sine.easeInOut
+        });
     }
 }
+
 /*----------------- end Modules Methods -------------------*/
 
 /*----------------- start footerListeners -----------------*/
 
 function footerListeners() {
-    $("#footer-social").find("#footer-social-holder").find("a").each(
-            function() {
-                var aTitle = $("img", this).attr("title");
-                $(this).hover(
-                        function() {
-                            $("#footer-social-tooltip").css("opacity", "0");
-                            $("#footer-social-tooltip").css("display", "inline");
-                            $("#footer-social-tooltip").css("visibility", "visible");
-                            $("#footer-social-tooltip").empty();
-                            $("#footer-social-tooltip").append('<span>' + aTitle + '</span>');
-                            TweenMax.to($("#footer-social-tooltip"), .6, {css: {opacity: "1"}, ease: Circ.easeOut});
-                        },
-                        function() {
-                            $("#footer-social-tooltip").css("opacity", "0");
-                            $("#footer-social-tooltip").css("display", "none");
-                            $("#footer-social-tooltip").css("visibility", "hidden");
-                            $("#footer-social-tooltip").empty();
-                        });
+    $("#footer-social").find("#footer-social-holder").find("a").each(function() {
+        var aTitle = $("img", this).attr("title");
+        $(this).hover(function() {
+            $("#footer-social-tooltip").css("opacity", "0");
+            $("#footer-social-tooltip").css("display", "inline");
+            $("#footer-social-tooltip").css("visibility", "visible");
+            $("#footer-social-tooltip").empty();
+            $("#footer-social-tooltip").append('<span>' + aTitle + '</span>');
+            TweenMax.to($("#footer-social-tooltip"), .6, {
+                css : {
+                    opacity : "1"
+                },
+                ease : Circ.easeOut
             });
+        }, function() {
+            $("#footer-social-tooltip").css("opacity", "0");
+            $("#footer-social-tooltip").css("display", "none");
+            $("#footer-social-tooltip").css("visibility", "hidden");
+            $("#footer-social-tooltip").empty();
+        });
+    });
 }
 
 /*----------------- end footerListeners -------------------*/
@@ -1817,7 +2286,14 @@ function activateAnimationLoading() {
     TweenMax.killTweensOf(loadAnim);
     loadAnim.css("right", "-104px").css("display", "inline").css("visibility", "visible");
     if (loadAnim.length > 0) {
-        TweenMax.to(loadAnim, .3, {css: {right: "0px"}, delay: delayAnimationLoading, ease: Circ.easeOut, onComplete: doLoad});
+        TweenMax.to(loadAnim, .3, {
+            css : {
+                right : "0px"
+            },
+            delay : delayAnimationLoading,
+            ease : Circ.easeOut,
+            onComplete : doLoad
+        });
     } else {
         doLoad();
     }
@@ -1882,7 +2358,12 @@ function moduleLoaded(response, status, xhr) {
                         loadedContent = true;
                         var loadAnim = $("#loading-animation");
                         if (loadAnim.length > 0) {
-                            TweenMax.to(loadAnim, .3, {css: {right: "-104px"}, ease: Circ.easeOut});
+                            TweenMax.to(loadAnim, .3, {
+                                css : {
+                                    right : "-104px"
+                                },
+                                ease : Circ.easeOut
+                            });
                         }
                         return;
                     }
@@ -1894,7 +2375,8 @@ function moduleLoaded(response, status, xhr) {
                     $("#load-container").css("visibility", "hidden").attr('id', 'module-container').attr("style", containerStyle);
                     $("#module-container-old").after($("#module-container"));
                     onModuleContentLoaded();
-                    $("#template-wrapper").after('<div id="load-container"></div>'); //.css("left", get_OffsetWidth() + "px" )                        
+                    $("#template-wrapper").after('<div id="load-container"></div>');
+                    //.css("left", get_OffsetWidth() + "px" )
                     showModule();
                     clearCustomInterval(showModuleInterval);
                 }, 50);
@@ -1908,11 +2390,6 @@ function onModuleContentLoaded() {
     // add scrollbar if there is not
     if ($("#module-container #module-scrollbar-holder_v2").length == 0) {
         $("#module-container").append('<div id="module-scrollbar-holder_v2"><div id="module-scrollbar-background" class="opacity_8"></div><div id="module-scrollbar-dragger"></div></div>');
-    }
-    
-    if(menuOptionClickedLastUnloaded !== null) {
-       //$(menuOptionClickedLastUnloaded).trigger("click");
-       menuOptionClickedLastUnloaded = null;
     }
 }
 
@@ -1950,7 +2427,12 @@ function get_OffsetWidth() {
 /*----------------- start Utils Methods -------------------*/
 
 function animateMedia(img) {
-    TweenMax.to(img, 0.4, {css: {opacity: "1"}, easing: Sine.easeOut});
+    TweenMax.to(img, 0.4, {
+        css : {
+            opacity : "1"
+        },
+        easing : Sine.easeOut
+    });
 }
 
 function templateAddMediaVideo(videoType, elem, elemParent) {
@@ -1959,8 +2441,7 @@ function templateAddMediaVideo(videoType, elem, elemParent) {
     var parent = (elemParent == undefined) ? elem : elemParent;
     var videoEmbedCode = "";
     if (videoType == "standalone") {
-        videoEmbedCode += '<video id="standalone-wrapper" class="video-js vjs-default-skin" controls preload="none" width="' + elem.attr("data-width") + '" height="' + elem.attr("data-height") + '"'
-                + 'poster="' + elem.attr("data-poster") + '">';
+        videoEmbedCode += '<video id="standalone-wrapper" class="video-js vjs-default-skin" controls preload="none" width="' + elem.attr("data-width") + '" height="' + elem.attr("data-height") + '"' + 'poster="' + elem.attr("data-poster") + '">';
         for (var i = 1; i <= 3; i++) {
             videoEmbedCode += '<source src="' + $(elem).attr("data-url" + i) + '" type="' + $(elem).attr("data-type" + i) + '" />';
         }
@@ -1970,13 +2451,7 @@ function templateAddMediaVideo(videoType, elem, elemParent) {
         if ($.browser.msie && videoType == "youtube") {
             if ($.browser.version == "8.0" || ($.browser.version == "9.0" && isIE9Std() == false)) {
                 url = url.replace("http://www.youtube.com/embed/", "http://www.youtube.com/v/");
-                videoEmbedCode = '<object width="' + elem.attr("data-width") + '" height="' + elem.attr("data-height") + '">' + '<param name="movie" value="' + url + '?fs=1&enablejsapi=1"></param>' +
-                        '<param name="allowFullScreen" value="true"></param>' +
-                        '<param name="allowScriptAccess" value="always"></param>' +
-                        '<embed id="ytplayer" src="' + url + '?fs=1&enablejsapi=1"' + 'type="application/x-shockwave-flash"' +
-                        'allowfullscreen="true"' + 'allowscriptaccess="always"' + 'width="' + elem.attr("data-width") + '" height="' + elem.attr("data-height") + '">' +
-                        '</embed>' +
-                        '</object>';
+                videoEmbedCode = '<object width="' + elem.attr("data-width") + '" height="' + elem.attr("data-height") + '">' + '<param name="movie" value="' + url + '?fs=1&enablejsapi=1"></param>' + '<param name="allowFullScreen" value="true"></param>' + '<param name="allowScriptAccess" value="always"></param>' + '<embed id="ytplayer" src="' + url + '?fs=1&enablejsapi=1"' + 'type="application/x-shockwave-flash"' + 'allowfullscreen="true"' + 'allowscriptaccess="always"' + 'width="' + elem.attr("data-width") + '" height="' + elem.attr("data-height") + '">' + '</embed>' + '</object>';
             }
         }
     }
@@ -1988,11 +2463,21 @@ function templateAddMediaVideo(videoType, elem, elemParent) {
         videojsHolder = _V_("standalone-wrapper", {}, function() {
             if (ready == false) {
                 ready = true;
-                TweenMax.to([$("#standalone-wrapper"), parent], .6, {css: {opacity: "1"}, ease: Circ.easeOut});
+                TweenMax.to([$("#standalone-wrapper"), parent], .6, {
+                    css : {
+                        opacity : "1"
+                    },
+                    ease : Circ.easeOut
+                });
             }
         });
     } else {
-        TweenMax.to(parent, .6, {css: {opacity: "1"}, ease: Circ.easeOut});
+        TweenMax.to(parent, .6, {
+            css : {
+                opacity : "1"
+            },
+            ease : Circ.easeOut
+        });
     }
 }
 
@@ -2006,9 +2491,12 @@ function destroyVideoJS() {
             videojsHolder.tech.removeTriggers();
             videojsHolder.load();
         }
-        videojsHolder.tech.destroy(); /* destroy the parts of the player which are specific to html5 or flash */
-        videojsHolder.destroy(); /* destroy the player */
-        $(videojsHolder.el).remove(); /* remove the entire player from the dom */
+        videojsHolder.tech.destroy();
+        /* destroy the parts of the player which are specific to html5 or flash */
+        videojsHolder.destroy();
+        /* destroy the player */
+        $(videojsHolder.el).remove();
+        /* remove the entire player from the dom */
         videojsHolder.players = {};
     }
 }
@@ -2023,15 +2511,7 @@ function clearCustomInterval(interval) {
 function resizeImage(image, animate) {
     image.removeAttr('width');
     image.removeAttr('height');
-    var ww = $(window).width() - get_OffsetWidth(),
-            wh = $(window).height(),
-            iw = image.width(),
-            ih = image.height(),
-            rw = wh / ww,
-            ri = ih / iw,
-            newWidth, newHeight,
-            newLeft, newTop,
-            properties;
+    var ww = $(window).width() - get_OffsetWidth(), wh = $(window).height(), iw = image.width(), ih = image.height(), rw = wh / ww, ri = ih / iw, newWidth, newHeight, newLeft, newTop, properties;
 
     if (rw > ri) {
         newWidth = wh / ri;
@@ -2043,7 +2523,13 @@ function resizeImage(image, animate) {
     if (animate == undefined || animate == false) {
         image.css("width", newWidth).css("height", newHeight);
     } else if (animate == true) {
-        TweenMax.to(image, .6, {css: {width: newWidth, height: newHeight}, ease: Sine.easeOut});
+        TweenMax.to(image, .6, {
+            css : {
+                width : newWidth,
+                height : newHeight
+            },
+            ease : Sine.easeOut
+        });
     }
 }
 
@@ -2069,14 +2555,12 @@ function mobileConsole(text, value, clear, displayConsole) {
         $("#console-log").css("display", "inline");
     }
 }
+
 /*----------------- end Utils Methods ---------------------*/
-
-
-var menuOptionClickedLastUnloaded = null; 
 
 /* menu hadlers */
 function menuOptionClicked(val, mType, sType, hrefPath) {
-    
+
     if (val != "#") {
         var url = '';
         if ($("#template-menu").attr("data-current-module-type") == "slideshow") {
@@ -2095,7 +2579,7 @@ function menuOptionClicked(val, mType, sType, hrefPath) {
         loadURL = url;
 
         stopCurrentLoading();
-        if(endModuleFunction !== null && loadedContent) 
+        if (endModuleFunction !== null && loadedContent)
             endModuleFunction();
 
         if (menuData[2] != oldMenuData[2]) {
@@ -2144,7 +2628,6 @@ function menuOptionClicked(val, mType, sType, hrefPath) {
     }
 }
 
-
 function updateMenu(currentURL, prevURL, sameURLParent, animate) {
     currentURL = currentURL.replace("#", "");
     prevURL = prevURL.replace("#", "");
@@ -2182,24 +2665,4 @@ function updateMenu(currentURL, prevURL, sameURLParent, animate) {
     }
     return returnURL;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -1,5 +1,3 @@
-/// <reference path="portfolioPage.js"/>
-
 var columnsPreviewOpen = false;
 var previewAnimDone = true;
 var columnsPreviewIndex = 0;
@@ -9,6 +7,10 @@ var modulePageColumnsCurrentSelectedId = "*";
 var previewMediaArrAll = Array();
 var previewMediaDescArrAll = Array();
 var modulePageColumnsInitedAndNocheckColumnSize = false;
+var modulePageColumnsFilterButtonsWidth;
+var initialColumns = 0;
+var maxColumns = 4;
+var containerTotalH = 0;
 
 function loadFullWidthPreviewFromThumb(thumb) {
     $("#module-columns-holder .fourth-thumb-holder").attr("data-selected", "false");
@@ -16,7 +18,6 @@ function loadFullWidthPreviewFromThumb(thumb) {
     var i = -1;
     var j = -1;
     $("#module-columns-holder .fourth-thumb-holder").each(function() {
-
         var code = $(this).attr("data-id");
 
         if (code == modulePageColumnsCurrentSelectedId || modulePageColumnsCurrentSelectedId == "*") {
@@ -24,10 +25,17 @@ function loadFullWidthPreviewFromThumb(thumb) {
         }
         if ($(this).attr("data-selected") == "true")
             i = j;
-
     });
 
     loadFullWidthPreview(i);
+}
+
+function countFilterButtonsWidth() {
+    var widthSum = 0;
+    $("#filter-buttons-holder .filter-button").each(function(){
+        widthSum += $(this).outerWidth(true);
+    });
+    return widthSum;
 }
 
 function modulePageColumns() {
@@ -214,12 +222,11 @@ function modulePageColumns() {
 
     previewMediaArrAll = previewMediaArr.slice(0);
     previewMediaDescArrAll = previewMediaDescArr.slice(0);
-
+    
+    modulePageColumnsFilterButtonsWidth = countFilterButtonsWidth();
     moduleUpdate_page_columns();
 
 }
-
-var containerTotalH = 0;
 
 function getOriginalPos(container) {
     var i = 0;
@@ -261,7 +268,8 @@ function getDirectionCSS($element, coordinates) {
     var w = $element.width(), h = $element.height(),
     /** calculate the x and y to get an angle to the center of the div from that x and y. **/
     /** gets the x value relative to the center of the DIV and "normalize" it **/
-    x = (coordinates.x - $element.offset().left - (w / 2)) * (w > h ? (h / w) : 1), y = (coordinates.y - $element.offset().top - (h / 2)) * (h > w ? (w / h) : 1),
+    x = (coordinates.x - $element.offset().left - (w / 2)) * (w > h ? (h / w) : 1);
+    y = (coordinates.y - $element.offset().top - (h / 2)) * (h > w ? (w / h) : 1);
     /** the angle and the direction from where the mouse came in/went out clockwise (TRBL=0123);**/
     /** first calculate the angle of the point, add 180 deg to get rid of the negative values divide by 90 to get the quadrant
      add 3 and do a modulo by 4  to shift the quadrants to a proper clockwise TRBL (top/right/bottom/left) **/
@@ -337,9 +345,6 @@ function animateThumb(img) {
     });
 }
 
-var initialColumns = 0;
-var maxColumns = 4;
-
 function checkColumnSize(adjustPreview) {
     var textPageInstanceHolder = $(txt_modCont);
     var textPageInstance = $("#module-columns", textPageInstanceHolder);
@@ -395,12 +400,14 @@ function checkColumnSize(adjustPreview) {
                         opacity : "0",
                         left : "0px",
                         top : "0px",
-                        display: "none"
+                        display : "none"
                     },
                     easing : Sine.easeOut
                 });
                 return;
             }
+
+            TweenLite.killTweensOf($(this));
             $(this).show();
             if (col == columns) {
                 col = 0;
@@ -425,7 +432,8 @@ function checkColumnSize(adjustPreview) {
 
         $originalDataPos = getOriginalPos(container);
         var thumbNewW = columns * (elementW + marginRight) - marginRight
-        var newWidth = thumbNewW + parseInt($("#module-columns-container").css("margin-left"), 10) + parseInt($("#module-columns-container").css("margin-right"), 10);
+        var newWidth = thumbNewW + parseInt($("#module-columns-container").css("margin-left"), 10)
+        newWidth += parseInt($("#module-columns-container").css("margin-right"), 10);
 
         $("#module-columns").css("width", newWidth + "px");
         $("#module-columns-container").css("width", thumbNewW + "px");
@@ -508,9 +516,10 @@ function moduleUpdate_page_columns(customStartPos) {
     }
 
     // buttons folding
-    if ($("#module-container #filter-buttons-holder").length > 0) {
+    if ($("#module-container #filter-buttons-holder").length > 0 && modulePageColumnsFilterButtonsWidth !== undefined) {
+        //alert(modulePageColumnsFilterButtonsWidth + " " + $("#module-columns-container").width());
         var buttonsHolder = $("#module-container #filter-buttons-holder");
-        if (buttonsHolder.width() > 900) {
+        if (modulePageColumnsFilterButtonsWidth <= $("#module-columns-container").width()) {
             buttonsHolder.find(".filter-button").show();
             buttonsHolder.find("#filter-buttons-dropdown").hide();
             buttonsHolder.attr("data-folded", "false");
@@ -521,3 +530,11 @@ function moduleUpdate_page_columns(customStartPos) {
         }
     }
 }
+
+
+
+
+
+
+
+

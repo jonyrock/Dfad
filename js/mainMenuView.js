@@ -11,7 +11,6 @@ MainMenuView.menuItemBackground = "menu-option-background";    // some class nam
 MainMenuView.menuAnimDuration   = 0.4;
 MainMenuView.menuAnimEase       = Quad.easeOut;
 
-
 function MainMenuView() {
     
     var me = this;
