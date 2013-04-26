@@ -215,11 +215,13 @@ function modulePageColumns() {
 
     if (needToShowDropdown)
         $("#filter-buttons-dropdown").hide();
-
+    
+    //TODO: build from factory
     //storeFullWidthPreviewMedia();
-
-    previewMediaArrAll = previewMediaArr.slice(0);
-    previewMediaDescArrAll = previewMediaDescArr.slice(0);
+    
+    //TODO: use filters in viewer
+    //previewMediaArrAll = previewMediaArr.slice(0);
+    //previewMediaDescArrAll = previewMediaDescArr.slice(0);
     
     modulePageColumnsFilterButtonsWidth = countFilterButtonsWidth();
     
@@ -250,6 +252,7 @@ function getOriginalPos(container) {
 }
 
 function filterContent(container, selector, originalDataPos) {
+    //TODO: use filters in viewer
     modulePageColumnsCurrentSelectedId = selector;
     window.previewMediaArr = Array();
     window.previewMediaDescArr = Array();
@@ -259,6 +262,7 @@ function filterContent(container, selector, originalDataPos) {
         window.previewMediaArr.push(previewMediaArrAll[i]);
         window.previewMediaDescArr.push(previewMediaDescArrAll[i]);
     });
+    //TODO: and only there animation with new filtered items
     moduleUpdate_page_columns();
 }
 

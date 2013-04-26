@@ -3,7 +3,6 @@ var maximNumberColumns = 4;
 var initialThumbW = 0;
 var initialThumbH = 0;
 
-
 function moduleFullWidthGallery() {
     var textPageInstanceHolder = $(txt_modCont);
     var textPageInstance = $("#module-full-width-gallery", textPageInstanceHolder);
@@ -31,40 +30,13 @@ function moduleFullWidthGallery() {
         function (event) { customHoverAnimation("out", event, $(this), $("#thumb-image-hover", this)); }
     );
     
-    var viewer = moduleFullWidthGalleryBuildFullScreenViewer();
+    var viewer = fullScreenViewer.buildFromHtml();
     galleryItem.click(function () {
         var index = $(".full-width-item").index(this);
         viewer.showItemAt(index); 
     });
     
     moduleFullWidthGalleryOnResize();
-}
-
-function moduleFullWidthGalleryBuildFullScreenViewer() {
-    
-    var previewMediaArr = new Array();
-    var previewMediaDescArr = new Array();
-    
-    $("#full-width-preview #full-width-preview-media-holder")
-        .find("#preview-media-holder").children().each(function (i) {
-            if ($(this).attr("id") == "preview-media-image") {
-                previewMediaArr[i] = '<img id="preview-media-image" src="' + $(this).attr("data-url") +
-                    '" title="' + $(this).attr("data-title") + '"' +
-                    ' alt="' + $(this).attr("data-alt") + '" />';
-            } else if ($(this).attr("id") == "video-wrapper") {
-                previewMediaArr[i] = $(this);
-            } else if ($(this).attr("id") == "video-wrapper-collection") {
-                previewMediaArr[i] = $(this);
-            }
-    });
-    
-    $(".full-width-info-holder").find(".full-width-info-holder-desc").each(function (i) {
-        previewMediaDescArr[i] = $(this).get(0);
-    });
-    $("#full-width-preview-media-holder").find("#preview-media-holder").empty();
-    
-    return new fullScreenViewer(previewMediaArr, previewMediaDescArr);
-    
 }
 
 function moduleFullWidthGalleryArrangeItems() {
