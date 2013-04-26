@@ -6,33 +6,51 @@
  **/
 
 function fullScreenViewer(mediaItems, mediaItemsHtml) {
+    //TODO: do it like static vars
     var me = this;
     this.mediaItems = mediaItems;
     this.mediaItemsHtml = mediaItemsHtml;
     this.isVisible = false;
     this.htmlMediaHolder = $("#full-width-preview-media-holder");
-    this.htmlHolder = $("#template-wrapper").find("#full-width-preview");
+    this.htmlHolder = $("#full-width-preview");
+    this.htmlInfoHolder = this.htmlHolder.find("#full-width-preview-info-holder");
+    this.htmlInfoHolderWidth = this.htmlInfoHolder.width();
+    this.htmlInfoHolder.css("width", "0px");
 }
 
 fullScreenViewer.prototype.show = function() {
     if (this.isVisible)
         return;
-    this.isVisible = true;
+    this.isVisible = true;    var me = this;
     this.htmlHolder.fadeIn();
+    TweenMax.killTweensOf(this.htmlInfoHolder);
+    alert(me.htmlInfoHolderWidth);
+    TweenMax.to(this.htmlInfoHolder, 0.6, {
+        css : {
+            width : me.htmlInfoHolderWidth + "px"
+        },
+        ease : Sine.easeInOut
+    });
 }
 
-fullScreenViewer.prototype.hide = function(){
-    if(!this.isVisible)
+fullScreenViewer.prototype.hide = function() {
+    if (!this.isVisible)
         return;
     this.isVisible = false;
     this.htmlHolder.fadeOut();
+    TweenMax.killTweensOf(this.htmlInfoHolder);
+    TweenMax.to(this.htmlInfoHolder, 0.6, {
+        css : {
+            width : "0px"
+        },
+        ease : Sine.easeInOut
+    });
 }
 
 fullScreenViewer.prototype.showItemAt = function(itemIndex) {
     if (!this.isVisible)
         this.show();
 }
-
 // FACTORIES
 fullScreenViewer.buildFromHtml = function() {
 
@@ -52,7 +70,7 @@ fullScreenViewer.buildFromHtml = function() {
     $(".full-width-info-holder").find(".full-width-info-holder-desc").each(function(i) {
         previewMediaDescArr[i] = $(this).get(0);
     });
-    
+
     $("#preview-media-holder").empty();
     $(".full-width-info-holder").empty();
     var templateHtml = $("#full-width-preview").html();
@@ -61,4 +79,10 @@ fullScreenViewer.buildFromHtml = function() {
     return new fullScreenViewer(previewMediaArr, previewMediaDescArr);
 
 }
+
+
+
+
+
+
 
