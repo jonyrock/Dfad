@@ -2,12 +2,15 @@ var initialNumberColumns = 4;
 var maximNumberColumns = 4;
 var initialThumbW = 0;
 var initialThumbH = 0;
+var moduleFullWidthGalleryViewer = null;
 
 function moduleFullWidthGallery() {
     var textPageInstanceHolder = $(txt_modCont);
     var textPageInstance = $("#module-full-width-gallery", textPageInstanceHolder);
     if (textPageInstance.length <= 0) 
         return;
+    
+    endModuleFunction = moduleFullWidthGalleryOnClose;
     
     var galleryItem = $(".full-width-item", textPageInstance);
     var currWindowW = $(window).width() - get_OffsetWidth() - $(t_scrBarV2).width();
@@ -30,7 +33,7 @@ function moduleFullWidthGallery() {
         function (event) { customHoverAnimation("out", event, $(this), $("#thumb-image-hover", this)); }
     );
     
-    var viewer = fullScreenViewer.buildFromHtml();
+    var viewer = moduleFullWidthGalleryViewer = fullScreenViewer.buildFromHtml();
     galleryItem.click(function () {
         var index = $(".full-width-item").index(this);
         viewer.showItemAt(index); 
@@ -135,4 +138,6 @@ function moduleFullWidthGalleryOnResize() {
     }
 }
 
-
+function moduleFullWidthGalleryOnClose(){
+    moduleFullWidthGalleryViewer.hide();
+}
