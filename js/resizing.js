@@ -169,7 +169,6 @@ function moduleUpdate_contact() {
         blocksWidthPersent = 80;
     } 
     
-    //alert(blocksWidthPersent);
     textPageInstance.find(".module-contact-holder").css("width",blocksWidthPersent+"%");
     
     moduleUpdate(textPageInstanceHolder, textPageInstance, $("div:first", textPageInstance), sideType);
@@ -207,19 +206,6 @@ function moduleUpdate_gallery() {
     }
 }
 
-function moduleUpdate_full_width_gallery() {
-    var textPageInstanceHolder = $(txt_modCont);
-    var textPageInstance = $("#module-full-width-gallery", textPageInstanceHolder);
-    var modulePositionType = textPageInstanceHolder.attr("data-id");
-    if (textPageInstance.length > 0) {
-        if (initialThumbW <= 0) return;
-        checkItems();
-        moduleUpdate(textPageInstanceHolder, textPageInstance, $("div:first", textPageInstance), sideType);
-    }
-    if (previewFullWidthOpen == true) {
-        updateFullWidthPreviewPosition();
-    }
-}
 
 $(window).resize(
     function () {
@@ -292,7 +278,7 @@ $(window).resize(
                 moduleUpdate_gallery();
                 break;
             case "full_width_gallery":
-                moduleUpdate_full_width_gallery();
+                moduleFullWidthGalleryOnResize();
                 break;
             case "page_columns":
                 moduleUpdate_page_columns(); // moved to pageColumns.js

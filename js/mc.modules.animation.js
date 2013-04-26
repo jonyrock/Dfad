@@ -590,7 +590,6 @@ function hideAnimationCompleted() {
     }
 }
 
-
 /* start module */
 
 function startModule() {
@@ -619,9 +618,6 @@ function startModule() {
             break;
         case "text_page":
             moduleTextPage();
-            break;
-        case "news":
-            moduleNews();
             break;
         case "contact":
             moduleContact();
@@ -1379,12 +1375,7 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
         var totalMinusSize = 0;
         var activScrollbar = availScrollbar.length;
         if (availScrollbar.length > 0) {
-
             availScrollbar.css("height", winH).css("top", "0px");
-            // 481 = <menu width> + <page_columns 1 colums (the thinnest page)>
-            if (winW < 481)
-                availScrollbar.css("height", "0");
-
         }
         if (pModH >= cConH) {
             if (availScrollbar.length > 0 && availScrollbar.css("display") != "none") {
@@ -1501,7 +1492,6 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
         pCon.css("overflow", "auto").css("-webkit-overflow-scrolling", "touch");
         var menuWidth = $("#menu-container").width();
         var maxPossibleWidth = winW - menuWidth;
-        //alert($(pCon).att)
         if (cConW > maxPossibleWidth) {
             pCon.css("width", maxPossibleWidth + "px");
         } else {
@@ -1646,358 +1636,6 @@ function endModuleComplete() {
     endPreviousModule = false;
 }
 
-/*================= NEWS ===================================*/
-var previewNewsOpen = false;
-var previewNewsIndex = 0;
-var totalPreviews = 0;
-var previewNewsMediaParent = "";
-var newsPrevItemArr = "";
-var shortNIV = "news-item-vertical";
-var shortNP = "news-preview"
-var shortNPH = "#module-news-preview-holder";
-var shortNPU = "#news-preview-list";
-var newsPrvH = "";
-var newsPrvU = "";
-
-function moduleNews() {
-    previewNewsOpen = false;
-    previewNewsIndex = 0;
-    previewNewsMediaParent = "";
-    newsPrevItemArr = new Array();
-
-    var textPageInstanceHolder = $(txt_modCont);
-    var textPageInstance = $("#module-news-vertical", textPageInstanceHolder);
-    var moduleWidth = textPageInstanceHolder.width();
-    var moduleHeight = textPageInstanceHolder.height();
-    newsPrvH = $(shortNPH);
-    newsPrvU = $(shortNPU);
-
-    moduleUpdate(textPageInstanceHolder, $("#module-news-vertical-holder", textPageInstance), $("#module-news-vertical-holder div:first", textPageInstance), sideType);
-
-    if (touchDevice) {
-        $("#module-news-vertical-holder").css("overflow", "auto").css("-webkit-overflow-scrolling", "touch");
-        newsPrvH.css("overflow", "auto").css("-webkit-overflow-scrolling", "touch");
-    }
-
-    var val = (-moduleWidth) + "px";
-    textPageInstanceHolder.attr("style", "left:" + val + "; visibility:visible;");
-    TweenMax.to(textPageInstanceHolder, .6, {
-        css : {
-            left : "0px"
-        },
-        delay : 0.1,
-        ease : Circ.easeInOut
-    });
-    endModuleFunction = endModuleTextPage;
-    moduleEnd = true;
-
-    newsPrvH.css("display", "inline");
-    var newsPrevItemMediaArr = new Array();
-    $(textPageInstance).find("." + shortNP + "-horizontal-fix").each(function() {
-        $(this).css("width", 999999);
-        var newsPrevItem = $("ul li", this);
-        var i = 0;
-        newsPrevItem.each(function() {
-            var mediaSrc = $(".media-holder-news-preview", this).attr("data-src");
-            newsPrevItemArr[i] = $(this);
-            newsPrevItemMediaArr[i] = mediaSrc;
-            i++;
-        });
-        $("ul", this).css("width", $("ul", this).width()).css("left", moduleWidth);
-        $(this).css("width", "");
-    });
-    newsPrvH.css("display", "");
-
-    var readMoreBtn = $("." + shortNIV + "-read-more", textPageInstance);
-    var basicColor = rgb2hex(readMoreBtn.css("background-color"));
-    var newsList = $("#module-news-vertical-holder");
-    var prevItemW = $("." + shortNP + "-horizontal-fix").width();
-    readMoreBtn.hover(function() {
-        TweenMax.to($(this), 0.6, {
-            css : {
-                backgroundColor : themeColor
-            },
-            easing : Sine.easeOut
-        });
-    }, function() {
-        TweenMax.to($(this), 0.6, {
-            css : {
-                backgroundColor : basicColor
-            },
-            easing : Sine.easeOut
-        });
-    });
-
-    var newsPreviewControls = $("#" + shortNP + "-controls");
-    var newsPrevItemMargRight = parseInt($("li:first", newsPrvU).css("margin-right"), 10);
-    newsPreviewControls.css("left", moduleWidth);
-
-    var nwsItem = $(".news-item-vertical", textPageInstance);
-    var nwsItemTitle = $(".news-item-vertical-title", $(".news-item-vertical:first", textPageInstance));
-    var nwsTitleColor = rgb2hex(nwsItemTitle.css("color"));
-    nwsItem.hover(function() {
-        TweenMax.to($(".news-item-vertical-title", this), .6, {
-            css : {
-                color : themeColor
-            },
-            easing : Sine.easeOut
-        });
-    }, function() {
-        TweenMax.to($(".news-item-vertical-title", this), .6, {
-            css : {
-                color : nwsTitleColor
-            },
-            easing : Sine.easeOut
-        });
-    });
-    nwsItem.click(function() {
-        previewNewsIndex = nwsItem.index(this);
-        newsItemClick(previewNewsIndex);
-    });
-    var newsItemTopPos = 0;
-    totalPreviews = newsPrvU.children().length;
-
-    function newsItemClick(index) {
-        if (moduleList != null) {
-            moduleList.disableList();
-            newsItemTopPos = moduleList.currentPosition();
-            var ts = $(t_scrBarV1);
-            TweenMax.to(ts, .3, {
-                css : {
-                    opacity : "0"
-                },
-                easing : Sine.easeOut,
-                onComplete : function() {
-                    ts.css("display", "none");
-                }
-            });
-        }
-        newsPrvH.css("display", "inline");
-        var newsListW = $(newsList).width() + $(newsList).position().left + 30;
-        var i = 0;
-        for (i; i < totalPreviews; i++) {
-            if (i == index) {
-                newsPrevItemArr[i].css("display", "inline");
-            } else {
-                newsPrevItemArr[i].css("display", "none");
-            }
-        }
-        $(".news-preview-counter span").empty().append((index + 1) + "/" + totalPreviews);
-        TweenMax.to(newsList, .6, {
-            css : {
-                left : -newsListW
-            },
-            delay : 0.1,
-            easing : Sine.easeOut
-        })
-        TweenMax.to([newsPrvU, newsPreviewControls], .6, {
-            css : {
-                left : "0px"
-            },
-            delay : 0.1,
-            easing : Sine.easeOut,
-            onComplete : loadNewsVerticalPreview,
-            onCompleteParams : [index]
-        });
-    }
-
-    function loadNewsVerticalPreview(index) {
-        var scrollValue = index * (prevItemW + newsPrevItemMargRight);
-        if (previewNewsOpen == false) {
-            previewNewsOpen = true;
-            newsPrvU.css("left", -(scrollValue) + "px");
-            newsPreviewItemDisplay("inline");
-            checkScrollBar(previewNewsOpen);
-        } else {
-            $(".news-preview-counter span").empty().append((index + 1) + "/" + totalPreviews);
-            TweenMax.to(newsPrvU, 0.6, {
-                css : {
-                    left : -scrollValue
-                },
-                delay : 0.1,
-                easing : Sine.easeOut,
-                onComplete : checkScrollBar,
-                onCompleteParams : [previewNewsOpen]
-            });
-        }
-    }
-
-    function checkScrollBar(previewNewsOpen) {
-        enablePreviewClose(true);
-        if (moduleList != null) {
-            moduleList.destroy(false);
-            moduleList = null;
-        }
-        var i = 0;
-        for (i; i < totalPreviews; i++) {
-            if (i != previewNewsIndex) {
-                newsPrevItemArr[i].css("display", "none");
-            }
-        }
-
-        moduleUpdate(textPageInstanceHolder, $("#module-news-preview-holder", textPageInstance), $("#module-news-preview-container", textPageInstance), "custom", 0);
-
-        previewNewsMediaParent = $(".media-holder-news-preview", newsPrevItemArr[previewNewsIndex]);
-        if ($("img", previewNewsMediaParent).length <= 0) {
-            previewNewsMediaParent.empty().append('<img width="100%" class="opacity_0" onload="animateNewsPreviewMedia(this)" />');
-            $("img", previewNewsMediaParent).attr("src", newsPrevItemMediaArr[previewNewsIndex]);
-        } else {
-            if (touchDevice) {
-                $("#module-news-preview-container", textPageInstance).css("height", "");
-                $("#module-news-preview-container", textPageInstance).css("height", $("#module-news-preview-container", textPageInstance).height());
-            }
-        }
-        newsPreviewItemDisplay("inline");
-    }
-
-    var initBackColor = rgb2hex($("." + shortNP + "-backward ." + shortNP + "-backg").css("background-color"));
-    $("." + shortNP + "-backward, ." + shortNP + "-forward, ." + shortNP + "-close").hover(function() {
-        TweenMax.to($("." + shortNP + "-backg", this), 0.3, {
-            css : {
-                backgroundColor : themeColor
-            },
-            easing : Sine.easeOut
-        });
-    }, function() {
-        TweenMax.to($("." + shortNP + "-backg", this), 0.3, {
-            css : {
-                backgroundColor : initBackColor
-            },
-            easing : Sine.easeOut
-        });
-    });
-    $("." + shortNP + "-backward, ." + shortNP + "-forward", textPageInstance).click(function() {
-        var index = previewNewsIndex;
-        if ($(this).hasClass("" + shortNP + "-backward") == true) {
-            index--;
-            changeNewsPreviewMedia(index);
-        } else if ($(this).hasClass("" + shortNP + "-forward") == true) {
-            index++;
-            changeNewsPreviewMedia(index);
-        }
-    });
-
-    function changeNewsPreviewMedia(index) {
-        if (index < 0)
-            index = 0;
-        if (index > totalPreviews - 1)
-            index = totalPreviews - 1;
-        if (index == previewNewsIndex)
-            return;
-        enablePreviewClose(false)
-        previewNewsIndex = index;
-        loadNewsVerticalPreview(previewNewsIndex);
-    }
-
-
-    newsPrvU.wipetouch({
-        tapToClick : false, /*if user taps the screen, triggers a click event*/
-        preventDefault : false,
-        wipeLeft : function(result) {
-            var index = previewNewsIndex;
-            index++;
-            changeNewsPreviewMedia(index)
-        },
-        wipeRight : function(result) {
-            var index = previewNewsIndex;
-            index--;
-            changeNewsPreviewMedia(index)
-        }
-    });
-
-    /*initial close enabled*/
-    enablePreviewClose(true);
-
-    function enablePreviewClose(enable) {
-        var newsPreviewCloseBtn = $("." + shortNP + "-close", textPageInstance);
-        newsPreviewCloseBtn.unbind("click");
-        if (enable == true) {
-            newsPreviewCloseBtn.click(function() {
-                click_PreviewClose();
-            });
-            TweenMax.to(newsPreviewCloseBtn, .4, {
-                css : {
-                    opacity : "1"
-                },
-                easing : Sine.easeOut
-            });
-        } else {
-            TweenMax.to(newsPreviewCloseBtn, .4, {
-                css : {
-                    opacity : "0.5"
-                },
-                easing : Sine.easeOut
-            });
-        }
-    }
-
-    function click_PreviewClose() {
-        previewNewsOpen = false;
-        newsPrvU.css("left", 0);
-        var i = 0;
-        for (i; i < totalPreviews; i++) {
-            if (i != previewNewsIndex) {
-                newsPrevItemArr[i].css("display", "none");
-            }
-        }
-        TweenMax.to([newsPrvU, newsPreviewControls], 0.6, {
-            css : {
-                left : $(newsList).width()
-            },
-            delay : 0.1,
-            easing : Sine.easeOut
-        });
-        TweenMax.to($(t_scrBarV1), .3, {
-            css : {
-                opacity : "0"
-            },
-            easing : Sine.easeOut
-        });
-        TweenMax.to(newsList, .6, {
-            css : {
-                left : "0"
-            },
-            delay : 0.1,
-            easing : Sine.easeOut,
-            onComplete : disableNewsPreview
-        })
-    }
-
-    function disableNewsPreview() {
-        newsPrvH.css("display", "none");
-        $(t_scrBarV1).css("display", "none");
-        if (moduleList != null) {
-            moduleList.destroy(true);
-            moduleList = null;
-        }
-        moduleUpdate(textPageInstanceHolder, $("#module-news-vertical-holder", textPageInstance), $("#module-news-vertical-holder div:first", textPageInstance), sideType, null, null, newsItemTopPos);
-    }
-
-}
-
-function animateNewsPreviewMedia(src) {
-    var inst = $(src);
-    TweenMax.to($(src).parent(), .3, {
-        css : {
-            height : inst.height()
-        },
-        easing : Sine.easeOut
-    });
-    TweenMax.to(inst, .4, {
-        css : {
-            opacity : '1'
-        },
-        easing : Sine.easeOut,
-        onComplete : moduleUpdate_news
-    });
-}
-
-function newsPreviewItemDisplay(display) {
-    var i = 0;
-    for (i; i < totalPreviews; i++) {
-        newsPrevItemArr[i].css("display", display);
-    }
-}
 
 /*================= SHOWREEL ===============================*/
 
@@ -2599,19 +2237,6 @@ function menuOptionClicked(val, mType, sType, hrefPath) {
             if (endModuleFunction == null) {
 
                 switch (menuData[0]) {
-                    case "news":
-                        var textPageInstanceHolder = $(txt_modCont);
-                        TweenMax.to(textPageInstanceHolder, .3, {
-                            css : {
-                                left : "0px"
-                            },
-                            delay : 0.1,
-                            ease : Circ.easeInOut
-                        });
-                        /*get_OffsetWidth() +*/
-                        endModuleFunction = endModuleTextPage;
-                        moduleEnd = true;
-                        break;
                     case "text_page":
                         moduleTextPage();
                         break;
