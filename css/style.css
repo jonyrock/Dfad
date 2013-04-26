@@ -520,7 +520,7 @@ footer {
     z-index: 6;
     display: none;
 }
-#loading-animation {
+#loading-animation, .loading-animation {
     display: none;
     visibility: hidden;
     position: fixed;
@@ -540,7 +540,7 @@ footer {
     filter: progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=-120, Color='#0c0c0c');
     /**** END CSS3 SHADOW CROSS-BROWSER ****/
 }
-#loading-animation img {
+#loading-animation img, .loading-animation img{
     position: relative;
     float: left;
     top: 11px;
