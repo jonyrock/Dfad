@@ -5,41 +5,63 @@
  * @author: @jonyrock exclusively to dfad.com
  **/
 
+fullScreenViewer.isInited = false;
+fullScreenViewer.isVisible;
+fullScreenViewer.htmlMediaHolder;
+fullScreenViewer.htmlHolder;
+fullScreenViewer.htmlInfoHolder;
+fullScreenViewer.htmlInfoHolderWidth;
+
 function fullScreenViewer(mediaItems, mediaItemsHtml) {
-    //TODO: do it like static vars
-    var me = this;
+
+    function initStatic() {
+        fullScreenViewer.isVisible = false;
+        fullScreenViewer.htmlMediaHolder = $("#full-width-preview-media-holder");
+        fullScreenViewer.htmlHolder = $("#full-width-preview");
+        fullScreenViewer.htmlInfoHolder = fullScreenViewer.htmlHolder.find("#full-width-preview-info-holder");
+        fullScreenViewer.htmlInfoHolderWidth = fullScreenViewer.htmlInfoHolder.width();
+        fullScreenViewer.htmlInfoHolder.css("width", "0px");
+        fullScreenViewer.isInited = true;
+    }
+    
+    if(!fullScreenViewer.isInited)
+        initStatic(); 
+
     this.mediaItems = mediaItems;
     this.mediaItemsHtml = mediaItemsHtml;
-    this.isVisible = false;
-    this.htmlMediaHolder = $("#full-width-preview-media-holder");
-    this.htmlHolder = $("#full-width-preview");
-    this.htmlInfoHolder = this.htmlHolder.find("#full-width-preview-info-holder");
-    this.htmlInfoHolderWidth = this.htmlInfoHolder.width();
-    this.htmlInfoHolder.css("width", "0px");
 }
 
-fullScreenViewer.prototype.show = function() {
-    if (this.isVisible)
+fullScreenViewer.prototype.showItemAt = function(itemIndex) {
+    if (!fullScreenViewer.isVisible)
+        fullScreenViewer.show();
+}
+
+// method useful for updating rep object data 
+fullScreenViewer.prototype.hide = function(){
+    fullScreenViewer.hide();
+} 
+
+fullScreenViewer.show = function() {
+    if (fullScreenViewer.isVisible)
         return;
-    this.isVisible = true;    var me = this;
-    this.htmlHolder.fadeIn();
-    TweenMax.killTweensOf(this.htmlInfoHolder);
-    alert(me.htmlInfoHolderWidth);
-    TweenMax.to(this.htmlInfoHolder, 0.6, {
+    fullScreenViewer.isVisible = true;
+    fullScreenViewer.htmlHolder.fadeIn();
+    TweenMax.killTweensOf(fullScreenViewer.htmlInfoHolder);
+    TweenMax.to(fullScreenViewer.htmlInfoHolder, 0.6, {
         css : {
-            width : me.htmlInfoHolderWidth + "px"
+            width : fullScreenViewer.htmlInfoHolderWidth + "px"
         },
         ease : Sine.easeInOut
     });
 }
 
-fullScreenViewer.prototype.hide = function() {
-    if (!this.isVisible)
+fullScreenViewer.hide = function() {
+    if (!fullScreenViewer.isVisible)
         return;
-    this.isVisible = false;
-    this.htmlHolder.fadeOut();
-    TweenMax.killTweensOf(this.htmlInfoHolder);
-    TweenMax.to(this.htmlInfoHolder, 0.6, {
+    fullScreenViewer.isVisible = false;
+    fullScreenViewer.htmlHolder.fadeOut();
+    TweenMax.killTweensOf(fullScreenViewer.htmlInfoHolder);
+    TweenMax.to(fullScreenViewer.htmlInfoHolder, 0.6, {
         css : {
             width : "0px"
         },
@@ -47,10 +69,7 @@ fullScreenViewer.prototype.hide = function() {
     });
 }
 
-fullScreenViewer.prototype.showItemAt = function(itemIndex) {
-    if (!this.isVisible)
-        this.show();
-}
+
 // FACTORIES
 fullScreenViewer.buildFromHtml = function() {
 
@@ -59,7 +78,8 @@ fullScreenViewer.buildFromHtml = function() {
 
     $("#full-width-preview #full-width-preview-media-holder").find("#preview-media-holder").children().each(function(i) {
         if ($(this).attr("id") == "preview-media-image") {
-            previewMediaArr[i] = '<img id="preview-media-image" src="' + $(this).attr("data-url") + '" title="' + $(this).attr("data-title") + '"' + ' alt="' + $(this).attr("data-alt") + '" />';
+            previewMediaArr[i] = '<img id="preview-media-image" src="' 
+                + $(this).attr("data-url") + '" title="' + $(this).attr("data-title") + '"' + ' alt="' + $(this).attr("data-alt") + '" />';
         } else if ($(this).attr("id") == "video-wrapper") {
             previewMediaArr[i] = $(this);
         } else if ($(this).attr("id") == "video-wrapper-collection") {
@@ -79,10 +99,4 @@ fullScreenViewer.buildFromHtml = function() {
     return new fullScreenViewer(previewMediaArr, previewMediaDescArr);
 
 }
-
-
-
-
-
-
 
