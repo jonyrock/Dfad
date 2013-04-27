@@ -6,13 +6,44 @@
  **/
 
 fullScreenViewer.isInited = false;
-fullScreenViewer.isVisible;
-fullScreenViewer.htmlMediaHolder;
-fullScreenViewer.htmlHolder;
-fullScreenViewer.htmlInfoHolder;
-fullScreenViewer.htmlInfoHolderWidth;
+fullScreenViewer.isVisible
+fullScreenViewer.htmlMediaHolder
+fullScreenViewer.htmlHolder
+fullScreenViewer.htmlInfoHolder
+fullScreenViewer.htmlInfoHolderWidth
+fullScreenViewer.navigationElements
+fullScreenViewer.navigationElementsDelayOrder
 
 function fullScreenViewer(mediaItems, mediaItemsHtml) {
+    
+    function initEventHandlers(){
+        fullScreenViewer.htmlHolder.find(".preview-arrow-close").click(fullScreenViewer.hide);
+        $(document).keyup(function(e) {
+            if (e.keyCode == 27) // esc key code 
+                fullScreenViewer.hide();
+        });
+    }
+    
+    function initNavigationAnimation() {
+        if (!touchDevice) {
+            fullScreenViewer.htmlHolder.find(".preview-arrow-backward, .preview-arrow-forward, .preview-arrow-close").hover(function() {
+                TweenMax.to($(".preview-arrow-backg", this), 0.3, {
+                    css : {
+                        backgroundColor : themeColor
+                    },
+                    easing : Sine.easeOut
+                });
+            }, function() {
+                TweenMax.to($(".preview-arrow-backg", this), 0.3, {
+                    css : {
+                        backgroundColor : initBackColor
+                    },
+                    easing : Sine.easeOut
+                });
+            });
+        }
+
+    }
 
     function initStatic() {
         fullScreenViewer.isVisible = false;
@@ -22,10 +53,14 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
         fullScreenViewer.htmlInfoHolderWidth = fullScreenViewer.htmlInfoHolder.width();
         fullScreenViewer.htmlInfoHolder.css("width", "0px");
         fullScreenViewer.isInited = true;
+        fullScreenViewer.navigationElements = fullScreenViewer.htmlInfoHolder.find(".navigationElement");
+        fullScreenViewer.navigationElementsDelayOrder = new Array(4, 2, 3, 1);
+        initNavigationAnimation();
+        initEventHandlers();
     }
-    
-    if(!fullScreenViewer.isInited)
-        initStatic(); 
+
+    if (!fullScreenViewer.isInited)
+        initStatic();
 
     this.mediaItems = mediaItems;
     this.mediaItemsHtml = mediaItemsHtml;
@@ -34,12 +69,13 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
 fullScreenViewer.prototype.showItemAt = function(itemIndex) {
     if (!fullScreenViewer.isVisible)
         fullScreenViewer.show();
+    var newCounterText = (itemIndex + 1) + "/" + this.mediaItems.length;
+    fullScreenViewer.htmlInfoHolder.find("#.preview-counter span").text(newCounterText);
 }
-
-// method useful for updating rep object data 
-fullScreenViewer.prototype.hide = function(){
+// method useful for updating rep object data
+fullScreenViewer.prototype.hide = function() {
     fullScreenViewer.hide();
-} 
+}
 
 fullScreenViewer.show = function() {
     if (fullScreenViewer.isVisible)
@@ -53,13 +89,18 @@ fullScreenViewer.show = function() {
         },
         ease : Sine.easeInOut
     });
+
+    fullScreenViewer.navigationElements.each(function(i) {
+        $(this).delay(80 * (fullScreenViewer.navigationElementsDelayOrder[i] + 1)).fadeIn();
+    });
+
 }
 
 fullScreenViewer.hide = function() {
     if (!fullScreenViewer.isVisible)
         return;
     fullScreenViewer.isVisible = false;
-    fullScreenViewer.htmlHolder.fadeOut();
+    fullScreenViewer.htmlHolder.delay(300).fadeOut();
     TweenMax.killTweensOf(fullScreenViewer.htmlInfoHolder);
     TweenMax.to(fullScreenViewer.htmlInfoHolder, 0.6, {
         css : {
@@ -67,9 +108,11 @@ fullScreenViewer.hide = function() {
         },
         ease : Sine.easeInOut
     });
+    fullScreenViewer.navigationElements.each(function(i) {
+        var order = fullScreenViewer.navigationElementsDelayOrder;
+        $(this).delay(80 * order[order.length - i]).fadeOut();
+    });
 }
-
-
 // FACTORIES
 fullScreenViewer.buildFromHtml = function() {
 
@@ -78,8 +121,7 @@ fullScreenViewer.buildFromHtml = function() {
 
     $("#full-width-preview #full-width-preview-media-holder").find("#preview-media-holder").children().each(function(i) {
         if ($(this).attr("id") == "preview-media-image") {
-            previewMediaArr[i] = '<img id="preview-media-image" src="' 
-                + $(this).attr("data-url") + '" title="' + $(this).attr("data-title") + '"' + ' alt="' + $(this).attr("data-alt") + '" />';
+            previewMediaArr[i] = '<img id="preview-media-image" src="' + $(this).attr("data-url") + '" title="' + $(this).attr("data-title") + '"' + ' alt="' + $(this).attr("data-alt") + '" />';
         } else if ($(this).attr("id") == "video-wrapper") {
             previewMediaArr[i] = $(this);
         } else if ($(this).attr("id") == "video-wrapper-collection") {
