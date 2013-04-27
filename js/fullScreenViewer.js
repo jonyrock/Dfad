@@ -31,7 +31,7 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
             if (e.keyCode == 27)// esc key code
                 fullScreenViewer.instance.hide();
             if (e.keyCode == 37)// left key code
-                fullScreenViewer.instance.showPrevios();
+                fullScreenViewer.instance.showPrevious();
             if (e.keyCode == 39)// right key code
                 fullScreenViewer.instance.showNext();
         });
@@ -66,6 +66,7 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
         fullScreenViewer.isVisible = false;
         fullScreenViewer.htmlMediaHolder = $("#full-width-preview-media-holder");
         fullScreenViewer.htmlHolder = $("#full-width-preview");
+        fullScreenViewer.htmlMediaHolder = fullScreenViewer.htmlHolder.find("#preview-media-holder");
         fullScreenViewer.htmlMediaHolderAnimation = fullScreenViewer.htmlHolder.find(".full-width-preview-media-loader");
         fullScreenViewer.htmlInfoHolder = fullScreenViewer.htmlHolder.find("#full-width-preview-info-holder");
         fullScreenViewer.htmlInfoTextHolder = fullScreenViewer.htmlInfoHolder.find(".full-width-info-holder");
@@ -98,7 +99,7 @@ fullScreenViewer.prototype.showNext = function() {
     fullScreenViewer.buttonTrigger(fullScreenViewer.htmlButtonNext);
 }
 
-fullScreenViewer.prototype.showPrevios = function() {
+fullScreenViewer.prototype.showPrevious = function() {
     var me = fullScreenViewer.instance;
     me.showItemAt((me.currentIndex - 1 + me.mediaItems.length) % me.mediaItems.length);
     fullScreenViewer.buttonTrigger(fullScreenViewer.htmlButtonPrevios);
@@ -114,10 +115,15 @@ fullScreenViewer.prototype.showItemAt = function(itemIndex) {
         return;
     }
     fullScreenViewer.htmlInfoTextHolder.empty();
+    fullScreenViewer.htmlMediaHolder.empty();
     this.currentIndex = itemIndex;
     var htmlText = $(this.mediaItemsHtml[itemIndex]);
     fullScreenViewer.htmlInfoTextHolder.append(htmlText);
     htmlText.fadeIn();
+    var currPreviewElem = $(this.mediaItems[itemIndex]);
+    var mediaType = currPreviewElem.attr("id");
+    fullScreenViewer.htmlMediaHolder.append(currPreviewElem);
+    
 }
 // method useful for updating rep object data
 fullScreenViewer.prototype.hide = function() {
@@ -159,7 +165,7 @@ fullScreenViewer.show = function(onCompleteFunction) {
     fullScreenViewer.navigationElements.each(function(i) {
         $(this).delay(80 * (fullScreenViewer.navigationElementsDelayOrder[i] + 1)).fadeIn();
     });
-
+    
 }
 
 fullScreenViewer.hide = function() {
@@ -168,6 +174,7 @@ fullScreenViewer.hide = function() {
     fullScreenViewer.isVisible = false;
     fullScreenViewer.buttonTrigger(fullScreenViewer.htmlButtonClose);
     fullScreenViewer.htmlInfoTextHolder.empty();
+    fullScreenViewer.htmlMediaHolder.empty();
     fullScreenViewer.htmlHolder.delay(300).fadeOut();
     TweenMax.killTweensOf(fullScreenViewer.htmlInfoHolder);
     TweenMax.to(fullScreenViewer.htmlInfoHolder, 0.6, {
@@ -182,6 +189,7 @@ fullScreenViewer.hide = function() {
     });
 
     fullScreenViewer.htmlMediaHolderAnimation.hide();
+    
 }
 // FACTORIES
 fullScreenViewer.buildFromHtml = function() {
