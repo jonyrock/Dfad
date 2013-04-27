@@ -6,32 +6,34 @@
  **/
 
 fullScreenViewer.isInited = false;
-fullScreenViewer.isVisible
-fullScreenViewer.htmlMediaHolder
-fullScreenViewer.htmlHolder
-fullScreenViewer.htmlInfoHolder
-fullScreenViewer.htmlInfoHolderWidth
-fullScreenViewer.navigationElements
-fullScreenViewer.navigationElementsDelayOrder
+fullScreenViewer.isVisible;
+fullScreenViewer.htmlMediaHolder;
+fullScreenViewer.htmlHolder;
+fullScreenViewer.htmlInfoHolder;
+fullScreenViewer.htmlInfoTextHolder;
+fullScreenViewer.htmlInfoHolderWidth;
+fullScreenViewer.navigationElements;
+fullScreenViewer.navigationElementsDelayOrder;
 fullScreenViewer.instance;
+
 
 // act like singleton
 function fullScreenViewer(mediaItems, mediaItemsHtml) {
-    
+
     fullScreenViewer.instance = this;
-    
+
     function initEventHandlers() {
         fullScreenViewer.htmlHolder.find(".preview-arrow-close").click(fullScreenViewer.instance.hide);
         $(document).keyup(function(e) {
-            if (e.keyCode == 27) // esc key code 
+            if (e.keyCode == 27)// esc key code
                 fullScreenViewer.instance.hide();
         });
-        
+
         fullScreenViewer.htmlInfoHolder.find(".preview-arrow-backward").click(fullScreenViewer.instance.showPrev);
         fullScreenViewer.htmlInfoHolder.find(".preview-arrow-forward").click(fullScreenViewer.instance.showNext);
-        
+
     }
-    
+
     function initNavigationAnimation() {
         if (!touchDevice) {
             fullScreenViewer.htmlHolder.find(".preview-arrow-backward, .preview-arrow-forward, .preview-arrow-close").hover(function() {
@@ -52,12 +54,13 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
         }
 
     }
-    
+
     function initStatic() {
         fullScreenViewer.isVisible = false;
         fullScreenViewer.htmlMediaHolder = $("#full-width-preview-media-holder");
         fullScreenViewer.htmlHolder = $("#full-width-preview");
         fullScreenViewer.htmlInfoHolder = fullScreenViewer.htmlHolder.find("#full-width-preview-info-holder");
+        fullScreenViewer.htmlInfoTextHolder = fullScreenViewer.htmlInfoHolder.find(".full-width-info-holder");
         fullScreenViewer.htmlInfoHolderWidth = fullScreenViewer.htmlInfoHolder.width();
         fullScreenViewer.htmlInfoHolder.css("width", "0px");
         fullScreenViewer.isInited = true;
@@ -69,7 +72,7 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
 
     if (!fullScreenViewer.isInited)
         initStatic();
-    
+
     this.mediaItems = mediaItems;
     this.mediaItemsHtml = mediaItemsHtml;
     this.currentIndex = 0;
@@ -88,18 +91,26 @@ fullScreenViewer.prototype.showPrev = function() {
 }
 
 fullScreenViewer.prototype.showItemAt = function(itemIndex) {
-    if (!fullScreenViewer.isVisible)
-        fullScreenViewer.show();
-    this.currentIndex = itemIndex;
     var newCounterText = (itemIndex + 1) + "/" + this.mediaItems.length;
     fullScreenViewer.htmlInfoHolder.find("#.preview-counter span").text(newCounterText);
+    if (!fullScreenViewer.isVisible) {
+        fullScreenViewer.show(function() {
+            fullScreenViewer.instance.showItemAt(itemIndex)
+        });
+        return;
+    }
+    fullScreenViewer.htmlInfoTextHolder.empty();
+    this.currentIndex = itemIndex;
+    var htmlText = $(this.mediaItemsHtml[itemIndex]);
+    fullScreenViewer.htmlInfoTextHolder.append(htmlText);
+    htmlText.fadeIn();
 }
 // method useful for updating rep object data
 fullScreenViewer.prototype.hide = function() {
     fullScreenViewer.hide();
 }
 
-fullScreenViewer.show = function() {
+fullScreenViewer.show = function(onCompleteFunction) {
     if (fullScreenViewer.isVisible)
         return;
     fullScreenViewer.isVisible = true;
@@ -109,7 +120,8 @@ fullScreenViewer.show = function() {
         css : {
             width : fullScreenViewer.htmlInfoHolderWidth + "px"
         },
-        ease : Sine.easeInOut
+        ease : Sine.easeInOut,
+        onComplete : onCompleteFunction
     });
 
     fullScreenViewer.navigationElements.each(function(i) {
@@ -122,6 +134,7 @@ fullScreenViewer.hide = function() {
     if (!fullScreenViewer.isVisible)
         return;
     fullScreenViewer.isVisible = false;
+    fullScreenViewer.htmlInfoTextHolder.empty();
     fullScreenViewer.htmlHolder.delay(300).fadeOut();
     TweenMax.killTweensOf(fullScreenViewer.htmlInfoHolder);
     TweenMax.to(fullScreenViewer.htmlInfoHolder, 0.6, {
@@ -143,8 +156,7 @@ fullScreenViewer.buildFromHtml = function() {
 
     $("#full-width-preview #full-width-preview-media-holder").find("#preview-media-holder").children().each(function(i) {
         if ($(this).attr("id") == "preview-media-image") {
-            previewMediaArr[i] = '<img id="preview-media-image" src="' 
-                + $(this).attr("data-url") + '" title="' + $(this).attr("data-title") + '"' + ' alt="' + $(this).attr("data-alt") + '" />';
+            previewMediaArr[i] = '<img id="preview-media-image" src="' + $(this).attr("data-url") + '" title="' + $(this).attr("data-title") + '"' + ' alt="' + $(this).attr("data-alt") + '" />';
         } else if ($(this).attr("id") == "video-wrapper") {
             previewMediaArr[i] = $(this);
         } else if ($(this).attr("id") == "video-wrapper-collection") {

@@ -2425,15 +2425,13 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
     margin: 9%;
     width: 82%;
-    margin-top: 53px;
+    margin-top: 78px;
 }
 .full-width-info-holder-desc {
     position: absolute;
     top: 0px;
     left: 0px;
     width: 100%;
-    display: none;
-    visibility: hidden;
 }
 .full-width-info-holder-desc p, .full-width-info-holder-desc span {
     position: relative;
