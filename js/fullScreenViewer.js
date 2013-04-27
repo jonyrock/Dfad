@@ -6,16 +6,19 @@
  **/
 
 fullScreenViewer.isInited = false;
-fullScreenViewer.isVisible;
-fullScreenViewer.htmlMediaHolder;
-fullScreenViewer.htmlHolder;
-fullScreenViewer.htmlInfoHolder;
-fullScreenViewer.htmlInfoTextHolder;
-fullScreenViewer.htmlInfoHolderWidth;
-fullScreenViewer.navigationElements;
-fullScreenViewer.navigationElementsDelayOrder;
-fullScreenViewer.instance;
-
+fullScreenViewer.isVisible
+fullScreenViewer.htmlMediaHolder
+fullScreenViewer.htmlMediaHolderAnimation
+fullScreenViewer.htmlHolder
+fullScreenViewer.htmlInfoHolder
+fullScreenViewer.htmlInfoTextHolder
+fullScreenViewer.htmlInfoHolderWidth
+fullScreenViewer.htmlButtonPrevios
+fullScreenViewer.htmlButtonNext
+fullScreenViewer.htmlButtonClose
+fullScreenViewer.navigationElements
+fullScreenViewer.navigationElementsDelayOrder
+fullScreenViewer.instance
 
 // act like singleton
 function fullScreenViewer(mediaItems, mediaItemsHtml) {
@@ -27,11 +30,13 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
         $(document).keyup(function(e) {
             if (e.keyCode == 27)// esc key code
                 fullScreenViewer.instance.hide();
+            if (e.keyCode == 37)// left key code
+                fullScreenViewer.instance.showPrevios();
+            if (e.keyCode == 39)// right key code
+                fullScreenViewer.instance.showNext();
         });
-
-        fullScreenViewer.htmlInfoHolder.find(".preview-arrow-backward").click(fullScreenViewer.instance.showPrev);
+        fullScreenViewer.htmlInfoHolder.find(".preview-arrow-backward").click(fullScreenViewer.instance.showPrevious);
         fullScreenViewer.htmlInfoHolder.find(".preview-arrow-forward").click(fullScreenViewer.instance.showNext);
-
     }
 
     function initNavigationAnimation() {
@@ -43,6 +48,7 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
                     },
                     easing : Sine.easeOut
                 });
+                $(this).attr("hovered","");
             }, function() {
                 TweenMax.to($(".preview-arrow-backg", this), 0.3, {
                     css : {
@@ -50,6 +56,7 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
                     },
                     easing : Sine.easeOut
                 });
+                $(this).removeAttr('hovered');
             });
         }
 
@@ -59,15 +66,21 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
         fullScreenViewer.isVisible = false;
         fullScreenViewer.htmlMediaHolder = $("#full-width-preview-media-holder");
         fullScreenViewer.htmlHolder = $("#full-width-preview");
+        fullScreenViewer.htmlMediaHolderAnimation = fullScreenViewer.htmlHolder.find(".full-width-preview-media-loader");
         fullScreenViewer.htmlInfoHolder = fullScreenViewer.htmlHolder.find("#full-width-preview-info-holder");
         fullScreenViewer.htmlInfoTextHolder = fullScreenViewer.htmlInfoHolder.find(".full-width-info-holder");
         fullScreenViewer.htmlInfoHolderWidth = fullScreenViewer.htmlInfoHolder.width();
         fullScreenViewer.htmlInfoHolder.css("width", "0px");
-        fullScreenViewer.isInited = true;
+
+        fullScreenViewer.htmlButtonPrevios = fullScreenViewer.htmlInfoHolder.find(".preview-arrow-backward");
+        fullScreenViewer.htmlButtonNext = fullScreenViewer.htmlInfoHolder.find(".preview-arrow-forward");
+        fullScreenViewer.htmlButtonClose = fullScreenViewer.htmlInfoHolder.find(".preview-arrow-close");
+
         fullScreenViewer.navigationElements = fullScreenViewer.htmlInfoHolder.find(".navigationElement");
         fullScreenViewer.navigationElementsDelayOrder = new Array(4, 2, 3, 1);
         initNavigationAnimation();
         initEventHandlers();
+        fullScreenViewer.isInited = true;
     }
 
     if (!fullScreenViewer.isInited)
@@ -76,18 +89,19 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
     this.mediaItems = mediaItems;
     this.mediaItemsHtml = mediaItemsHtml;
     this.currentIndex = 0;
+
 }
 
 fullScreenViewer.prototype.showNext = function() {
-    //TODO:play animation to it
     var me = fullScreenViewer.instance;
     me.showItemAt((me.currentIndex + 1) % me.mediaItems.length);
+    fullScreenViewer.buttonTrigger(fullScreenViewer.htmlButtonNext);
 }
 
-fullScreenViewer.prototype.showPrev = function() {
-    //TODO:play animation to it
+fullScreenViewer.prototype.showPrevios = function() {
     var me = fullScreenViewer.instance;
     me.showItemAt((me.currentIndex - 1 + me.mediaItems.length) % me.mediaItems.length);
+    fullScreenViewer.buttonTrigger(fullScreenViewer.htmlButtonPrevios);
 }
 
 fullScreenViewer.prototype.showItemAt = function(itemIndex) {
@@ -110,6 +124,21 @@ fullScreenViewer.prototype.hide = function() {
     fullScreenViewer.hide();
 }
 
+fullScreenViewer.buttonTrigger = function(button) {
+    if($(button).attr('hovered') !== undefined){
+        return
+    }
+    var back = $(button).find(".preview-arrow-backg");
+    TweenLite.killTweensOf(back);
+    back.css("backgroundColor", themeColor);
+    TweenMax.to(back, 2, {
+        css : {
+            backgroundColor : initBackColor
+        },
+        easing : Sine.easeOut
+    });
+}
+
 fullScreenViewer.show = function(onCompleteFunction) {
     if (fullScreenViewer.isVisible)
         return;
@@ -121,7 +150,10 @@ fullScreenViewer.show = function(onCompleteFunction) {
             width : fullScreenViewer.htmlInfoHolderWidth + "px"
         },
         ease : Sine.easeInOut,
-        onComplete : onCompleteFunction
+        onComplete : function() {
+            fullScreenViewer.htmlMediaHolderAnimation.show();
+            onCompleteFunction();
+        }
     });
 
     fullScreenViewer.navigationElements.each(function(i) {
@@ -134,6 +166,7 @@ fullScreenViewer.hide = function() {
     if (!fullScreenViewer.isVisible)
         return;
     fullScreenViewer.isVisible = false;
+    fullScreenViewer.buttonTrigger(fullScreenViewer.htmlButtonClose);
     fullScreenViewer.htmlInfoTextHolder.empty();
     fullScreenViewer.htmlHolder.delay(300).fadeOut();
     TweenMax.killTweensOf(fullScreenViewer.htmlInfoHolder);
@@ -147,6 +180,8 @@ fullScreenViewer.hide = function() {
         var order = fullScreenViewer.navigationElementsDelayOrder;
         $(this).delay(80 * order[order.length - i]).fadeOut();
     });
+
+    fullScreenViewer.htmlMediaHolderAnimation.hide();
 }
 // FACTORIES
 fullScreenViewer.buildFromHtml = function() {

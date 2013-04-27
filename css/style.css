@@ -2406,13 +2406,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #full-width-preview-info-holder {
-    width: 380px
-}
-#full-width-info-container {
+    width: 380px;
     position: relative;
-    float: left;
-    z-index: 2;
+    background: #fff;
 }
+
 .full-width-info-container {
     top: 0px;
     width: 100%;
@@ -2472,6 +2470,7 @@ h1, h2, h3, h4, h5, h6 {
     background-image: url(../assets/loaders/loader.gif);
     background-repeat: no-repeat;
     background-position: center;
+    display: none;
 }
 .preview-arrow-forward, .preview-arrow-backward, .preview-arrow-close {
     position: absolute;
@@ -3087,11 +3086,10 @@ h1, h2, h3, h4, h5, h6 {
     /*z-index:91;*/
 }
 #preview-media-holder {
-    position: absolute;
-    margin: 4px;
-    width: 292px;
-    height: 292px;
-    overflow: hidden;
+    margin:0;
+    padding:0;
+    width: 100%;
+    height: 100%;
 }
 #preview-media-load {
     position: relative;
