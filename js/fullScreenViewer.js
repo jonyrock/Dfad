@@ -18,6 +18,7 @@ fullScreenViewer.htmlButtonNext
 fullScreenViewer.htmlButtonClose
 fullScreenViewer.navigationElements
 fullScreenViewer.navigationElementsDelayOrder
+fullScreenViewer.mediaRenderers
 fullScreenViewer.instance
 
 // act like singleton
@@ -48,7 +49,7 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
                     },
                     easing : Sine.easeOut
                 });
-                $(this).attr("hovered","");
+                $(this).attr("hovered", "");
             }, function() {
                 TweenMax.to($(".preview-arrow-backg", this), 0.3, {
                     css : {
@@ -59,6 +60,28 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
                 $(this).removeAttr('hovered');
             });
         }
+
+    }
+
+    function initMediaRenderers() {
+
+        function placeSingleImage(mediaElem) {
+            var htmlElem = $('<img id="preview-media-image" src="' + $(mediaElem).attr("data-url") + '" title="' + $(mediaElem).attr("data-title") + '"' + ' alt="' + $(mediaElem).attr("data-alt") + '" />');
+
+            fullScreenViewer.htmlMediaHolder.append(htmlElem);
+            htmlElem.css("visibility", "hidden");
+            htmlElem.load(function() {
+                var mediaWidth = htmlElem.width();
+                var mediaHeight = htmlElem.height();
+                htmlElem.css("position", "relative");
+                htmlElem.css("visibility", "visible");
+                htmlElem.css("left", -mediaWidth / 2);
+                htmlElem.css("top", -mediaHeight / 2);
+            });
+        }
+        
+        fullScreenViewer.mediaRenderers = new Array();
+        fullScreenViewer.mediaRenderers["preview-media-image"] = placeSingleImage;
 
     }
 
@@ -81,6 +104,7 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
         fullScreenViewer.navigationElementsDelayOrder = new Array(4, 2, 3, 1);
         initNavigationAnimation();
         initEventHandlers();
+        initMediaRenderers();
         fullScreenViewer.isInited = true;
     }
 
@@ -122,16 +146,17 @@ fullScreenViewer.prototype.showItemAt = function(itemIndex) {
     htmlText.fadeIn();
     var currPreviewElem = $(this.mediaItems[itemIndex]);
     var mediaType = currPreviewElem.attr("id");
-    fullScreenViewer.htmlMediaHolder.append(currPreviewElem);
+    fullScreenViewer.mediaRenderers[mediaType](currPreviewElem);
+    
     
 }
-// method useful for updating rep object data
+// method useful for updating per object data
 fullScreenViewer.prototype.hide = function() {
     fullScreenViewer.hide();
 }
 
 fullScreenViewer.buttonTrigger = function(button) {
-    if($(button).attr('hovered') !== undefined){
+    if ($(button).attr('hovered') !== undefined) {
         return
     }
     var back = $(button).find(".preview-arrow-backg");
@@ -165,7 +190,7 @@ fullScreenViewer.show = function(onCompleteFunction) {
     fullScreenViewer.navigationElements.each(function(i) {
         $(this).delay(80 * (fullScreenViewer.navigationElementsDelayOrder[i] + 1)).fadeIn();
     });
-    
+
 }
 
 fullScreenViewer.hide = function() {
@@ -189,7 +214,7 @@ fullScreenViewer.hide = function() {
     });
 
     fullScreenViewer.htmlMediaHolderAnimation.hide();
-    
+
 }
 // FACTORIES
 fullScreenViewer.buildFromHtml = function() {
@@ -198,13 +223,7 @@ fullScreenViewer.buildFromHtml = function() {
     var previewMediaDescArr = new Array();
 
     $("#full-width-preview #full-width-preview-media-holder").find("#preview-media-holder").children().each(function(i) {
-        if ($(this).attr("id") == "preview-media-image") {
-            previewMediaArr[i] = '<img id="preview-media-image" src="' + $(this).attr("data-url") + '" title="' + $(this).attr("data-title") + '"' + ' alt="' + $(this).attr("data-alt") + '" />';
-        } else if ($(this).attr("id") == "video-wrapper") {
-            previewMediaArr[i] = $(this);
-        } else if ($(this).attr("id") == "video-wrapper-collection") {
-            previewMediaArr[i] = $(this);
-        }
+        previewMediaArr[i] = $(this);
     });
 
     $(".full-width-info-holder").find(".full-width-info-holder-desc").each(function(i) {
