@@ -10,7 +10,7 @@ var modulePageColumnsInitedAndNocheckColumnSize = false;
 var modulePageColumnsFilterButtonsWidth;
 var initialColumns = 0;
 var maxColumns = 4;
-var containerTotalH = 0;
+var containerTotalH = 0; 
 
 function loadFullWidthPreviewFromThumb(thumb) {
     $("#module-columns-holder .fourth-thumb-holder").attr("data-selected", "false");
@@ -215,16 +215,17 @@ function modulePageColumns() {
 
     if (needToShowDropdown)
         $("#filter-buttons-dropdown").hide();
-
-    // set portfolio full view page
-    setFullWidthPreview();
-    storeFullWidthPreviewMedia();
-
-    previewMediaArrAll = previewMediaArr.slice(0);
-    previewMediaDescArrAll = previewMediaDescArr.slice(0);
+    
+    //TODO: build from factory
+    //storeFullWidthPreviewMedia();
+    
+    //TODO: use filters in viewer
+    //previewMediaArrAll = previewMediaArr.slice(0);
+    //previewMediaDescArrAll = previewMediaDescArr.slice(0);
     
     modulePageColumnsFilterButtonsWidth = countFilterButtonsWidth();
-    moduleUpdate_page_columns();
+    
+    filterContent($filterContainer, "*", $originalDataPos);
 
 }
 
@@ -251,6 +252,7 @@ function getOriginalPos(container) {
 }
 
 function filterContent(container, selector, originalDataPos) {
+    //TODO: use filters in viewer
     modulePageColumnsCurrentSelectedId = selector;
     window.previewMediaArr = Array();
     window.previewMediaDescArr = Array();
@@ -260,6 +262,7 @@ function filterContent(container, selector, originalDataPos) {
         window.previewMediaArr.push(previewMediaArrAll[i]);
         window.previewMediaDescArr.push(previewMediaDescArrAll[i]);
     });
+    //TODO: and only there animation with new filtered items
     moduleUpdate_page_columns();
 }
 

@@ -1944,14 +1944,9 @@ function doLoad() {
         var toLoad = loadURL;
         clearCustomInterval(loadInterval);
         var modGallPrev = $("#module-galleries-preview");
-        var fullWidPrev = $("#full-width-preview");
         if (modGallPrev.length > 0) {
             modGallPrev.remove();
         }
-        if (fullWidPrev.length > 0) {
-            fullWidPrev.remove();
-        }
-
         loadedContent = false;
         loadInterval = setInterval(function() {
             loadModule(toLoad)
