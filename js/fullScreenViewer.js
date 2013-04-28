@@ -20,6 +20,8 @@ fullScreenViewer.navigationElements
 fullScreenViewer.navigationElementsDelayOrder
 fullScreenViewer.mediaRenderers
 fullScreenViewer.instance
+fullScreenViewer.initSharedEventHandlers
+fullScreenViewer.removeSharedEventHandlers
 
 // act like singleton
 function fullScreenViewer(mediaItems, mediaItemsHtml) {
@@ -35,16 +37,19 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
             fullScreenViewer.instance.showNext();
     }
 
-    function initEventHandlers() {
-        fullScreenViewer.htmlHolder.find(".preview-arrow-close").click(fullScreenViewer.instance.hide);
+    fullScreenViewer.initSharedEventHandlers = function () {
         $(document).bind('keyup', keyHandlers);
-        fullScreenViewer.htmlInfoHolder.find(".preview-arrow-backward").click(fullScreenViewer.instance.showPrevious);
-        fullScreenViewer.htmlInfoHolder.find(".preview-arrow-forward").click(fullScreenViewer.instance.showNext);
     }
 
-    fullScreenViewer.removeEventHandlers = function() {
+    fullScreenViewer.removeSharedEventHandlers = function() {
         $(document).unbind('keyup', keyHandlers);
     }
+
+    function initEventHandlers() {
+        fullScreenViewer.htmlHolder.find(".preview-arrow-close").click(fullScreenViewer.instance.hide);
+        fullScreenViewer.htmlInfoHolder.find(".preview-arrow-backward").click(fullScreenViewer.instance.showPrevious);
+        fullScreenViewer.htmlInfoHolder.find(".preview-arrow-forward").click(fullScreenViewer.instance.showNext);
+    }    
 
     function initNavigationAnimation() {
         if (!touchDevice) {
@@ -181,6 +186,7 @@ fullScreenViewer.show = function(onCompleteFunction) {
     if (fullScreenViewer.isVisible)
         return;
     fullScreenViewer.isVisible = true;
+    fullScreenViewer.initSharedEventHandlers();
     fullScreenViewer.htmlHolder.fadeIn();
     TweenMax.killTweensOf(fullScreenViewer.htmlInfoHolder);
     TweenMax.to(fullScreenViewer.htmlInfoHolder, 0.6, {
@@ -204,6 +210,7 @@ fullScreenViewer.hide = function() {
     if (!fullScreenViewer.isVisible)
         return;
     fullScreenViewer.isVisible = false;
+    fullScreenViewer.removeSharedEventHandlers();
     fullScreenViewer.buttonTrigger(fullScreenViewer.htmlButtonClose);
     fullScreenViewer.htmlInfoTextHolder.empty();
     fullScreenViewer.htmlMediaHolder.empty();
@@ -221,8 +228,6 @@ fullScreenViewer.hide = function() {
     });
 
     fullScreenViewer.htmlMediaHolderAnimation.hide();
-    fullScreenViewer.removeEventHandlers();
-
 }
 // FACTORIES
 fullScreenViewer.buildFromHtml = function() {
