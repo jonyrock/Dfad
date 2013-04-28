@@ -18,7 +18,6 @@ fullScreenViewer.htmlButtonNext
 fullScreenViewer.htmlButtonClose
 fullScreenViewer.navigationElements
 fullScreenViewer.navigationElementsDelayOrder
-fullScreenViewer.mediaRenderers
 fullScreenViewer.instance
 fullScreenViewer.initSharedEventHandlers
 fullScreenViewer.removeSharedEventHandlers
@@ -78,83 +77,6 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
         }
     }
 
-    function initMediaRenderers() {
-
-        function placeSingleImage(mediaElem) {
-            var htmlElem = $('<img id="preview-media-image" src="' + $(mediaElem).attr("data-url") + '" title="' + $(mediaElem).attr("data-title") + '"' + ' alt="' + $(mediaElem).attr("data-alt") + '" />');
-
-            fullScreenViewer.htmlMediaHolder.append(htmlElem);
-            htmlElem.css("visibility", "hidden");
-            htmlElem.load(function() {
-                var mediaWidth = htmlElem.width();
-                var mediaHeight = htmlElem.height();
-                htmlElem.css("position", "relative");
-                htmlElem.css("visibility", "visible");
-                htmlElem.css("left", -mediaWidth / 2);
-                htmlElem.css("top", -mediaHeight / 2);
-            });
-        }
-
-        function placeSingleVideo(mediaElem){
-            var htmlElem = $('<div id="video-wrapper"></div>');
-            fullScreenViewer.htmlMediaHolder.append(htmlElem);
-
-            htmlElem.css("position", "relative");
-            htmlElem.css("visibility", "visible");
-
-            var mediaWidth = parseInt($(mediaElem).attr("data-width"), 10);
-            var mediaHeight = parseInt($(mediaElem).attr("data-height"), 10);
-            var widthValue = mediaWidth;
-            var leftValue = -mediaWidth / 2;
-            if($(mediaElem).attr("data-width").indexOf("%") != -1){
-                widthValue += "%";
-                leftValue += "%";
-            }
-            else {
-                widthValue += "px";
-                leftValue += "px";
-            }
-
-            var heightValue = mediaHeight;
-            var topValue = -mediaHeight / 2;
-            if($(mediaElem).attr("data-height").indexOf("%") != -1){
-                heightValue += "%";
-                topValue += "%";
-            }
-            else {
-                heightValue += "px";
-                topValue += "px";
-            }
-
-            htmlElem.css("width", widthValue);
-            htmlElem.css("height", heightValue);
-            htmlElem.css("left", leftValue);
-            htmlElem.css("top", topValue);
-
-            templateAddMediaVideo($(mediaElem).attr("data-video-type"), $(mediaElem), htmlElem);
-        }
-
-        function placeCollection(mediaElem) {
-
-            var videoItems = $(mediaElem).find("#video-wrapper");
-            var buttons = new fullScreenViewer.pagesButtons(videoItems.length);
-            buttons.onPageChanged = function(pageIndex){
-                // fullScreenViewer.htmlInfoTextHolder.empty();
-                fullScreenViewer.htmlMediaHolder.empty();
-                placeSingleVideo(videoItems.eq(pageIndex));
-            }
-            buttons.show();
-            buttons.selectPage(0);
-
-        }
-
-        fullScreenViewer.mediaRenderers = new Array();
-        fullScreenViewer.mediaRenderers["preview-media-image"] = placeSingleImage;
-        fullScreenViewer.mediaRenderers["video-wrapper"] = placeSingleVideo;
-        fullScreenViewer.mediaRenderers["video-wrapper-collection"] = placeCollection;
-
-    }
-
     function initStatic() {
         fullScreenViewer.isVisible = false;
         fullScreenViewer.htmlMediaHolder = $("#full-width-preview-media-holder");
@@ -174,7 +96,6 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
         fullScreenViewer.navigationElementsDelayOrder = new Array(4, 2, 3, 1);
         initNavigationAnimation();
         initEventHandlers();
-        initMediaRenderers();
         fullScreenViewer.isInited = true;
     }
 
@@ -184,7 +105,6 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
     this.mediaItems = mediaItems;
     this.mediaItemsHtml = mediaItemsHtml;
     this.currentIndex = 0;
-
 }
 
 fullScreenViewer.prototype.showNext = function() {
@@ -208,16 +128,13 @@ fullScreenViewer.prototype.showItemAt = function(itemIndex) {
         });
         return;
     }
-    fullScreenViewer.htmlInfoTextHolder.empty();
-    fullScreenViewer.htmlMediaHolder.empty();
+    
     this.currentIndex = itemIndex;
-    var htmlText = $(this.mediaItemsHtml[itemIndex]);
-    fullScreenViewer.htmlInfoTextHolder.append(htmlText);
-    htmlText.fadeIn();
-    var currPreviewElem = $(this.mediaItems[itemIndex]);
-    var mediaType = currPreviewElem.attr("id");
-    if(fullScreenViewer.mediaRenderers[mediaType] !== undefined)
-        fullScreenViewer.mediaRenderers[mediaType](currPreviewElem);
+    
+    var mediaItem = this.mediaItems[itemIndex];
+    var mediaItemHtml = this.mediaItemsHtml[itemIndex];
+    fullScreenViewer.renderMedia(mediaItem, mediaItemHtml);
+    
 }
 
 // method useful for updating per object data
@@ -240,7 +157,108 @@ fullScreenViewer.buttonTrigger = function(button) {
     });
 }
 
-fullScreenViewer.show = function(onCompleteFunction) {
+fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
+
+        function prepareHolders() {
+            fullScreenViewer.htmlInfoTextHolder.empty();
+            fullScreenViewer.htmlMediaHolder.empty();
+        }
+
+        function placeMediaText(mediaItemHtmlPiece) {
+            var htmlText = $(mediaItemHtmlPiece);
+            fullScreenViewer.htmlInfoTextHolder.append(htmlText);
+            htmlText.fadeIn();
+        }
+
+        function placeSingleImage(mediaItemPiece, mediaItemHtmlPiece) {
+            
+            prepareHolders();
+            placeMediaText(mediaItemHtmlPiece);
+
+            var htmlElem = $(
+                '<img id="preview-media-image"' + 
+                ' src="'    + $(mediaItemPiece).attr("data-url") + '"' +
+                ' title="'  + $(mediaItemPiece).attr("data-title") + '"' + 
+                ' alt="'    + $(mediaItemPiece).attr("data-alt") + '" />');
+
+            fullScreenViewer.htmlMediaHolder.append(htmlElem);
+            htmlElem.css("visibility", "hidden");
+            htmlElem.load(function() {
+                var mediaWidth = htmlElem.width();
+                var mediaHeight = htmlElem.height();
+                htmlElem.css("position", "relative");
+                htmlElem.css("visibility", "visible");
+                htmlElem.css("left", -mediaWidth / 2);
+                htmlElem.css("top", -mediaHeight / 2);
+            });
+        }
+
+        function placeSingleVideo(mediaItemPiece, mediaItemHtmlPiece) {
+            
+            prepareHolders();
+            placeMediaText(mediaItemHtmlPiece);
+
+            var htmlElem = $('<div id="video-wrapper"></div>');
+            fullScreenViewer.htmlMediaHolder.append(htmlElem);
+
+            htmlElem.css("position", "relative");
+            htmlElem.css("visibility", "visible");
+
+            var mediaWidth = parseInt($(mediaItemPiece).attr("data-width"), 10);
+            var mediaHeight = parseInt($(mediaItemPiece).attr("data-height"), 10);
+            
+            var widthValue = mediaWidth;
+            var leftValue = -mediaWidth / 2;
+            if($(mediaItemPiece).attr("data-width").indexOf("%") != -1){
+                widthValue += "%";
+                leftValue += "%";
+            } else {
+                widthValue += "px";
+                leftValue += "px";
+            }
+
+            var heightValue = mediaHeight;
+            var topValue = -mediaHeight / 2;
+            if($(mediaItemPiece).attr("data-height").indexOf("%") != -1){
+                heightValue += "%";
+                topValue += "%";
+            } else {
+                heightValue += "px";
+                topValue += "px";
+            }
+
+            htmlElem.css("width", widthValue);
+            htmlElem.css("height", heightValue);
+            htmlElem.css("left", leftValue);
+            htmlElem.css("top", topValue);
+
+            templateAddMediaVideo(
+                $(mediaItemPiece).attr("data-video-type"), 
+                $(mediaItemPiece), 
+                htmlElem
+            );
+        }
+
+        function placeCollection(mediaItemPiece, mediaItemHtmlPiece) {
+            var videoItems = $(mediaItemPiece).find("#video-wrapper");
+            var buttons = new fullScreenViewer.pagesButtons(videoItems.length);
+            buttons.onPageChanged = function(pageIndex) {
+                placeSingleVideo(videoItems.eq(pageIndex), "<p>hello</p>");
+            }
+            buttons.show();
+            buttons.selectPage(0);
+        }
+
+        var mediaRenderers = new Array();
+        mediaRenderers["preview-media-image"] = placeSingleImage;
+        mediaRenderers["video-wrapper"] = placeSingleVideo;
+        mediaRenderers["video-wrapper-collection"] = placeCollection;
+
+        var mediaType = mediaItem.attr("id");
+        mediaRenderers[mediaType](mediaItem, mediaItemHtml);
+}
+
+fullScreenViewer.show = function(callback) {
     if (fullScreenViewer.isVisible)
         return;
     fullScreenViewer.isVisible = true;
@@ -254,7 +272,7 @@ fullScreenViewer.show = function(onCompleteFunction) {
         ease : Sine.easeInOut,
         onComplete : function() {
             fullScreenViewer.htmlMediaHolderAnimation.show();
-            onCompleteFunction();
+            callback();
         }
     });
 
@@ -286,13 +304,14 @@ fullScreenViewer.hide = function() {
 
     fullScreenViewer.htmlMediaHolderAnimation.hide();
 }
-// FACTORIES
+// FACTORY (for legacy)
 fullScreenViewer.buildFromHtml = function() {
 
     var previewMediaArr = new Array();
     var previewMediaDescArr = new Array();
 
-    $("#full-width-preview #full-width-preview-media-holder").find("#preview-media-holder").children().each(function(i) {
+    $("#full-width-preview #full-width-preview-media-holder").find("#preview-media-holder")
+    .children().each(function(i) {
         previewMediaArr[i] = $(this);
     });
 
@@ -307,8 +326,6 @@ fullScreenViewer.buildFromHtml = function() {
 
     return new fullScreenViewer(previewMediaArr, previewMediaDescArr);
 }
-
-
 
 
 
@@ -333,7 +350,6 @@ fullScreenViewer.pagesButtons = function(pagesCount) {
     }
     var htmlClearItem = $('<div style="clear:both" />');
     holder.append(htmlClearItem);
-
 }
 
 fullScreenViewer.pagesButtons.prototype.onPageChanged
