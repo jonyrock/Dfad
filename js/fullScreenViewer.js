@@ -23,27 +23,32 @@ fullScreenViewer.instance
 fullScreenViewer.initSharedEventHandlers
 fullScreenViewer.removeSharedEventHandlers
 
+
+
 // act like singleton
 function fullScreenViewer(mediaItems, mediaItemsHtml) {
 
     fullScreenViewer.instance = this;
 
-    var keyHandlers = function(e) {
+    var keyHandlers = function(e) {27
+        var bindedKeyCodes = new Array(27, 33, 34, 37, 38, 39, 40);
+        if(bindedKeyCodes.indexOf(e.keyCode) == -1)
+            return ;
         e.preventDefault();
         if (e.keyCode == 27)// esc key code
             fullScreenViewer.instance.hide();
-        if (e.keyCode == 37)// left key code
+        if (e.keyCode == 37 || e.keyCode == 33) // left key code or pageup
             fullScreenViewer.instance.showPrevious();
-        if (e.keyCode == 39)// right key code
+        if (e.keyCode == 39 || e.keyCode == 34) // right key code or pagedown
             fullScreenViewer.instance.showNext();
     }
 
     fullScreenViewer.initSharedEventHandlers = function () {
-        $(document).bind('keyup', keyHandlers);
+        $(document).bind('keydown', keyHandlers);
     }
 
     fullScreenViewer.removeSharedEventHandlers = function() {
-        $(document).unbind('keyup', keyHandlers);
+        $(document).unbind('keydown', keyHandlers);
     }
 
     function initEventHandlers() {
