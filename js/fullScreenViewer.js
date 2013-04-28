@@ -30,7 +30,7 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
     fullScreenViewer.instance = this;
 
     var keyHandlers = function(e) {
-        var bindedKeyCodes = new Array(27, 33, 34, 37, 38, 39, 40);
+        var bindedKeyCodes = new Array(27, 33, 34, 35, 36, 37, 38, 39, 40);
         if(bindedKeyCodes.indexOf(e.keyCode) == -1)
             return ;
         e.preventDefault();
