@@ -176,7 +176,6 @@ function loadFullWidthPreview(index) {
                 $(".preview-arrow-forward"), 
                 $(".preview-arrow-backward")], .3, { css: { opacity: "0" }, ease: Circ.easeInOut });
             TweenMax.to(previewInfoHolder, .3, { css: { right: val }, ease: Circ.easeInOut, onComplete: hideFullWidthPreview });
-
         }
 
         function hideFullWidthPreview() {
@@ -190,7 +189,7 @@ function loadFullWidthPreview(index) {
 
         function removeFullWidthPreview() {
             if (moduleList != null) moduleList.enableList();
-            fullWidthPreview.css("display", "none");
+            fullWidthPreview.css("display", "none");a
         }
     }
 

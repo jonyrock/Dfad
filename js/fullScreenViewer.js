@@ -1,7 +1,7 @@
 /**
  * VERSION: 1.0
  * DATE: 2013-04-25
- * 
+ *
  * @author: @jonyrock exclusively to dfad.com
  **/
 
@@ -34,7 +34,7 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
         if(bindedKeyCodes.indexOf(e.keyCode) == -1)
             return ;
         e.preventDefault();
-        if (e.keyCode == 27)// esc key code
+        if (e.keyCode == 27)                    // esc key code
             fullScreenViewer.instance.hide();
         if (e.keyCode == 37 || e.keyCode == 33) // left key code or pageup
             fullScreenViewer.instance.showPrevious();
@@ -54,7 +54,7 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
         fullScreenViewer.htmlHolder.find(".preview-arrow-close").click(fullScreenViewer.instance.hide);
         fullScreenViewer.htmlInfoHolder.find(".preview-arrow-backward").click(fullScreenViewer.instance.showPrevious);
         fullScreenViewer.htmlInfoHolder.find(".preview-arrow-forward").click(fullScreenViewer.instance.showNext);
-    }    
+    }
 
     function initNavigationAnimation() {
         if (!touchDevice) {
@@ -98,7 +98,7 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
         function placeSingleVideo(mediaElem){
             var htmlElem = $('<div id="video-wrapper"></div>');
             fullScreenViewer.htmlMediaHolder.append(htmlElem);
-            
+
             htmlElem.css("position", "relative");
             htmlElem.css("visibility", "visible");
 
@@ -125,7 +125,7 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
                 heightValue += "px";
                 topValue += "px";
             }
-            
+
             htmlElem.css("width", widthValue);
             htmlElem.css("height", heightValue);
             htmlElem.css("left", leftValue);
@@ -133,10 +133,26 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
 
             templateAddMediaVideo($(mediaElem).attr("data-video-type"), $(mediaElem), htmlElem);
         }
-        
+
+        function placeCollection(mediaElem) {
+
+            var videoItems = $(mediaElem).find("#video-wrapper");
+            var buttons = new fullScreenViewer.pagesButtons(videoItems.length);
+            buttons.onPageChanged = function(pageIndex){
+                // fullScreenViewer.htmlInfoTextHolder.empty();
+                fullScreenViewer.htmlMediaHolder.empty();
+                placeSingleVideo(videoItems.eq(pageIndex));
+            }
+            buttons.show();
+            buttons.selectPage(0);
+
+        }
+
         fullScreenViewer.mediaRenderers = new Array();
         fullScreenViewer.mediaRenderers["preview-media-image"] = placeSingleImage;
         fullScreenViewer.mediaRenderers["video-wrapper"] = placeSingleVideo;
+        fullScreenViewer.mediaRenderers["video-wrapper-collection"] = placeCollection;
+
     }
 
     function initStatic() {
@@ -168,6 +184,7 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
     this.mediaItems = mediaItems;
     this.mediaItemsHtml = mediaItemsHtml;
     this.currentIndex = 0;
+
 }
 
 fullScreenViewer.prototype.showNext = function() {
@@ -289,4 +306,48 @@ fullScreenViewer.buildFromHtml = function() {
     $("#full-width-preview").remove();
 
     return new fullScreenViewer(previewMediaArr, previewMediaDescArr);
+}
+
+
+
+
+
+fullScreenViewer.pagesButtons = function(pagesCount) {
+    var holder = fullScreenViewer.pagesButtons.htmlHolder =
+        fullScreenViewer.htmlInfoHolder
+        .find("#full-width-info-holder-pages-buttons");
+    var me = this;
+    holder.empty();
+
+    function onButtonClick(index) {
+        return function() {
+            me.selectPage(index);
+        }
+    }
+    me.items = new Array();
+    for(var i = 1; i <= pagesCount; i++) {
+        var item = $('<li>'+ i +'</li>');
+        holder.append(item);
+        me.items.push(item);
+        item.click(onButtonClick(i - 1));
+    }
+    var htmlClearItem = $('<div style="clear:both" />');
+    holder.append(htmlClearItem);
+
+}
+
+fullScreenViewer.pagesButtons.prototype.onPageChanged
+
+fullScreenViewer.pagesButtons.prototype.selectPage = function (index) {
+    this.onPageChanged(index);
+    for(var i = 0; i < this.items.length; i++)
+        this.items[i].removeClass("selected");
+    this.items[index].addClass("selected");
+}
+
+fullScreenViewer.pagesButtons.prototype.show = function() {
+    fullScreenViewer.pagesButtons.htmlHolder.fadeIn();
+}
+fullScreenViewer.pagesButtons.prototype.hide = function() {
+    fullScreenViewer.pagesButtons.htmlHolder.fadeOut();
 }
