@@ -24,13 +24,12 @@ fullScreenViewer.initSharedEventHandlers
 fullScreenViewer.removeSharedEventHandlers
 
 
-
 // act like singleton
 function fullScreenViewer(mediaItems, mediaItemsHtml) {
 
     fullScreenViewer.instance = this;
 
-    var keyHandlers = function(e) {27
+    var keyHandlers = function(e) {
         var bindedKeyCodes = new Array(27, 33, 34, 37, 38, 39, 40);
         if(bindedKeyCodes.indexOf(e.keyCode) == -1)
             return ;
@@ -77,7 +76,6 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
                 $(this).removeAttr('hovered');
             });
         }
-
     }
 
     function initMediaRenderers() {
@@ -96,10 +94,26 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
                 htmlElem.css("top", -mediaHeight / 2);
             });
         }
+
+        function placeSingleVideo(mediaElem){
+            alert("singleton"); 
+            var htmlElem = $('<div id="video-wrapper"></div>');
+            fullScreenViewer.htmlMediaHolder.append(htmlElem);
+
+            var mediaWidth = parseInt($(mediaElem).attr("data-width"), 10);
+            var mediaHeight = parseInt($(mediaElem).attr("data-height"), 10);
+            htmlElem.css("position", "relative");
+            htmlElem.css("visibility", "visible");
+            htmlElem.css("width", mediaWidth + "px");
+            htmlElem.css("height", mediaHeight + "px");
+            htmlElem.css("left", -mediaWidth / 2);
+            htmlElem.css("top", -mediaHeight / 2);
+            templateAddMediaVideo($(mediaElem).attr("data-video-type"), $(mediaElem), htmlElem);
+        }
         
         fullScreenViewer.mediaRenderers = new Array();
         fullScreenViewer.mediaRenderers["preview-media-image"] = placeSingleImage;
-
+        fullScreenViewer.mediaRenderers["video-wrapper"] = placeSingleVideo;
     }
 
     function initStatic() {
@@ -131,7 +145,6 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
     this.mediaItems = mediaItems;
     this.mediaItemsHtml = mediaItemsHtml;
     this.currentIndex = 0;
-
 }
 
 fullScreenViewer.prototype.showNext = function() {
@@ -165,7 +178,6 @@ fullScreenViewer.prototype.showItemAt = function(itemIndex) {
     var mediaType = currPreviewElem.attr("id");
     if(fullScreenViewer.mediaRenderers[mediaType] !== undefined)
         fullScreenViewer.mediaRenderers[mediaType](currPreviewElem);
-    
 }
 
 // method useful for updating per object data
@@ -209,7 +221,6 @@ fullScreenViewer.show = function(onCompleteFunction) {
     fullScreenViewer.navigationElements.each(function(i) {
         $(this).delay(80 * (fullScreenViewer.navigationElementsDelayOrder[i] + 1)).fadeIn();
     });
-
 }
 
 fullScreenViewer.hide = function() {
@@ -255,6 +266,4 @@ fullScreenViewer.buildFromHtml = function() {
     $("#full-width-preview").remove();
 
     return new fullScreenViewer(previewMediaArr, previewMediaDescArr);
-
 }
-
