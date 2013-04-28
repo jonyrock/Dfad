@@ -28,7 +28,8 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
 
     fullScreenViewer.instance = this;
 
-    var keyHandlers = function(e){
+    var keyHandlers = function(e) {
+        e.preventDefault();
         if (e.keyCode == 27)// esc key code
             fullScreenViewer.instance.hide();
         if (e.keyCode == 37)// left key code
