@@ -96,18 +96,41 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
         }
 
         function placeSingleVideo(mediaElem){
-            alert("singleton"); 
             var htmlElem = $('<div id="video-wrapper"></div>');
             fullScreenViewer.htmlMediaHolder.append(htmlElem);
+            
+            htmlElem.css("position", "relative");
+            htmlElem.css("visibility", "visible");
 
             var mediaWidth = parseInt($(mediaElem).attr("data-width"), 10);
             var mediaHeight = parseInt($(mediaElem).attr("data-height"), 10);
-            htmlElem.css("position", "relative");
-            htmlElem.css("visibility", "visible");
-            htmlElem.css("width", mediaWidth + "px");
-            htmlElem.css("height", mediaHeight + "px");
-            htmlElem.css("left", -mediaWidth / 2);
-            htmlElem.css("top", -mediaHeight / 2);
+            var widthValue = mediaWidth;
+            var leftValue = -mediaWidth / 2;
+            if($(mediaElem).attr("data-width").indexOf("%") != -1){
+                widthValue += "%";
+                leftValue += "%";
+            }
+            else {
+                widthValue += "px";
+                leftValue += "px";
+            }
+
+            var heightValue = mediaHeight;
+            var topValue = -mediaHeight / 2;
+            if($(mediaElem).attr("data-height").indexOf("%") != -1){
+                heightValue += "%";
+                topValue += "%";
+            }
+            else {
+                heightValue += "px";
+                topValue += "px";
+            }
+            
+            htmlElem.css("width", widthValue);
+            htmlElem.css("height", heightValue);
+            htmlElem.css("left", leftValue);
+            htmlElem.css("top", topValue);
+
             templateAddMediaVideo($(mediaElem).attr("data-video-type"), $(mediaElem), htmlElem);
         }
         
