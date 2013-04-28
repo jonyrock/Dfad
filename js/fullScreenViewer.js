@@ -1,7 +1,7 @@
 /**
  * VERSION: 1.0
  * DATE: 2013-04-25
- *
+ * 
  * @author: @jonyrock exclusively to dfad.com
  **/
 
@@ -26,18 +26,24 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
 
     fullScreenViewer.instance = this;
 
+    var keyHandlers = function(e){
+        if (e.keyCode == 27)// esc key code
+            fullScreenViewer.instance.hide();
+        if (e.keyCode == 37)// left key code
+            fullScreenViewer.instance.showPrevious();
+        if (e.keyCode == 39)// right key code
+            fullScreenViewer.instance.showNext();
+    }
+
     function initEventHandlers() {
         fullScreenViewer.htmlHolder.find(".preview-arrow-close").click(fullScreenViewer.instance.hide);
-        $(document).keyup(function(e) {
-            if (e.keyCode == 27)// esc key code
-                fullScreenViewer.instance.hide();
-            if (e.keyCode == 37)// left key code
-                fullScreenViewer.instance.showPrevious();
-            if (e.keyCode == 39)// right key code
-                fullScreenViewer.instance.showNext();
-        });
+        $(document).bind('keyup', keyHandlers);
         fullScreenViewer.htmlInfoHolder.find(".preview-arrow-backward").click(fullScreenViewer.instance.showPrevious);
         fullScreenViewer.htmlInfoHolder.find(".preview-arrow-forward").click(fullScreenViewer.instance.showNext);
+    }
+
+    fullScreenViewer.removeEventHandlers = function() {
+        $(document).unbind('keyup', keyHandlers);
     }
 
     function initNavigationAnimation() {
@@ -146,10 +152,11 @@ fullScreenViewer.prototype.showItemAt = function(itemIndex) {
     htmlText.fadeIn();
     var currPreviewElem = $(this.mediaItems[itemIndex]);
     var mediaType = currPreviewElem.attr("id");
-    fullScreenViewer.mediaRenderers[mediaType](currPreviewElem);
-    
+    if(fullScreenViewer.mediaRenderers[mediaType] !== undefined)
+        fullScreenViewer.mediaRenderers[mediaType](currPreviewElem);
     
 }
+
 // method useful for updating per object data
 fullScreenViewer.prototype.hide = function() {
     fullScreenViewer.hide();
@@ -214,6 +221,7 @@ fullScreenViewer.hide = function() {
     });
 
     fullScreenViewer.htmlMediaHolderAnimation.hide();
+    fullScreenViewer.removeEventHandlers();
 
 }
 // FACTORIES

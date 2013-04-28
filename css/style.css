@@ -2404,6 +2404,9 @@ h1, h2, h3, h4, h5, h6 {
     height:100%;
     border-spacing: 0;
 }
+#full-width-preview table td{
+    height: 100%;
+}
 
 #full-width-preview-info-holder {
     width: 380px;
@@ -2448,7 +2451,9 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 20px;
 }
 #full-width-preview-media-holder {
-   
+    position: relative;
+    width:100%;
+    height: 100%;   
 }
 .full-width-preview-media-holder-background {
     position: absolute;
