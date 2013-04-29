@@ -256,8 +256,8 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
         }
 
         function placeCollection(mediaItemPiece, mediaItemHtmlPiece) {
-            var videoItems      = $(mediaItemPiece).find("#video-wrapper");
-            var mediaHtmlItems  = $(mediaItemHtmlPiece).find(".full-width-info-holder-desc");
+            var videoItems      = $(mediaItemPiece).children("#video-wrapper");
+            var mediaHtmlItems  = $(mediaItemHtmlPiece).children(".full-width-info-holder-desc");
             buttonsInstance.setPagesCount(videoItems.length)
             buttonsInstance.show();
             buttonsInstance.onPageChanged = function(pageIndex) {
@@ -329,12 +329,12 @@ fullScreenViewer.buildFromHtml = function() {
     var previewMediaArr = new Array();
     var previewMediaDescArr = new Array();
 
-    $("#full-width-preview #full-width-preview-media-holder").find("#preview-media-holder")
+    $("#full-width-preview #full-width-preview-media-holder").children("#preview-media-holder")
     .children().each(function(i) {
         previewMediaArr[i] = $(this);
     });
 
-    $(".full-width-info-holder").find(".full-width-info-holder-desc").each(function(i) {
+    $(".full-width-info-holder").children(".full-width-info-holder-desc").each(function(i) {
         previewMediaDescArr[i] = $(this).get(0);
     });
 
