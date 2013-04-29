@@ -19,6 +19,7 @@ fullScreenViewer.htmlButtonClose
 fullScreenViewer.navigationElements
 fullScreenViewer.navigationElementsDelayOrder
 fullScreenViewer.instance
+fullScreenViewer.buttonsInstance
 fullScreenViewer.initSharedEventHandlers
 fullScreenViewer.removeSharedEventHandlers
 
@@ -170,8 +171,9 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
         var buttonsInstance;
         if(buttonsInstance === undefined){
             buttonsInstance = new fullScreenViewer.pagesButtons(0);
+            fullScreenViewer.buttonsInstance = buttonsInstance;
         }
-        if(mediaType !== "video-wrapper-collection"){
+        if(mediaType !== "video-wrapper-collection") {
             buttonsInstance.hide();
         }
 
@@ -322,6 +324,8 @@ fullScreenViewer.hide = function() {
     });
 
     fullScreenViewer.htmlMediaHolderAnimation.hide();
+    if(fullScreenViewer.buttonsInstance !== undefined)
+        fullScreenViewer.buttonsInstance.hide();
 }
 // FACTORY (for legacy)
 fullScreenViewer.buildFromHtml = function() {
@@ -358,7 +362,7 @@ fullScreenViewer.pagesButtons = function(pagesCount) {
 
 fullScreenViewer.pagesButtons.prototype.onPageChanged
 
-fullScreenViewer.pagesButtons.prototype.setPagesCount = function (pagesCount){
+fullScreenViewer.pagesButtons.prototype.setPagesCount = function (pagesCount) {
     var me = fullScreenViewer.pagesButtons.instance;
     var holder = fullScreenViewer.pagesButtons.htmlHolder;
     holder.empty();
@@ -390,5 +394,7 @@ fullScreenViewer.pagesButtons.prototype.show = function() {
     fullScreenViewer.pagesButtons.htmlHolder.fadeIn();
 }
 fullScreenViewer.pagesButtons.prototype.hide = function() {
-    fullScreenViewer.pagesButtons.htmlHolder.fadeOut();
+    for(var i = 0; i < this.items.length; i++) {
+        this.items[i].delay((this.items.length - i) * 10).fadeOut("fast");
+    }
 }
