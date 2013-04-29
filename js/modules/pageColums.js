@@ -16,15 +16,10 @@ var initialColumns = 0;
 var maxColumns = 4;
 var containerTotalH = 0;
 
-var modulePageColumnsViewerFilterFunction = function(thumb) {
-
-}
-
 function loadFullWidthPreviewFromThumb(thumb) {
     $("#module-columns-holder .fourth-thumb-holder").attr("data-selected", "false");
-    var i = modulePageColumnsHtmlHolder.find(":visible").index(thumb);
-    alert(i);
-    //modulePageColumnsViewer.showItemAt(i);
+    var i = modulePageColumnsHtmlHolder.children(":visible").index(thumb)
+    modulePageColumnsViewer.showItemAt(i);
 }
 
 function modulePageColumnsApplyFilter(selector) {
@@ -39,8 +34,10 @@ function modulePageColumnsApplyFilter(selector) {
         modulePageColumnsHtmlHolder.children().each(function(i) {
             if ($(this).attr("data-id") != selector)
                 return;
-            mediaItems.push(previewMediaArrAll[i]);
-            mediaItemsHtml.push(previewMediaDescArrAll[i]);
+            mediaItems.push(modulePageColumnsMediaItemsAll[i]);
+            mediaItemsHtml.push(modulePageColumnsMediaItemsHtmlAll[i]);
+            //alert($(modulePageColumnsMediaItemsHtmlAll[i]).html());
+            //alert($(mediaItemsHtml[0]).html());
         });
     }
     modulePageColumnsViewer.setMediaItems(mediaItems);
@@ -58,7 +55,7 @@ function modulePageColumns() {
     var textPageInstanceHolder = $(txt_modCont);
     modulePageColumnsCurrentSelectedId = "*";
     var textPageInstance = $("#module-columns", textPageInstanceHolder);
-    modulePageColumnsHtmlHolder = $("module-columns-holder");
+    modulePageColumnsHtmlHolder = $("#module-columns-holder");
 
     if (textPageInstance.length <= 0)
         return;

@@ -199,6 +199,7 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
         }
 
         function placeMediaText(mediaItemHtmlPiece) {
+            //alert($(mediaItemHtmlPiece).text());
             var htmlText = $(mediaItemHtmlPiece);
             fullScreenViewer.htmlInfoTextHolder.append(htmlText.clone());
             htmlText.fadeIn();
