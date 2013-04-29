@@ -53,6 +53,13 @@ function fullScreenViewer(mediaItems, mediaItemsHtml) {
         fullScreenViewer.htmlHolder.find(".preview-arrow-close").click(fullScreenViewer.instance.hide);
         fullScreenViewer.htmlInfoHolder.find(".preview-arrow-backward").click(fullScreenViewer.instance.showPrevious);
         fullScreenViewer.htmlInfoHolder.find(".preview-arrow-forward").click(fullScreenViewer.instance.showNext);
+        if(touchDevice) {
+            $(fullScreenViewer.htmlHolder).wipetouch({
+                allowDiagonal: false,
+                wipeLeft: function(result) { fullScreenViewer.instance.showNext(); },
+                wipeRight: function(result) { fullScreenViewer.instance.showPrevious(); },
+            });
+        }
     }
 
     function initNavigationAnimation() {
@@ -159,6 +166,15 @@ fullScreenViewer.buttonTrigger = function(button) {
 
 fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
 
+        var mediaType = mediaItem.attr("id");
+        var buttonsInstance;
+        if(buttonsInstance === undefined){
+            buttonsInstance = new fullScreenViewer.pagesButtons(0);
+        }
+        if(mediaType !== "video-wrapper-collection"){
+            buttonsInstance.hide();
+        }
+
         function prepareHolders() {
             fullScreenViewer.htmlInfoTextHolder.empty();
             fullScreenViewer.htmlMediaHolder.empty();
@@ -240,21 +256,24 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
         }
 
         function placeCollection(mediaItemPiece, mediaItemHtmlPiece) {
-            var videoItems = $(mediaItemPiece).find("#video-wrapper");
-            var buttons = new fullScreenViewer.pagesButtons(videoItems.length);
-            buttons.onPageChanged = function(pageIndex) {
-                placeSingleVideo(videoItems.eq(pageIndex), "<p>hello</p>");
+            var videoItems      = $(mediaItemPiece).find("#video-wrapper");
+            var mediaHtmlItems  = $(mediaItemHtmlPiece).find(".full-width-info-holder-desc");
+            buttonsInstance.setPagesCount(videoItems.length)
+            buttonsInstance.show();
+            buttonsInstance.onPageChanged = function(pageIndex) {
+                placeSingleVideo(
+                    videoItems.eq(pageIndex), 
+                    mediaHtmlItems.eq(pageIndex)
+                );
             }
-            buttons.show();
-            buttons.selectPage(0);
+            buttonsInstance.selectPage(0);
         }
 
         var mediaRenderers = new Array();
-        mediaRenderers["preview-media-image"] = placeSingleImage;
-        mediaRenderers["video-wrapper"] = placeSingleVideo;
-        mediaRenderers["video-wrapper-collection"] = placeCollection;
-
-        var mediaType = mediaItem.attr("id");
+        mediaRenderers["preview-media-image"]       = placeSingleImage;
+        mediaRenderers["video-wrapper"]             = placeSingleVideo;
+        mediaRenderers["video-wrapper-collection"]  = placeCollection;
+        
         mediaRenderers[mediaType](mediaItem, mediaItemHtml);
 }
 
@@ -328,14 +347,21 @@ fullScreenViewer.buildFromHtml = function() {
 }
 
 
-
 fullScreenViewer.pagesButtons = function(pagesCount) {
-    var holder = fullScreenViewer.pagesButtons.htmlHolder =
+    fullScreenViewer.pagesButtons.htmlHolder =
         fullScreenViewer.htmlInfoHolder
         .find("#full-width-info-holder-pages-buttons");
     var me = this;
-    holder.empty();
+    fullScreenViewer.pagesButtons.instance = this;
+    this.setPagesCount(pagesCount)
+}
 
+fullScreenViewer.pagesButtons.prototype.onPageChanged
+
+fullScreenViewer.pagesButtons.prototype.setPagesCount = function (pagesCount){
+    var me = fullScreenViewer.pagesButtons.instance;
+    var holder = fullScreenViewer.pagesButtons.htmlHolder;
+    holder.empty();
     function onButtonClick(index) {
         return function() {
             me.selectPage(index);
@@ -352,13 +378,12 @@ fullScreenViewer.pagesButtons = function(pagesCount) {
     holder.append(htmlClearItem);
 }
 
-fullScreenViewer.pagesButtons.prototype.onPageChanged
-
 fullScreenViewer.pagesButtons.prototype.selectPage = function (index) {
-    this.onPageChanged(index);
-    for(var i = 0; i < this.items.length; i++)
-        this.items[i].removeClass("selected");
-    this.items[index].addClass("selected");
+    var me = fullScreenViewer.pagesButtons.instance;
+    me.onPageChanged(index);
+    for(var i = 0; i < me.items.length; i++)
+        me.items[i].removeClass("selected");
+    me.items[index].addClass("selected");
 }
 
 fullScreenViewer.pagesButtons.prototype.show = function() {
