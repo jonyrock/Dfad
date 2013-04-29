@@ -383,6 +383,9 @@ fullScreenViewer.pagesButtons.prototype.setPagesCount = function (pagesCount) {
 }
 
 fullScreenViewer.pagesButtons.prototype.selectPage = function (index) {
+    if(this.currentPage !== undefined && this.currentPage == index)
+        return;
+    this.currentPage = index;
     var me = fullScreenViewer.pagesButtons.instance;
     me.onPageChanged(index);
     for(var i = 0; i < me.items.length; i++)
