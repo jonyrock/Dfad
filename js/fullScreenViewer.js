@@ -23,7 +23,7 @@ fullScreenViewer.buttonsInstance
 fullScreenViewer.initSharedEventHandlers
 fullScreenViewer.removeSharedEventHandlers
 
-
+                                                                                                                                             
 // act like singleton
 function fullScreenViewer(mediaItems, mediaItemsHtml) {
 
@@ -141,9 +141,25 @@ fullScreenViewer.prototype.showItemAt = function(itemIndex) {
     
     var mediaItem = this.mediaItems[itemIndex];
     var mediaItemHtml = this.mediaItemsHtml[itemIndex];
-    fullScreenViewer.renderMedia(mediaItem, mediaItemHtml);
-    
+    fullScreenViewer.renderMedia(mediaItem, mediaItemHtml);   
 }
+
+fullScreenViewer.prototype.getMediaItems = function(){
+    return this.mediaItems;
+}
+
+fullScreenViewer.prototype.setMediaItems = function(items) {
+    this.mediaItems = items;
+}
+
+fullScreenViewer.prototype.getMediaItemsHtml = function() {
+    return this.mediaItemsHtml;
+}
+
+fullScreenViewer.prototype.setMediaItemsHtml = function(items) {
+    this.mediaItemsHtml = items;
+}
+
 
 // method useful for updating per object data
 fullScreenViewer.prototype.hide = function() {

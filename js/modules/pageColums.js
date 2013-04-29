@@ -6,15 +6,47 @@ var columnsPreviewIndex = 0;
 var columnsPrevItemArr = "";
 var totalColPreviews = 0;
 var modulePageColumnsCurrentSelectedId = "*";
-var previewMediaArrAll = Array();
-var previewMediaDescArrAll = Array();
 var modulePageColumnsInitedAndNocheckColumnSize = false;
 var modulePageColumnsViewer;
+var modulePageColumnsMediaItemsAll;
+var modulePageColumnsMediaItemsHtmlAll;
+var modulePageColumnsHtmlHolder;
+
+var initialColumns = 0;
+var maxColumns = 4;
+var containerTotalH = 0;
+
+var modulePageColumnsViewerFilterFunction = function(thumb) {
+
+}
 
 function loadFullWidthPreviewFromThumb(thumb) {
     $("#module-columns-holder .fourth-thumb-holder").attr("data-selected", "false");
-    var i = $(thumb).index();
-    modulePageColumnsViewer.showItemAt(i);
+    var i = modulePageColumnsHtmlHolder.find(":visible").index(thumb);
+    alert(i);
+    //modulePageColumnsViewer.showItemAt(i);
+}
+
+function modulePageColumnsApplyFilter(selector) {
+    
+    modulePageColumnsCurrentSelectedId = selector;
+
+    var mediaItems = modulePageColumnsMediaItemsAll;
+    var mediaItemsHtml = modulePageColumnsMediaItemsHtmlAll;
+    if(selector != "*") {
+        mediaItems = new Array();
+        mediaItemsHtml = new Array();
+        modulePageColumnsHtmlHolder.children().each(function(i) {
+            if ($(this).attr("data-id") != selector)
+                return;
+            mediaItems.push(previewMediaArrAll[i]);
+            mediaItemsHtml.push(previewMediaDescArrAll[i]);
+        });
+    }
+    modulePageColumnsViewer.setMediaItems(mediaItems);
+    modulePageColumnsViewer.getMediaItemsHtml(mediaItemsHtml);
+
+    moduleUpdate_page_columns();
 }
 
 function modulePageColumns() {
@@ -27,6 +59,7 @@ function modulePageColumns() {
     var textPageInstanceHolder = $(txt_modCont);
     modulePageColumnsCurrentSelectedId = "*";
     var textPageInstance = $("#module-columns", textPageInstanceHolder);
+    modulePageColumnsHtmlHolder = $("module-columns-holder");
 
     if (textPageInstance.length <= 0)
         return;
@@ -160,8 +193,7 @@ function modulePageColumns() {
                 ease : Sine.easeOut
             });
         }
-        // TODO: implement filter invoke
-        // filterContent($filterContainer, selector, $originalDataPos);
+        modulePageColumnsApplyFilter(selector);
         return false;
     });
 
@@ -197,11 +229,13 @@ function modulePageColumns() {
         $("#filter-buttons-dropdown").hide();
 
     modulePageColumnsViewer = fullScreenViewer.buildFromHtml();
-    
-    moduleUpdate_page_columns();
+    modulePageColumnsMediaItemsAll = modulePageColumnsViewer.getMediaItems();
+    modulePageColumnsMediaItemsHtmlAll = modulePageColumnsViewer.getMediaItemsHtml();
+    modulePageColumnsApplyFilter("*");
+
 }
 
-var containerTotalH = 0;
+
 
 function getOriginalPos(container) {
     var i = 0;
@@ -225,18 +259,6 @@ function getOriginalPos(container) {
     return posArray;
 }
 
-function filterContent(container, selector, originalDataPos) {
-    modulePageColumnsCurrentSelectedId = selector;
-    window.previewMediaArr = Array();
-    window.previewMediaDescArr = Array();
-    container.children().each(function(i) {
-        if ($(this).attr("data-id") != selector && selector != "*")
-            return;
-        window.previewMediaArr.push(previewMediaArrAll[i]);
-        window.previewMediaDescArr.push(previewMediaDescArrAll[i]);
-    });
-    moduleUpdate_page_columns();
-}
 
 function getDirectionCSS($element, coordinates) {
     /** the width and height of the current div **/
@@ -319,8 +341,7 @@ function animateThumb(img) {
     });
 }
 
-var initialColumns = 0;
-var maxColumns = 4;
+
 
 function checkColumnSize(adjustPreview) {
     var textPageInstanceHolder = $(txt_modCont);
@@ -337,7 +358,6 @@ function checkColumnSize(adjustPreview) {
 
     if (textPageInstance.length <= 0)
         return;
-
     if (thumbType == "fourth-thumb-holder")
         maxColumns = 4;
     if (thumbType == "third-thumb-holder")
@@ -450,6 +470,7 @@ function animateColPreviewMedia(src) {
 }
 
 function moduleUpdate_page_columns(customStartPos) {
+
     var textPageInstanceHolder = $(txt_modCont);
     var textPageInstance = $("#module-columns", textPageInstanceHolder);
     var modulePositionType = textPageInstanceHolder.attr("data-id");
