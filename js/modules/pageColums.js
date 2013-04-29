@@ -6,11 +6,11 @@ var columnsPreviewIndex = 0;
 var columnsPrevItemArr = "";
 var totalColPreviews = 0;
 var modulePageColumnsCurrentSelectedId = "*";
-var modulePageColumnsInitedAndNocheckColumnSize = false;
 var modulePageColumnsViewer;
 var modulePageColumnsMediaItemsAll;
 var modulePageColumnsMediaItemsHtmlAll;
 var modulePageColumnsHtmlHolder;
+var modulePageColumnsFilterTriggered = false;
 
 var initialColumns = 0;
 var maxColumns = 4;
@@ -28,7 +28,7 @@ function loadFullWidthPreviewFromThumb(thumb) {
 }
 
 function modulePageColumnsApplyFilter(selector) {
-    
+
     modulePageColumnsCurrentSelectedId = selector;
 
     var mediaItems = modulePageColumnsMediaItemsAll;
@@ -45,12 +45,11 @@ function modulePageColumnsApplyFilter(selector) {
     }
     modulePageColumnsViewer.setMediaItems(mediaItems);
     modulePageColumnsViewer.getMediaItemsHtml(mediaItemsHtml);
-
+    modulePageColumnsFilterTriggered = true;
     moduleUpdate_page_columns();
 }
 
 function modulePageColumns() {
-    modulePageColumnsInitedAndNocheckColumnSize = false;
     columnsPreviewOpen = false;
     previewAnimDone = true;
     columnsPreviewIndex = 0;
@@ -358,6 +357,7 @@ function checkColumnSize(adjustPreview) {
 
     if (textPageInstance.length <= 0)
         return;
+
     if (thumbType == "fourth-thumb-holder")
         maxColumns = 4;
     if (thumbType == "third-thumb-holder")
@@ -382,9 +382,8 @@ function checkColumnSize(adjustPreview) {
     } else if (visibleWidth > newWidth) {
         initialColumns--;
     }
-
-    if (initialColumns != columns || !modulePageColumnsInitedAndNocheckColumnSize) {
-        modulePageColumnsInitedAndNocheckColumnSize = true;
+    if (initialColumns != columns || modulePageColumnsFilterTriggered) {
+        modulePageColumnsFilterTriggered = false;
         var lin = 0;
         var col = 0
         var newH = 0;
@@ -470,7 +469,6 @@ function animateColPreviewMedia(src) {
 }
 
 function moduleUpdate_page_columns(customStartPos) {
-
     var textPageInstanceHolder = $(txt_modCont);
     var textPageInstance = $("#module-columns", textPageInstanceHolder);
     var modulePositionType = textPageInstanceHolder.attr("data-id");
