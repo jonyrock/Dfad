@@ -2436,9 +2436,9 @@ h1, h2, h3, h4, h5, h6 {
 
 #full-width-info-holder-pages-buttons {
     position: absolute;
-    bottom: 20px;
+    bottom: 0px;
     width: 100%;
-    padding: 15px;
+    padding: 30px;
     display: none;
 }
 #full-width-info-holder-pages-buttons li{
@@ -2452,11 +2452,11 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
     line-height: 30px;
     text-align: center;
-    background: #6E6E6E;
+    background: #3f3f3f;
     cursor: pointer;
 }
 #full-width-info-holder-pages-buttons li.selected {
-    background: #3B3B3B;   
+    background: #00aaff;
 }
 
 .full-width-info-holder-desc {

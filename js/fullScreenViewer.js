@@ -184,7 +184,7 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
 
         function placeMediaText(mediaItemHtmlPiece) {
             var htmlText = $(mediaItemHtmlPiece);
-            fullScreenViewer.htmlInfoTextHolder.append(htmlText);
+            fullScreenViewer.htmlInfoTextHolder.append(htmlText.clone());
             htmlText.fadeIn();
         }
 
@@ -264,7 +264,7 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
             buttonsInstance.show();
             buttonsInstance.onPageChanged = function(pageIndex) {
                 placeSingleVideo(
-                    videoItems.eq(pageIndex), 
+                    videoItems.eq(pageIndex),
                     mediaHtmlItems.eq(pageIndex)
                 );
             }
