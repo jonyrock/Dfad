@@ -34,12 +34,10 @@ function modulePageColumnsApplyFilter(selector) {
                 return;
             mediaItems.push(modulePageColumnsMediaItemsAll[i]);
             mediaItemsHtml.push(modulePageColumnsMediaItemsHtmlAll[i]);
-            //alert($(modulePageColumnsMediaItemsHtmlAll[i]).html());
-            //alert($(mediaItemsHtml[0]).html());
         });
     }
     modulePageColumnsViewer.setMediaItems(mediaItems);
-    modulePageColumnsViewer.getMediaItemsHtml(mediaItemsHtml);
+    modulePageColumnsViewer.setMediaItemsHtml(mediaItemsHtml);
     modulePageColumnsFilterTriggered = true;
     moduleUpdate_page_columns();
 }
