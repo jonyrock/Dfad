@@ -8,6 +8,7 @@ var modulePageColumnsViewer;
 var modulePageColumnsMediaItemsAll;
 var modulePageColumnsMediaItemsHtmlAll;
 var modulePageColumnsHtmlHolder;
+var modulePageColumnsFilterButtonsWidth;
 
 var initialColumns = 0;
 var maxColumns = 4;
@@ -217,6 +218,8 @@ function modulePageColumns() {
 
     if (needToShowDropdown)
         $("#filter-buttons-dropdown").hide();
+
+    modulePageColumnsFilterButtonsWidth = countFilterButtonsWidth();
 
     modulePageColumnsViewer = fullScreenViewer.buildFromHtml();
     modulePageColumnsMediaItemsAll = modulePageColumnsViewer.getMediaItems();
@@ -428,8 +431,6 @@ function checkColumnSize(adjustPreview) {
         prevMedia.css("width", "");
         prevDesc.css("margin-left", "").css("width", "");
     }
-    
-
 }
 
 function animateColPreviewMedia(src) {
@@ -454,6 +455,14 @@ function animateColPreviewMedia(src) {
         delay : 0.1,
         onComplete : moduleUpdate_page_columns
     });
+}
+
+function countFilterButtonsWidth() {
+    var widthSum = 0;
+    $("#filter-buttons-holder .filter-button").each(function(){
+        widthSum += $(this).outerWidth(true);
+    });
+    return widthSum;
 }
 
 function moduleUpdate_page_columns(customStartPos) {
@@ -499,7 +508,7 @@ function moduleUpdate_page_columns(customStartPos) {
     // buttons folding
     if ($("#module-container #filter-buttons-holder").length > 0) {
         var buttonsHolder = $("#module-container #filter-buttons-holder");
-        if (buttonsHolder.width() > 900) {
+        if (modulePageColumnsFilterButtonsWidth <= $("#module-columns-container").width()) {
             buttonsHolder.find(".filter-button").show();
             buttonsHolder.find("#filter-buttons-dropdown").hide();
             buttonsHolder.attr("data-folded", "false");
