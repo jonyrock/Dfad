@@ -120,8 +120,8 @@ function moduleUpdate_contact() {
     } 
     
     textPageInstance.find(".module-contact-holder").css("width",blocksWidthPersent+"%");
-    
-    moduleUpdate(textPageInstanceHolder, textPageInstance, $("div:first", textPageInstance), sideType);
+    moduleUpdate(textPageInstanceHolder, 
+        textPageInstance, $("div:first", textPageInstance));
 }
 
 

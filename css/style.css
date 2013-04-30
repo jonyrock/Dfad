@@ -200,10 +200,6 @@ body {
     left: 240px;
 }
 
-.menu-option-text {
-    margin-top: 2px;
-}
-
 .menu-option-background {
     display: none;
 }
@@ -277,10 +273,10 @@ body {
 }
 
 .menu-option-holder, .sub-menu-option-holder {
-    margin-bottom: 4px;
-    overflow: hidden;
+    margin-top: 4px;
 }
 .menu-option-holder:hover, .sub-menu-option-holder:hover {
+    overflow: hidden;
     cursor: pointer;
 }
 
@@ -299,16 +295,15 @@ body {
 }
 .menu-option-text a, .menu-option-sign, .sub-menu-option-text a {
     display: block;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-family: PT Sans Caption, Arial; /*'Open Sans',sans-serif;*/
+    padding-top: 10.5px;
+    font-family: 'Open Sans', PT Sans Caption, Arial;
+    font-weight: 800;
     font-size: 12px;
     padding-left: 14px;
-    /*letter-spacing:1px;*/
     color: #FFF;
     overflow: hidden;
+    height: 23px;
     text-decoration: none;
-    outline: none;
 }
 .menu-option-sign {
     position: absolute;
@@ -474,6 +469,7 @@ footer {
     width: 100%;
     font-size:9px;
     text-transform: uppercase;
+    font-weight: 200;
 }
 #footer-copyright a {
     position: relative;
