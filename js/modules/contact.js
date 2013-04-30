@@ -1,4 +1,7 @@
+var moduleContactHtmlHolder;
+
 function moduleContact() {
+    moduleContactHtmlHolder = $("#module-contact-page-holder");
     var textPageInstanceHolder = $(txt_modCont);
     var textPageInstance = $("#module-wrapper", textPageInstanceHolder);
     if (textPageInstance.length <= 0) {
@@ -11,19 +14,6 @@ function moduleContact() {
     var mapLeft = (-get_OffsetWidth()) * .5;
     var mapH = mapHolder.height();
 
-    var currWindowW = $(window).width() - get_OffsetWidth() - $(t_scrBarV2).width();
-    if (touchDevice) {
-        currWindowW = $(window).width() - templateMenuW;
-    }
-    textPageInstance.css("width", currWindowW);
-
-    if ($("div:first", textPageInstance).height() <= $(window).height()) {
-        currWindowW = currWindowW + $(t_scrBarV2).width();
-    }
-
-    textPageInstance.css("width", currWindowW);
-    moduleUpdate(textPageInstanceHolder, textPageInstance, $("div:first", textPageInstance), sideType);
-
     var modContact = $("#module-container #module-contact");
     var modContactH = modContact.height();
     var conH = ((winH - mapH) >= modContactH) ? (winH - mapH) : modContactH;
@@ -34,12 +24,13 @@ function moduleContact() {
         ease: Circ.easeInOut,
     });
 
-    var modContainerW = $("#module-container").width();
-    $("#module-contact-holder").css("left", (modContainerW - $("#module-contact-holder").width()) * .5 + "px");
     endModuleFunction = null;
     moduleEnd = true;
 
-    moduleContactInitMap();
+    try {
+        // sometimes loading is impossible 
+        moduleContactInitMap();
+    } catch(e){}
     moduleUpdate_contact();
 }
 
@@ -105,23 +96,50 @@ function moduleContactInitMap() {
     });
 }
 
+function moduleContactResizeHolder() {
+    if(touchDevice) {
+        moduleContactHtmlHolder.css("width","100%");
+        return moduleContactHtmlHolder.width();
+    }
+    var newWidth = $("#module-container").width();
+    moduleContactHtmlHolder.css("width", newWidth);
+    if(moduleContactHtmlHolder.height() > $(window).height()){
+        newWidth -= $(t_scrBarV2).width();
+    }
+    moduleContactHtmlHolder.css("width", newWidth);
+    return newWidth;
+}
+
 function moduleUpdate_contact() {
-    var textPageInstanceHolder = $(txt_modCont);
-    var textPageInstance = $("#module-wrapper", textPageInstanceHolder);
-    var blocksWidthPersent = 0;
-    if($(textPageInstance).width() <= 1024){
-        blocksWidthPersent = 30;
-    } else {
-        blocksWidthPersent = 15;
-    } if($(textPageInstance).width() <= 794){
-        blocksWidthPersent = 38;
-    } if($(textPageInstance).width() <= 400){
-        blocksWidthPersent = 80;
+
+    if(moduleContactHtmlHolder === undefined)
+        return;
+
+    // resize page holder and get new width
+    var currentWidth = moduleContactResizeHolder();
+    
+    var blocksWidthPersent = 24;
+    var blocksMarginPersent = 4.5;
+    if(currentWidth <= 1024) {
+        blocksWidthPersent = 31;
+        blocksMarginPersent = 1;
+    } if(currentWidth <= 794){
+        blocksWidthPersent = 47;
+        blocksMarginPersent = 1.5;
+    } if(currentWidth <= 500) {
+        blocksMarginPersent = 0;
+        blocksWidthPersent = 99;
     } 
     
-    textPageInstance.find(".module-contact-holder").css("width",blocksWidthPersent+"%");
-    moduleUpdate(textPageInstanceHolder, 
-        textPageInstance, $("div:first", textPageInstance));
+    moduleContactHtmlHolder.find(".module-contact-holder")
+        .css("width", blocksWidthPersent+"%")
+        .css("margin-left", blocksMarginPersent + "%")
+        .css("margin-right", blocksMarginPersent + "%");
+    
+    var textPageInstanceHolder = $(txt_modCont);
+    var textPageInstance = $("#module-wrapper", textPageInstanceHolder);
+    moduleUpdate(textPageInstanceHolder, textPageInstance, $("div:first", textPageInstance), sideType);
+
 }
 
 
