@@ -224,10 +224,7 @@ function modulePageColumns() {
     modulePageColumnsMediaItemsAll = modulePageColumnsViewer.getMediaItems();
     modulePageColumnsMediaItemsHtmlAll = modulePageColumnsViewer.getMediaItemsHtml();
     modulePageColumnsApplyFilter("*");
-
 }
-
-
 
 function getOriginalPos(container) {
     var i = 0;
@@ -333,8 +330,6 @@ function animateThumb(img) {
     });
 }
 
-
-
 function checkColumnSize(adjustPreview) {
     var textPageInstanceHolder = $(txt_modCont);
     var textPageInstance = $("#module-columns", textPageInstanceHolder);
@@ -395,7 +390,7 @@ function checkColumnSize(adjustPreview) {
                 });
                 return;
             }
-            $(this).show();
+
             if (col == columns) {
                 col = 0;
                 lin++;
@@ -403,6 +398,8 @@ function checkColumnSize(adjustPreview) {
 
             var topVal = lin * (elementH + marginBottom);
             var leftVal = col * (elementW + marginRight);
+            $(this).show();
+            TweenMax.killTweensOf($(this));
             TweenMax.to($(this), .6, {
                 css : {
                     opacity : "1",
