@@ -103,8 +103,25 @@ function moduleContactInitMap() {
             anchor: new google.maps.Point(43, 47)
         }
     });
-
-    
-
 }
+
+function moduleUpdate_contact() {
+    var textPageInstanceHolder = $(txt_modCont);
+    var textPageInstance = $("#module-wrapper", textPageInstanceHolder);
+    var blocksWidthPersent = 0;
+    if($(textPageInstance).width() <= 1024){
+        blocksWidthPersent = 30;
+    } else {
+        blocksWidthPersent = 15;
+    } if($(textPageInstance).width() <= 794){
+        blocksWidthPersent = 38;
+    } if($(textPageInstance).width() <= 400){
+        blocksWidthPersent = 80;
+    } 
+    
+    textPageInstance.find(".module-contact-holder").css("width",blocksWidthPersent+"%");
+    
+    moduleUpdate(textPageInstanceHolder, textPageInstance, $("div:first", textPageInstance), sideType);
+}
+
 

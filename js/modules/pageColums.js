@@ -476,7 +476,7 @@ function moduleUpdate_page_columns(customStartPos) {
         return;
     checkColumnSize(columnsPreviewOpen);
 
-    var val = Math.abs($("#module-container").width() - textPageInstanceHolder.width()) * .5;
+    var val = Math.abs($("#module-container").width() - $("#module-columns-wrapper").width()) * .5;
     TweenMax.to(textPageInstanceHolder, .2, {
         css : {
             left : val
