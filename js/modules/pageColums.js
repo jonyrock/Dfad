@@ -8,7 +8,6 @@ var modulePageColumnsViewer;
 var modulePageColumnsMediaItemsAll;
 var modulePageColumnsMediaItemsHtmlAll;
 var modulePageColumnsHtmlHolder;
-var modulePageColumnsFilterTriggered = false;
 
 var initialColumns = 0;
 var maxColumns = 4;
@@ -38,7 +37,6 @@ function modulePageColumnsApplyFilter(selector) {
     }
     modulePageColumnsViewer.setMediaItems(mediaItems);
     modulePageColumnsViewer.setMediaItemsHtml(mediaItemsHtml);
-    modulePageColumnsFilterTriggered = true;
     moduleUpdate_page_columns();
 }
 
@@ -248,7 +246,6 @@ function getOriginalPos(container) {
     return posArray;
 }
 
-
 function getDirectionCSS($element, coordinates) {
     /** the width and height of the current div **/
     var w = $element.width(), h = $element.height(),
@@ -370,67 +367,68 @@ function checkColumnSize(adjustPreview) {
     } else if (visibleWidth > newWidth) {
         initialColumns--;
     }
-    if (initialColumns != columns || modulePageColumnsFilterTriggered) {
-        modulePageColumnsFilterTriggered = false;
-        var lin = 0;
-        var col = 0
-        var newH = 0;
-        var count = 0;
+    
+    var lin = 0;
+    var col = 0
+    var newH = 0;
+    var count = 0;
 
-        container.children().each(function() {
-            if (modulePageColumnsCurrentSelectedId != "*" && modulePageColumnsCurrentSelectedId != $(this).attr("data-id")) {
-                TweenMax.to($(this), .6, {
-                    css : {
-                        opacity : "0",
-                        left : "0px",
-                        top : "0px",
-                        display: "none"
-                    },
-                    easing : Sine.easeOut
-                });
-                return;
-            }
-
-            if (col == columns) {
-                col = 0;
-                lin++;
-            }
-
-            var topVal = lin * (elementH + marginBottom);
-            var leftVal = col * (elementW + marginRight);
-            $(this).show();
-            TweenMax.killTweensOf($(this));
+    container.children().each(function() {
+        if (modulePageColumnsCurrentSelectedId != "*" && modulePageColumnsCurrentSelectedId != $(this).attr("data-id")) {
             TweenMax.to($(this), .6, {
                 css : {
-                    opacity : "1",
-                    left : leftVal + "px",
-                    top : topVal + "px"
+                    opacity : "0",
+                    left : "0px",
+                    top : "0px",
+                    display: "none"
                 },
                 easing : Sine.easeOut
             });
-            col++;
-            count++;
-        });
-
-        newH = Math.ceil(count / columns) * (elementH + marginBottom);
-
-        $originalDataPos = getOriginalPos(container);
-        var thumbNewW = columns * (elementW + marginRight) - marginRight
-        var newWidth = thumbNewW + parseInt($("#module-columns-container").css("margin-left"), 10) + parseInt($("#module-columns-container").css("margin-right"), 10);
-
-        $("#module-columns").css("width", newWidth + "px");
-        $("#module-columns-container").css("width", thumbNewW + "px");
-        container.css("height", newH + "px");
-        container.css("width", thumbNewW + "px");
-
-        if (thumbNewW < 768) {
-            prevMedia.css("width", thumbNewW + "px");
-            prevDesc.css("margin-left", "0px").css("width", "100%");
-        } else {
-            prevMedia.css("width", "");
-            prevDesc.css("margin-left", "").css("width", "");
+            return;
         }
+
+        if (col == columns) {
+            col = 0;
+            lin++;
+        }
+
+        var topVal = lin * (elementH + marginBottom);
+        var leftVal = col * (elementW + marginRight);
+        TweenMax.killTweensOf($(this));
+        TweenMax.to($(this), .6, {
+            css : {
+                opacity : "1",
+                left : leftVal + "px",
+                top : topVal + "px",
+                display: "block"
+            },
+            easing : Sine.easeOut
+        });
+        col++;
+        count++;
+    });
+
+    newH = Math.ceil(count / columns) * (elementH + marginBottom);
+
+    $originalDataPos = getOriginalPos(container);
+    var thumbNewW = columns * (elementW + marginRight) - marginRight
+    var newWidth = thumbNewW 
+        + parseInt($("#module-columns-container").css("margin-left"), 10) 
+        + parseInt($("#module-columns-container").css("margin-right"), 10);
+
+    $("#module-columns").css("width", newWidth + "px");
+    $("#module-columns-container").css("width", thumbNewW + "px");
+    container.css("height", newH + "px");
+    container.css("width", thumbNewW + "px");
+
+    if (thumbNewW < 768) {
+        prevMedia.css("width", thumbNewW + "px");
+        prevDesc.css("margin-left", "0px").css("width", "100%");
+    } else {
+        prevMedia.css("width", "");
+        prevDesc.css("margin-left", "").css("width", "");
     }
+    
 
 }
 
