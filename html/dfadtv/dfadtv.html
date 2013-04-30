@@ -1,489 +1,602 @@
 <html>
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,IE=8,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    
-	<title>4 Columns Projects | Synergy - Responsive and Interactive HTML Portfolio </title>
-    
-	<meta name="description" content="" />
-	<meta name="author" content="MEDIACREED.COM" />
-        
-        <link rel="stylesheet" href="css/style.css" />
-        <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic|PT+Sans+Caption:400,700' rel='stylesheet' type='text/css' />        
-        
-        <!-- SCRIPT IE FIXES -->  
-        <!--[if lt IE 9]>
-        <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]--> 
-        <!-- END SCRIPT IE FIXES-->
-      
-      
-        <!-- START TEMPLATE JavaScript load -->
-    	<script type="text/javascript" src="js/libs/jquery-1.7.2.min.js"></script>    
-        <script type="text/javascript" src="js/libs/modernizr.custom.min.js"></script> 
-        <script type="text/javascript" src="js/libs/jquery.wipetouch.js"></script>   
-             
-        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&sensor=true"></script>
-        
-        <script type="text/javascript" src="js/libs/jquery.gmap.min.js"></script>
-        <script type="text/javascript" src="js/greensock/minified/TweenMax.min.js"></script>    
-        <script type="text/javascript" src="js/libs/jquery.timer.js"></script>
-        <script type="text/javascript" src="js/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="js/libs/jquery.mousewheel.min.js"></script>
-        <script type="text/javascript" src="js/mediacreed/scrollbar/mc.custom.list.js"></script>
-        <script type="text/javascript" src="js/mc.modules.animation.js"></script> 
-        <link rel="stylesheet" href="js/video-js/video-js.min.css" media="screen" />
-        <script type="text/javascript" src="js/video-js/video.min.js"></script>
-        <!-- END TEMPLATE JavaScript load ---->
-        
-        <!--<script src="http://vjs.zencdn.net/c/video.js"></script>    
-        Careful when using the online version because the destroy method throws an error.    
-        Our version has the fix on destroy method. Until it updates we recommend using the JS file from the template.    
-        -->
-        <script>
-            _V_.options.flash.swf = "js/video-js/video-js.swf";
-            _V_.options.techOrder = ["html5", "flash", "links"];
-            var params = {};
-            params.bgcolor = "#000000";
-            params.allowFullScreen = "true";
-            _V_.options.flash.params = params;
+    <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+    <head>
+        <title>4 Columns Projects | Synergy - Responsive and Interactive HTML Portfolio </title>    
+    </head>
 
-        </script>   
-</head>
+    <body>
 
-<body>
+        <div class="main-template-loader"></div>
 
-<div class="main-template-loader"></div>
-
-<div id="template-wrapper">
-    <div id="module-container"><!-- start #module-container -->
-        <div id="module-background-holder">   
-            <!--<div id="module-background-solid1" class="opacity_0"></div> --> 
-        	<img src="assets/backg/bck-04.jpg" onload="animateModuleBackground(this)" class="module-background" id="module-background" alt="" />
-        </div>
-        <div id="module-container-holder" class="module-position-cc"  data-id="module-position-cc">
-            <div id="module-columns"  class="module-columns " > <!-- .shadow-side-all-->
-                <div id="module-columns-wrapper">
-                    <div id="module-columns-container">
-                        <div class="columns-filter-holder">
-                            <div id="filter-buttons-holder">
-                                <div class="filter-button" data-filter="voice">VOICE</div>
-                                <div class="filter-button" data-filter="sound">SOUND</div>
-                                <div class="filter-button" data-filter="music">MUSIC</div>
-                                <div class="filter-button selected" data-filter="*">SHOW ALL</div>
-                                <div id="filter-buttons-dropdown">
-                                    <select>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="columns-horizontal-separator"></div>         
-                    	<div id="module-columns-holder"> 
-                        	<div class="fourth-thumb-holder" data-id="music">
-                            	<div class="fourth-thumb-image">
-                                	<img src="assets/media/our_projects/4_columns/thumbs/thumb1.jpg" class="opacity_0" onload="animateThumb(this)" width="220" height="180" alt="" />
-                                    <div id="thumb-image-hover" class="hover-default">
-                                        <div class="background opacity_6"></div>
-                                        <div class="zoom-gallery"></div>
+        <div id="template-wrapper">
+            <div id="module-container"><!-- start #module-container -->
+                <div id="module-background-holder">   
+                    <!--<div id="module-background-solid1" class="opacity_0"></div> --> 
+                    <img src="assets/backg/bck-04.jpg" onload=" animateModuleBackground(this) " class="module-background" id="module-background" alt="" />
+                </div>
+                <div id="module-container-holder" class="module-position-cc" data-id="module-position-cc">
+                    <div id="module-columns"  class="module-columns " > <!-- .shadow-side-all-->
+                        <div id="module-columns-wrapper">
+                            <div id="module-columns-container">
+                                <div class="columns-filter-holder">
+                                    <div id="filter-buttons-holder">
+                                        <div class="filter-button" data-filter="voice">Voice</div>
+                                        <div class="filter-button" data-filter="sound">Sound</div>
+                                        <div class="filter-button" data-filter="music">Music</div>
+                                        <div class="filter-button selected" data-filter="*">Show All</div>
+                                        <div id="filter-buttons-dropdown"><select></select></div>
                                     </div>
+                                </div>  
+                                <div class="columns-horizontal-separator"></div>         
+                                <div id="module-columns-holder"> 
+                                    <div class="fourth-thumb-holder" data-id="sound">
+                                        <div class="fourth-thumb-image">
+                                            <img src="assets/media/our_projects/4_columns/thumbs/thumb1.jpg" class="opacity_0" onload=" animateThumb(this) " width="220" height="180" alt="" />
+                                            <div id="thumb-image-hover" class="hover-default">
+                                                <div class="background opacity_6"></div>
+                                                <div class="zoom-gallery"></div>
+                                            </div>
                                     
-                                </div> 
-                                <div class="thumb-tag">
-                                	<h1>Giuseppe</h1>
-                                    <h2>music</h2>
-                                </div>                  
-                            </div>
-                            <div class="fourth-thumb-holder " data-id="music">
-                            	<div class="fourth-thumb-image">
-                                	<img src="assets/media/our_projects/4_columns/thumbs/thumb2.jpg" class="opacity_0" onload="animateThumb(this)" width="220" height="180" alt="" />
-                                    <div id="thumb-image-hover" class="hover-default">
-                                        <div class="background opacity_6"></div>
-                                        <div class="zoom-gallery"></div>
+                                        </div> 
+                                        <div class="thumb-tag">
+                                            <h1>Giuseppe</h1>
+                                            <h2>SOUND / Video games</h2>
+                                        </div>                  
                                     </div>
-                                </div> 
-                                <div class="thumb-tag">
-                                	<h1>Baseball Illustration</h1>
-                                    <h2>music</h2>
-                                </div>                                                  
-                            </div>
-                            <div class="fourth-thumb-holder" data-id="music">
-                            	<div class="fourth-thumb-image">
-                                	<img src="assets/media/our_projects/4_columns/thumbs/thumb3.jpg" class="opacity_0" onload="animateThumb(this)" width="220" height="180" alt="" />
-                                    <div id="thumb-image-hover" class="hover-default">
-                                        <div class="background opacity_6"></div>
-                                        <div class="zoom-gallery"></div>
+                                    <div class="fourth-thumb-holder" data-id="voice">
+                                        <div class="fourth-thumb-image">
+                                            <img src="assets/media/our_projects/4_columns/thumbs/thumb2.jpg" class="opacity_0" onload=" animateThumb(this) " width="220" height="180" alt="" />
+                                            <div id="thumb-image-hover" class="hover-default">
+                                                <div class="background opacity_6"></div>
+                                                <div class="zoom-gallery"></div>
+                                            </div>
+                                        </div> 
+                                        <div class="thumb-tag">
+                                            <h1>Baseball Illustration</h1>
+                                            <h2>SOUND / TV and Film</h2>
+                                        </div>                                                  
                                     </div>
-                                </div>  
-                                <div class="thumb-tag">
-                                	<h1>Caricature Dr. House</h1>
-                                    <h2>music</h2>
-                                </div>                                                    
-                            </div>
-                            <div class="fourth-thumb-holder" data-id="music">
-                            	<div class="fourth-thumb-image">
-                                	<img src="assets/media/our_projects/4_columns/thumbs/thumb4.jpg" class="opacity_0" onload="animateThumb(this)" width="220" height="180" alt="" />
-                                    <div id="thumb-image-hover" class="hover-default">
-                                        <div class="background opacity_6"></div>
-                                        <div class="zoom-gallery"></div>
+                                    <div class="fourth-thumb-holder" data-id="voice">
+                                        <div class="fourth-thumb-image">
+                                            <img src="assets/media/our_projects/4_columns/thumbs/thumb3.jpg" class="opacity_0" onload=" animateThumb(this) " width="220" height="180" alt="" />
+                                            <div id="thumb-image-hover" class="hover-default">
+                                                <div class="background opacity_6"></div>
+                                                <div class="zoom-gallery"></div>
+                                            </div>
+                                        </div>  
+                                        <div class="thumb-tag">
+                                            <h1>Caricature Dr. House</h1>
+                                            <h2>SOUND / Adv</h2>
+                                        </div>                                                    
                                     </div>
-                                </div>   
-                                <div class="thumb-tag">
-                                	<h1>Carousel Bike</h1>
-                                    <h2>music</h2>
-                                </div>                                                  
-                            </div>
-                            <div class="fourth-thumb-holder" data-id="music">
-                            	<div class="fourth-thumb-image">
-                                	<img src="assets/media/our_projects/4_columns/thumbs/thumb5.jpg" class="opacity_0" onload="animateThumb(this)" width="220" height="180" alt="" />
-                                    <div id="thumb-image-hover" class="hover-default">
-                                        <div class="background opacity_6"></div>
-                                        <div class="zoom-gallery"></div>
+                                    <div class="fourth-thumb-holder" data-id="sound">
+                                        <div class="fourth-thumb-image">
+                                            <img src="assets/media/our_projects/4_columns/thumbs/thumb4.jpg" class="opacity_0" onload=" animateThumb(this) " width="220" height="180" alt="" />
+                                            <div id="thumb-image-hover" class="hover-default">
+                                                <div class="background opacity_6"></div>
+                                                <div class="zoom-gallery"></div>
+                                            </div>
+                                        </div>   
+                                        <div class="thumb-tag">
+                                            <h1>Carousel Bike</h1>
+                                            <h2>SOUND / Sports</h2>
+                                        </div>                                                  
                                     </div>
-                                </div> 
-                                <div class="thumb-tag">
-                                	<h1>Late Days Of A Legend</h1>
-                                    <h2>music</h2>
-                                </div>                                                                                   
-                            </div>
-                            <div class="fourth-thumb-holder " data-id="music">
-                            	<div class="fourth-thumb-image">
-                                	<img src="assets/media/our_projects/4_columns/thumbs/thumb6.jpg" class="opacity_0" onload="animateThumb(this)" width="220" height="180" alt="" />
-                                    <div id="thumb-image-hover" class="hover-default">
-                                        <div class="background opacity_6"></div>
-                                        <div class="zoom-gallery"></div>
+                                    <div class="fourth-thumb-holder" data-id="sound">
+                                        <div class="fourth-thumb-image">
+                                            <img src="assets/media/our_projects/4_columns/thumbs/thumb5.jpg" class="opacity_0" onload=" animateThumb(this) " width="220" height="180" alt="" />
+                                            <div id="thumb-image-hover" class="hover-default">
+                                                <div class="background opacity_6"></div>
+                                                <div class="zoom-gallery"></div>
+                                            </div>
+                                        </div> 
+                                        <div class="thumb-tag">
+                                            <h1>Late Days Of A Legend</h1>
+                                            <h2>SOUND / Transportation</h2>
+                                        </div>                                                                                   
                                     </div>
-                                </div>   
-                                <div class="thumb-tag">
-                                	<h1>Planet Of The Apes</h1>
-                                    <h2>music</h2>
-                                </div>                                                    
-                            </div>
-                            <div class="fourth-thumb-holder" data-id="sound">
-                            	<div class="fourth-thumb-image">
-                                	<img src="assets/media/our_projects/4_columns/thumbs/thumb7.jpg" class="opacity_0" onload="animateThumb(this)" width="220" height="180" alt="" />
-                                    <div id="thumb-image-hover" class="hover-default">
-                                        <div class="background opacity_6"></div>
-                                        <div class="zoom-gallery"></div>
+                                    <div class="fourth-thumb-holder" data-id="sound">
+                                        <div class="fourth-thumb-image">
+                                            <img src="assets/media/our_projects/4_columns/thumbs/thumb6.jpg" class="opacity_0" onload=" animateThumb(this) " width="220" height="180" alt="" />
+                                            <div id="thumb-image-hover" class="hover-default">
+                                                <div class="background opacity_6"></div>
+                                                <div class="zoom-gallery"></div>
+                                            </div>
+                                        </div>   
+                                        <div class="thumb-tag">
+                                            <h1>Planet Of The Apes</h1>
+                                            <h2>SOUND / Retail</h2>
+                                        </div>                                                    
+                                    </div>
+                                    <div class="fourth-thumb-holder" data-id="sound">
+                                        <div class="fourth-thumb-image">
+                                            <img src="assets/media/our_projects/4_columns/thumbs/thumb7.jpg" class="opacity_0" onload=" animateThumb(this) " width="220" height="180" alt="" />
+                                            <div id="thumb-image-hover" class="hover-default">
+                                                <div class="background opacity_6"></div>
+                                                <div class="zoom-gallery"></div>
+                                            </div>
+                                        </div>
+                                        <div class="thumb-tag">
+                                            <h1>Shopping Spree</h1>
+                                            <h2>SOUND / Cruise Lines</h2>
+                                        </div>                                                    
+                                    </div>
+                                    <div class="fourth-thumb-holder" data-id="sound">
+                                        <div class="fourth-thumb-image">
+                                            <img src="assets/media/our_projects/4_columns/thumbs/thumb8.jpg" class="opacity_0" onload=" animateThumb(this) " width="220" height="180" alt="" />
+                                            <div id="thumb-image-hover" class="hover-default">
+                                                <div class="background opacity_6"></div>
+                                                <div class="zoom-gallery"></div>
+                                            </div>
+                                        </div> 
+                                        <div class="thumb-tag">
+                                            <h1>Oh My Gosh</h1>
+                                            <h2>SOUND / HoReCa</h2>
+                                        </div>                                                     
+                                    </div>
+                                    <div class="fourth-thumb-holder" data-id="music">
+                                        <div class="fourth-thumb-image">
+                                            <img src="assets/media/our_projects/4_columns/thumbs/thumb9.jpg" class="opacity_0" onload=" animateThumb(this) " width="220" height="180" alt="" />
+                                            <div id="thumb-image-hover" class="hover-default">
+                                                <div class="background opacity_6"></div>
+                                                <div class="zoom-gallery"></div>
+                                            </div>
+                                        </div>   
+                                        <div class="thumb-tag">
+                                            <h1>Media Overdose</h1>
+                                            <h2>SOUND / Government</h2>
+                                        </div>                                                                                 
+                                    </div>
+                                    <div class="fourth-thumb-holder" data-id="music">
+                                        <div class="fourth-thumb-image">
+                                            <img src="assets/media/our_projects/4_columns/thumbs/thumb10.jpg" class="opacity_0" onload=" animateThumb(this) " width="220" height="180" alt="" />
+                                            <div id="thumb-image-hover" class="hover-default">
+                                                <div class="background opacity_6"></div>
+                                                <div class="zoom-gallery"></div>
+                                            </div>
+                                        </div>   
+                                        <div class="thumb-tag">
+                                            <h1>Qubsik Project</h1>
+                                            <h2>SOUND / Military</h2>
+                                        </div>                                                       
+                                    </div>
+                                    <div class="fourth-thumb-holder" data-id="music">
+                                        <div class="fourth-thumb-image">
+                                            <img src="assets/media/our_projects/4_columns/thumbs/thumb11.jpg" class="opacity_0" onload=" animateThumb(this) " width="220" height="180" alt="" />
+                                            <div id="thumb-image-hover" class="hover-default">
+                                                <div class="background opacity_6"></div>
+                                                <div class="zoom-gallery"></div>
+                                            </div>
+                                        </div>  
+                                        <div class="thumb-tag">
+                                            <h1>Modern House</h1>
+                                            <h2>SOUND / Video games</h2>
+                                        </div>                                                      
+                                    </div>
+                                    <div class="fourth-thumb-holder" data-id="music">
+                                        <div class="fourth-thumb-image">
+                                            <img src="assets/media/our_projects/4_columns/thumbs/thumb12.jpg" class="opacity_0" onload=" animateThumb(this) " width="220" height="180" alt="" />
+                                            <div id="thumb-image-hover" class="hover-default">
+                                                <div class="background opacity_6"></div>
+                                                <div class="zoom-gallery"></div>
+                                            </div>
+                                        </div>      
+                                        <div class="thumb-tag">
+                                            <h1>Red Passion</h1>
+                                            <h2>SOUND / Adv</h2>
+                                        </div>                                                 
+                                    </div>
+                                    <div class="fourth-thumb-holder" data-id="music">
+                                        <div class="fourth-thumb-image">
+                                            <img src="assets/media/our_projects/4_columns/thumbs/thumb13.jpg" class="opacity_0" onload=" animateThumb(this) " width="220" height="180" alt="" />
+                                            <div id="thumb-image-hover" class="hover-default">
+                                                <div class="background opacity_6"></div>
+                                                <div class="zoom-gallery"></div>
+                                            </div>
+                                        </div>  
+                                        <div class="thumb-tag">
+                                            <h1>Sleep Deprivation</h1>
+                                            <h2>SOUND / adv</h2>
+                                        </div>                                                       
                                     </div>
                                 </div>
-                                <div class="thumb-tag">
-                                	<h1>Shopping Spree</h1>
-                                    <h2>sound</h2>
-                                </div>                                                    
-                            </div>
-                            <div class="fourth-thumb-holder" data-id="sound">
-                            	<div class="fourth-thumb-image">
-                                	<img src="assets/media/our_projects/4_columns/thumbs/thumb8.jpg" class="opacity_0" onload="animateThumb(this)" width="220" height="180" alt="" />
-                                    <div id="thumb-image-hover" class="hover-default">
-                                        <div class="background opacity_6"></div>
-                                        <div class="zoom-gallery"></div>
-                                    </div>
-                                </div> 
-                                <div class="thumb-tag">
-                                	<h1>Oh My Gosh</h1>
-                                    <h2>sound</h2>
-                                </div>                                                     
-                            </div>
-                            <div class="fourth-thumb-holder" data-id="sound">
-                            	<div class="fourth-thumb-image">
-                                	<img src="assets/media/our_projects/4_columns/thumbs/thumb9.jpg" class="opacity_0" onload="animateThumb(this)" width="220" height="180" alt="" />
-                                    <div id="thumb-image-hover" class="hover-default">
-                                        <div class="background opacity_6"></div>
-                                        <div class="zoom-gallery"></div>
-                                    </div>
-                                </div>   
-                                <div class="thumb-tag">
-                                	<h1>Media Overdose</h1>
-                                    <h2>sound</h2>
-                                </div>                                                                                 
-                            </div>
-                            <div class="fourth-thumb-holder " data-id="sound">
-                            	<div class="fourth-thumb-image">
-                                	<img src="assets/media/our_projects/4_columns/thumbs/thumb10.jpg" class="opacity_0" onload="animateThumb(this)" width="220" height="180" alt="" />
-                                   <div id="thumb-image-hover" class="hover-default">
-                                        <div class="background opacity_6"></div>
-                                        <div class="zoom-gallery"></div>
-                                    </div>
-                                </div>   
-                                <div class="thumb-tag">
-                                	<h1>Qubsik Project</h1>
-                                    <h2>sound</h2>
-                                </div>                                                       
-                            </div>
-                            <div class="fourth-thumb-holder" data-id="sound">
-                            	<div class="fourth-thumb-image">
-                                	<img src="assets/media/our_projects/4_columns/thumbs/thumb11.jpg" class="opacity_0" onload="animateThumb(this)" width="220" height="180" alt="" />
-                                    <div id="thumb-image-hover" class="hover-default">
-                                        <div class="background opacity_6"></div>
-                                        <div class="zoom-gallery"></div>
-                                    </div>
-                                </div>  
-                                <div class="thumb-tag">
-                                	<h1>Modern House</h1>
-                                    <h2>sound</h2>
-                                </div>                                                      
-                            </div>
-                            <div class="fourth-thumb-holder" data-id="sound">
-                            	<div class="fourth-thumb-image">
-                                	<img src="assets/media/our_projects/4_columns/thumbs/thumb12.jpg" class="opacity_0" onload="animateThumb(this)" width="220" height="180" alt="" />
-                                    <div id="thumb-image-hover" class="hover-default">
-                                        <div class="background opacity_6"></div>
-                                        <div class="zoom-gallery"></div>
-                                    </div>
-                                </div>      
-                                <div class="thumb-tag">
-                                	<h1>Red Passion</h1>
-                                    <h2>sound</h2>
-                                </div>                                                 
-                            </div>
-                            <div class="fourth-thumb-holder" data-id="voice">
-                            	<div class="fourth-thumb-image">
-                                	<img src="assets/media/our_projects/4_columns/thumbs/thumb13.jpg" class="opacity_0" onload="animateThumb(this)" width="220" height="180" alt="" />
-                                    <div id="thumb-image-hover" class="hover-default">
-                                        <div class="background opacity_6"></div>
-                                        <div class="zoom-gallery"></div>
-                                    </div>
-                                </div>  
-                                <div class="thumb-tag">
-                                	<h1>Sleep Deprivation</h1>
-                                    <h2>voice</h2>
-                                </div>                                                       
-                            </div>
-                            <div class="fourth-thumb-holder " data-id="voice">
-                            	<div class="fourth-thumb-image">
-                                	<img src="assets/media/our_projects/4_columns/thumbs/thumb14.jpg" class="opacity_0" onload="animateThumb(this)" width="220" height="180" alt="" />
-                                    <div id="thumb-image-hover" class="hover-default">
-                                        <div class="background opacity_6"></div>
-                                        <div class="zoom-gallery"></div>
-                                    </div>
-                                </div>  
-                                <div class="thumb-tag">
-                                	<h1>Streetbot</h1>
-                                    <h2>voice</h2>
-                                </div>                                                       
-                            </div>
-                            <div class="fourth-thumb-holder" data-id="voice">
-                            	<div class="fourth-thumb-image">
-                                	<img src="assets/media/our_projects/4_columns/thumbs/thumb15.jpg" class="opacity_0" onload="animateThumb(this)" width="220" height="180" alt="" />
-                                    <div id="thumb-image-hover" class="hover-default">
-                                        <div class="background opacity_6"></div>
-                                        <div class="zoom-gallery"></div>
-                                    </div>
-                                </div>       
-                                <div class="thumb-tag">
-                                	<h1>Missed Relic</h1>
-                                    <h2>voice</h2>
-                                </div>                                                  
-                            </div>
-                            <div class="fourth-thumb-holder" data-id="voice">
-                            	<div class="fourth-thumb-image">
-                                	<img src="assets/media/our_projects/4_columns/thumbs/thumb16.jpg" class="opacity_0" onload="animateThumb(this)" width="220" height="180" alt="" />
-                                    <div id="thumb-image-hover" class="hover-default">
-                                        <div class="background opacity_6"></div>
-                                        <div class="zoom-gallery"></div>
-                                    </div>
-                                </div>   
-                                <div class="thumb-tag">
-                                	<h1>Nothing To Lose</h1>
-                                    <h2>voice</h2>
-                                </div>                                                    
-                            </div>      		
-                        </div>
-                    </div><!-- end #module-columns-container -->
-                </div>    
+                            </div><!-- end #module-columns-container -->
+                        </div>    
                  
-                <div id="module-columns-preview-wrapper">
-                    <div id="module-columns-preview"><!-- start #module-columns-preview -->
-                        <div id="module-columns-preview-holder">
-                            <div id="columns-preview-controls">
-                                  <div class="columns-preview-counter">
-                                    <span>x/x</span>
-                                  </div>
-                                  <div class="columns-preview-backward">
-                                    <div class="columns-preview-backg"></div>
-                                    <div class="columns-preview-backward-sign"></div>
-                                  </div>
-                                  <div class="columns-preview-close">
-                                    <div class="columns-preview-backg"></div>
-                                    <div class="columns-preview-close-sign"></div>
-                                  </div>
-                                  <div class="columns-preview-forward">
-                                    <div class="columns-preview-backg"></div>
-                                    <div class="columns-preview-forward-sign"></div>
-                                  </div>  
-                            </div>
-                            <div class="columns-horizontal-separator"></div>
-                            <div class="columns-preview-horizontal-fix">
-                                <ul>
-                                    <li>
-                                        <div class="columns-preview-media" data-src="assets/media/our_projects/4_columns/images/image1.jpg"></div>
-                                        <div class="columns-preview-description">
-                                            <p>Giuseppe</p>
-                                            <span>Etiam viverra, sem sit amet convallis posuere, ante velit congue dolor, vitae semper tortor diam in sapien. Cras pulvinar, justo id hendrerit congue, est ante elementum lectus, vitae rutrum justo quam ut lectus. </span>
-                                            <span>Sed sit amet leo sit amet nisl dignissim sagittis. Donec semper arcu augue. In eget erat nibh, vel venenatis metus. Donec fermentum arcu ac mauris viverra dictum. Duis venenatis turpis at nisl dictum pretium. Vestibulum sollicitudin nunc ut tortor sollicitudin bibendum. Proin convallis elit ac risus iaculis scelerisque. Nulla pellentesque mi dapibus ligula condimentum commodo porta metus fringilla. Nam venenatis est non ligula convallis vitae tempor eros tempus. </span>
-                                            <span>Suspendisse mollis feugiat consectetur. Suspendisse arcu nisl, vulputate ut laoreet ut, lacinia nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Praesent quis odio ligula, a dictum erat. Donec et pharetra lacus. </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="columns-preview-media" data-src="assets/media/our_projects/4_columns/images/image2.jpg"></div>
-                                        <div class="columns-preview-description">
-                                            <p>Baseball Illustration</p>
-                                            <span>Etiam viverra, sem sit amet convallis posuere, ante velit congue dolor, vitae semper tortor diam in sapien. Cras pulvinar, justo id hendrerit congue, est ante elementum lectus, vitae rutrum justo quam ut lectus. </span>
-                                            <span>Sed sit amet leo sit amet nisl dignissim sagittis. Donec semper arcu augue. In eget erat nibh, vel venenatis metus. Donec fermentum arcu ac mauris viverra dictum. Duis venenatis turpis at nisl dictum pretium. Vestibulum sollicitudin nunc ut tortor sollicitudin bibendum. Proin convallis elit ac risus iaculis scelerisque. Nulla pellentesque mi dapibus ligula condimentum commodo porta metus fringilla. Nam venenatis est non ligula convallis vitae tempor eros tempus. </span>
-                                            <span>Suspendisse mollis feugiat consectetur. Suspendisse arcu nisl, vulputate ut laoreet ut, lacinia nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Praesent quis odio ligula, a dictum erat. Donec et pharetra lacus. </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="columns-preview-media" data-src="assets/media/our_projects/4_columns/images/image3.jpg"></div>
-                                        <div class="columns-preview-description">
-                                            <p>Caricature Dr. House</p>
-                                            <span>Etiam viverra, sem sit amet convallis posuere, ante velit congue dolor, vitae semper tortor diam in sapien. Cras pulvinar, justo id hendrerit congue, est ante elementum lectus, vitae rutrum justo quam ut lectus. </span>
-                                            <span>Sed sit amet leo sit amet nisl dignissim sagittis. Donec semper arcu augue. In eget erat nibh, vel venenatis metus. Donec fermentum arcu ac mauris viverra dictum. Duis venenatis turpis at nisl dictum pretium. Vestibulum sollicitudin nunc ut tortor sollicitudin bibendum. Proin convallis elit ac risus iaculis scelerisque. Nulla pellentesque mi dapibus ligula condimentum commodo porta metus fringilla. Nam venenatis est non ligula convallis vitae tempor eros tempus. </span>
-                                            <span>Suspendisse mollis feugiat consectetur. Suspendisse arcu nisl, vulputate ut laoreet ut, lacinia nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Praesent quis odio ligula, a dictum erat. Donec et pharetra lacus. </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="columns-preview-media" data-src="assets/media/our_projects/4_columns/images/image4.jpg"></div>
-                                        <div class="columns-preview-description">
-                                            <p>Carousel Bike</p>
-                                            <span>Etiam viverra, sem sit amet convallis posuere, ante velit congue dolor, vitae semper tortor diam in sapien. Cras pulvinar, justo id hendrerit congue, est ante elementum lectus, vitae rutrum justo quam ut lectus. </span>
-                                            <span>Sed sit amet leo sit amet nisl dignissim sagittis. Donec semper arcu augue. In eget erat nibh, vel venenatis metus. Donec fermentum arcu ac mauris viverra dictum. Duis venenatis turpis at nisl dictum pretium. Vestibulum sollicitudin nunc ut tortor sollicitudin bibendum. Proin convallis elit ac risus iaculis scelerisque. Nulla pellentesque mi dapibus ligula condimentum commodo porta metus fringilla. Nam venenatis est non ligula convallis vitae tempor eros tempus. </span>
-                                            <span>Suspendisse mollis feugiat consectetur. Suspendisse arcu nisl, vulputate ut laoreet ut, lacinia nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Praesent quis odio ligula, a dictum erat. Donec et pharetra lacus. </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="columns-preview-media" data-src="assets/media/our_projects/4_columns/images/image5.jpg"></div>
-                                        <div class="columns-preview-description">
-                                            <p>Late Days Of A Legend</p>
-                                            <span>Etiam viverra, sem sit amet convallis posuere, ante velit congue dolor, vitae semper tortor diam in sapien. Cras pulvinar, justo id hendrerit congue, est ante elementum lectus, vitae rutrum justo quam ut lectus. </span>
-                                            <span>Sed sit amet leo sit amet nisl dignissim sagittis. Donec semper arcu augue. In eget erat nibh, vel venenatis metus. Donec fermentum arcu ac mauris viverra dictum. Duis venenatis turpis at nisl dictum pretium. Vestibulum sollicitudin nunc ut tortor sollicitudin bibendum. Proin convallis elit ac risus iaculis scelerisque. Nulla pellentesque mi dapibus ligula condimentum commodo porta metus fringilla. Nam venenatis est non ligula convallis vitae tempor eros tempus. </span>
-                                            <span>Suspendisse mollis feugiat consectetur. Suspendisse arcu nisl, vulputate ut laoreet ut, lacinia nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Praesent quis odio ligula, a dictum erat. Donec et pharetra lacus. </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="columns-preview-media" data-src="assets/media/our_projects/4_columns/images/image6.jpg"></div>
-                                        <div class="columns-preview-description">
-                                            <p>Planet Of The Apes</p>
-                                            <span>Etiam viverra, sem sit amet convallis posuere, ante velit congue dolor, vitae semper tortor diam in sapien. Cras pulvinar, justo id hendrerit congue, est ante elementum lectus, vitae rutrum justo quam ut lectus. </span>
-                                            <span>Sed sit amet leo sit amet nisl dignissim sagittis. Donec semper arcu augue. In eget erat nibh, vel venenatis metus. Donec fermentum arcu ac mauris viverra dictum. Duis venenatis turpis at nisl dictum pretium. Vestibulum sollicitudin nunc ut tortor sollicitudin bibendum. Proin convallis elit ac risus iaculis scelerisque. Nulla pellentesque mi dapibus ligula condimentum commodo porta metus fringilla. Nam venenatis est non ligula convallis vitae tempor eros tempus. </span>
-                                            <span>Suspendisse mollis feugiat consectetur. Suspendisse arcu nisl, vulputate ut laoreet ut, lacinia nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Praesent quis odio ligula, a dictum erat. Donec et pharetra lacus. </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="columns-preview-media" data-src="assets/media/our_projects/4_columns/images/image7.jpg"></div>
-                                        <div class="columns-preview-description">
-                                            <p>Shopping Spree</p>
-                                            <span>Etiam viverra, sem sit amet convallis posuere, ante velit congue dolor, vitae semper tortor diam in sapien. Cras pulvinar, justo id hendrerit congue, est ante elementum lectus, vitae rutrum justo quam ut lectus. </span>
-                                            <span>Sed sit amet leo sit amet nisl dignissim sagittis. Donec semper arcu augue. In eget erat nibh, vel venenatis metus. Donec fermentum arcu ac mauris viverra dictum. Duis venenatis turpis at nisl dictum pretium. Vestibulum sollicitudin nunc ut tortor sollicitudin bibendum. Proin convallis elit ac risus iaculis scelerisque. Nulla pellentesque mi dapibus ligula condimentum commodo porta metus fringilla. Nam venenatis est non ligula convallis vitae tempor eros tempus. </span>
-                                            <span>Suspendisse mollis feugiat consectetur. Suspendisse arcu nisl, vulputate ut laoreet ut, lacinia nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Praesent quis odio ligula, a dictum erat. Donec et pharetra lacus. </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="columns-preview-media" data-src="assets/media/our_projects/4_columns/images/image8.jpg"></div>
-                                        <div class="columns-preview-description">
-                                            <p>Oh My Gosh</p>
-                                            <span>Etiam viverra, sem sit amet convallis posuere, ante velit congue dolor, vitae semper tortor diam in sapien. Cras pulvinar, justo id hendrerit congue, est ante elementum lectus, vitae rutrum justo quam ut lectus. </span>
-                                            <span>Sed sit amet leo sit amet nisl dignissim sagittis. Donec semper arcu augue. In eget erat nibh, vel venenatis metus. Donec fermentum arcu ac mauris viverra dictum. Duis venenatis turpis at nisl dictum pretium. Vestibulum sollicitudin nunc ut tortor sollicitudin bibendum. Proin convallis elit ac risus iaculis scelerisque. Nulla pellentesque mi dapibus ligula condimentum commodo porta metus fringilla. Nam venenatis est non ligula convallis vitae tempor eros tempus. </span>
-                                            <span>Suspendisse mollis feugiat consectetur. Suspendisse arcu nisl, vulputate ut laoreet ut, lacinia nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Praesent quis odio ligula, a dictum erat. Donec et pharetra lacus. </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="columns-preview-media" data-src="assets/media/our_projects/4_columns/images/image9.jpg"></div>
-                                        <div class="columns-preview-description">
-                                            <p>Media Overdose</p>
-                                            <span>Etiam viverra, sem sit amet convallis posuere, ante velit congue dolor, vitae semper tortor diam in sapien. Cras pulvinar, justo id hendrerit congue, est ante elementum lectus, vitae rutrum justo quam ut lectus. </span>
-                                            <span>Sed sit amet leo sit amet nisl dignissim sagittis. Donec semper arcu augue. In eget erat nibh, vel venenatis metus. Donec fermentum arcu ac mauris viverra dictum. Duis venenatis turpis at nisl dictum pretium. Vestibulum sollicitudin nunc ut tortor sollicitudin bibendum. Proin convallis elit ac risus iaculis scelerisque. Nulla pellentesque mi dapibus ligula condimentum commodo porta metus fringilla. Nam venenatis est non ligula convallis vitae tempor eros tempus. </span>
-                                            <span>Suspendisse mollis feugiat consectetur. Suspendisse arcu nisl, vulputate ut laoreet ut, lacinia nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Praesent quis odio ligula, a dictum erat. Donec et pharetra lacus. </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="columns-preview-media" data-src="assets/media/our_projects/4_columns/images/image10.jpg"></div>
-                                        <div class="columns-preview-description">
-                                            <p>Qubsik Project</p>
-                                            <span>Etiam viverra, sem sit amet convallis posuere, ante velit congue dolor, vitae semper tortor diam in sapien. Cras pulvinar, justo id hendrerit congue, est ante elementum lectus, vitae rutrum justo quam ut lectus. </span>
-                                            <span>Sed sit amet leo sit amet nisl dignissim sagittis. Donec semper arcu augue. In eget erat nibh, vel venenatis metus. Donec fermentum arcu ac mauris viverra dictum. Duis venenatis turpis at nisl dictum pretium. Vestibulum sollicitudin nunc ut tortor sollicitudin bibendum. Proin convallis elit ac risus iaculis scelerisque. Nulla pellentesque mi dapibus ligula condimentum commodo porta metus fringilla. Nam venenatis est non ligula convallis vitae tempor eros tempus. </span>
-                                            <span>Suspendisse mollis feugiat consectetur. Suspendisse arcu nisl, vulputate ut laoreet ut, lacinia nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Praesent quis odio ligula, a dictum erat. Donec et pharetra lacus. </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="columns-preview-media" data-src="assets/media/our_projects/4_columns/images/image11.jpg"></div>
-                                        <div class="columns-preview-description">
-                                            <p>Modern House</p>
-                                            <span>Etiam viverra, sem sit amet convallis posuere, ante velit congue dolor, vitae semper tortor diam in sapien. Cras pulvinar, justo id hendrerit congue, est ante elementum lectus, vitae rutrum justo quam ut lectus. </span>
-                                            <span>Sed sit amet leo sit amet nisl dignissim sagittis. Donec semper arcu augue. In eget erat nibh, vel venenatis metus. Donec fermentum arcu ac mauris viverra dictum. Duis venenatis turpis at nisl dictum pretium. Vestibulum sollicitudin nunc ut tortor sollicitudin bibendum. Proin convallis elit ac risus iaculis scelerisque. Nulla pellentesque mi dapibus ligula condimentum commodo porta metus fringilla. Nam venenatis est non ligula convallis vitae tempor eros tempus. </span>
-                                            <span>Suspendisse mollis feugiat consectetur. Suspendisse arcu nisl, vulputate ut laoreet ut, lacinia nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Praesent quis odio ligula, a dictum erat. Donec et pharetra lacus. </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="columns-preview-media" data-src="assets/media/our_projects/4_columns/images/image12.jpg"></div>
-                                        <div class="columns-preview-description">
-                                            <p>Red Passion</p>
-                                            <span>Etiam viverra, sem sit amet convallis posuere, ante velit congue dolor, vitae semper tortor diam in sapien. Cras pulvinar, justo id hendrerit congue, est ante elementum lectus, vitae rutrum justo quam ut lectus. </span>
-                                            <span>Sed sit amet leo sit amet nisl dignissim sagittis. Donec semper arcu augue. In eget erat nibh, vel venenatis metus. Donec fermentum arcu ac mauris viverra dictum. Duis venenatis turpis at nisl dictum pretium. Vestibulum sollicitudin nunc ut tortor sollicitudin bibendum. Proin convallis elit ac risus iaculis scelerisque. Nulla pellentesque mi dapibus ligula condimentum commodo porta metus fringilla. Nam venenatis est non ligula convallis vitae tempor eros tempus. </span>
-                                            <span>Suspendisse mollis feugiat consectetur. Suspendisse arcu nisl, vulputate ut laoreet ut, lacinia nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Praesent quis odio ligula, a dictum erat. Donec et pharetra lacus. </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="columns-preview-media" data-src="assets/media/our_projects/4_columns/images/image13.jpg"></div>
-                                        <div class="columns-preview-description">
-                                            <p>Sleep Deprivation</p>
-                                            <span>Etiam viverra, sem sit amet convallis posuere, ante velit congue dolor, vitae semper tortor diam in sapien. Cras pulvinar, justo id hendrerit congue, est ante elementum lectus, vitae rutrum justo quam ut lectus. </span>
-                                            <span>Sed sit amet leo sit amet nisl dignissim sagittis. Donec semper arcu augue. In eget erat nibh, vel venenatis metus. Donec fermentum arcu ac mauris viverra dictum. Duis venenatis turpis at nisl dictum pretium. Vestibulum sollicitudin nunc ut tortor sollicitudin bibendum. Proin convallis elit ac risus iaculis scelerisque. Nulla pellentesque mi dapibus ligula condimentum commodo porta metus fringilla. Nam venenatis est non ligula convallis vitae tempor eros tempus. </span>
-                                            <span>Suspendisse mollis feugiat consectetur. Suspendisse arcu nisl, vulputate ut laoreet ut, lacinia nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Praesent quis odio ligula, a dictum erat. Donec et pharetra lacus. </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="columns-preview-media" data-src="assets/media/our_projects/4_columns/images/image14.jpg"></div>
-                                        <div class="columns-preview-description">
-                                            <p>Streetbot</p>
-                                            <span>Etiam viverra, sem sit amet convallis posuere, ante velit congue dolor, vitae semper tortor diam in sapien. Cras pulvinar, justo id hendrerit congue, est ante elementum lectus, vitae rutrum justo quam ut lectus. </span>
-                                            <span>Sed sit amet leo sit amet nisl dignissim sagittis. Donec semper arcu augue. In eget erat nibh, vel venenatis metus. Donec fermentum arcu ac mauris viverra dictum. Duis venenatis turpis at nisl dictum pretium. Vestibulum sollicitudin nunc ut tortor sollicitudin bibendum. Proin convallis elit ac risus iaculis scelerisque. Nulla pellentesque mi dapibus ligula condimentum commodo porta metus fringilla. Nam venenatis est non ligula convallis vitae tempor eros tempus. </span>
-                                            <span>Suspendisse mollis feugiat consectetur. Suspendisse arcu nisl, vulputate ut laoreet ut, lacinia nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Praesent quis odio ligula, a dictum erat. Donec et pharetra lacus. </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="columns-preview-media" data-src="assets/media/our_projects/4_columns/images/image15.jpg"></div>
-                                        <div class="columns-preview-description">
-                                            <p>Missed Relic</p>
-                                            <span>Etiam viverra, sem sit amet convallis posuere, ante velit congue dolor, vitae semper tortor diam in sapien. Cras pulvinar, justo id hendrerit congue, est ante elementum lectus, vitae rutrum justo quam ut lectus. </span>
-                                            <span>Sed sit amet leo sit amet nisl dignissim sagittis. Donec semper arcu augue. In eget erat nibh, vel venenatis metus. Donec fermentum arcu ac mauris viverra dictum. Duis venenatis turpis at nisl dictum pretium. Vestibulum sollicitudin nunc ut tortor sollicitudin bibendum. Proin convallis elit ac risus iaculis scelerisque. Nulla pellentesque mi dapibus ligula condimentum commodo porta metus fringilla. Nam venenatis est non ligula convallis vitae tempor eros tempus. </span>
-                                            <span>Suspendisse mollis feugiat consectetur. Suspendisse arcu nisl, vulputate ut laoreet ut, lacinia nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Praesent quis odio ligula, a dictum erat. Donec et pharetra lacus. </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="columns-preview-media" data-src="assets/media/our_projects/4_columns/images/image16.jpg"></div>
-                                        <div class="columns-preview-description">
-                                            <p>Nothing To Lose</p>
-                                            <span>Etiam viverra, sem sit amet convallis posuere, ante velit congue dolor, vitae semper tortor diam in sapien. Cras pulvinar, justo id hendrerit congue, est ante elementum lectus, vitae rutrum justo quam ut lectus. </span>
-                                            <span>Sed sit amet leo sit amet nisl dignissim sagittis. Donec semper arcu augue. In eget erat nibh, vel venenatis metus. Donec fermentum arcu ac mauris viverra dictum. Duis venenatis turpis at nisl dictum pretium. Vestibulum sollicitudin nunc ut tortor sollicitudin bibendum. Proin convallis elit ac risus iaculis scelerisque. Nulla pellentesque mi dapibus ligula condimentum commodo porta metus fringilla. Nam venenatis est non ligula convallis vitae tempor eros tempus. </span>
-                                            <span>Suspendisse mollis feugiat consectetur. Suspendisse arcu nisl, vulputate ut laoreet ut, lacinia nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Praesent quis odio ligula, a dictum erat. Donec et pharetra lacus. </span>
-                                        </div>
-                                    </li>
-                                </ul>    
-                            </div>
-                        </div>
-                    </div> <!-- end #module-columns-preview -->
-                </div>    
-                <!--<div id="galleries-background" class="opacity_8"></div>-->  
-            </div>
+                    </div>
             
-        </div>
-        <div id="module-scrollbar-holder_v2">
-            <div id="module-scrollbar-background" class="opacity_8"></div>
-            <div id="module-scrollbar-dragger"></div>
-        </div>	       
-    </div><!-- end #module-container -->
-</div>
+                </div>
+                <div id="module-scrollbar-holder_v2">
+                    <div id="module-scrollbar-background" class="opacity_8"></div>
+                    <div id="module-scrollbar-dragger"></div>
+                </div>
+        
+                <div id="full-width-preview"><!-- start .full-width-preview" -->
+                    <div class="full-width-preview-background opacity_9_7"></div>
+                    <div id="full-width-preview-media-holder">
+                        <div class="full-width-preview-media-holder-background opacity_0"></div>
+                        <div class="full-width-preview-media-loader"></div>
+                        <div id="preview-media-holder">           
+                            <div id="preview-media-image" 
+                                 data-url="assets/media/portfolio/images/Project_page_img1.jpg" 
+                                 data-title="Custom Title 1" data-alt="Custom Alt 1"
+                                 >
+                            </div>
+                            
+                            <div id="video-wrapper-collection">
+                                <div id="video-wrapper" 
+                                     data-video-type="vimeo"
+                                     data-width="100%"
+                                     data-height="400px"
+                                     data-url="http://player.vimeo.com/video/32201946?portrait=0&color=ffffff">
+                                </div>
+                                <div id="video-wrapper" 
+                                     data-video-type="youtube"
+                                     data-width="100%"
+                                     data-height="100%"
+                                     data-url="http://www.youtube.com/embed/saw1w-8ODKM">
+                                </div>
+                                <div id="video-wrapper" 
+                                     data-video-type="youtube"
+                                     data-width="100%"
+                                     data-height="400px"
+                                     data-url="http://www.youtube.com/embed/LF2daIOV6ns">
+                                </div>
+                                <div id="video-wrapper" 
+                                     data-video-type="youtube"
+                                     data-width="100%"
+                                     data-height="400px"
+                                     data-url="http://www.youtube.com/embed/LF2daIOV6ns">
+                                </div>
+                                <div id="video-wrapper" 
+                                     data-video-type="youtube"
+                                     data-width="100%"
+                                     data-height="400px"
+                                     data-url="http://www.youtube.com/embed/LF2daIOV6ns">
+                                </div>
+                            </div>
+                            <div id="video-wrapper" data-video-type="vimeo" data-width="640" data-height="390"
+                                 data-url="http://player.vimeo.com/video/32201946?portrait=0&color=ffffff">
+                            </div>
+                            <div id="video-wrapper-collection">
+                                <div id="video-wrapper" 
+                                     data-video-type="vimeo"
+                                     data-width="100%"
+                                     data-height="100%"
+                                     data-url="http://player.vimeo.com/video/32201946?portrait=0&color=ffffff">
+                                </div>
+                                <div id="video-wrapper" 
+                                     data-video-type="vimeo"
+                                     data-width="100%"
+                                     data-height="100%"
+                                     data-url="http://player.vimeo.com/video/32201946?portrait=0&color=ffffff">
+                                </div>
+                                <div id="video-wrapper" 
+                                     data-video-type="vimeo"
+                                     data-width="100%"
+                                     data-height="100%"
+                                     data-url="http://player.vimeo.com/video/32201946?portrait=0&color=ffffff">
+                                </div>
+                                <div id="video-wrapper" 
+                                     data-video-type="vimeo"
+                                     data-width="100%"
+                                     data-height="100%"
+                                     data-url="http://player.vimeo.com/video/32201946?portrait=0&color=ffffff">
+                                </div>
+                                <div id="video-wrapper" 
+                                     data-video-type="vimeo"
+                                     data-width="100%"
+                                     data-height="100%"
+                                     data-url="http://player.vimeo.com/video/32201946?portrait=0&color=ffffff">
+                                </div>
+                                <div id="video-wrapper" 
+                                     data-video-type="vimeo"
+                                     data-width="100%"
+                                     data-height="100%"
+                                     data-url="http://player.vimeo.com/video/32201946?portrait=0&color=ffffff">
+                                </div>
+                                <div id="video-wrapper" 
+                                     data-video-type="vimeo"
+                                     data-width="100%"
+                                     data-height="100%"
+                                     data-url="http://player.vimeo.com/video/32201946?portrait=0&color=ffffff">
+                                </div>
+                                <div id="video-wrapper" 
+                                     data-video-type="vimeo"
+                                     data-width="100%"
+                                     data-height="100%"
+                                     data-url="http://player.vimeo.com/video/32201946?portrait=0&color=ffffff">
+                                </div>
+                                <div id="video-wrapper" 
+                                     data-video-type="vimeo"
+                                     data-width="100%"
+                                     data-height="100%"
+                                     data-url="http://player.vimeo.com/video/32201946?portrait=0&color=ffffff">
+                                </div>
+                                <div id="video-wrapper" 
+                                     data-video-type="vimeo"
+                                     data-width="100%"
+                                     data-height="100%"
+                                     data-url="http://player.vimeo.com/video/32201946?portrait=0&color=ffffff">
+                                </div>
+                            </div>
+                            
+                            <div id="video-wrapper" data-video-type="vimeo" data-width="80%" data-height="80%"
+                                 data-url="http://www.youtube-nocookie.com/embed/_-sH-3whAkM?rel=0?portrait=0&color=ffffff">
+                            </div>
+                            
+                            <div id="preview-media-image" data-url="assets/media/portfolio/images/image3.jpg" 
+                                data-title="Custom Title 3" data-alt="Custom Alt 3"
+                                data-width="100%" data-height="100%"></div>
+                            <div id="video-wrapper" data-video-type="vimeo" data-width="640" data-height="390"
+                                 data-url="http://player.vimeo.com/video/23106251?portrait=0&color=ffffff">
+                            </div>
+                            <div id="preview-media-image" data-url="assets/media/portfolio/images/image4.jpg" data-title="Custom Title 4" data-alt="Custom Alt 4"></div>
+                    
+                            <div id="preview-media-image" data-url="assets/media/portfolio/images/image5.jpg" data-title="Custom Title 5" data-alt="Custom Alt 5"></div>
+                            <div id="preview-media-image" data-url="assets/media/portfolio/images/image6.jpg" data-title="Custom Title 6" data-alt="Custom Alt 6"></div>
+                    
+                            <div id="video-wrapper" data-video-type="vimeo" data-width="640" data-height="390"
+                                 data-url="http://player.vimeo.com/video/33690353?portrait=0&color=ffffff">
+                            </div>
+                            <div id="preview-media-image" data-url="assets/media/portfolio/images/image7.jpg" data-title="Custom Title 7" data-alt="Custom Alt 7"></div>
+                            <div id="video-wrapper" data-video-type="vimeo" data-width="640" data-height="390"
+                                 data-url="http://player.vimeo.com/video/33480080?portrait=0&color=ffffff">
+                            </div>
+                        </div>            
+                    </div>
+                    <div class="preview-counter"><span>x/x</span></div>
+                    <div class="preview-arrow-close">
+                        <div class="preview-arrow-backg"></div>
+                        <div class="preview-arrow-close-sign"></div>
+                    </div>
+                    <div class="preview-arrow-backward">
+                        <div class="preview-arrow-backg"></div>
+                        <div class="preview-arrow-backward-sign"></div>
+                    </div>
+                    <div class="preview-arrow-forward">
+                        <div class="preview-arrow-backg"></div>
+                        <div class="preview-arrow-forward-sign"></div>
+                    </div>                
+                    <div id="full-width-preview-info-holder" class="module-position-rc">
+                        <div id="full-width-info-container" class="full-width-info-container">
+                            <div class="full-width-info-holder">
+                                <div class="full-width-info-holder-desc">
+                                    <div class="custom-separator"></div>
+                                    <p>Giuseppe</p>
+                                    <span>DFAD TV - Official TV channel of DFAD. Powered by DF Music Organization Inc.</span>
+                                    <span>DFAD makes music, sound and voice for different brands in different industries.</span>
+                                    <span>DFAD is an audio developer and audio content license provider in TV commercials to narr...</span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <div class="full-width-info-holder-desc">
+                                        <p>Luciano</p>
+                                        <div class="custom-separator"></div>
+                                        <span>DFAD TV - Official TV channel of DFAD. Powered by DF Music Organization Inc.</span>
+                                        <span>DFAD makes music, sound and voice for different brands in different industries.</span>
+                                        <span>DFAD is an audio developer and audio content license provider in TV commercials to narr...</span>
+                                    </div>
+                                    <div class="full-width-info-holder-desc">
+                                        <p>Luciano/Part 2</p>
+                                        <div class="custom-separator"></div>
+                                        <span>Some <b>important</b> text</span>
+                                        <span>DFAD makes music, sound and voice for different brands in different industries.</span>
+                                        <span>DFAD is an audio developer and audio content license provider in TV commercials to narr...</span>
+                                    </div>
+                                    <div class="full-width-info-holder-desc">
+                                        <p>Luciano/ Final</p>
+                                        <div class="custom-separator"></div>
+                                        <span>DFAD TV - Official TV channel of DFAD. Powered by DF Music Organization Inc.</span>
+                                        <span>DFAD makes music, sound and voice for different brands in different industries.</span>
+                                        <span>DFAD is an audio developer and audio content license provider in TV commercials to narr...</span>
+                                    </div>
+                                    <div class="full-width-info-holder-desc">
+                                        <p>Luciano/ Final</p>
+                                        <div class="custom-separator"></div>
+                                        <span>DFAD TV - Official TV channel of DFAD. Powered by DF Music Organization Inc.</span>
+                                        <span>DFAD makes music, sound and voice for different brands in different industries.</span>
+                                        <span>DFAD is an audio developer and audio content license provider in TV commercials to narr...</span>
+                                    </div>
+                                    <div class="full-width-info-holder-desc">
+                                        <p>Luciano/ Final</p>
+                                        <div class="custom-separator"></div>
+                                        <span>DFAD TV - Official TV channel of DFAD. Powered by DF Music Organization Inc.</span>
+                                        <span>DFAD makes music, sound and voice for different brands in different industries.</span>
+                                        <span>DFAD is an audio developer and audio content license provider in TV commercials to narr...</span>
+                                    </div>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Frames</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <div class="full-width-info-holder-desc">
+                                        <p>Baseball Illustration</p>
+                                        <div class="custom-separator"></div>
+                                        <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique. Sed elit elit, adipiscing eget molestie vulputate, euismod vitae mi. Proin posuere volutpat congue. Proin posuere volutpat congue.</span>
+                                    </div>
+                                    <div class="full-width-info-holder-desc">
+                                        <p>Baseball Illustration/Part 2</p>
+                                        <div class="custom-separator"></div>
+                                        <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique. Sed elit elit, adipiscing eget molestie vulputate, euismod vitae mi. Proin posuere volutpat congue. Proin posuere volutpat congue.</span>
+                                    </div>
+                                    <div class="full-width-info-holder-desc">
+                                        <p>Baseball Illustration/Part 2</p>
+                                        <div class="custom-separator"></div>
+                                        <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique. Sed elit elit, adipiscing eget molestie vulputate, euismod vitae mi. Proin posuere volutpat congue. Proin posuere volutpat congue.</span>
+                                    </div>
+                                    <div class="full-width-info-holder-desc">
+                                        <p>Baseball Illustration/Part 2</p>
+                                        <div class="custom-separator"></div>
+                                        <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique. Sed elit elit, adipiscing eget molestie vulputate, euismod vitae mi. Proin posuere volutpat congue. Proin posuere volutpat congue.</span>
+                                    </div>
+                                    <div class="full-width-info-holder-desc">
+                                        <p>Baseball Illustration/Part 2</p>
+                                        <div class="custom-separator"></div>
+                                        <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique. Sed elit elit, adipiscing eget molestie vulputate, euismod vitae mi. Proin posuere volutpat congue. Proin posuere volutpat congue.</span>
+                                    </div>
+                                    <div class="full-width-info-holder-desc">
+                                        <p>Baseball Illustration/Part 2</p>
+                                        <div class="custom-separator"></div>
+                                        <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique. Sed elit elit, adipiscing eget molestie vulputate, euismod vitae mi. Proin posuere volutpat congue. Proin posuere volutpat congue.</span>
+                                    </div>
+                                    <div class="full-width-info-holder-desc">
+                                        <p>Baseball Illustration/Part 2</p>
+                                        <div class="custom-separator"></div>
+                                        <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique. Sed elit elit, adipiscing eget molestie vulputate, euismod vitae mi. Proin posuere volutpat congue. Proin posuere volutpat congue.</span>
+                                    </div>
+                                    <div class="full-width-info-holder-desc">
+                                        <p>Baseball Illustration/Part 2</p>
+                                        <div class="custom-separator"></div>
+                                        <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique. Sed elit elit, adipiscing eget molestie vulputate, euismod vitae mi. Proin posuere volutpat congue. Proin posuere volutpat congue.</span>
+                                    </div>
+                                    <div class="full-width-info-holder-desc">
+                                        <p>Baseball Illustration/Part 2</p>
+                                        <div class="custom-separator"></div>
+                                        <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique. Sed elit elit, adipiscing eget molestie vulputate, euismod vitae mi. Proin posuere volutpat congue. Proin posuere volutpat congue.</span>
+                                    </div>
+                                    <div class="full-width-info-holder-desc">
+                                        <p>Baseball Illustration/Part 2</p>
+                                        <div class="custom-separator"></div>
+                                        <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique. Sed elit elit, adipiscing eget molestie vulputate, euismod vitae mi. Proin posuere volutpat congue. Proin posuere volutpat congue.</span>
+                                    </div>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Caricature Dr. House</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>The Node</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Carousel Bike</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Late Days Of A Legend</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Planet Of The Apes</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Cee-Ee</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Shopping Spree</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Proteigon</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Oh My Gosh</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Media Overdose</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Qubsik Project</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Modern House</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Red Passion</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Opening Sequence | BUNRAKU </p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Sleep Deprivation</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Streetbot</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Missed Relic</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Nothing To Lose</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Violen</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>
+                                <div class="full-width-info-holder-desc">
+                                    <p>Sunset Background</p>
+                                    <div class="custom-separator"></div>
+                                    <span>Pellentesque diam lectus, dapibus non lacinia in, vulputate sit amet dolor. Vivamus sollicitudin nunc sed augue lobortis at elementum nulla tristique.</span>
+                                    <span>Vivamus porta, mi non vestibulum semper, massa nisl commodo est, quis fermentum nisi risus in erat. Phasellus sed nulla vel enim mattis tristique. Ut condimentum sodales leo, et mattis urna vulputate ut. </span>
+                                </div>                        
+                            </div>
+                        </div>        
+                    </div>        
+                </div>
 
-<!-- START LOADING CONTAINER AND ANIMATION-->
-<div id="load-container"></div>
-<div id="loading-animation">
-	<img src="assets/loaders/loader.gif" width="16" height="11" alt="Synergy - loading animation"/>
-</div>
-<!-- END LOADING CONTAINER AND ANIMATION--> 
+            </div><!-- end #module-container -->
+        </div>
+
+        <!-- START LOADING CONTAINER AND ANIMATION-->
+        <div id="load-container"></div>
+        <div id="loading-animation">
+            <img src="assets/loaders/loader.gif" width="16" height="11" alt="Synergy - loading animation"/>
+        </div>
+        <!-- END LOADING CONTAINER AND ANIMATION--> 
     
-</body>
+    </body>
 </html>

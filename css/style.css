@@ -296,7 +296,7 @@ body {
 .menu-option-text a, .menu-option-sign, .sub-menu-option-text a {
     display: block;
     padding-top: 10.5px;
-    font-family: 'Open Sans', PT Sans Caption, Arial;
+    font-family: PT Sans Caption, 'Open Sans', Arial;
     font-weight: 800;
     font-size: 12px;
     padding-left: 14px;

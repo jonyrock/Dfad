@@ -204,6 +204,19 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
             htmlText.fadeIn();
         }
 
+        function getOffsetLengthDimentionByString(valueStr){
+            var length = parseInt(valueStr, 10);
+            var offset = -length / 2;
+            if(valueStr.indexOf("%") != -1){
+                length += "%";
+                offset += "%";
+            } else {
+                length += "px";
+                offset += "px";
+            }
+            return { length:length, offset:offset };
+        }
+
         function placeSingleImage(mediaItemPiece, mediaItemHtmlPiece) {
             prepareHolders();
             placeMediaText(mediaItemHtmlPiece);
@@ -217,14 +230,36 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
             fullScreenViewer.htmlMediaHolder.append(htmlElem);
             htmlElem.css("visibility", "hidden");
             htmlElem.load(function() {
-                var mediaWidth = htmlElem.width();
-                var mediaHeight = htmlElem.height();
                 htmlElem.css("position", "relative");
                 htmlElem.css("visibility", "visible");
-                htmlElem.css("left", -mediaWidth / 2);
-                htmlElem.css("top", -mediaHeight / 2);
+                if($(mediaItemPiece).attr("data-width") !== undefined) {
+                    var mediaWidth = getOffsetLengthDimentionByString(
+                            $(mediaItemPiece).attr("data-width")).length;
+                    htmlElem.css("width", mediaWidth);
+                    var left = getOffsetLengthDimentionByString(
+                            $(mediaItemPiece).attr("data-width")).offset;
+                    htmlElem.css("left", left);
+                } else {
+                    var mediaWidth = htmlElem.width();
+                    htmlElem.css("left", -mediaWidth / 2);
+                }
+
+                if($(mediaItemPiece).attr("data-height") !== undefined) {
+                    var mediaHeight = getOffsetLengthDimentionByString(
+                            $(mediaItemPiece).attr("data-height")).length;
+                    htmlElem.css("height", mediaHeight);
+                    var top = getOffsetLengthDimentionByString(
+                            $(mediaItemPiece).attr("data-height")).offset;
+                    htmlElem.css("top", top);
+                } else {
+                    var mediaHeight = htmlElem.height();
+                    htmlElem.css("top", -mediaHeight / 2);
+                }
+                
             });
         }
+
+        
 
         function placeSingleVideo(mediaItemPiece, mediaItemHtmlPiece) {
             prepareHolders();
@@ -235,30 +270,13 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
 
             htmlElem.css("position", "relative");
             htmlElem.css("visibility", "visible");
-
-            var mediaWidth = parseInt($(mediaItemPiece).attr("data-width"), 10);
-            var mediaHeight = parseInt($(mediaItemPiece).attr("data-height"), 10);
             
-            var widthValue = mediaWidth;
-            var leftValue = -mediaWidth / 2;
-            if($(mediaItemPiece).attr("data-width").indexOf("%") != -1){
-                widthValue += "%";
-                leftValue += "%";
-            } else {
-                widthValue += "px";
-                leftValue += "px";
-            }
+            var widthValue = getOffsetLengthDimentionByString($(mediaItemPiece).attr("data-width")).length;
+            var leftValue = getOffsetLengthDimentionByString($(mediaItemPiece).attr("data-width")).offset;
 
-            var heightValue = mediaHeight;
-            var topValue = -mediaHeight / 2;
-            if($(mediaItemPiece).attr("data-height").indexOf("%") != -1){
-                heightValue += "%";
-                topValue += "%";
-            } else {
-                heightValue += "px";
-                topValue += "px";
-            }
-
+            var heightValue = getOffsetLengthDimentionByString($(mediaItemPiece).attr("data-height")).length;
+            var topValue = getOffsetLengthDimentionByString($(mediaItemPiece).attr("data-height")).offset;
+            
             htmlElem.css("width", widthValue);
             htmlElem.css("height", heightValue);
             htmlElem.css("left", leftValue);
