@@ -182,7 +182,6 @@ fullScreenViewer.buttonTrigger = function(button) {
 }
 
 fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
-
         var mediaType = mediaItem.attr("id");
         var buttonsInstance;
         if(buttonsInstance === undefined){
@@ -206,15 +205,14 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
         }
 
         function placeSingleImage(mediaItemPiece, mediaItemHtmlPiece) {
-            
             prepareHolders();
             placeMediaText(mediaItemHtmlPiece);
 
             var htmlElem = $(
                 '<img id="preview-media-image"' + 
-                ' src="'    + $(mediaItemPiece).attr("data-url") + '"' +
-                ' title="'  + $(mediaItemPiece).attr("data-title") + '"' + 
-                ' alt="'    + $(mediaItemPiece).attr("data-alt") + '" />');
+                ' src="'    + $(mediaItemPiece).attr("data-url")    + '"' +
+                ' title="'  + $(mediaItemPiece).attr("data-title")  + '"' + 
+                ' alt="'    + $(mediaItemPiece).attr("data-alt")    + '" />');
 
             fullScreenViewer.htmlMediaHolder.append(htmlElem);
             htmlElem.css("visibility", "hidden");
@@ -229,7 +227,6 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
         }
 
         function placeSingleVideo(mediaItemPiece, mediaItemHtmlPiece) {
-            
             prepareHolders();
             placeMediaText(mediaItemHtmlPiece);
 

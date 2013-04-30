@@ -1,5 +1,3 @@
-/// <reference path="portfolioPage.js"/>
-
 var columnsPreviewOpen = false;
 var previewAnimDone = true;
 var columnsPreviewIndex = 0;
