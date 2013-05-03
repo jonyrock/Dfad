@@ -7,23 +7,9 @@ function moduleContact() {
     if (textPageInstance.length <= 0) {
         return;
     }
-    var mapHolder = $("#module-container #module-contact-map-container");
-    var winH = $(window).height();
-    var winW = $(window).width();
-    var mapW = screen.width; /**/
-    var mapLeft = (-get_OffsetWidth()) * .5;
-    var mapH = mapHolder.height();
-
+    
     var modContact = $("#module-container #module-contact");
-    var modContactH = modContact.height();
-    var conH = ((winH - mapH) >= modContactH) ? (winH - mapH) : modContactH;
-    modContact.attr("style", "bottom: " + (-conH) + "px; height: " + conH + "px; visibility: visible;");
-
-    TweenMax.to(modContact, .6, {
-        css: { bottom: "0px" },
-        ease: Circ.easeInOut,
-    });
-
+    modContact.attr("style", "visibility: visible;");
     endModuleFunction = null;
     moduleEnd = true;
 
@@ -118,9 +104,9 @@ function moduleUpdate_contact() {
     // resize page holder and get new width
     var currentWidth = moduleContactResizeHolder();
     
-    var blocksWidthPersent = 24;
-    var blocksMarginPersent = 4.5;
-    if(currentWidth <= 1024) {
+    var blocksWidthPersent = 21;
+    var blocksMarginPersent = 1.5;
+    if(currentWidth <= 1120) {
         blocksWidthPersent = 31;
         blocksMarginPersent = 1;
     } if(currentWidth <= 794){

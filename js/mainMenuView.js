@@ -2,7 +2,7 @@
  * VERSION: 1.0
  * DATE: 2013-04-22
  * 
- * @author: @jonyrock exclusively to dfad.com
+ * @author: @jonyrock exclusively for dfad.com
  **/
 
 MainMenuView.menuHolder         = "#template-menu";            // any jqery selector

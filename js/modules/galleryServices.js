@@ -574,3 +574,35 @@ function gallerySizeMedia(image, w, h) {
     image.width(newImageW);
     image.height(newImageH);
 }
+
+function moduleUpdate_gallery() {
+
+    var textPageInstanceHolder = $(txt_modCont);
+    var textPageInstance = $("#module-galleries", textPageInstanceHolder);
+    var galleryHolder = $("#module-galleries-holder", textPageInstance);
+
+    if (textPageInstance.length <= 0) return;
+
+    var thumbMarginRight = parseInt($(".thumb-holder").css("margin-right"), 10);
+    var thumbMarginBottom = parseInt($(".thumb-holder").css("margin-bottom"), 10);
+    var thumbWidth = $(".thumb-holder").width();
+    var thumbHeight = $(".thumb-holder").height();
+    var containerWidth = galleryHolder.width();
+    var containerHeight = galleryHolder.height();
+    var visibleHeight = textPageInstance.height();
+    var numberColumns = Math.round(containerWidth / (thumbWidth + thumbMarginRight));
+    var numberLines = Math.floor(visibleHeight / (thumbHeight + thumbMarginBottom) + 1);
+    var totalVisibleThumbs = numberColumns * numberLines - 1;
+    visibleGalleryH = visibleHeight;
+    galleryColumns = numberColumns;
+    galleryLines = numberLines;
+
+    $(".thumb-holder", galleryHolder).css("margin-right", "");
+    $(".thumb-holder" + ":nth-child(" + galleryColumns + "n+" + galleryColumns + ")", galleryHolder)
+        .css("margin-right", "0px");
+
+    moduleUpdate(textPageInstanceHolder, textPageInstance, $("div:first", textPageInstance), sideType);
+    if (previewGalleryOpen == true) {
+        updatePreviewMediaPosition();
+    }
+}

@@ -2433,7 +2433,7 @@ h1, h2, h3, h4, h5, h6 {
 #full-width-info-holder-pages-buttons {
     position: absolute;
     bottom: 0px;
-    width: 100%;
+    width: 90%;
     padding: 30px;
     display: none;
 }
@@ -2442,6 +2442,7 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     float: left;
     margin-left: 5px;
+    margin-top: 7px;
     width: 30px;
     height: 30px;
     font-size: 12px;

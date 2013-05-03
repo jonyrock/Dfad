@@ -64,3 +64,41 @@ function animateFullWidthMedia(src) {
                 }
     });
 }
+
+
+function moduleUpdate_full_width(animate) {
+    var textPageInstanceHolder = $(txt_modCont);
+    var textPageInstance = $("#module-full-width", textPageInstanceHolder);
+    var modWrapper = $("#module-wrapper", textPageInstance);
+    if (textPageInstance.length <= 0) return;
+    var currWindowW = $(window).width() - get_OffsetWidth();
+    if (touchDevice) {
+        currWindowW = $(window).width() - templateMenuW;
+    }
+
+    var tempWidth = textPageInstance.width();
+    textPageInstance.css("width", currWindowW);
+
+    if ($("#module-full-width-holder-text", modWrapper).height() > $(window).height() && !touchDevice) {
+        currWindowW = currWindowW - $(t_scrBarV2).width();
+    }
+
+    if (animate == undefined || animate == false) {
+        textPageInstance.css("width", currWindowW);
+        moduleUpdate(textPageInstanceHolder, modWrapper, $("div:first", modWrapper), sideType);
+    } else {
+        if (tempWidth == currWindowW) {
+            textPageInstance.css("width", currWindowW);
+        } else {
+            TweenMax.to(textPageInstance, .3, {
+                css: { width: currWindowW },
+                easeing: Sine.easeOut,
+                onComplete:
+                    function () {
+                        moduleUpdate(textPageInstanceHolder, modWrapper, $("div:first", modWrapper), sideType);
+                    }
+            });
+        }
+    }
+    
+}
