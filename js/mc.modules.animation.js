@@ -2,7 +2,7 @@
  * VERSION: 1.0
  * DATE: 2012-09-20
  *
- * @author: mediacreed, mediacreed.com, @jonyrock exclusively to dfad.com
+ * @author: mediacreed, mediacreed.com, @jonyrock exclusively for dfad.com
  **/
 
 /* start GENERAL CUSTOMIZATION PROPERTIES */
@@ -1374,9 +1374,6 @@ function moduleUpdate(pMod, pCon, cCon, modSide, anim, noRepos, custStartPos) {
     if (!touchDevice) {
         var totalMinusSize = 0;
         var activScrollbar = availScrollbar.length;
-        if (availScrollbar.length > 0) {
-            availScrollbar.css("height", winH).css("top", "0px");
-        }
         if (pModH >= cConH) {
             if (availScrollbar.length > 0 && availScrollbar.css("display") != "none") {
                 TweenMax.to(availScrollbar, .6, {
@@ -2193,56 +2190,56 @@ function mobileConsole(text, value, clear, displayConsole) {
 
 /* menu hadlers */
 function menuOptionClicked(val, mType, sType, hrefPath) {
+    
+    if (val === "#") 
+        return;
+    
+    var url = '';
+    if ($("#template-menu").attr("data-current-module-type") == "slideshow") {
+        deleteSlideshowTimer();
+    }
+    currModuleType = mType;
+    sideType = sType;
+    hrefPath = (hrefPath == undefined) ? "" : hrefPath;
+    url = templateBaseURL + hrefPath + val.replace('#', '');
 
-    if (val != "#") {
-        var url = '';
-        if ($("#template-menu").attr("data-current-module-type") == "slideshow") {
-            deleteSlideshowTimer();
+    if (prevURL == '') {
+        prevURL = url;
+    } else {
+        prevURL = loadURL;
+    }
+    loadURL = url;
+
+    stopCurrentLoading();
+    if (endModuleFunction !== null && loadedContent)
+        endModuleFunction();
+
+    if (menuData[2] != oldMenuData[2]) {
+        loadedContent = true;
+        activateAnimationLoading();
+    } else {
+        loadedContent = true;
+        var loadAnim = $("#loading-animation");
+        if (loadAnim.length > 0) {
+            TweenMax.to(loadAnim, .25, {
+                css : {
+                    right : "-104px"
+                },
+                ease : Circ.easeOut
+            });
         }
-        currModuleType = mType;
-        sideType = sType;
-        hrefPath = (hrefPath == undefined) ? "" : hrefPath;
-        url = templateBaseURL + hrefPath + val.replace('#', '');
-
-        if (prevURL == '') {
-            prevURL = url;
-        } else {
-            prevURL = loadURL;
-        }
-        loadURL = url;
-
-        stopCurrentLoading();
-        if (endModuleFunction !== null && loadedContent)
-            endModuleFunction();
-
-        if (menuData[2] != oldMenuData[2]) {
-            loadedContent = true;
-            activateAnimationLoading();
-        } else {
-            loadedContent = true;
-            var loadAnim = $("#loading-animation");
-            if (loadAnim.length > 0) {
-                TweenMax.to(loadAnim, .25, {
-                    css : {
-                        right : "-104px"
-                    },
-                    ease : Circ.easeOut
-                });
-            }
-            if (endModuleFunction == null) {
-
-                switch (menuData[0]) {
-                    case "text_page":
-                        moduleTextPage();
-                        break;
-                    case "gallery":
-                        endModuleGallery(true);
-                        endModuleFunction = endModuleGallery;
-                        break;
-                    case "showreel":
-                        reverseEndModuleShowreel();
-                        break;
-                }
+        if (endModuleFunction == null) {
+            switch (menuData[0]) {
+                case "text_page":
+                    moduleTextPage();
+                    break;
+                case "gallery":
+                    endModuleGallery(true);
+                    endModuleFunction = endModuleGallery;
+                    break;
+                case "showreel":
+                    reverseEndModuleShowreel();
+                    break;
             }
         }
     }

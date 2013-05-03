@@ -21,10 +21,6 @@ $(window).resize(
         .css("left", menW + "px")
         .css("height", "100%");
 
-        if (availScrollbar.length > 0) {
-            availScrollbar.css("height", winH).css("top", "0px");
-        }
-
         switch (currModuleType) {
             case "full_width":
                 moduleUpdate_full_width();
