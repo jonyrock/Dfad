@@ -52,6 +52,8 @@ function modulePageColumns() {
     var textPageInstance = $("#module-columns", textPageInstanceHolder);
     modulePageColumnsHtmlHolder = $("#module-columns-holder");
 
+    endModuleFunction = modulePageColumnsOnClose;
+
     if (textPageInstance.length <= 0)
         return;
     var columnItemWrapper = $("#module-columns-wrapper", textPageInstanceHolder);
@@ -518,4 +520,9 @@ function moduleUpdate_page_columns(customStartPos) {
             buttonsHolder.attr("data-folded", "true");
         }
     }
+}
+
+function modulePageColumnsOnClose(){
+    if(modulePageColumns !== undefined)
+        modulePageColumnsViewer.hide();
 }
