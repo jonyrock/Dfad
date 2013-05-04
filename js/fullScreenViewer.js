@@ -184,6 +184,9 @@ fullScreenViewer.buttonTrigger = function(button) {
 fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
         var mediaType = mediaItem.attr("id");
         var buttonsInstance;
+        var mediaItemCredits = $(mediaItemHtml).find(".credits");
+        $(mediaItemHtml).find(".credits").remove();
+
         if(buttonsInstance === undefined){
             buttonsInstance = new fullScreenViewer.pagesButtons(0);
             fullScreenViewer.buttonsInstance = buttonsInstance;
@@ -198,9 +201,9 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
         }
 
         function placeMediaText(mediaItemHtmlPiece) {
-            //alert($(mediaItemHtmlPiece).text());
             var htmlText = $(mediaItemHtmlPiece);
             fullScreenViewer.htmlInfoTextHolder.append(htmlText.clone());
+            fullScreenViewer.htmlInfoTextHolder.remove(".credits");
             htmlText.fadeIn();
         }
 
@@ -259,8 +262,6 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
             });
         }
 
-        
-
         function placeSingleVideo(mediaItemPiece, mediaItemHtmlPiece) {
             prepareHolders();
             placeMediaText(mediaItemHtmlPiece);
@@ -294,7 +295,7 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
             var mediaHtmlItems  = $(mediaItemHtmlPiece).children(".full-width-info-holder-desc");
             buttonsInstance.setPagesCount(videoItems.length)
             buttonsInstance.show();
-            buttonsInstance.onPageChanged = function(pageIndex) {
+            buttonsInstance.onPageChange = function(pageIndex) {
                 placeSingleVideo(
                     videoItems.eq(pageIndex),
                     mediaHtmlItems.eq(pageIndex)
@@ -392,23 +393,45 @@ fullScreenViewer.pagesButtons = function(pagesCount) {
     this.setPagesCount(pagesCount)
 }
 
-fullScreenViewer.pagesButtons.prototype.onPageChanged
+fullScreenViewer.pagesButtons.prototype.onPageChange
+fullScreenViewer.pagesButtons.prototype.onHomeClick
+fullScreenViewer.pagesButtons.prototype.onCreditsClick
 
-fullScreenViewer.pagesButtons.prototype.setPagesCount = function (pagesCount) {
+fullScreenViewer.pagesButtons.prototype.setPagesCount = function (pagesCount, isAddHome, isAddCredits) {
     var me = fullScreenViewer.pagesButtons.instance;
     var holder = fullScreenViewer.pagesButtons.htmlHolder;
     holder.empty();
+
     function onButtonClick(index) {
         return function() {
             me.selectPage(index);
         }
     }
+
+    function onHomeClick() {
+        return function() {
+            me.selectPage();
+        }
+    }
+
     me.items = new Array();
+    me.isAddHome = isAddHome;
+    isAddCredits = isAddCredits;
+    if(isAddHome !== undefined && isAddHome){
+        var item = $('<li>.</li>');
+        holder.append(item);
+        me.items.push(item);
+    }
     for(var i = 1; i <= pagesCount; i++) {
         var item = $('<li>'+ i +'</li>');
         holder.append(item);
         me.items.push(item);
         item.click(onButtonClick(i - 1));
+    }
+    if(isAddCredits !== undefined && isAddCredits){
+        var item = $('<li> credits </li>');
+        holder.append(item);
+        me.items.push(item);
     }
     var htmlClearItem = $('<div style="clear:both" />');
     holder.append(htmlClearItem);
@@ -419,7 +442,7 @@ fullScreenViewer.pagesButtons.prototype.selectPage = function (index) {
         return;
     this.currentPage = index;
     var me = fullScreenViewer.pagesButtons.instance;
-    me.onPageChanged(index);
+    me.onPageChange(index);
     for(var i = 0; i < me.items.length; i++)
         me.items[i].removeClass("selected");
     me.items[index].addClass("selected");
