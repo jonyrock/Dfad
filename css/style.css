@@ -297,7 +297,7 @@ body {
     display: block;
     padding-top: 10.5px;
     font-family: PT Sans Caption, 'Open Sans', Arial;
-    font-weight: 800;
+    font-weight: 400;
     font-size: 12px;
     padding-left: 14px;
     color: #FFF;
@@ -2346,6 +2346,9 @@ h1, h2, h3, h4, h5, h6 {
     border-collapse:collapse;
     margin-top: 10px;
     float: left;
+}
+.full-width-info-holder-desc  td{
+    line-height: 20px;
 }
 
 .full-width-info-holder-desc .credits-table-row-break td{
