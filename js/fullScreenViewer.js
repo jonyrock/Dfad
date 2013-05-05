@@ -182,6 +182,8 @@ fullScreenViewer.buttonTrigger = function(button) {
 }
 
 fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
+        if(mediaItem === undefined) return;
+        if(mediaItemHtml === undefined) return;
         var mediaType = mediaItem.attr("id");
         var buttonsInstance;
         if(fullScreenViewer.buttonsInstance === undefined) {
