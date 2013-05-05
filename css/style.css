@@ -95,6 +95,7 @@ html, body {
     z-index: 9999999;
     overflow: auto;
 }
+
 #console-log span {
     position: relative;
     float: left;
@@ -288,6 +289,9 @@ body {
     position: absolute;
     z-index: 1;
 }
+
+
+
 .sub-menu-option-text, .menu-option-text {
     position: absolute;
     z-index: 2;
@@ -305,6 +309,12 @@ body {
     height: 23px;
     text-decoration: none;
 }
+
+.safari-mac .menu-option-text a, .safari-mac .menu-option-sign, 
+.safari-mac .sub-menu-option-text a {
+    font-weight: 600;
+}
+
 .menu-option-sign {
     position: absolute;
     top: 0px;
@@ -462,6 +472,11 @@ footer {
     font-size: 11px;
     text-align: center
 }
+
+.safari-mac #footer-copyright {
+    font-weight: 200
+}
+
 #footer-copyright {
     position: absolute;
     top: 0px;
@@ -2463,7 +2478,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
     margin: 9%;
     width: 82%;
-    margin-top: 78px;
+    margin-top: 58px;
 }
 
 #full-width-info-holder-pages-buttons {
@@ -2471,6 +2486,7 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 0px;
     width: 316px;
     padding: 30px;
+    padding-bottom: 25px;
     display: none;
 }
 #full-width-info-holder-pages-buttons li{
@@ -2478,7 +2494,7 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     float: left;
     margin-left: 5px;
-    margin-top: 7px;
+    margin-top: 8px;
     width: 30px;
     height: 30px;
     font-size: 12px;
