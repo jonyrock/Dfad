@@ -185,26 +185,63 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
         var mediaType = mediaItem.attr("id");
         var buttonsInstance;
         var mediaItemCredits = $(mediaItemHtml).find(".credits");
+        // it buttons rendering should be executed once by parent render
+        var buttonsRendered = false;
         $(mediaItemHtml).find(".credits").remove();
 
-        if(buttonsInstance === undefined){
+        if(buttonsInstance === undefined) {
             buttonsInstance = new fullScreenViewer.pagesButtons(0);
             fullScreenViewer.buttonsInstance = buttonsInstance;
         }
-        if(mediaType !== "video-wrapper-collection") {
-            buttonsInstance.hide();
-        }
 
-        function prepareHolders() {
+        function showCredits() {
             fullScreenViewer.htmlInfoTextHolder.empty();
-            fullScreenViewer.htmlMediaHolder.empty();
+            renderMediaText(mediaItemCredits);
         }
 
-        function placeMediaText(mediaItemHtmlPiece) {
+        function renderMediaText(mediaItemHtmlPiece) {
+            fullScreenViewer.htmlInfoTextHolder.empty();
             var htmlText = $(mediaItemHtmlPiece);
             fullScreenViewer.htmlInfoTextHolder.append(htmlText.clone());
             fullScreenViewer.htmlInfoTextHolder.remove(".credits");
             htmlText.fadeIn();
+        }
+
+        function renderButtons(count) {
+            
+            if(buttonsRendered)
+                return;
+
+            buttonsRendered = true;
+
+            var hasCredits = false;
+            var hasHome = false;
+            if(mediaItemCredits.length > 0) {
+                hasCredits = true;
+                buttonsInstance.onCreditsClick = showCredits;
+            }
+
+            if(count == 0){
+                hasHome = true;
+                buttonsInstance.onHomeClick = function(){
+                    renderMediaText(mediaItemHtml);
+                }
+            }
+            if(count == 1) {
+                hasHome = true;
+                count--;
+                buttonsInstance.onHomeClick = function(){
+                    buttonsInstance.selectPage(0);
+                }
+            }
+
+            if(!(hasCredits || count > 0)) {
+                buttonsInstance.hide();
+                return;
+            }
+
+            buttonsInstance.setPagesCount(count, hasHome, hasCredits);
+            buttonsInstance.show();
         }
 
         function getOffsetLengthDimentionByString(valueStr){
@@ -220,9 +257,10 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
             return { length:length, offset:offset };
         }
 
-        function placeSingleImage(mediaItemPiece, mediaItemHtmlPiece) {
-            prepareHolders();
-            placeMediaText(mediaItemHtmlPiece);
+        function renderSingleImage(mediaItemPiece, mediaItemHtmlPiece) {
+            fullScreenViewer.htmlMediaHolder.empty();
+            renderMediaText(mediaItemHtmlPiece);
+            renderButtons(0);
 
             var htmlElem = $(
                 '<img id="preview-media-image"' + 
@@ -262,9 +300,10 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
             });
         }
 
-        function placeSingleVideo(mediaItemPiece, mediaItemHtmlPiece) {
-            prepareHolders();
-            placeMediaText(mediaItemHtmlPiece);
+        function renderSingleVideo(mediaItemPiece, mediaItemHtmlPiece) {
+            fullScreenViewer.htmlMediaHolder.empty();
+            renderMediaText(mediaItemHtmlPiece);
+            renderButtons(0);
 
             var htmlElem = $('<div id="video-wrapper"></div>');
             fullScreenViewer.htmlMediaHolder.append(htmlElem);
@@ -290,13 +329,12 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
             );
         }
 
-        function placeCollection(mediaItemPiece, mediaItemHtmlPiece) {
+        function renderCollection(mediaItemPiece, mediaItemHtmlPiece) {
             var videoItems      = $(mediaItemPiece).children("#video-wrapper");
             var mediaHtmlItems  = $(mediaItemHtmlPiece).children(".full-width-info-holder-desc");
-            buttonsInstance.setPagesCount(videoItems.length)
-            buttonsInstance.show();
+            renderButtons(videoItems.length);
             buttonsInstance.onPageChange = function(pageIndex) {
-                placeSingleVideo(
+                renderSingleVideo(
                     videoItems.eq(pageIndex),
                     mediaHtmlItems.eq(pageIndex)
                 );
@@ -305,9 +343,9 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
         }
 
         var mediaRenderers = new Array();
-        mediaRenderers["preview-media-image"]       = placeSingleImage;
-        mediaRenderers["video-wrapper"]             = placeSingleVideo;
-        mediaRenderers["video-wrapper-collection"]  = placeCollection;
+        mediaRenderers["preview-media-image"]       = renderSingleImage;
+        mediaRenderers["video-wrapper"]             = renderSingleVideo;
+        mediaRenderers["video-wrapper-collection"]  = renderCollection;
         
         mediaRenderers[mediaType](mediaItem, mediaItemHtml);
 }
@@ -383,7 +421,6 @@ fullScreenViewer.buildFromHtml = function() {
     return new fullScreenViewer(previewMediaArr, previewMediaDescArr);
 }
 
-
 fullScreenViewer.pagesButtons = function(pagesCount) {
     fullScreenViewer.pagesButtons.htmlHolder =
         fullScreenViewer.htmlInfoHolder
@@ -402,6 +439,13 @@ fullScreenViewer.pagesButtons.prototype.setPagesCount = function (pagesCount, is
     var holder = fullScreenViewer.pagesButtons.htmlHolder;
     holder.empty();
 
+    function initSelectEffect(htmlButton) {
+        $(holder).children().click(function(){
+            holder.children().removeClass("selected");
+            $(this).addClass("selected");
+        });
+    }
+
     function onButtonClick(index) {
         return function() {
             me.selectPage(index);
@@ -410,29 +454,36 @@ fullScreenViewer.pagesButtons.prototype.setPagesCount = function (pagesCount, is
 
     function onHomeClick() {
         return function() {
-            me.selectPage();
+            if(me.onHomeClick !== undefined)
+                me.onHomeClick();
         }
     }
 
-    me.items = new Array();
-    me.isAddHome = isAddHome;
-    isAddCredits = isAddCredits;
+    function onCreditsClick() {
+        return function() {
+            if(me.onCreditsClick !== undefined)
+                me.onCreditsClick();
+        }
+    }
+
     if(isAddHome !== undefined && isAddHome){
         var item = $('<li>.</li>');
         holder.append(item);
-        me.items.push(item);
+        item.click(onHomeClick());
     }
     for(var i = 1; i <= pagesCount; i++) {
         var item = $('<li>'+ i +'</li>');
         holder.append(item);
-        me.items.push(item);
         item.click(onButtonClick(i - 1));
     }
     if(isAddCredits !== undefined && isAddCredits){
         var item = $('<li> credits </li>');
         holder.append(item);
-        me.items.push(item);
+        item.click(onCreditsClick());
     }
+
+    initSelectEffect();
+
     var htmlClearItem = $('<div style="clear:both" />');
     holder.append(htmlClearItem);
 }
@@ -443,16 +494,14 @@ fullScreenViewer.pagesButtons.prototype.selectPage = function (index) {
     this.currentPage = index;
     var me = fullScreenViewer.pagesButtons.instance;
     me.onPageChange(index);
-    for(var i = 0; i < me.items.length; i++)
-        me.items[i].removeClass("selected");
-    me.items[index].addClass("selected");
 }
 
 fullScreenViewer.pagesButtons.prototype.show = function() {
     fullScreenViewer.pagesButtons.htmlHolder.fadeIn();
 }
 fullScreenViewer.pagesButtons.prototype.hide = function() {
-    for(var i = 0; i < this.items.length; i++) {
-        this.items[i].delay((this.items.length - i) * 10).fadeOut("fast");
+    var items = fullScreenViewer.pagesButtons.htmlHolder.find("li");
+    for(var i = 0; i < items.length; i++) {
+        this.items[i].delay((items.length - i) * 10).fadeOut("fast");
     }
 }
