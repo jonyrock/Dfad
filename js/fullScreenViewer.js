@@ -443,6 +443,7 @@ fullScreenViewer.pagesButtons.prototype.setPagesCount = function (pagesCount, is
     var me = fullScreenViewer.pagesButtons.instance;
     var holder = fullScreenViewer.pagesButtons.htmlHolder;
     holder.empty();
+    this.currentPage = undefined;
 
     function bindSelectEffect(htmlButton) {
         $(holder).children().click(function(){
