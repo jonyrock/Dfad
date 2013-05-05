@@ -2485,6 +2485,20 @@ h1, h2, h3, h4, h5, h6 {
     background: #3f3f3f;
     cursor: pointer;
 }
+
+#full-width-info-holder-pages-buttons li.button-home {
+    width: 30px;
+
+}
+#full-width-info-holder-pages-buttons li.button-home img{
+    margin: auto;
+    margin-top: 5px;
+}
+
+#full-width-info-holder-pages-buttons li.button-credits {
+    width: 50px;
+}
+
 #full-width-info-holder-pages-buttons li.selected {
     background: #00aaff;
 }

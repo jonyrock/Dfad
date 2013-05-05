@@ -1,8 +1,8 @@
 /**
- * VERSION: 1.0
- * DATE: 2013-04-25
+ * VERSION: 1.1
+ * DATE: 2013-05-05
  *
- * @author: @jonyrock exclusively to dfad.com
+ * @author: @jonyrock exclusively for dfad.us
  **/
 
 fullScreenViewer.isInited = false;
@@ -24,7 +24,7 @@ fullScreenViewer.initSharedEventHandlers
 fullScreenViewer.removeSharedEventHandlers
 
                                                                                                                                              
-// act like singleton
+// acts like singleton
 function fullScreenViewer(mediaItems, mediaItemsHtml) {
 
     fullScreenViewer.instance = this;
@@ -184,26 +184,30 @@ fullScreenViewer.buttonTrigger = function(button) {
 fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
         var mediaType = mediaItem.attr("id");
         var buttonsInstance;
-        var mediaItemCredits = $(mediaItemHtml).find(".credits");
-        // it buttons rendering should be executed once by parent render
-        var buttonsRendered = false;
-        $(mediaItemHtml).find(".credits").remove();
-
-        if(buttonsInstance === undefined) {
-            buttonsInstance = new fullScreenViewer.pagesButtons(0);
+        if(fullScreenViewer.buttonsInstance === undefined) {
+            buttonsInstance = new fullScreenViewer.pagesButtons();
             fullScreenViewer.buttonsInstance = buttonsInstance;
+        } else {
+            buttonsInstance = fullScreenViewer.buttonsInstance;
         }
 
+        // cloning because it will be updated as dom model
+        mediaItemHtml = $(mediaItemHtml).clone();
+        mediaItem = mediaItem.clone();
+        var mediaItemCredits = $(mediaItemHtml).find(".credits");
+        $(mediaItemHtml).find(".credits").remove();
+
+        // buttons rendering should be executed once by parent render
+        var buttonsRendered = false;
+        
         function showCredits() {
-            fullScreenViewer.htmlInfoTextHolder.empty();
             renderMediaText(mediaItemCredits);
         }
 
         function renderMediaText(mediaItemHtmlPiece) {
             fullScreenViewer.htmlInfoTextHolder.empty();
             var htmlText = $(mediaItemHtmlPiece);
-            fullScreenViewer.htmlInfoTextHolder.append(htmlText.clone());
-            fullScreenViewer.htmlInfoTextHolder.remove(".credits");
+            fullScreenViewer.htmlInfoTextHolder.append(htmlText);
             htmlText.fadeIn();
         }
 
@@ -223,7 +227,7 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
 
             if(count == 0){
                 hasHome = true;
-                buttonsInstance.onHomeClick = function(){
+                buttonsInstance.onHomeClick = function() {
                     renderMediaText(mediaItemHtml);
                 }
             }
@@ -241,7 +245,6 @@ fullScreenViewer.renderMedia = function (mediaItem, mediaItemHtml) {
             }
 
             buttonsInstance.setPagesCount(count, hasHome, hasCredits);
-            buttonsInstance.show();
         }
 
         function getOffsetLengthDimentionByString(valueStr){
@@ -421,13 +424,12 @@ fullScreenViewer.buildFromHtml = function() {
     return new fullScreenViewer(previewMediaArr, previewMediaDescArr);
 }
 
-fullScreenViewer.pagesButtons = function(pagesCount) {
+fullScreenViewer.pagesButtons = function() {
     fullScreenViewer.pagesButtons.htmlHolder =
         fullScreenViewer.htmlInfoHolder
         .find("#full-width-info-holder-pages-buttons");
     var me = this;
     fullScreenViewer.pagesButtons.instance = this;
-    this.setPagesCount(pagesCount)
 }
 
 fullScreenViewer.pagesButtons.prototype.onPageChange
@@ -435,11 +437,12 @@ fullScreenViewer.pagesButtons.prototype.onHomeClick
 fullScreenViewer.pagesButtons.prototype.onCreditsClick
 
 fullScreenViewer.pagesButtons.prototype.setPagesCount = function (pagesCount, isAddHome, isAddCredits) {
+    this.show();
     var me = fullScreenViewer.pagesButtons.instance;
     var holder = fullScreenViewer.pagesButtons.htmlHolder;
     holder.empty();
 
-    function initSelectEffect(htmlButton) {
+    function bindSelectEffect(htmlButton) {
         $(holder).children().click(function(){
             holder.children().removeClass("selected");
             $(this).addClass("selected");
@@ -456,6 +459,7 @@ fullScreenViewer.pagesButtons.prototype.setPagesCount = function (pagesCount, is
         return function() {
             if(me.onHomeClick !== undefined)
                 me.onHomeClick();
+            me.currentPage = -1;
         }
     }
 
@@ -463,11 +467,12 @@ fullScreenViewer.pagesButtons.prototype.setPagesCount = function (pagesCount, is
         return function() {
             if(me.onCreditsClick !== undefined)
                 me.onCreditsClick();
+            me.currentPage = -2;
         }
     }
 
     if(isAddHome !== undefined && isAddHome){
-        var item = $('<li>.</li>');
+        var item = $('<li class="button-home"><img src="/assets/media/button_home.png"</li>');
         holder.append(item);
         item.click(onHomeClick());
     }
@@ -477,12 +482,15 @@ fullScreenViewer.pagesButtons.prototype.setPagesCount = function (pagesCount, is
         item.click(onButtonClick(i - 1));
     }
     if(isAddCredits !== undefined && isAddCredits){
-        var item = $('<li> credits </li>');
+        var item = $('<li class="button-credits"> credits </li>');
         holder.append(item);
         item.click(onCreditsClick());
     }
 
-    initSelectEffect();
+    // TODO: think about it. 
+    holder.children().first().addClass("selected");
+
+    bindSelectEffect();
 
     var htmlClearItem = $('<div style="clear:both" />');
     holder.append(htmlClearItem);
@@ -499,9 +507,12 @@ fullScreenViewer.pagesButtons.prototype.selectPage = function (index) {
 fullScreenViewer.pagesButtons.prototype.show = function() {
     fullScreenViewer.pagesButtons.htmlHolder.fadeIn();
 }
+
 fullScreenViewer.pagesButtons.prototype.hide = function() {
     var items = fullScreenViewer.pagesButtons.htmlHolder.find("li");
+    if(items.length === 0) 
+        return;
     for(var i = 0; i < items.length; i++) {
-        this.items[i].delay((items.length - i) * 10).fadeOut("fast");
+        items.delay((items.length - i) * 10).fadeOut("fast");
     }
 }

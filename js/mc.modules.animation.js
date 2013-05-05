@@ -2,7 +2,7 @@
  * VERSION: 1.0
  * DATE: 2012-09-20
  *
- * @author: mediacreed, mediacreed.com, @jonyrock exclusively for dfad.com
+ * @author: mediacreed, mediacreed.com, @jonyrock exclusively for dfad.us
  **/
 
 /* start GENERAL CUSTOMIZATION PROPERTIES */
