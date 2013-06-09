@@ -27,10 +27,7 @@ var contactFormDemo = false;
 /* start ready function */
 $(document).ready(function() {
     readyAndLoad++;
-    $(window).error(function(msg, url, line) {
-        console.log("error: ", msg, " url: ", url, " line: ", line);
-    });
-
+    
     if (readyAndLoad == 2)
         prepareTemplate();
 

@@ -15,6 +15,10 @@ var maxColumns = 4;
 var containerTotalH = 0;
 
 function loadFullWidthPreviewFromThumb(thumb) {
+    if($(thumb).attr("data-url") !== undefined){
+        document.location = $(thumb).attr("data-url");
+        return;
+    }
     $("#module-columns-holder .fourth-thumb-holder").attr("data-selected", "false");
     var i = modulePageColumnsHtmlHolder.children(":visible").index(thumb)
     modulePageColumnsViewer.showItemAt(i);
