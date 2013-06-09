@@ -38,7 +38,7 @@ function moduleContactInitMap() {
         featureType: "all",
         elementType: "all",
         stylers: [
-          { saturation: -70 } // -100 is absolutlu gray , +100 is acid colors
+          { saturation: -70 } // -100 is absolute gray , +100 is acid colors
         ]
     }
     ];
@@ -48,13 +48,16 @@ function moduleContactInitMap() {
 
     //markers
     var markerEurope = new google.maps.Marker({
-        position: new google.maps.LatLng(59.925211, 30.370191),
+        position: new google.maps.LatLng(59.924998, 30.37014),
         map: map,
-        icon: "/assets/media/contact/contact_map_pin_europe.png"
+        icon:  { 
+            url: "/assets/media/contact/contact_map_pin_europe.png",
+            anchor: new google.maps.Point(43, 47)
+        }
     });
 
     var markerNorthAmerica = new google.maps.Marker({
-        position: new google.maps.LatLng(34.069074, -118.40664),
+        position: new google.maps.LatLng(34.069092, -118.406739),
         map: map,
         draggable : true, 
         icon:  { 
@@ -63,23 +66,23 @@ function moduleContactInitMap() {
         }
     });
 
-    var markerMiddleEast = new google.maps.Marker({
-        position: new google.maps.LatLng(25.258669, 55.340538),
-        map: map,
-        icon:  { 
-            url: "assets/media/contact/contact_map_pin_middle_east.png",
-            anchor: new google.maps.Point(43, 47)
-        }
-    });
+    // var markerMiddleEast = new google.maps.Marker({
+    //     position: new google.maps.LatLng(25.258669, 55.340538),
+    //     map: map,
+    //     icon:  { 
+    //         url: "assets/media/contact/contact_map_pin_middle_east.png",
+    //         anchor: new google.maps.Point(43, 47)
+    //     }
+    // });
 
-    var markerSouthEast = new google.maps.Marker({
-        position: new google.maps.LatLng(25.259601, 55.323715),
-        map: map,
-        icon:  { 
-            url: "assets/media/contact/contact_map_pin_south_east.png",
-            anchor: new google.maps.Point(43, 47)
-        }
-    });
+    // var markerSouthEast = new google.maps.Marker({
+    //     position: new google.maps.LatLng(25.259601, 55.323715),
+    //     map: map,
+    //     icon:  { 
+    //         url: "assets/media/contact/contact_map_pin_south_east.png",
+    //         anchor: new google.maps.Point(43, 47)
+    //     }
+    // });
 }
 
 function moduleContactResizeHolder() {
@@ -104,23 +107,26 @@ function moduleUpdate_contact() {
     // resize page holder and get new width
     var currentWidth = moduleContactResizeHolder();
     
-    var blocksWidthPersent = 21;
-    var blocksMarginPersent = 1.5;
-    if(currentWidth <= 1120) {
-        blocksWidthPersent = 31;
-        blocksMarginPersent = 1;
-    } if(currentWidth <= 794){
-        blocksWidthPersent = 47;
-        blocksMarginPersent = 1.5;
-    } if(currentWidth <= 500) {
-        blocksMarginPersent = 0;
-        blocksWidthPersent = 99;
+    if(currentWidth > 580) {
+        gap = currentWidth - 580;
+        blockRowCount = 3;
+        offset = gap / (blockRowCount * 2);
+        
+        moduleContactHtmlHolder.find(".module-contact-holder")
+        .css("width", "250px")
+        .css("margin-left", offset + "px")
+        .css("margin-right", offset + "px");
+
+    } 
+
+    if(currentWidth <= 610) {
+        moduleContactHtmlHolder.find(".module-contact-holder")
+        .css("width", "99%")
+        .css("margin-left", "0%")
+        .css("margin-right", "0%");
     } 
     
-    moduleContactHtmlHolder.find(".module-contact-holder")
-        .css("width", blocksWidthPersent+"%")
-        .css("margin-left", blocksMarginPersent + "%")
-        .css("margin-right", blocksMarginPersent + "%");
+    
     
     var textPageInstanceHolder = $(txt_modCont);
     var textPageInstance = $("#module-wrapper", textPageInstanceHolder);
