@@ -30,7 +30,7 @@ function modulePageColumnsApplyFilter(selector) {
         mediaItems = new Array();
         mediaItemsHtml = new Array();
         modulePageColumnsHtmlHolder.children().each(function(i) {
-            if ($(this).attr("data-id") != selector)
+            if ($(this).attr("data-id").indexOf(selector) == -1)
                 return;
             mediaItems.push(modulePageColumnsMediaItemsAll[i]);
             mediaItemsHtml.push(modulePageColumnsMediaItemsHtmlAll[i]);
@@ -379,7 +379,7 @@ function checkColumnSize(adjustPreview) {
     var count = 0;
 
     container.children().each(function() {
-        if (modulePageColumnsCurrentSelectedId != "*" && modulePageColumnsCurrentSelectedId != $(this).attr("data-id")) {
+        if (modulePageColumnsCurrentSelectedId != "*" && $(this).attr("data-id").indexOf(modulePageColumnsCurrentSelectedId) == -1) {
             TweenMax.to($(this), .6, {
                 css : {
                     opacity : "0",
