@@ -288,6 +288,7 @@ body {
 .menu-option-background, .menu-option-background-selected, .sub-menu-option-background, .sub-menu-option-background-selected {
     position: absolute;
     z-index: 1;
+    width: 200px;
 }
 
 
